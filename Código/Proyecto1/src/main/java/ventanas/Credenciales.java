@@ -12,12 +12,12 @@ import javax.swing.JOptionPane;
  *
  * @author Steven Umaña
  */
-public class Interfaz extends javax.swing.JFrame {
+public class Credenciales extends javax.swing.JFrame {
 
     /**
      * Creates new form Interfaz
      */
-    public Interfaz() {
+    public Credenciales() {
         initComponents();
     }
 
@@ -40,6 +40,7 @@ public class Interfaz extends javax.swing.JFrame {
         box_contrasenia = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,6 +77,7 @@ public class Interfaz extends javax.swing.JFrame {
         button_ingresar.setText("INGRESAR");
         button_ingresar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         button_ingresar.setContentAreaFilled(false);
+        button_ingresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         button_ingresar.setDefaultCapable(false);
         button_ingresar.setFocusable(false);
         button_ingresar.setMargin(new java.awt.Insets(3, 15, 4, 15));
@@ -164,9 +166,18 @@ public class Interfaz extends javax.swing.JFrame {
 
         Usuario u = new Usuario();
         boolean accesoValido = u.validarAcceso(usuario, contrasena);
-
+        
+        // Valida las credenciales
         if (accesoValido) {
             JOptionPane.showMessageDialog(this, "¡Inicio de sesión exitoso!", "Inicio de Sesión", JOptionPane.INFORMATION_MESSAGE);
+            
+             // Cierra el frame actual
+            this.dispose(); 
+
+            // Abre el nuevo frame
+            MenuOpciones opciones = new MenuOpciones(); // Reemplaza con el nombre de tu clase para el nuevo frame
+            opciones.setVisible(true);
+            
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
         }
@@ -193,19 +204,20 @@ public class Interfaz extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Credenciales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Credenciales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Credenciales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(Interfaz.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(Credenciales.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Interfaz().setVisible(true);
+            new Credenciales().setVisible(true);
         });
     }
 

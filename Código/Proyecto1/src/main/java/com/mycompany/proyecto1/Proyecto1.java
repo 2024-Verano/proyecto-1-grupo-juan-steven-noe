@@ -4,7 +4,7 @@
 
 package com.mycompany.proyecto1;
 
-import ventanas.Interfaz;
+import ventanas.Credenciales;
 
 /**
  * Clase principal del proyecto
@@ -15,6 +15,6 @@ import ventanas.Interfaz;
 public class Proyecto1 {
     public static void main(String[] args) {
         // Crear y mostrar la interfaz gráfica
-        java.awt.EventQueue.invokeLater(() -> new Interfaz().setVisible(true));
+        java.awt.EventQueue.invokeLater(() -> new Credenciales().setVisible(true));
     }
 }
