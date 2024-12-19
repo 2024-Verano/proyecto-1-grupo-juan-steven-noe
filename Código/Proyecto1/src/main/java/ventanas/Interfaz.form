@@ -33,9 +33,9 @@
                   </Group>
                   <Group type="102" attributes="0">
                       <Component id="user_icon" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="10" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                       <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                      <EmptySpace pref="56" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -46,12 +46,12 @@
                   <Component id="label_iniciar_usuario" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
                   <Component id="button_ingresar" min="-2" pref="129" max="-2" attributes="0"/>
-                  <Component id="box_usuario" min="-2" pref="306" max="-2" attributes="0"/>
-                  <Component id="box_contrasenia" min="-2" pref="306" max="-2" attributes="0"/>
+                  <Component id="box_usuario" pref="306" max="32767" attributes="0"/>
+                  <Component id="box_contrasenia" alignment="0" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace max="32767" attributes="0"/>
+              <EmptySpace pref="102" max="32767" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -73,16 +73,16 @@
               <EmptySpace min="-2" pref="51" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="label_iniciar_usuario" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                  <Component id="box_usuario" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="box_usuario" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="label_iniciar_contrasenia" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
-                  <Component id="box_contrasenia" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="label_iniciar_contrasenia" min="-2" pref="32" max="-2" attributes="0"/>
+                  <Component id="box_contrasenia" max="32767" attributes="0"/>
               </Group>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <EmptySpace type="unrelated" pref="21" max="32767" attributes="0"/>
               <Component id="button_ingresar" min="-2" pref="40" max="-2" attributes="0"/>
-              <EmptySpace pref="30" max="32767" attributes="0"/>
+              <EmptySpace min="-2" pref="34" max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -146,16 +146,6 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_usuarioActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JTextField" name="box_contrasenia">
-      <Properties>
-        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-          <Font name="Century Gothic" size="18" style="0"/>
-        </Property>
-      </Properties>
-      <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_contraseniaActionPerformed"/>
-      </Events>
-    </Component>
     <Component class="javax.swing.JButton" name="button_ingresar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -176,6 +166,11 @@
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="button_ingresarActionPerformed"/>
+      </Events>
+    </Component>
+    <Component class="javax.swing.JPasswordField" name="box_contrasenia">
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_contraseniaActionPerformed"/>
       </Events>
     </Component>
   </SubComponents>
