@@ -45,4 +45,29 @@ public class ButtonHoverEffect {
             }
         });
     }
+    
+    // NUEVO: Efecto donde aparece un borde negro sin desplazar otros componentes
+    public static void applyBorderOnHoverEffect(JButton button) {
+        // Establece un borde vacío inicial para mantener el espacio reservado
+        button.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+        button.setOpaque(false); // Evita el fondo predeterminado
+        button.setContentAreaFilled(false); // No pintar el contenido
+        button.setFocusPainted(false); // Sin el borde de foco azul
+
+        button.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent e) {
+                // Cambia el borde a negro al pasar el cursor
+                button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+            }
+
+            @Override
+            public void mouseExited(MouseEvent e) {
+                // Restaura el borde vacío al salir
+                button.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+            }
+        });
+    }
+
+
 }

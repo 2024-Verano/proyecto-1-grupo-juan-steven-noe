@@ -162,7 +162,12 @@ public class MenuOpciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void registro_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_productoActionPerformed
-        // TODO add your handling code here:
+             // Cierra el frame actual
+            this.dispose(); 
+
+            // Abre el nuevo frame
+            RegistroProductos opciones = new RegistroProductos(); // Reemplaza con el nombre de tu clase para el nuevo frame
+            opciones.setVisible(true);
     }//GEN-LAST:event_registro_productoActionPerformed
 
     private void registro_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_clientesActionPerformed
@@ -202,6 +207,9 @@ public class MenuOpciones extends javax.swing.JFrame {
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(MenuOpciones.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
