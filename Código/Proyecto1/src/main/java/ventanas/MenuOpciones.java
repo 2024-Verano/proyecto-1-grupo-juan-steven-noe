@@ -3,6 +3,8 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ventanas;
+import java.awt.Color;
+
 
 /**
  *
@@ -15,6 +17,21 @@ public class MenuOpciones extends javax.swing.JFrame {
      */
     public MenuOpciones() {
         initComponents();
+        
+        // Define los colores
+        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
+        Color originalColor = Color.BLACK; // Negro (borde inicial)
+
+        // Crear la instancia de ButtonHoverEffect
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+
+        // Aplica el efecto hover a cada botón
+        hoverEffect.applyTo(registro_producto);
+        hoverEffect.applyTo(registro_clientes);
+        hoverEffect.applyTo(registro_mant);
+        hoverEffect.applyTo(facturacion);
+        
+
     }
 
     /**

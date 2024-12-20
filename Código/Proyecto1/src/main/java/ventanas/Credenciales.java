@@ -6,6 +6,7 @@ package ventanas;
 
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Usuario;
+import java.awt.Color;
 import javax.swing.JOptionPane;
 
 /**
@@ -19,6 +20,15 @@ public class Credenciales extends javax.swing.JFrame {
      */
     public Credenciales() {
         initComponents();
+          // Define los colores
+        Color hoverColor = new Color(150,150,150); // Rojo oscuro (al pasar el cursor)
+        Color originalColor = Color.BLACK; // Negro (borde inicial)
+
+        // Crear la instancia de ButtonHoverEffect
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+
+        // Aplica el efecto hover a cada botón
+        hoverEffect.applyTo(button_ingresar);
     }
 
     /**
