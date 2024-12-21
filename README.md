@@ -2,5 +2,5 @@
 # Proyecto1
 ### Carné y nombre de estudiantes:
 #### 2024253314 Steven Umaña López
-### 2024234500 Noé López Durón
+#### 2024234500 Noé López Durón
 ### Enlace del vídeo:
