@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ventanas;
+
 import java.awt.Color;
 
 
@@ -17,12 +18,42 @@ public class RegistroProductos extends javax.swing.JFrame {
      */
     public RegistroProductos() {
         initComponents();
-        // Aplicar el efecto de borde negro al pasar el cursor
+        
+        // Aplicar el efecto de borde negro al pasar el cursor (TOOLBAR)
         ButtonHoverEffect.applyBorderOnHoverEffect(agregar_prod);
         ButtonHoverEffect.applyBorderOnHoverEffect(modificar_prod);
         ButtonHoverEffect.applyBorderOnHoverEffect(eliminar_prod);
         ButtonHoverEffect.applyBorderOnHoverEffect(buscar_prod);
         ButtonHoverEffect.applyBorderOnHoverEffect(salir);
+
+         // Aplicar el efecto hover de borde gris al pasar el cursor (PANEL AGREGAR_PROD)
+        // Define los colores
+        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
+        Color originalColor = Color.BLACK; // Negro (borde inicial)
+
+        // Crear la instancia de ButtonHoverEffect para el efecto
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+
+        // Aplica el efecto hover a cada botón
+        hoverEffect.applyTo(crear_tipo_prod);
+        hoverEffect.applyTo(crear_prod);
+        hoverEffect.applyTo(guardar_tipo_prod);
+        hoverEffect.applyTo(guardar_art);
+
+        // Registrar los paneles en el CardLayout
+        SubFrameContainer.add(agregarPanel, "agregarPanel");
+        SubFrameContainer.add(modificarPanel, "modificarPanel");
+        SubFrameContainer.add(eliminarPanel, "eliminarPanel");
+        SubFrameContainer.add(buscarPanel, "buscarPanel");
+
+        // Ocultar los paneles de opcion de "agregar productos"
+        opcionesTipoProducto.setVisible(false);
+        opcionesProducto.setVisible(false);
+        
+        // Mostrar la bienvenida al inicio
+        SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
+        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+        layout.show(SubFrameContainer, "bienvenidaPanel");
     }
 
     /**
@@ -45,10 +76,50 @@ public class RegistroProductos extends javax.swing.JFrame {
         buscar_prod = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         salir = new javax.swing.JButton();
+        SubFrameContainer = new javax.swing.JPanel();
+        bienvenidaPanel = new javax.swing.JPanel();
+        bienvenidaLabel = new javax.swing.JLabel();
+        bienvenidaLabel1 = new javax.swing.JLabel();
+        ciclista_icon = new javax.swing.JLabel();
+        agregarPanel = new javax.swing.JPanel();
+        crear_tipo_prod = new javax.swing.JButton();
+        crear_prod = new javax.swing.JButton();
+        opcionesTipoProducto = new javax.swing.JPanel();
+        codigo_defecto1 = new javax.swing.JLabel();
+        box_codigo_tipo_prod = new javax.swing.JTextField();
+        nombre_prod = new javax.swing.JLabel();
+        box_nombre_tipo_prod = new javax.swing.JTextField();
+        guardar_tipo_prod = new javax.swing.JButton();
+        opcionesProducto = new javax.swing.JPanel();
+        codigo_art = new javax.swing.JLabel();
+        box_codigo_art = new javax.swing.JTextField();
+        codigo_prod = new javax.swing.JLabel();
+        box_codigo_prod = new javax.swing.JTextField();
+        tipo_art = new javax.swing.JLabel();
+        como_tipo_art = new javax.swing.JComboBox<>();
+        tammanio_bici1 = new javax.swing.JLabel();
+        combo_tammanio_bici = new javax.swing.JComboBox<>();
+        nombre_art = new javax.swing.JLabel();
+        box_nombre_art = new javax.swing.JTextField();
+        marca_art = new javax.swing.JLabel();
+        box_marca_art = new javax.swing.JTextField();
+        guardar_art = new javax.swing.JButton();
+        marca_art1 = new javax.swing.JLabel();
+        box_marca_art1 = new javax.swing.JTextField();
+        marca_art2 = new javax.swing.JLabel();
+        box_marca_art2 = new javax.swing.JTextField();
+        jSeparator6 = new javax.swing.JSeparator();
+        jSeparator7 = new javax.swing.JSeparator();
+        modificarPanel = new javax.swing.JPanel();
+        eliminarPanel = new javax.swing.JPanel();
+        buscarPanel = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(1000, 800));
         setMinimumSize(new java.awt.Dimension(1000, 800));
+        setPreferredSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
 
@@ -144,36 +215,465 @@ public class RegistroProductos extends javax.swing.JFrame {
         });
         funciones.add(salir);
 
+        SubFrameContainer.setLayout(new java.awt.CardLayout());
+
+        bienvenidaLabel.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
+        bienvenidaLabel.setText("¡Bienvenido al menú de registro de productos!");
+
+        bienvenidaLabel1.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
+        bienvenidaLabel1.setText("Elija una opción para comenzar");
+
+        ciclista_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cycling.png"))); // NOI18N
+
+        javax.swing.GroupLayout bienvenidaPanelLayout = new javax.swing.GroupLayout(bienvenidaPanel);
+        bienvenidaPanel.setLayout(bienvenidaPanelLayout);
+        bienvenidaPanelLayout.setHorizontalGroup(
+            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bienvenidaLabel)
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(129, 129, 129)
+                        .addComponent(bienvenidaLabel1))
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(362, 362, 362)
+                        .addComponent(ciclista_icon)))
+                .addContainerGap(108, Short.MAX_VALUE))
+        );
+        bienvenidaPanelLayout.setVerticalGroup(
+            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(bienvenidaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bienvenidaLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(ciclista_icon)
+                .addContainerGap(333, Short.MAX_VALUE))
+        );
+
+        SubFrameContainer.add(bienvenidaPanel, "card2");
+
+        crear_tipo_prod.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        crear_tipo_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new-product.png"))); // NOI18N
+        crear_tipo_prod.setText("Crear tipo de producto");
+        crear_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        crear_tipo_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crear_tipo_prod.setFocusable(false);
+        crear_tipo_prod.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        crear_tipo_prod.setIconTextGap(10);
+        crear_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crear_tipo_prodActionPerformed(evt);
+            }
+        });
+
+        crear_prod.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        crear_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add_product.png"))); // NOI18N
+        crear_prod.setText("Crear producto nuevo");
+        crear_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        crear_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crear_prod.setFocusable(false);
+        crear_prod.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        crear_prod.setIconTextGap(10);
+        crear_prod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crear_prodActionPerformed(evt);
+            }
+        });
+
+        opcionesTipoProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        codigo_defecto1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        codigo_defecto1.setText("Código");
+
+        box_codigo_tipo_prod.setEditable(false);
+        box_codigo_tipo_prod.setBackground(new java.awt.Color(255, 255, 255));
+        box_codigo_tipo_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_codigo_tipo_prod.setText(" AUTOMÁTICO");
+        box_codigo_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_codigo_tipo_prod.setEnabled(false);
+        box_codigo_tipo_prod.setFocusable(false);
+        box_codigo_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_codigo_tipo_prodActionPerformed(evt);
+            }
+        });
+
+        nombre_prod.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        nombre_prod.setText("Nombre del tipo de producto");
+
+        box_nombre_tipo_prod.setBackground(new java.awt.Color(255, 255, 255));
+        box_nombre_tipo_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_nombre_tipo_prod.setText(" ");
+        box_nombre_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_nombre_tipo_prod.setSelectionColor(new java.awt.Color(0, 0, 0));
+        box_nombre_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_nombre_tipo_prodActionPerformed(evt);
+            }
+        });
+
+        guardar_tipo_prod.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        guardar_tipo_prod.setText("G U A R D A R");
+        guardar_tipo_prod.setBorder(null);
+        guardar_tipo_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+
+        javax.swing.GroupLayout opcionesTipoProductoLayout = new javax.swing.GroupLayout(opcionesTipoProducto);
+        opcionesTipoProducto.setLayout(opcionesTipoProductoLayout);
+        opcionesTipoProductoLayout.setHorizontalGroup(
+            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGap(113, 113, 113)
+                .addComponent(codigo_defecto1)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionesTipoProductoLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(box_codigo_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(box_nombre_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(nombre_prod))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGap(74, 74, 74)
+                .addComponent(guardar_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        opcionesTipoProductoLayout.setVerticalGroup(
+            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(codigo_defecto1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_codigo_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombre_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(box_nombre_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(guardar_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(103, 103, 103))
+        );
+
+        opcionesProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        codigo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        codigo_art.setText("Código artículo");
+
+        box_codigo_art.setBackground(new java.awt.Color(255, 255, 255));
+        box_codigo_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_codigo_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_codigo_art.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_codigo_artActionPerformed(evt);
+            }
+        });
+
+        codigo_prod.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        codigo_prod.setText("Código producto");
+
+        box_codigo_prod.setBackground(new java.awt.Color(255, 255, 255));
+        box_codigo_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_codigo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_codigo_prod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_codigo_prodActionPerformed(evt);
+            }
+        });
+
+        tipo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        tipo_art.setText("Tipo de artículo");
+
+        como_tipo_art.setBackground(new java.awt.Color(255, 255, 255));
+        como_tipo_art.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        como_tipo_art.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bicicleta", "Accesorio", "Suplemento" }));
+        como_tipo_art.setBorder(null);
+        como_tipo_art.setFocusable(false);
+        como_tipo_art.setRequestFocusEnabled(false);
+
+        tammanio_bici1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        tammanio_bici1.setText("Tamaño (bici)");
+
+        combo_tammanio_bici.setBackground(new java.awt.Color(255, 255, 255));
+        combo_tammanio_bici.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        combo_tammanio_bici.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "16", "22", "26", "27", "27.5", "29" }));
+        combo_tammanio_bici.setBorder(null);
+        combo_tammanio_bici.setFocusable(false);
+        combo_tammanio_bici.setRequestFocusEnabled(false);
+
+        nombre_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        nombre_art.setText("Nombre");
+
+        box_nombre_art.setBackground(new java.awt.Color(255, 255, 255));
+        box_nombre_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_nombre_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_nombre_art.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_nombre_artActionPerformed(evt);
+            }
+        });
+
+        marca_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        marca_art.setText("Marca");
+
+        box_marca_art.setBackground(new java.awt.Color(255, 255, 255));
+        box_marca_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_marca_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_marca_art.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_marca_artActionPerformed(evt);
+            }
+        });
+
+        guardar_art.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        guardar_art.setText("G U A R D A R");
+        guardar_art.setBorder(null);
+        guardar_art.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardar_art.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardar_artActionPerformed(evt);
+            }
+        });
+
+        marca_art1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        marca_art1.setText("Precio");
+
+        box_marca_art1.setBackground(new java.awt.Color(255, 255, 255));
+        box_marca_art1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_marca_art1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_marca_art1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_marca_art1ActionPerformed(evt);
+            }
+        });
+
+        marca_art2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        marca_art2.setText("Cantidad");
+
+        box_marca_art2.setBackground(new java.awt.Color(255, 255, 255));
+        box_marca_art2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_marca_art2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_marca_art2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_marca_art2ActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout opcionesProductoLayout = new javax.swing.GroupLayout(opcionesProducto);
+        opcionesProducto.setLayout(opcionesProductoLayout);
+        opcionesProductoLayout.setHorizontalGroup(
+            opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesProductoLayout.createSequentialGroup()
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(opcionesProductoLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jSeparator6)
+                            .addGroup(opcionesProductoLayout.createSequentialGroup()
+                                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                        .addComponent(box_nombre_art, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addGroup(opcionesProductoLayout.createSequentialGroup()
+                                            .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(codigo_prod)
+                                                .addComponent(codigo_art)
+                                                .addComponent(tammanio_bici1))
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                            .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(combo_tammanio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(box_codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(box_codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(como_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addGroup(opcionesProductoLayout.createSequentialGroup()
+                                            .addComponent(marca_art)
+                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                            .addComponent(box_marca_art, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                    .addComponent(tipo_art)
+                                    .addComponent(nombre_art)
+                                    .addComponent(marca_art1)
+                                    .addGroup(opcionesProductoLayout.createSequentialGroup()
+                                        .addComponent(marca_art2)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(guardar_art, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                                .addComponent(box_marca_art2, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(box_marca_art1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 39, Short.MAX_VALUE))))
+                    .addGroup(opcionesProductoLayout.createSequentialGroup()
+                        .addGap(12, 12, 12)
+                        .addComponent(jSeparator7)))
+                .addContainerGap())
+        );
+        opcionesProductoLayout.setVerticalGroup(
+            opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesProductoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(como_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(tammanio_bici1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo_tammanio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(nombre_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_nombre_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(marca_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_marca_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addComponent(guardar_art, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(17, 17, 17))
+        );
+
+        javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
+        agregarPanel.setLayout(agregarPanelLayout);
+        agregarPanelLayout.setHorizontalGroup(
+            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarPanelLayout.createSequentialGroup()
+                .addGap(149, 149, 149)
+                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crear_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(102, 102, 102)
+                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(crear_prod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(opcionesProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(154, Short.MAX_VALUE))
+        );
+        agregarPanelLayout.setVerticalGroup(
+            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarPanelLayout.createSequentialGroup()
+                .addGap(71, 71, 71)
+                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(crear_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(crear_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(opcionesProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(163, Short.MAX_VALUE))
+        );
+
+        SubFrameContainer.add(agregarPanel, "card2");
+
+        javax.swing.GroupLayout modificarPanelLayout = new javax.swing.GroupLayout(modificarPanel);
+        modificarPanel.setLayout(modificarPanelLayout);
+        modificarPanelLayout.setHorizontalGroup(
+            modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 994, Short.MAX_VALUE)
+        );
+        modificarPanelLayout.setVerticalGroup(
+            modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 686, Short.MAX_VALUE)
+        );
+
+        SubFrameContainer.add(modificarPanel, "card2");
+
+        javax.swing.GroupLayout eliminarPanelLayout = new javax.swing.GroupLayout(eliminarPanel);
+        eliminarPanel.setLayout(eliminarPanelLayout);
+        eliminarPanelLayout.setHorizontalGroup(
+            eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 994, Short.MAX_VALUE)
+        );
+        eliminarPanelLayout.setVerticalGroup(
+            eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 686, Short.MAX_VALUE)
+        );
+
+        SubFrameContainer.add(eliminarPanel, "card2");
+
+        jLabel2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
+        jLabel2.setText("PRUEBA");
+
+        javax.swing.GroupLayout buscarPanelLayout = new javax.swing.GroupLayout(buscarPanel);
+        buscarPanel.setLayout(buscarPanelLayout);
+        buscarPanelLayout.setHorizontalGroup(
+            buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buscarPanelLayout.createSequentialGroup()
+                .addGap(400, 400, 400)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(378, Short.MAX_VALUE))
+        );
+        buscarPanelLayout.setVerticalGroup(
+            buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(buscarPanelLayout.createSequentialGroup()
+                .addGap(191, 191, 191)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(299, Short.MAX_VALUE))
+        );
+
+        SubFrameContainer.add(buscarPanel, "card2");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(funciones, javax.swing.GroupLayout.DEFAULT_SIZE, 1000, Short.MAX_VALUE)
+            .addComponent(funciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(SubFrameContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addComponent(funciones, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 692, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(SubFrameContainer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void buscar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_prodActionPerformed
-        // TODO add your handling code here:
+        // Mostrar el SubFrame de "buscar producto"
+        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+        layout.show(SubFrameContainer, "buscarPanel");
     }//GEN-LAST:event_buscar_prodActionPerformed
 
     private void agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_prodActionPerformed
-        // TODO add your handling code here:
+        // Mostrar el SubFrame de "agregar producto"
+        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+        layout.show(SubFrameContainer, "agregarPanel");
     }//GEN-LAST:event_agregar_prodActionPerformed
 
     private void eliminar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_prodActionPerformed
-        // TODO add your handling code here:
+        // Mostrar el SubFrame de "eliminar producto"
+        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+        layout.show(SubFrameContainer, "eliminarPanel");
     }//GEN-LAST:event_eliminar_prodActionPerformed
 
     private void modificar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_prodActionPerformed
-        // TODO add your handling code here:
+        // Mostrar el SubFrame de "modificar producto"
+        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+        layout.show(SubFrameContainer, "modificarPanel");
     }//GEN-LAST:event_modificar_prodActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
@@ -185,6 +685,58 @@ public class RegistroProductos extends javax.swing.JFrame {
             MenuOpciones opciones = new MenuOpciones(); // Reemplaza con el nombre de tu clase para el nuevo frame
             opciones.setVisible(true);
     }//GEN-LAST:event_salirActionPerformed
+
+    private void crear_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_tipo_prodActionPerformed
+        // Despliega las opciones
+        boolean isVisible = opcionesTipoProducto.isVisible();
+        opcionesTipoProducto.setVisible(!isVisible);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_crear_tipo_prodActionPerformed
+
+    private void crear_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_prodActionPerformed
+        // Despliega las opciones
+        boolean isVisible = opcionesProducto.isVisible();
+        opcionesProducto.setVisible(!isVisible);
+        this.revalidate();
+        this.repaint();
+    }//GEN-LAST:event_crear_prodActionPerformed
+
+    private void box_nombre_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_tipo_prodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_nombre_tipo_prodActionPerformed
+
+    private void box_codigo_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_tipo_prodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_codigo_tipo_prodActionPerformed
+
+    private void box_codigo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_artActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_codigo_artActionPerformed
+
+    private void box_codigo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_prodActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_codigo_prodActionPerformed
+
+    private void box_nombre_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_artActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_nombre_artActionPerformed
+
+    private void guardar_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_artActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_guardar_artActionPerformed
+
+    private void box_marca_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_artActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_marca_artActionPerformed
+
+    private void box_marca_art1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_marca_art1ActionPerformed
+
+    private void box_marca_art2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_marca_art2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -223,16 +775,54 @@ public class RegistroProductos extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel SubFrameContainer;
+    private javax.swing.JPanel agregarPanel;
     private javax.swing.JButton agregar_prod;
+    private javax.swing.JLabel bienvenidaLabel;
+    private javax.swing.JLabel bienvenidaLabel1;
+    private javax.swing.JPanel bienvenidaPanel;
+    private javax.swing.JTextField box_codigo_art;
+    private javax.swing.JTextField box_codigo_prod;
+    private javax.swing.JTextField box_codigo_tipo_prod;
+    private javax.swing.JTextField box_marca_art;
+    private javax.swing.JTextField box_marca_art1;
+    private javax.swing.JTextField box_marca_art2;
+    private javax.swing.JTextField box_nombre_art;
+    private javax.swing.JTextField box_nombre_tipo_prod;
+    private javax.swing.JPanel buscarPanel;
     private javax.swing.JButton buscar_prod;
+    private javax.swing.JLabel ciclista_icon;
+    private javax.swing.JLabel codigo_art;
+    private javax.swing.JLabel codigo_defecto1;
+    private javax.swing.JLabel codigo_prod;
+    private javax.swing.JComboBox<String> combo_tammanio_bici;
+    private javax.swing.JComboBox<String> como_tipo_art;
+    private javax.swing.JButton crear_prod;
+    private javax.swing.JButton crear_tipo_prod;
+    private javax.swing.JPanel eliminarPanel;
     private javax.swing.JButton eliminar_prod;
     private javax.swing.JToolBar funciones;
+    private javax.swing.JButton guardar_art;
+    private javax.swing.JButton guardar_tipo_prod;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
+    private javax.swing.JSeparator jSeparator6;
+    private javax.swing.JSeparator jSeparator7;
+    private javax.swing.JLabel marca_art;
+    private javax.swing.JLabel marca_art1;
+    private javax.swing.JLabel marca_art2;
+    private javax.swing.JPanel modificarPanel;
     private javax.swing.JButton modificar_prod;
+    private javax.swing.JLabel nombre_art;
+    private javax.swing.JLabel nombre_prod;
+    private javax.swing.JPanel opcionesProducto;
+    private javax.swing.JPanel opcionesTipoProducto;
     private javax.swing.JButton salir;
+    private javax.swing.JLabel tammanio_bici1;
+    private javax.swing.JLabel tipo_art;
     // End of variables declaration//GEN-END:variables
 }
