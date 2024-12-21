@@ -39,6 +39,9 @@ public class RegistroProductos extends javax.swing.JFrame {
         hoverEffect.applyTo(crear_prod);
         hoverEffect.applyTo(guardar_tipo_prod);
         hoverEffect.applyTo(guardar_art);
+        hoverEffect.applyTo(button_buscar_agregar);
+        hoverEffect.applyTo(button_buscar_eliminar);
+        hoverEffect.applyTo(button_buscar_buscar);
 
         // Registrar los paneles en el CardLayout
         SubFrameContainer.add(agregarPanel, "agregarPanel");
@@ -111,9 +114,29 @@ public class RegistroProductos extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         modificarPanel = new javax.swing.JPanel();
+        filtro_agregar = new javax.swing.JLabel();
+        combo_filtro_agregar = new javax.swing.JComboBox<>();
+        buscador_agregar = new javax.swing.JTextField();
+        button_buscar_agregar = new javax.swing.JButton();
+        text_buscar_agregar = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla_resultado = new javax.swing.JTable();
         eliminarPanel = new javax.swing.JPanel();
+        filtro_eliminar = new javax.swing.JLabel();
+        combo_filtro_eliminar = new javax.swing.JComboBox<>();
+        text_buscar_eliminar = new javax.swing.JLabel();
+        buscador_eliminar = new javax.swing.JTextField();
+        button_buscar_eliminar = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        tabla_resultado1 = new javax.swing.JTable();
         buscarPanel = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
+        filtro_buscar = new javax.swing.JLabel();
+        combo_filtro_buscar = new javax.swing.JComboBox<>();
+        text_buscar_buscar = new javax.swing.JLabel();
+        buscador_buscar = new javax.swing.JTextField();
+        button_buscar_buscar = new javax.swing.JButton();
+        jScrollPane4 = new javax.swing.JScrollPane();
+        tabla_resultado2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -566,7 +589,7 @@ public class RegistroProductos extends javax.swing.JFrame {
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(crear_prod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(opcionesProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(154, Short.MAX_VALUE))
+                .addContainerGap(138, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -579,55 +602,323 @@ public class RegistroProductos extends javax.swing.JFrame {
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(opcionesProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(163, Short.MAX_VALUE))
+                .addContainerGap(86, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(agregarPanel, "card2");
+
+        filtro_agregar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        filtro_agregar.setText("Filtro");
+
+        combo_filtro_agregar.setBackground(new java.awt.Color(255, 255, 255));
+        combo_filtro_agregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        combo_filtro_agregar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
+        combo_filtro_agregar.setFocusable(false);
+
+        buscador_agregar.setBackground(new java.awt.Color(255, 255, 255));
+        buscador_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        buscador_agregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        button_buscar_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        button_buscar_agregar.setText("B U S C A R");
+        button_buscar_agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        button_buscar_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_buscar_agregarActionPerformed(evt);
+            }
+        });
+
+        text_buscar_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        text_buscar_agregar.setText("Buscar un producto para modificar");
+
+        tabla_resultado.setBackground(new java.awt.Color(255, 255, 255));
+        tabla_resultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tabla_resultado.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tabla_resultado.setForeground(new java.awt.Color(0, 0, 0));
+        tabla_resultado.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo art.", "Codigo prod.", "Tipo", "Tamaño", "Nombre", "Marca", "Precio", "Cantidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, true, true, true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabla_resultado.setToolTipText("");
+        tabla_resultado.setFocusable(false);
+        tabla_resultado.setGridColor(new java.awt.Color(0, 0, 0));
+        tabla_resultado.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        tabla_resultado.setShowGrid(true);
+        tabla_resultado.getTableHeader().setResizingAllowed(false);
+        tabla_resultado.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tabla_resultado);
+        if (tabla_resultado.getColumnModel().getColumnCount() > 0) {
+            tabla_resultado.getColumnModel().getColumn(0).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(1).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(2).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(3).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(4).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(5).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(6).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         javax.swing.GroupLayout modificarPanelLayout = new javax.swing.GroupLayout(modificarPanel);
         modificarPanel.setLayout(modificarPanelLayout);
         modificarPanelLayout.setHorizontalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 994, Short.MAX_VALUE)
+            .addGroup(modificarPanelLayout.createSequentialGroup()
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addComponent(filtro_agregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(text_buscar_agregar)
+                    .addGroup(modificarPanelLayout.createSequentialGroup()
+                        .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_buscar_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(119, 119, 119))
+            .addGroup(modificarPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane1)
+                .addContainerGap())
         );
         modificarPanelLayout.setVerticalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
+            .addGroup(modificarPanelLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(text_buscar_agregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_buscar_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filtro_agregar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         SubFrameContainer.add(modificarPanel, "card2");
+
+        filtro_eliminar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        filtro_eliminar.setText("Filtro");
+
+        combo_filtro_eliminar.setBackground(new java.awt.Color(255, 255, 255));
+        combo_filtro_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        combo_filtro_eliminar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
+        combo_filtro_eliminar.setFocusable(false);
+
+        text_buscar_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        text_buscar_eliminar.setText("Buscar un producto para eliminar");
+
+        buscador_eliminar.setBackground(new java.awt.Color(255, 255, 255));
+        buscador_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        buscador_eliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        buscador_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscador_eliminarActionPerformed(evt);
+            }
+        });
+
+        button_buscar_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        button_buscar_eliminar.setText("B U S C A R");
+        button_buscar_eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        button_buscar_eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_buscar_eliminarActionPerformed(evt);
+            }
+        });
+
+        tabla_resultado1.setBackground(new java.awt.Color(255, 255, 255));
+        tabla_resultado1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tabla_resultado1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tabla_resultado1.setForeground(new java.awt.Color(0, 0, 0));
+        tabla_resultado1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo art.", "Codigo prod.", "Tipo", "Tamaño", "Nombre", "Marca", "Precio", "Cantidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabla_resultado1.setToolTipText("");
+        tabla_resultado1.setFocusable(false);
+        tabla_resultado1.setGridColor(new java.awt.Color(0, 0, 0));
+        tabla_resultado1.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        tabla_resultado1.setShowGrid(true);
+        tabla_resultado1.getTableHeader().setResizingAllowed(false);
+        tabla_resultado1.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tabla_resultado1);
+        if (tabla_resultado1.getColumnModel().getColumnCount() > 0) {
+            tabla_resultado1.getColumnModel().getColumn(0).setResizable(false);
+            tabla_resultado1.getColumnModel().getColumn(1).setResizable(false);
+            tabla_resultado1.getColumnModel().getColumn(2).setResizable(false);
+            tabla_resultado1.getColumnModel().getColumn(3).setResizable(false);
+            tabla_resultado1.getColumnModel().getColumn(4).setResizable(false);
+            tabla_resultado1.getColumnModel().getColumn(5).setResizable(false);
+            tabla_resultado1.getColumnModel().getColumn(6).setResizable(false);
+            tabla_resultado1.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         javax.swing.GroupLayout eliminarPanelLayout = new javax.swing.GroupLayout(eliminarPanel);
         eliminarPanel.setLayout(eliminarPanelLayout);
         eliminarPanelLayout.setHorizontalGroup(
             eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 994, Short.MAX_VALUE)
+            .addGroup(eliminarPanelLayout.createSequentialGroup()
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addComponent(filtro_eliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(combo_filtro_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(text_buscar_eliminar)
+                    .addGroup(eliminarPanelLayout.createSequentialGroup()
+                        .addComponent(buscador_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_buscar_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(119, 119, 119))
+            .addGroup(eliminarPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane2)
+                .addContainerGap())
         );
         eliminarPanelLayout.setVerticalGroup(
             eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 686, Short.MAX_VALUE)
+            .addGroup(eliminarPanelLayout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(text_buscar_eliminar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscador_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo_filtro_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_buscar_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filtro_eliminar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         SubFrameContainer.add(eliminarPanel, "card2");
 
-        jLabel2.setFont(new java.awt.Font("Dialog", 0, 36)); // NOI18N
-        jLabel2.setText("PRUEBA");
+        filtro_buscar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        filtro_buscar.setText("Filtro");
+
+        combo_filtro_buscar.setBackground(new java.awt.Color(255, 255, 255));
+        combo_filtro_buscar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        combo_filtro_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
+        combo_filtro_buscar.setFocusable(false);
+
+        text_buscar_buscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        text_buscar_buscar.setText("Buscar un producto");
+
+        buscador_buscar.setBackground(new java.awt.Color(255, 255, 255));
+        buscador_buscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        buscador_buscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        buscador_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                buscador_buscarActionPerformed(evt);
+            }
+        });
+
+        button_buscar_buscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        button_buscar_buscar.setText("B U S C A R");
+        button_buscar_buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        button_buscar_buscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_buscar_buscarActionPerformed(evt);
+            }
+        });
+
+        tabla_resultado2.setBackground(new java.awt.Color(255, 255, 255));
+        tabla_resultado2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        tabla_resultado2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        tabla_resultado2.setForeground(new java.awt.Color(0, 0, 0));
+        tabla_resultado2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Codigo art.", "Codigo prod.", "Tipo", "Tamaño", "Nombre", "Marca", "Precio", "Cantidad"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        tabla_resultado2.setToolTipText("");
+        tabla_resultado2.setFocusable(false);
+        tabla_resultado2.setGridColor(new java.awt.Color(0, 0, 0));
+        tabla_resultado2.setSelectionBackground(new java.awt.Color(204, 204, 204));
+        tabla_resultado2.setShowGrid(true);
+        tabla_resultado2.getTableHeader().setResizingAllowed(false);
+        tabla_resultado2.getTableHeader().setReorderingAllowed(false);
+        jScrollPane4.setViewportView(tabla_resultado2);
+        if (tabla_resultado2.getColumnModel().getColumnCount() > 0) {
+            tabla_resultado2.getColumnModel().getColumn(0).setResizable(false);
+            tabla_resultado2.getColumnModel().getColumn(1).setResizable(false);
+            tabla_resultado2.getColumnModel().getColumn(2).setResizable(false);
+            tabla_resultado2.getColumnModel().getColumn(3).setResizable(false);
+            tabla_resultado2.getColumnModel().getColumn(4).setResizable(false);
+            tabla_resultado2.getColumnModel().getColumn(5).setResizable(false);
+            tabla_resultado2.getColumnModel().getColumn(6).setResizable(false);
+            tabla_resultado2.getColumnModel().getColumn(7).setResizable(false);
+        }
 
         javax.swing.GroupLayout buscarPanelLayout = new javax.swing.GroupLayout(buscarPanel);
         buscarPanel.setLayout(buscarPanelLayout);
         buscarPanelLayout.setHorizontalGroup(
             buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buscarPanelLayout.createSequentialGroup()
-                .addGap(400, 400, 400)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 216, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(378, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE)
+                .addComponent(filtro_buscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(combo_filtro_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(text_buscar_buscar)
+                    .addGroup(buscarPanelLayout.createSequentialGroup()
+                        .addComponent(buscador_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_buscar_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(119, 119, 119))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buscarPanelLayout.createSequentialGroup()
+                .addComponent(jScrollPane4)
+                .addContainerGap())
         );
         buscarPanelLayout.setVerticalGroup(
             buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(buscarPanelLayout.createSequentialGroup()
-                .addGap(191, 191, 191)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(299, Short.MAX_VALUE))
+                .addGap(37, 37, 37)
+                .addComponent(text_buscar_buscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(buscador_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo_filtro_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_buscar_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filtro_buscar))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         SubFrameContainer.add(buscarPanel, "card2");
@@ -738,6 +1029,26 @@ public class RegistroProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_art2ActionPerformed
 
+    private void button_buscar_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_agregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_buscar_agregarActionPerformed
+
+    private void button_buscar_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_buscar_eliminarActionPerformed
+
+    private void buscador_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscador_eliminarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscador_eliminarActionPerformed
+
+    private void buscador_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscador_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_buscador_buscarActionPerformed
+
+    private void button_buscar_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_buscarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_button_buscar_buscarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -789,22 +1100,36 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JTextField box_marca_art2;
     private javax.swing.JTextField box_nombre_art;
     private javax.swing.JTextField box_nombre_tipo_prod;
+    private javax.swing.JTextField buscador_agregar;
+    private javax.swing.JTextField buscador_buscar;
+    private javax.swing.JTextField buscador_eliminar;
     private javax.swing.JPanel buscarPanel;
     private javax.swing.JButton buscar_prod;
+    private javax.swing.JButton button_buscar_agregar;
+    private javax.swing.JButton button_buscar_buscar;
+    private javax.swing.JButton button_buscar_eliminar;
     private javax.swing.JLabel ciclista_icon;
     private javax.swing.JLabel codigo_art;
     private javax.swing.JLabel codigo_defecto1;
     private javax.swing.JLabel codigo_prod;
+    private javax.swing.JComboBox<String> combo_filtro_agregar;
+    private javax.swing.JComboBox<String> combo_filtro_buscar;
+    private javax.swing.JComboBox<String> combo_filtro_eliminar;
     private javax.swing.JComboBox<String> combo_tammanio_bici;
     private javax.swing.JComboBox<String> como_tipo_art;
     private javax.swing.JButton crear_prod;
     private javax.swing.JButton crear_tipo_prod;
     private javax.swing.JPanel eliminarPanel;
     private javax.swing.JButton eliminar_prod;
+    private javax.swing.JLabel filtro_agregar;
+    private javax.swing.JLabel filtro_buscar;
+    private javax.swing.JLabel filtro_eliminar;
     private javax.swing.JToolBar funciones;
     private javax.swing.JButton guardar_art;
     private javax.swing.JButton guardar_tipo_prod;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator3;
@@ -822,7 +1147,13 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JPanel opcionesProducto;
     private javax.swing.JPanel opcionesTipoProducto;
     private javax.swing.JButton salir;
+    private javax.swing.JTable tabla_resultado;
+    private javax.swing.JTable tabla_resultado1;
+    private javax.swing.JTable tabla_resultado2;
     private javax.swing.JLabel tammanio_bici1;
+    private javax.swing.JLabel text_buscar_agregar;
+    private javax.swing.JLabel text_buscar_buscar;
+    private javax.swing.JLabel text_buscar_eliminar;
     private javax.swing.JLabel tipo_art;
     // End of variables declaration//GEN-END:variables
 }
