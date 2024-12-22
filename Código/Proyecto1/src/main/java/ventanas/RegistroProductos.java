@@ -97,7 +97,7 @@ public class RegistroProductos extends javax.swing.JFrame {
         codigo_art = new javax.swing.JLabel();
         box_codigo_art = new javax.swing.JTextField();
         codigo_prod = new javax.swing.JLabel();
-        box_codigo_prod = new javax.swing.JTextField();
+        box_codigo_prod = new javax.swing.JComboBox<>();
         tipo_art = new javax.swing.JLabel();
         como_tipo_art = new javax.swing.JComboBox<>();
         tammanio_bici1 = new javax.swing.JLabel();
@@ -399,13 +399,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         codigo_prod.setText("Código producto");
 
         box_codigo_prod.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_codigo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_codigo_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_codigo_prodActionPerformed(evt);
-            }
-        });
+        box_codigo_prod.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        box_codigo_prod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "tipo prod" }));
+        box_codigo_prod.setBorder(null);
+        box_codigo_prod.setFocusable(false);
+        box_codigo_prod.setRequestFocusEnabled(false);
 
         tipo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         tipo_art.setText("Tipo de artículo");
@@ -508,8 +506,8 @@ public class RegistroProductos extends javax.swing.JFrame {
                                             .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(combo_tammanio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(box_codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(box_codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(como_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                .addComponent(como_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(box_codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(opcionesProductoLayout.createSequentialGroup()
                                             .addComponent(marca_art)
                                             .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -1004,10 +1002,6 @@ public class RegistroProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_artActionPerformed
 
-    private void box_codigo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_prodActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_codigo_prodActionPerformed
-
     private void box_nombre_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_artActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_nombre_artActionPerformed
@@ -1092,7 +1086,7 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JLabel bienvenidaLabel1;
     private javax.swing.JPanel bienvenidaPanel;
     private javax.swing.JTextField box_codigo_art;
-    private javax.swing.JTextField box_codigo_prod;
+    private javax.swing.JComboBox<String> box_codigo_prod;
     private javax.swing.JTextField box_codigo_tipo_prod;
     private javax.swing.JTextField box_marca_art;
     private javax.swing.JTextField box_marca_art1;
