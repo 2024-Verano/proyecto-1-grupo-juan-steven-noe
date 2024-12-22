@@ -13,11 +13,12 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-// Clase para pintar los bordes de los botones cuando se pase el cursor por encima
+// Clase para efectps hover varios
 public class ButtonHoverEffect {
 
-    private final Color hoverColor; // Color del borde al pasar el cursor
-    private final Color originalColor; // Color del borde original
+    private final Color hoverColor;
+    private final Color originalColor;
+    private static JButton activeButton = null; // Rastrea el botón activo
 
     public ButtonHoverEffect(Color hoverColor, Color originalColor) {
         this.hoverColor = hoverColor;
@@ -45,26 +46,42 @@ public class ButtonHoverEffect {
             }
         });
     }
-    
-    // NUEVO: Efecto donde aparece un borde negro sin desplazar otros componentes
-    public static void applyBorderOnHoverEffect(JButton button) {
+      
+    // Método para aplicar el efecto hover y mantener seleccionado
+    public static void applySelectableHoverEffect(JButton button) {
         // Establece un borde vacío inicial para mantener el espacio reservado
         button.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
-        button.setOpaque(false); // Evita el fondo predeterminado
-        button.setContentAreaFilled(false); // No pintar el contenido
-        button.setFocusPainted(false); // Sin el borde de foco azul
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setFocusPainted(false);
 
         button.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent e) {
-                // Cambia el borde a negro al pasar el cursor
-                button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+
+                if (activeButton != button) {
+                    button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
+                }
             }
 
             @Override
             public void mouseExited(MouseEvent e) {
-                // Restaura el borde vacío al salir
-                button.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+
+                if (activeButton != button) {
+                    button.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+                }
+            }
+
+            @Override
+            public void mousePressed(MouseEvent e) {
+
+                if (activeButton != null) {
+
+                    activeButton.setBorder(BorderFactory.createEmptyBorder(2, 2, 2, 2));
+                }
+                activeButton = button;
+
+                button.setBorder(BorderFactory.createLineBorder(Color.BLACK, 2));
             }
         });
     }

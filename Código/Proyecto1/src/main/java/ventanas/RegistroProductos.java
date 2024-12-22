@@ -18,13 +18,13 @@ public class RegistroProductos extends javax.swing.JFrame {
      */
     public RegistroProductos() {
         initComponents();
-        
-        // Aplicar el efecto de borde negro al pasar el cursor (TOOLBAR)
-        ButtonHoverEffect.applyBorderOnHoverEffect(agregar_prod);
-        ButtonHoverEffect.applyBorderOnHoverEffect(modificar_prod);
-        ButtonHoverEffect.applyBorderOnHoverEffect(eliminar_prod);
-        ButtonHoverEffect.applyBorderOnHoverEffect(buscar_prod);
-        ButtonHoverEffect.applyBorderOnHoverEffect(salir);
+
+        // Aplicar el efecto hover y selección a los botones (TOOLBAR)
+        ButtonHoverEffect.applySelectableHoverEffect(agregar_prod);
+        ButtonHoverEffect.applySelectableHoverEffect(modificar_prod);
+        ButtonHoverEffect.applySelectableHoverEffect(eliminar_prod);
+        ButtonHoverEffect.applySelectableHoverEffect(buscar_prod);
+        ButtonHoverEffect.applySelectableHoverEffect(salir);
 
          // Aplicar el efecto hover de borde gris al pasar el cursor (PANEL AGREGAR_PROD)
         // Define los colores
@@ -142,7 +142,6 @@ public class RegistroProductos extends javax.swing.JFrame {
         setBackground(new java.awt.Color(255, 255, 255));
         setMaximumSize(new java.awt.Dimension(1000, 800));
         setMinimumSize(new java.awt.Dimension(1000, 800));
-        setPreferredSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
 

@@ -26,6 +26,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
         // Aplica el efecto hover a cada botón
+        hoverEffect.applyTo(cerrar_sesion);
         hoverEffect.applyTo(registro_producto);
         hoverEffect.applyTo(registro_clientes);
         hoverEffect.applyTo(registro_mant);
@@ -49,6 +50,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         registro_clientes = new javax.swing.JButton();
         registro_mant = new javax.swing.JButton();
         facturacion = new javax.swing.JButton();
+        cerrar_sesion = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -119,6 +121,15 @@ public class MenuOpciones extends javax.swing.JFrame {
             }
         });
 
+        cerrar_sesion.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        cerrar_sesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/logout.png"))); // NOI18N
+        cerrar_sesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        cerrar_sesion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cerrar_sesionActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -140,11 +151,17 @@ public class MenuOpciones extends javax.swing.JFrame {
                             .addComponent(registro_clientes, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(facturacion, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(332, 332, 332))))
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(cerrar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(57, 57, 57)
+                .addContainerGap()
+                .addComponent(cerrar_sesion, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(encabezado)
                 .addGap(49, 49, 49)
                 .addComponent(registro_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -181,6 +198,15 @@ public class MenuOpciones extends javax.swing.JFrame {
     private void facturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturacionActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_facturacionActionPerformed
+
+    private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
+        // Cierra el frame actual
+        this.dispose(); 
+
+        // Abre el nuevo frame
+        Credenciales opciones = new Credenciales(); // Reemplaza con el nombre de tu clase para el nuevo frame
+        opciones.setVisible(true);
+    }//GEN-LAST:event_cerrar_sesionActionPerformed
 
     /**
      * @param args the command line arguments
@@ -221,6 +247,7 @@ public class MenuOpciones extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cerrar_sesion;
     private javax.swing.JLabel ciclista_icon;
     private javax.swing.JLabel encabezado;
     private javax.swing.JButton facturacion;
