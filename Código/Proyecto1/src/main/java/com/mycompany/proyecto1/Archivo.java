@@ -5,6 +5,8 @@
 package com.mycompany.proyecto1;
 
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -29,6 +31,30 @@ public class Archivo {
         } catch (IOException e) {
             System.out.println("Error al leer el archivo: " + e.getMessage());
             return null;
+        }
+    }
+    
+    // Calcula el siguiente código de cualquier objeto
+    public <T extends ConCodigo> int obtenerSiguienteCodigo(String ruta, Class<T[]> clase) {
+        try {
+            ObjectMapper mapper = new ObjectMapper();
+            File archivo = new File(ruta);
+
+            if (!archivo.exists()) {
+                return 1;
+            }
+
+            T[] array = mapper.readValue(archivo, clase);
+            List<T> lista = new ArrayList<>(List.of(array));
+
+            return lista.stream()
+                        .mapToInt(T::getCodigo)
+                        .max()
+                        .orElse(0) + 1;
+
+        } catch (IOException e) {
+            System.out.println("Error al procesar el archivo para obtener el siguiente código: " + e.getMessage());
+            return 1;
         }
     }
 }

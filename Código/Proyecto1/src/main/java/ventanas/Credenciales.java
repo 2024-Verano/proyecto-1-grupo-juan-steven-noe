@@ -20,6 +20,10 @@ public class Credenciales extends javax.swing.JFrame {
      */
     public Credenciales() {
         initComponents();
+        
+        // Asigna el botón ENTER ingresar como el predeterminado
+        this.getRootPane().setDefaultButton(button_ingresar);
+        
           // Define los colores
         Color hoverColor = new Color(150,150,150); // Rojo oscuro (al pasar el cursor)
         Color originalColor = Color.BLACK; // Negro (borde inicial)
@@ -162,7 +166,7 @@ public class Credenciales extends javax.swing.JFrame {
     }//GEN-LAST:event_box_usuarioActionPerformed
 
     private void button_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ingresarActionPerformed
-        // TODO add your handling code here:
+
         // Obtener el texto ingresado en los campos de usuario y contraseña
         String usuario = box_usuario.getText().trim();
         String contrasena = box_contrasenia.getText().trim();

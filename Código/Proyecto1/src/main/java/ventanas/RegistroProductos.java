@@ -5,6 +5,14 @@
 package ventanas;
 
 import java.awt.Color;
+import java.util.List;
+import java.util.ArrayList;
+
+// Importar las clases de lógica:
+import com.mycompany.proyecto1.Archivo;
+import com.mycompany.proyecto1.TipoProducto;
+import com.mycompany.proyecto1.Validador;
+import java.util.Arrays;
 
 
 /**
@@ -312,8 +320,8 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         box_codigo_tipo_prod.setEditable(false);
         box_codigo_tipo_prod.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_tipo_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_codigo_tipo_prod.setText(" AUTOMÁTICO");
+        box_codigo_tipo_prod.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        box_codigo_tipo_prod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         box_codigo_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_codigo_tipo_prod.setEnabled(false);
         box_codigo_tipo_prod.setFocusable(false);
@@ -341,6 +349,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         guardar_tipo_prod.setText("G U A R D A R");
         guardar_tipo_prod.setBorder(null);
         guardar_tipo_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardar_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardar_tipo_prodActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout opcionesTipoProductoLayout = new javax.swing.GroupLayout(opcionesTipoProducto);
         opcionesTipoProducto.setLayout(opcionesTipoProductoLayout);
@@ -975,11 +988,30 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void crear_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_tipo_prodActionPerformed
-        // Despliega las opciones
+
         boolean isVisible = opcionesTipoProducto.isVisible();
         opcionesTipoProducto.setVisible(!isVisible);
-        this.revalidate();
-        this.repaint();
+
+        // Si las opciones se hacen visibles, cargar el siguiente código
+        if (!isVisible) {
+            String ruta = "tiposProductos.json";
+            Archivo archivo = new Archivo();
+
+            try {
+                // Usar el método de Archivo para obtener el siguiente código
+                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+
+                // Mostrar el código en el campo correspondiente
+                box_codigo_tipo_prod.setText(String.valueOf(siguienteCodigo));
+
+            } catch (Exception e) {
+                box_codigo_tipo_prod.setText("AUTOMÁTICO");
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+    }
+
+    this.revalidate();
+    this.repaint();
     }//GEN-LAST:event_crear_tipo_prodActionPerformed
 
     private void crear_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_prodActionPerformed
@@ -1041,6 +1073,54 @@ public class RegistroProductos extends javax.swing.JFrame {
     private void button_buscar_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_buscarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_button_buscar_buscarActionPerformed
+
+    private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
+
+        String ruta = "tiposProductos.json";
+        Archivo archivo = new Archivo();
+        String nombre = box_nombre_tipo_prod.getText().trim();
+
+        // Validar la entrada (nombre del tipo de producto)
+        if (!Validador.validarAlfabetico(nombre)) {
+            javax.swing.JOptionPane.showMessageDialog(this, "El nombre del tipo de producto es inválido. Solo se permiten caracteres alfabéticos y no puede estar vacío.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            // Leer los tipos de productos existentes desde el archivo JSON
+            TipoProducto[] productos = (TipoProducto[]) archivo.leerArchivo(ruta, TipoProducto[].class);
+
+            // Inicializar la lista con los productos
+            List<TipoProducto> listaProductos = productos != null 
+                    ? new ArrayList<>(List.of(productos)) 
+                    : new ArrayList<>();
+
+            // Calcular el siguiente código
+            int nuevoCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+
+            // Crear un nuevo tipo de producto y agregarlo a la lista
+            TipoProducto nuevoProducto = new TipoProducto(nuevoCodigo, nombre);
+            listaProductos.add(nuevoProducto);
+
+            // Guardar la lista actualizada en el archivo JSON
+            archivo.guardarArchivo(ruta, listaProductos);
+
+            // Mostrar mensaje de éxito
+            javax.swing.JOptionPane.showMessageDialog(this, "Tipo de producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            // Limpiar los campos de texto
+            box_nombre_tipo_prod.setText("");
+            box_codigo_tipo_prod.setText("AUTOMÁTICO");
+            
+            // Actualizar el siguiente código disponible
+            int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+            box_codigo_tipo_prod.setText(String.valueOf(siguienteCodigo));
+
+        } catch (Exception e) {
+            // Mostrar mensaje de error
+            javax.swing.JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar el tipo de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_guardar_tipo_prodActionPerformed
 
     /**
      * @param args the command line arguments

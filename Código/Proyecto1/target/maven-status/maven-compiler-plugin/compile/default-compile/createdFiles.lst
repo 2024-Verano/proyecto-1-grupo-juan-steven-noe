@@ -19,9 +19,12 @@ ventanas\RegistroProductos$22.class
 ventanas\RegistroProductos$7.class
 ventanas\ButtonHoverEffect$2.class
 ventanas\MenuOpciones.class
+com\mycompany\proyecto1\ConCodigo.class
 ventanas\RegistroProductos$5.class
 ventanas\RegistroProductos$12.class
 ventanas\RegistroProductos$15.class
+ventanas\RegistroProductos$25.class
+com\mycompany\proyecto1\Validador.class
 ventanas\RegistroProductos$18.class
 ventanas\Credenciales$2.class
 ventanas\MenuOpciones$1.class
@@ -30,6 +33,7 @@ ventanas\RegistroProductos$8.class
 ventanas\RegistroProductos.class
 ventanas\RegistroProductos$16.class
 ventanas\RegistroProductos$6.class
+com\mycompany\proyecto1\TipoProducto.class
 ventanas\RegistroProductos$21.class
 ventanas\Credenciales$1.class
 ventanas\RegistroProductos$2.class
