@@ -4,10 +4,12 @@
  */
 package ventanas;
 
+// importar librerías de swing
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
+import javax.swing.table.DefaultTableModel;
 
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
@@ -49,13 +51,19 @@ public class RegistroProductos extends javax.swing.JFrame {
         // Crear la instancia de ButtonHoverEffect para el efecto
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-        // Aplica el efecto hover a cada botón
+        // Aplica el efecto hover a cada botón (Agregar Producto)
         hoverEffect.applyTo(crear_tipo_prod);
         hoverEffect.applyTo(crear_prod);
         hoverEffect.applyTo(guardar_tipo_prod);
         hoverEffect.applyTo(guardar_art);
-        hoverEffect.applyTo(button_buscar_agregar);
+        
+        // Aplica el efecto hover a cada botón (Modificar Productoi)
+        hoverEffect.applyTo(button_buscar_modificar);
+        
+        // Aplica el efecto hover a cada botón (Eliminar Producto)
         hoverEffect.applyTo(button_buscar_eliminar);
+        
+        // Aplica el efecto hover a cada botón (Buscar Producto)
         hoverEffect.applyTo(button_buscar_buscar);
 
         // Registrar los paneles en el CardLayout
@@ -73,7 +81,7 @@ public class RegistroProductos extends javax.swing.JFrame {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "bienvenidaPanel");
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -132,7 +140,7 @@ public class RegistroProductos extends javax.swing.JFrame {
         filtro_agregar = new javax.swing.JLabel();
         combo_filtro_agregar = new javax.swing.JComboBox<>();
         buscador_agregar = new javax.swing.JTextField();
-        button_buscar_agregar = new javax.swing.JButton();
+        button_buscar_modificar = new javax.swing.JButton();
         text_buscar_agregar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_resultado = new javax.swing.JTable();
@@ -648,12 +656,12 @@ public class RegistroProductos extends javax.swing.JFrame {
         buscador_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
         buscador_agregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        button_buscar_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        button_buscar_agregar.setText("B U S C A R");
-        button_buscar_agregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        button_buscar_agregar.addActionListener(new java.awt.event.ActionListener() {
+        button_buscar_modificar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        button_buscar_modificar.setText("B U S C A R");
+        button_buscar_modificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        button_buscar_modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_buscar_agregarActionPerformed(evt);
+                button_buscar_modificarActionPerformed(evt);
             }
         });
 
@@ -673,7 +681,7 @@ public class RegistroProductos extends javax.swing.JFrame {
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, true, true, true, true, true, false
+                false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -687,6 +695,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         tabla_resultado.setShowGrid(true);
         tabla_resultado.getTableHeader().setResizingAllowed(false);
         tabla_resultado.getTableHeader().setReorderingAllowed(false);
+        tabla_resultado.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                tabla_resultadoMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tabla_resultado);
         if (tabla_resultado.getColumnModel().getColumnCount() > 0) {
             tabla_resultado.getColumnModel().getColumn(0).setResizable(false);
@@ -703,22 +716,24 @@ public class RegistroProductos extends javax.swing.JFrame {
         modificarPanel.setLayout(modificarPanelLayout);
         modificarPanelLayout.setHorizontalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarPanelLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
                 .addContainerGap(146, Short.MAX_VALUE)
-                .addComponent(filtro_agregar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(text_buscar_agregar)
-                    .addGroup(modificarPanelLayout.createSequentialGroup()
-                        .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
+                        .addComponent(filtro_agregar)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_buscar_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(119, 119, 119))
-            .addGroup(modificarPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane1)
-                .addContainerGap())
+                        .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(text_buscar_agregar)
+                            .addGroup(modificarPanelLayout.createSequentialGroup()
+                                .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(119, 119, 119))
+                    .addGroup(modificarPanelLayout.createSequentialGroup()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap())))
         );
         modificarPanelLayout.setVerticalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -729,11 +744,11 @@ public class RegistroProductos extends javax.swing.JFrame {
                 .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_buscar_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filtro_agregar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(265, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(modificarPanel, "card2");
@@ -1145,9 +1160,49 @@ public class RegistroProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_art2ActionPerformed
 
-    private void button_buscar_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_agregarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button_buscar_agregarActionPerformed
+    private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
+        String ruta = "productos.json";
+        Archivo archivo = new Archivo();
+
+        try {
+            // Obtener el criterio seleccionado y el valor ingresado
+            String criterio = combo_filtro_agregar.getSelectedItem().toString();
+            String valor = buscador_agregar.getText().trim();
+
+            if (valor.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor para buscar.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Leer productos del archivo
+            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
+            if (productos == null || productos.length == 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                return;
+            }
+
+            // Filtrar productos según el criterio
+            List<Producto> resultados = new ArrayList<>();
+            for (Producto producto : productos) {
+                if ("Codigo".equals(criterio) && String.valueOf(producto.getCodigoArticulo()).equals(valor)) {
+                    resultados.add(producto);
+                } else if ("Nombre".equals(criterio) && producto.getNombre().toLowerCase().contains(valor.toLowerCase())) {
+                    resultados.add(producto);
+                }
+            }
+
+            // Verificar si hay resultados
+            if (resultados.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron productos.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+
+            // Cargar resultados en la tabla
+            Utilidades.cargarResultadosEnTabla((DefaultTableModel) tabla_resultado.getModel(), resultados);
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     private void button_buscar_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_eliminarActionPerformed
         // TODO add your handling code here:
@@ -1162,7 +1217,7 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_buscador_buscarActionPerformed
 
     private void button_buscar_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_buscarActionPerformed
-        // TODO add your handling code here:
+
     }//GEN-LAST:event_button_buscar_buscarActionPerformed
 
     private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
@@ -1234,6 +1289,21 @@ public class RegistroProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_combo_tipo_artActionPerformed
 
+    private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
+        // Detectar doble clic
+        if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
+            // Obtener el código del artículo de la fila seleccionada
+            int selectedRow = tabla_resultado.getSelectedRow();
+            int codigoArticulo = (int) tabla_resultado.getValueAt(selectedRow, 0);
+
+            // Crear y mostrar la ventana de modificación
+            VentanaModificar ventana = new VentanaModificar();
+            ventana.cargarDatosProducto(codigoArticulo); // Cargar los datos correspondientes
+            ventana.setVisible(true);
+            ventana.setLocationRelativeTo(this); // Centrar respecto al formulario principal
+        }
+    }//GEN-LAST:event_tabla_resultadoMouseClicked
+
     /**
      * @param args the command line arguments
      */
@@ -1290,9 +1360,9 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JTextField buscador_eliminar;
     private javax.swing.JPanel buscarPanel;
     private javax.swing.JButton buscar_prod;
-    private javax.swing.JButton button_buscar_agregar;
     private javax.swing.JButton button_buscar_buscar;
     private javax.swing.JButton button_buscar_eliminar;
+    private javax.swing.JButton button_buscar_modificar;
     private javax.swing.JLabel ciclista_icon;
     private javax.swing.JLabel codigo_art;
     private javax.swing.JLabel codigo_defecto1;

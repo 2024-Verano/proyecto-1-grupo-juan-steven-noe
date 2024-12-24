@@ -4,12 +4,15 @@
  */
 package com.mycompany.proyecto1;
 
+import java.util.List;
+import javax.swing.JComboBox;
+import javax.swing.table.DefaultTableModel;
+
+
 /**
  *
  * @author noe
  */
-
-import javax.swing.JComboBox;
 
 // Clase para funciones y métodos inespecíficos
 public class Utilidades {
@@ -34,6 +37,24 @@ public class Utilidades {
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar los tipos de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Método para cargar resultados de búsqueda en las tablas de Agregar Producto
+    public static void cargarResultadosEnTabla(DefaultTableModel modelo, List<Producto> resultados) {
+        modelo.setRowCount(0);
+
+        for (Producto p : resultados) {
+            modelo.addRow(new Object[]{
+                p.getCodigoArticulo(),
+                p.getCodigoProducto(),
+                p.getTipoArticulo(),
+                p.getTamanoBici(),
+                p.getNombre(),
+                p.getMarca(),
+                p.getPrecio(),
+                p.getCantidad()
+            });
         }
     }
     
