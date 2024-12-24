@@ -1124,6 +1124,10 @@ public class RegistroProductos extends javax.swing.JFrame {
             box_marca_art2.setText("");
             combo_tammanio_bici.setSelectedIndex(-1);
 
+        // Actualizar el siguiente código disponible para el artículo (tiempo real)
+        int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Producto[].class);
+        box_codigo_art.setText(String.valueOf(siguienteCodigo));
+
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }

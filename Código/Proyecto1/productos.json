@@ -1,1 +1,1 @@
-[]
+[{"codigoArticulo":1,"codigoProducto":1,"tipoArticulo":"Accesorio","tamanoBici":null,"nombre":"Guantes trail","marca":"Everest","precio":200000,"cantidad":10},{"codigoArticulo":2,"codigoProducto":1,"tipoArticulo":"Suplemento","tamanoBici":null,"nombre":"Protein whey","marca":"X Labs","precio":25000,"cantidad":25},{"codigoArticulo":3,"codigoProducto":1,"tipoArticulo":"Accesorio","tamanoBici":null,"nombre":"Casco trail","marca":"Fox","precio":500000,"cantidad":5}]
