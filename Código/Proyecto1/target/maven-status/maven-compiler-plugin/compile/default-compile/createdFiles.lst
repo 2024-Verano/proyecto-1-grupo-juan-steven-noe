@@ -1,3 +1,4 @@
+com\mycompany\proyecto1\Utilidades.class
 ventanas\MenuOpciones$3.class
 ventanas\RegistroProductos$20.class
 ventanas\RegistroProductos$17.class
@@ -5,10 +6,12 @@ ventanas\ButtonHoverEffect$1.class
 ventanas\RegistroProductos$10.class
 ventanas\MenuOpciones$6.class
 ventanas\RegistroProductos$23.class
+com\mycompany\proyecto1\Producto.class
 ventanas\RegistroProductos$3.class
 ventanas\RegistroProductos$13.class
 com\mycompany\proyecto1\Archivo.class
 ventanas\RegistroProductos$4.class
+ventanas\RegistroProductos$26.class
 com\mycompany\proyecto1\Proyecto1.class
 ventanas\Credenciales$3.class
 ventanas\MenuOpciones$4.class
@@ -43,4 +46,5 @@ ventanas\ButtonHoverEffect.class
 ventanas\MenuOpciones$5.class
 com\mycompany\proyecto1\Usuario.class
 ventanas\RegistroProductos$9.class
+ventanas\RegistroProductos$27.class
 ventanas\MenuOpciones$2.class

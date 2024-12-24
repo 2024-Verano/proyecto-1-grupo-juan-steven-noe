@@ -300,8 +300,8 @@
                       </Group>
                       <EmptySpace min="-2" pref="102" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="crear_prod" max="32767" attributes="0"/>
                           <Component id="opcionesProducto" max="32767" attributes="0"/>
+                          <Component id="crear_prod" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="138" max="32767" attributes="0"/>
                   </Group>
@@ -543,7 +543,7 @@
                                                       <Group type="103" groupAlignment="0" attributes="0">
                                                           <Component id="combo_tammanio_bici" min="-2" pref="108" max="-2" attributes="0"/>
                                                           <Component id="box_codigo_art" min="-2" pref="107" max="-2" attributes="0"/>
-                                                          <Component id="como_tipo_art" min="-2" pref="108" max="-2" attributes="0"/>
+                                                          <Component id="combo_tipo_art" min="-2" pref="108" max="-2" attributes="0"/>
                                                           <Component id="box_codigo_prod" min="-2" pref="108" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
@@ -597,7 +597,7 @@
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="tipo_art" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="como_tipo_art" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="combo_tipo_art" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
@@ -650,13 +650,15 @@
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
                     </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                      <Font name="Century Gothic" size="14" style="0"/>
+                      <Font name="Century Gothic" size="14" style="1"/>
                     </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                       <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                         <LineBorder/>
                       </Border>
                     </Property>
+                    <Property name="enabled" type="boolean" value="false"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_codigo_artActionPerformed"/>
@@ -701,7 +703,7 @@
                     <Property name="text" type="java.lang.String" value="Tipo de art&#xed;culo"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JComboBox" name="como_tipo_art">
+                <Component class="javax.swing.JComboBox" name="combo_tipo_art">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -722,6 +724,9 @@
                     <Property name="focusable" type="boolean" value="false"/>
                     <Property name="requestFocusEnabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combo_tipo_artActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>
@@ -759,6 +764,9 @@
                     <Property name="focusable" type="boolean" value="false"/>
                     <Property name="requestFocusEnabled" type="boolean" value="false"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="combo_tammanio_biciActionPerformed"/>
+                  </Events>
                   <AuxValues>
                     <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
                   </AuxValues>

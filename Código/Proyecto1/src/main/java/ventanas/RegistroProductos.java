@@ -7,12 +7,16 @@ package ventanas;
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
-import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Validador;
-import java.util.Arrays;
+import com.mycompany.proyecto1.Utilidades;
+
+// Importar las clases de objetos:
+import com.mycompany.proyecto1.TipoProducto;
+import com.mycompany.proyecto1.Producto;
 
 
 /**
@@ -26,6 +30,9 @@ public class RegistroProductos extends javax.swing.JFrame {
      */
     public RegistroProductos() {
         initComponents();
+        
+        // Cargar los tipos de producto en el comboBox al iniciar el formulario
+        Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
 
         // Aplicar el efecto hover y selección a los botones (TOOLBAR)
         ButtonHoverEffect.applySelectableHoverEffect(agregar_prod);
@@ -34,7 +41,7 @@ public class RegistroProductos extends javax.swing.JFrame {
         ButtonHoverEffect.applySelectableHoverEffect(buscar_prod);
         ButtonHoverEffect.applySelectableHoverEffect(salir);
 
-         // Aplicar el efecto hover de borde gris al pasar el cursor (PANEL AGREGAR_PROD)
+
         // Define los colores
         Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
         Color originalColor = Color.BLACK; // Negro (borde inicial)
@@ -107,7 +114,7 @@ public class RegistroProductos extends javax.swing.JFrame {
         codigo_prod = new javax.swing.JLabel();
         box_codigo_prod = new javax.swing.JComboBox<>();
         tipo_art = new javax.swing.JLabel();
-        como_tipo_art = new javax.swing.JComboBox<>();
+        combo_tipo_art = new javax.swing.JComboBox<>();
         tammanio_bici1 = new javax.swing.JLabel();
         combo_tammanio_bici = new javax.swing.JComboBox<>();
         nombre_art = new javax.swing.JLabel();
@@ -400,8 +407,10 @@ public class RegistroProductos extends javax.swing.JFrame {
         codigo_art.setText("Código artículo");
 
         box_codigo_art.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_codigo_art.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_codigo_art.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         box_codigo_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_codigo_art.setEnabled(false);
         box_codigo_art.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_codigo_artActionPerformed(evt);
@@ -421,12 +430,17 @@ public class RegistroProductos extends javax.swing.JFrame {
         tipo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         tipo_art.setText("Tipo de artículo");
 
-        como_tipo_art.setBackground(new java.awt.Color(255, 255, 255));
-        como_tipo_art.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        como_tipo_art.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bicicleta", "Accesorio", "Suplemento" }));
-        como_tipo_art.setBorder(null);
-        como_tipo_art.setFocusable(false);
-        como_tipo_art.setRequestFocusEnabled(false);
+        combo_tipo_art.setBackground(new java.awt.Color(255, 255, 255));
+        combo_tipo_art.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        combo_tipo_art.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bicicleta", "Accesorio", "Suplemento" }));
+        combo_tipo_art.setBorder(null);
+        combo_tipo_art.setFocusable(false);
+        combo_tipo_art.setRequestFocusEnabled(false);
+        combo_tipo_art.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_tipo_artActionPerformed(evt);
+            }
+        });
 
         tammanio_bici1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         tammanio_bici1.setText("Tamaño (bici)");
@@ -437,6 +451,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         combo_tammanio_bici.setBorder(null);
         combo_tammanio_bici.setFocusable(false);
         combo_tammanio_bici.setRequestFocusEnabled(false);
+        combo_tammanio_bici.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_tammanio_biciActionPerformed(evt);
+            }
+        });
 
         nombre_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         nombre_art.setText("Nombre");
@@ -519,7 +538,7 @@ public class RegistroProductos extends javax.swing.JFrame {
                                             .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(combo_tammanio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(box_codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(como_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(combo_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addComponent(box_codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                         .addGroup(opcionesProductoLayout.createSequentialGroup()
                                             .addComponent(marca_art)
@@ -556,7 +575,7 @@ public class RegistroProductos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(como_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(combo_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tammanio_bici1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -597,8 +616,8 @@ public class RegistroProductos extends javax.swing.JFrame {
                     .addComponent(crear_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(102, 102, 102)
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(crear_prod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(opcionesProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(opcionesProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crear_prod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
@@ -1015,11 +1034,28 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_crear_tipo_prodActionPerformed
 
     private void crear_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_prodActionPerformed
-        // Despliega las opciones
         boolean isVisible = opcionesProducto.isVisible();
         opcionesProducto.setVisible(!isVisible);
-        this.revalidate();
-        this.repaint();
+
+        if (!isVisible) {
+            String ruta = "productos.json";
+            Archivo archivo = new Archivo();
+
+            try {
+                // Usar el método de Archivo para obtener el siguiente código
+                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Producto[].class);
+
+                // Mostrar el código en el campo correspondiente
+            box_codigo_art.setText(String.valueOf(siguienteCodigo));
+
+            } catch (Exception e) {
+                box_codigo_art.setText("AUTOMÁTICO");
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            }
+    }
+
+    this.revalidate();
+    this.repaint();
     }//GEN-LAST:event_crear_prodActionPerformed
 
     private void box_nombre_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_tipo_prodActionPerformed
@@ -1039,7 +1075,58 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_box_nombre_artActionPerformed
 
     private void guardar_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_artActionPerformed
-        // TODO add your handling code here:
+         // Actualizar el comboBox con los tipos de producto
+        Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
+
+        String ruta = "productos.json";
+        Archivo archivo = new Archivo();
+
+        try {
+            // Validar las entradas
+            int codigoArticulo = archivo.obtenerSiguienteCodigo(ruta, Producto[].class);
+            String codigoProductoTexto = (String) box_codigo_prod.getSelectedItem();
+            int codigoProducto = Integer.parseInt(codigoProductoTexto.split(" - ")[0]);
+            String tipoArticulo = (String) combo_tipo_art.getSelectedItem();
+            String tamanoBici = "Bicicleta".equals(tipoArticulo) ? (String) combo_tammanio_bici.getSelectedItem() : null;
+            String nombre = box_nombre_art.getText().trim();
+            String marca = box_marca_art.getText().trim();
+            int precio = (int) Double.parseDouble(box_marca_art1.getText().trim());
+            int cantidad = Integer.parseInt(box_marca_art2.getText().trim());
+
+            // Validar los campos no vacíos
+            if (nombre.isEmpty() || marca.isEmpty() || precio <= 0 || cantidad < 0) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Por favor complete todos los campos correctamente.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Crear un nuevo producto
+            Producto nuevoProducto = new Producto(codigoArticulo, codigoProducto, tipoArticulo, tamanoBici, nombre, marca, precio, cantidad);
+
+            // Leer productos existentes del archivo
+            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
+            List<Producto> listaProductos = productos != null 
+                ? new ArrayList<>(List.of(productos)) 
+                    : new ArrayList<>();
+
+            // Agregar el nuevo producto a la lista
+            listaProductos.add(nuevoProducto);
+
+            // Guardar la lista actualizada en el archivo JSON
+            archivo.guardarArchivo(ruta, listaProductos);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            // Limpiar los campos del formulario
+            box_codigo_art.setText("");
+            box_nombre_art.setText("");
+            box_marca_art.setText("");
+            box_marca_art1.setText("");
+            box_marca_art2.setText("");
+            combo_tammanio_bici.setSelectedIndex(-1);
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_guardar_artActionPerformed
 
     private void box_marca_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_artActionPerformed
@@ -1075,7 +1162,7 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_button_buscar_buscarActionPerformed
 
     private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
-
+  
         String ruta = "tiposProductos.json";
         Archivo archivo = new Archivo();
         String nombre = box_nombre_tipo_prod.getText().trim();
@@ -1105,9 +1192,14 @@ public class RegistroProductos extends javax.swing.JFrame {
             // Guardar la lista actualizada en el archivo JSON
             archivo.guardarArchivo(ruta, listaProductos);
 
-            // Mostrar mensaje de éxito
             javax.swing.JOptionPane.showMessageDialog(this, "Tipo de producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
+            
+            // Actualizar el comboBox en tiempo real
+            if (box_codigo_prod.getItemCount() == 1 && "No hay tipos".equals(box_codigo_prod.getItemAt(0))) {
+                box_codigo_prod.removeAllItems();
+            }
+            box_codigo_prod.addItem(nuevoProducto.getCodigo() + " - " + nuevoProducto.getNombre());
+            
             // Limpiar los campos de texto
             box_nombre_tipo_prod.setText("");
             box_codigo_tipo_prod.setText("AUTOMÁTICO");
@@ -1117,10 +1209,26 @@ public class RegistroProductos extends javax.swing.JFrame {
             box_codigo_tipo_prod.setText(String.valueOf(siguienteCodigo));
 
         } catch (Exception e) {
-            // Mostrar mensaje de error
             javax.swing.JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar el tipo de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_guardar_tipo_prodActionPerformed
+
+    private void combo_tammanio_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tammanio_biciActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_tammanio_biciActionPerformed
+
+    private void combo_tipo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_artActionPerformed
+
+        String tipoSeleccionado = (String) combo_tipo_art.getSelectedItem();
+
+        // Activar o desactivar el combo de tamaño de bicicleta
+        if ("Bicicleta".equals(tipoSeleccionado)) {
+            combo_tammanio_bici.setEnabled(true);
+        } else {
+            combo_tammanio_bici.setEnabled(false);
+        combo_tammanio_bici.setSelectedIndex(-1);
+        }
+    }//GEN-LAST:event_combo_tipo_artActionPerformed
 
     /**
      * @param args the command line arguments
@@ -1189,7 +1297,7 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> combo_filtro_buscar;
     private javax.swing.JComboBox<String> combo_filtro_eliminar;
     private javax.swing.JComboBox<String> combo_tammanio_bici;
-    private javax.swing.JComboBox<String> como_tipo_art;
+    private javax.swing.JComboBox<String> combo_tipo_art;
     private javax.swing.JButton crear_prod;
     private javax.swing.JButton crear_tipo_prod;
     private javax.swing.JPanel eliminarPanel;
