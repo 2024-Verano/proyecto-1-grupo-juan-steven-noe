@@ -1,0 +1,49 @@
+-J-Duser.language=
+-J-Duser.country=
+@options
+@packages
+-classpath
+'C:/Users/Steven Umaña/.m2/repository/com/fasterxml/jackson/core/jackson-databind/2.15.2/jackson-databind-2.15.2.jar;C:/Users/Steven Umaña/.m2/repository/com/fasterxml/jackson/core/jackson-annotations/2.15.2/jackson-annotations-2.15.2.jar;C:/Users/Steven Umaña/.m2/repository/com/fasterxml/jackson/core/jackson-core/2.15.2/jackson-core-2.15.2.jar'
+-encoding
+'UTF-8'
+-protected
+--release
+23
+-sourcepath
+'C:/Users/Steven Umaña/OneDrive/Documentos/proyecto-1-grupo-juan-steven-noe/Código/Proyecto1/src/main/java'
+-author
+-bottom
+'Copyright &#169; 2024. All rights reserved.'
+-charset
+'UTF-8'
+-d
+'C:/Users/Steven Umaña/OneDrive/Documentos/proyecto-1-grupo-juan-steven-noe/Código/Proyecto1/target/reports/apidocs'
+-docencoding
+'UTF-8'
+-doctitle
+'Proyecto1 1.0-SNAPSHOT API'
+-use
+-version
+-windowtitle
+'Proyecto1 1.0-SNAPSHOT API'
+com.mycompany.proyecto1
+ventanas
+C:\Users\Steven Umaña\.m2\repository\com\fasterxml\jackson\core\jackson-databind\2.15.2\jackson-databind-2.15.2.jar = 1734553183053
+C:\Users\Steven Umaña\.m2\repository\com\fasterxml\jackson\core\jackson-annotations\2.15.2\jackson-annotations-2.15.2.jar = 1734553183738
+C:\Users\Steven Umaña\.m2\repository\com\fasterxml\jackson\core\jackson-core\2.15.2\jackson-core-2.15.2.jar = 1734553183740
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java = 1734560572376
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\allclasses-index.html = 1735247278963
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\allpackages-index.html = 1735247278977
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\element-list = 1735247278413
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\help-doc.html = 1735247279136
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\index-all.html = 1735247279099
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\index.html = 1735247278888
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\member-search-index.js = 1735247279002
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\module-search-index.js = 1735247278985
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\overview-summary.html = 1735247279121
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\overview-tree.html = 1735247278873
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\package-search-index.js = 1735247278992
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\search.html = 1735247279109
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\serialized-form.html = 1735247278681
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\tag-search-index.js = 1735247279007
+C:\Users\Steven Umaña\OneDrive\Documentos\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\target\reports\apidocs\type-search-index.js = 1735247278997
