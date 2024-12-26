@@ -39,8 +39,6 @@ public class RegistroProductos extends javax.swing.JFrame {
         // Aplicar el efecto hover y selección a los botones (TOOLBAR)
         ButtonHoverEffect.applySelectableHoverEffect(agregar_prod);
         ButtonHoverEffect.applySelectableHoverEffect(modificar_prod);
-        ButtonHoverEffect.applySelectableHoverEffect(eliminar_prod);
-        ButtonHoverEffect.applySelectableHoverEffect(buscar_prod);
         ButtonHoverEffect.applySelectableHoverEffect(salir);
 
 
@@ -60,17 +58,10 @@ public class RegistroProductos extends javax.swing.JFrame {
         // Aplica el efecto hover a cada botón (Modificar Productoi)
         hoverEffect.applyTo(button_buscar_modificar);
         
-        // Aplica el efecto hover a cada botón (Eliminar Producto)
-        hoverEffect.applyTo(button_buscar_eliminar);
-        
-        // Aplica el efecto hover a cada botón (Buscar Producto)
-        hoverEffect.applyTo(button_buscar_buscar);
 
         // Registrar los paneles en el CardLayout
         SubFrameContainer.add(agregarPanel, "agregarPanel");
         SubFrameContainer.add(modificarPanel, "modificarPanel");
-        SubFrameContainer.add(eliminarPanel, "eliminarPanel");
-        SubFrameContainer.add(buscarPanel, "buscarPanel");
 
         // Ocultar los paneles de opcion de "agregar productos"
         opcionesTipoProducto.setVisible(false);
@@ -96,10 +87,6 @@ public class RegistroProductos extends javax.swing.JFrame {
         agregar_prod = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         modificar_prod = new javax.swing.JButton();
-        jSeparator3 = new javax.swing.JToolBar.Separator();
-        eliminar_prod = new javax.swing.JButton();
-        jSeparator4 = new javax.swing.JToolBar.Separator();
-        buscar_prod = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         salir = new javax.swing.JButton();
         SubFrameContainer = new javax.swing.JPanel();
@@ -144,26 +131,9 @@ public class RegistroProductos extends javax.swing.JFrame {
         text_buscar_agregar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_resultado = new javax.swing.JTable();
-        eliminarPanel = new javax.swing.JPanel();
-        filtro_eliminar = new javax.swing.JLabel();
-        combo_filtro_eliminar = new javax.swing.JComboBox<>();
-        text_buscar_eliminar = new javax.swing.JLabel();
-        buscador_eliminar = new javax.swing.JTextField();
-        button_buscar_eliminar = new javax.swing.JButton();
-        jScrollPane2 = new javax.swing.JScrollPane();
-        tabla_resultado1 = new javax.swing.JTable();
-        buscarPanel = new javax.swing.JPanel();
-        filtro_buscar = new javax.swing.JLabel();
-        combo_filtro_buscar = new javax.swing.JComboBox<>();
-        text_buscar_buscar = new javax.swing.JLabel();
-        buscador_buscar = new javax.swing.JTextField();
-        button_buscar_buscar = new javax.swing.JButton();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        tabla_resultado2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
-        setMaximumSize(new java.awt.Dimension(1000, 800));
         setMinimumSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
@@ -174,7 +144,7 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         jSeparator1.setEnabled(false);
         jSeparator1.setRequestFocusEnabled(false);
-        jSeparator1.setSeparatorSize(new java.awt.Dimension(120, 10));
+        jSeparator1.setSeparatorSize(new java.awt.Dimension(275, 10));
         funciones.add(jSeparator1);
 
         agregar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -208,40 +178,6 @@ public class RegistroProductos extends javax.swing.JFrame {
             }
         });
         funciones.add(modificar_prod);
-
-        jSeparator3.setSeparatorSize(new java.awt.Dimension(25, 10));
-        funciones.add(jSeparator3);
-
-        eliminar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        eliminar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/delete.png"))); // NOI18N
-        eliminar_prod.setText("Eliminar producto");
-        eliminar_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        eliminar_prod.setFocusable(false);
-        eliminar_prod.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        eliminar_prod.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        eliminar_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminar_prodActionPerformed(evt);
-            }
-        });
-        funciones.add(eliminar_prod);
-
-        jSeparator4.setSeparatorSize(new java.awt.Dimension(25, 10));
-        funciones.add(jSeparator4);
-
-        buscar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        buscar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/search.png"))); // NOI18N
-        buscar_prod.setText("Buscar producto");
-        buscar_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        buscar_prod.setFocusable(false);
-        buscar_prod.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        buscar_prod.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        buscar_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscar_prodActionPerformed(evt);
-            }
-        });
-        funciones.add(buscar_prod);
 
         jSeparator5.setSeparatorSize(new java.awt.Dimension(25, 10));
         funciones.add(jSeparator5);
@@ -753,220 +689,6 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         SubFrameContainer.add(modificarPanel, "card2");
 
-        filtro_eliminar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        filtro_eliminar.setText("Filtro");
-
-        combo_filtro_eliminar.setBackground(new java.awt.Color(255, 255, 255));
-        combo_filtro_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        combo_filtro_eliminar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
-        combo_filtro_eliminar.setFocusable(false);
-
-        text_buscar_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        text_buscar_eliminar.setText("Buscar un producto para eliminar");
-
-        buscador_eliminar.setBackground(new java.awt.Color(255, 255, 255));
-        buscador_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        buscador_eliminar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        buscador_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscador_eliminarActionPerformed(evt);
-            }
-        });
-
-        button_buscar_eliminar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        button_buscar_eliminar.setText("B U S C A R");
-        button_buscar_eliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        button_buscar_eliminar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_buscar_eliminarActionPerformed(evt);
-            }
-        });
-
-        tabla_resultado1.setBackground(new java.awt.Color(255, 255, 255));
-        tabla_resultado1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tabla_resultado1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tabla_resultado1.setForeground(new java.awt.Color(0, 0, 0));
-        tabla_resultado1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Codigo art.", "Codigo prod.", "Tipo", "Tamaño", "Nombre", "Marca", "Precio", "Cantidad"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabla_resultado1.setToolTipText("");
-        tabla_resultado1.setFocusable(false);
-        tabla_resultado1.setGridColor(new java.awt.Color(0, 0, 0));
-        tabla_resultado1.setSelectionBackground(new java.awt.Color(204, 204, 204));
-        tabla_resultado1.setShowGrid(true);
-        tabla_resultado1.getTableHeader().setResizingAllowed(false);
-        tabla_resultado1.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tabla_resultado1);
-        if (tabla_resultado1.getColumnModel().getColumnCount() > 0) {
-            tabla_resultado1.getColumnModel().getColumn(0).setResizable(false);
-            tabla_resultado1.getColumnModel().getColumn(1).setResizable(false);
-            tabla_resultado1.getColumnModel().getColumn(2).setResizable(false);
-            tabla_resultado1.getColumnModel().getColumn(3).setResizable(false);
-            tabla_resultado1.getColumnModel().getColumn(4).setResizable(false);
-            tabla_resultado1.getColumnModel().getColumn(5).setResizable(false);
-            tabla_resultado1.getColumnModel().getColumn(6).setResizable(false);
-            tabla_resultado1.getColumnModel().getColumn(7).setResizable(false);
-        }
-
-        javax.swing.GroupLayout eliminarPanelLayout = new javax.swing.GroupLayout(eliminarPanel);
-        eliminarPanel.setLayout(eliminarPanelLayout);
-        eliminarPanelLayout.setHorizontalGroup(
-            eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarPanelLayout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
-                .addComponent(filtro_eliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(combo_filtro_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(text_buscar_eliminar)
-                    .addGroup(eliminarPanelLayout.createSequentialGroup()
-                        .addComponent(buscador_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_buscar_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(119, 119, 119))
-            .addGroup(eliminarPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane2)
-                .addContainerGap())
-        );
-        eliminarPanelLayout.setVerticalGroup(
-            eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(eliminarPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(text_buscar_eliminar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(eliminarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscador_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_filtro_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_buscar_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filtro_eliminar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        SubFrameContainer.add(eliminarPanel, "card2");
-
-        filtro_buscar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        filtro_buscar.setText("Filtro");
-
-        combo_filtro_buscar.setBackground(new java.awt.Color(255, 255, 255));
-        combo_filtro_buscar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        combo_filtro_buscar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
-        combo_filtro_buscar.setFocusable(false);
-
-        text_buscar_buscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        text_buscar_buscar.setText("Buscar un producto");
-
-        buscador_buscar.setBackground(new java.awt.Color(255, 255, 255));
-        buscador_buscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        buscador_buscar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        buscador_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                buscador_buscarActionPerformed(evt);
-            }
-        });
-
-        button_buscar_buscar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        button_buscar_buscar.setText("B U S C A R");
-        button_buscar_buscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        button_buscar_buscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_buscar_buscarActionPerformed(evt);
-            }
-        });
-
-        tabla_resultado2.setBackground(new java.awt.Color(255, 255, 255));
-        tabla_resultado2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        tabla_resultado2.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        tabla_resultado2.setForeground(new java.awt.Color(0, 0, 0));
-        tabla_resultado2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-                "Codigo art.", "Codigo prod.", "Tipo", "Tamaño", "Nombre", "Marca", "Precio", "Cantidad"
-            }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
-        tabla_resultado2.setToolTipText("");
-        tabla_resultado2.setFocusable(false);
-        tabla_resultado2.setGridColor(new java.awt.Color(0, 0, 0));
-        tabla_resultado2.setSelectionBackground(new java.awt.Color(204, 204, 204));
-        tabla_resultado2.setShowGrid(true);
-        tabla_resultado2.getTableHeader().setResizingAllowed(false);
-        tabla_resultado2.getTableHeader().setReorderingAllowed(false);
-        jScrollPane4.setViewportView(tabla_resultado2);
-        if (tabla_resultado2.getColumnModel().getColumnCount() > 0) {
-            tabla_resultado2.getColumnModel().getColumn(0).setResizable(false);
-            tabla_resultado2.getColumnModel().getColumn(1).setResizable(false);
-            tabla_resultado2.getColumnModel().getColumn(2).setResizable(false);
-            tabla_resultado2.getColumnModel().getColumn(3).setResizable(false);
-            tabla_resultado2.getColumnModel().getColumn(4).setResizable(false);
-            tabla_resultado2.getColumnModel().getColumn(5).setResizable(false);
-            tabla_resultado2.getColumnModel().getColumn(6).setResizable(false);
-            tabla_resultado2.getColumnModel().getColumn(7).setResizable(false);
-        }
-
-        javax.swing.GroupLayout buscarPanelLayout = new javax.swing.GroupLayout(buscarPanel);
-        buscarPanel.setLayout(buscarPanelLayout);
-        buscarPanelLayout.setHorizontalGroup(
-            buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buscarPanelLayout.createSequentialGroup()
-                .addContainerGap(146, Short.MAX_VALUE)
-                .addComponent(filtro_buscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(combo_filtro_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(text_buscar_buscar)
-                    .addGroup(buscarPanelLayout.createSequentialGroup()
-                        .addComponent(buscador_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_buscar_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(119, 119, 119))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, buscarPanelLayout.createSequentialGroup()
-                .addComponent(jScrollPane4)
-                .addContainerGap())
-        );
-        buscarPanelLayout.setVerticalGroup(
-            buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(buscarPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(text_buscar_buscar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(buscarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscador_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_filtro_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_buscar_buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filtro_buscar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane4, javax.swing.GroupLayout.DEFAULT_SIZE, 573, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-
-        SubFrameContainer.add(buscarPanel, "card2");
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -987,23 +709,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void buscar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscar_prodActionPerformed
-        // Mostrar el SubFrame de "buscar producto"
-        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
-        layout.show(SubFrameContainer, "buscarPanel");
-    }//GEN-LAST:event_buscar_prodActionPerformed
-
     private void agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_prodActionPerformed
         // Mostrar el SubFrame de "agregar producto"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "agregarPanel");
     }//GEN-LAST:event_agregar_prodActionPerformed
-
-    private void eliminar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_prodActionPerformed
-        // Mostrar el SubFrame de "eliminar producto"
-        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
-        layout.show(SubFrameContainer, "eliminarPanel");
-    }//GEN-LAST:event_eliminar_prodActionPerformed
 
     private void modificar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_prodActionPerformed
         // Mostrar el SubFrame de "modificar producto"
@@ -1204,22 +914,6 @@ public class RegistroProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
-    private void button_buscar_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_button_buscar_eliminarActionPerformed
-
-    private void buscador_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscador_eliminarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscador_eliminarActionPerformed
-
-    private void buscador_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_buscador_buscarActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_buscador_buscarActionPerformed
-
-    private void button_buscar_buscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_buscarActionPerformed
-
-    }//GEN-LAST:event_button_buscar_buscarActionPerformed
-
     private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
   
         String ruta = "tiposProductos.json";
@@ -1356,39 +1050,23 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JTextField box_nombre_art;
     private javax.swing.JTextField box_nombre_tipo_prod;
     private javax.swing.JTextField buscador_agregar;
-    private javax.swing.JTextField buscador_buscar;
-    private javax.swing.JTextField buscador_eliminar;
-    private javax.swing.JPanel buscarPanel;
-    private javax.swing.JButton buscar_prod;
-    private javax.swing.JButton button_buscar_buscar;
-    private javax.swing.JButton button_buscar_eliminar;
     private javax.swing.JButton button_buscar_modificar;
     private javax.swing.JLabel ciclista_icon;
     private javax.swing.JLabel codigo_art;
     private javax.swing.JLabel codigo_defecto1;
     private javax.swing.JLabel codigo_prod;
     private javax.swing.JComboBox<String> combo_filtro_agregar;
-    private javax.swing.JComboBox<String> combo_filtro_buscar;
-    private javax.swing.JComboBox<String> combo_filtro_eliminar;
     private javax.swing.JComboBox<String> combo_tammanio_bici;
     private javax.swing.JComboBox<String> combo_tipo_art;
     private javax.swing.JButton crear_prod;
     private javax.swing.JButton crear_tipo_prod;
-    private javax.swing.JPanel eliminarPanel;
-    private javax.swing.JButton eliminar_prod;
     private javax.swing.JLabel filtro_agregar;
-    private javax.swing.JLabel filtro_buscar;
-    private javax.swing.JLabel filtro_eliminar;
     private javax.swing.JToolBar funciones;
     private javax.swing.JButton guardar_art;
     private javax.swing.JButton guardar_tipo_prod;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
-    private javax.swing.JToolBar.Separator jSeparator3;
-    private javax.swing.JToolBar.Separator jSeparator4;
     private javax.swing.JToolBar.Separator jSeparator5;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
@@ -1403,12 +1081,8 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JPanel opcionesTipoProducto;
     private javax.swing.JButton salir;
     private javax.swing.JTable tabla_resultado;
-    private javax.swing.JTable tabla_resultado1;
-    private javax.swing.JTable tabla_resultado2;
     private javax.swing.JLabel tammanio_bici1;
     private javax.swing.JLabel text_buscar_agregar;
-    private javax.swing.JLabel text_buscar_buscar;
-    private javax.swing.JLabel text_buscar_eliminar;
     private javax.swing.JLabel tipo_art;
     // End of variables declaration//GEN-END:variables
 }
