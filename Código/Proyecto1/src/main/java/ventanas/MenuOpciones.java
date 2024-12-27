@@ -188,7 +188,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_registro_productoActionPerformed
 
     private void registro_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_clientesActionPerformed
-        // TODO add your handling code here:
+            
+            this.dispose();
+        
+            RegistroClientes opciones = new RegistroClientes();
+            opciones.setVisible(true);
     }//GEN-LAST:event_registro_clientesActionPerformed
 
     private void registro_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_mantActionPerformed
