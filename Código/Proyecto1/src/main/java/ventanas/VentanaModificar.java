@@ -85,6 +85,7 @@ public class VentanaModificar extends javax.swing.JFrame {
         eliminar_producto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         codigo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         codigo_art.setText("Código artículo");
