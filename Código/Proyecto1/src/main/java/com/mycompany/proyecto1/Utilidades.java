@@ -8,7 +8,6 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.table.DefaultTableModel;
 
-
 /**
  *
  * @author noe
@@ -57,5 +56,31 @@ public class Utilidades {
             });
         }
     }
+    
+    //Clase para obtener los datos de un tipo de producto
+    public static String obtenerNombreTipoProducto(int codigoProducto) {
+        String ruta = "tiposProductos.json";
+        Archivo archivo = new Archivo();
+
+        try {
+            // Leer los tipos de productos desde el archivo JSON
+            TipoProducto[] tipos = (TipoProducto[]) archivo.leerArchivo(ruta, TipoProducto[].class);
+
+            if (tipos != null) {
+                // Buscar el nombre del tipo de producto correspondiente al código
+                for (TipoProducto tipo : tipos) {
+                    if (tipo.getCodigo() == codigoProducto) {
+                        return tipo.getNombre();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener el nombre del tipo de producto: " + e.getMessage());
+        }
+
+        // Retornar "Desconocido" si no se encuentra el código
+        return "Desconocido";
+    }
+
     
 }

@@ -13,11 +13,9 @@ import javax.swing.table.DefaultTableModel;
 
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
-import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
 
 // Importar las clases de objetos:
-import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Producto;
 
 /**
@@ -25,12 +23,24 @@ import com.mycompany.proyecto1.Producto;
  * @author noe
  */
 public class VentanaModificar extends javax.swing.JFrame {
-
+    
+    // Constructor vacío para que VentanaModificar pueda recibir parámetros sin conflictos en el main
+    public VentanaModificar(){
+        initComponents();
+    }
     /**
      * Creates new form VentanaModificar
+     * @param producto
      */
-    public VentanaModificar() {
+    public VentanaModificar(Producto producto) {
         initComponents();
+        
+        // Evitar que la ventana emergente VentanaModificar cierre el programa
+        setDefaultCloseOperation(VentanaModificar.DISPOSE_ON_CLOSE);
+        
+        // Cargar los datos del producto en los espacios correspondientes
+        cargarDatosProducto(producto);
+        
             // Define los colores
             Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
             Color originalColor = Color.BLACK; // Negro (borde inicial)
@@ -333,22 +343,24 @@ public class VentanaModificar extends javax.swing.JFrame {
         Archivo archivo = new Archivo();
 
         try {
-            // Leer productos existentes del archivo JSON
             Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
             if (productos == null) {
                 javax.swing.JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Encontrar el producto por código
             int codigoArticulo = Integer.parseInt(box_codigo_art.getText());
             for (Producto producto : productos) {
                 if (producto.getCodigoArticulo() == codigoArticulo) {
-                    // Actualizar los valores del producto
-                    producto.setCodigoProducto(Integer.parseInt(box_codigo_prod.getSelectedItem().toString()));
+                    // Obtener el código del producto seleccionado en el comboBox
+                    String codigoProductoTexto = (String) box_codigo_prod.getSelectedItem();
+                    int codigoProducto = Integer.parseInt(codigoProductoTexto.split(" - ")[0]);
+
+                    // Actualizar los valores
+                    producto.setCodigoProducto(codigoProducto);
                     producto.setTipoArticulo(combo_tipo_art.getSelectedItem().toString());
-                    producto.setTamanoBici("Bicicleta".equals(combo_tipo_art.getSelectedItem().toString()) 
-                        ? combo_tammanio_bici.getSelectedItem().toString() 
+                    producto.setTamanoBici("Bicicleta".equals(combo_tipo_art.getSelectedItem().toString())
+                        ? combo_tammanio_bici.getSelectedItem().toString()
                         : null);
                     producto.setNombre(box_nombre_art.getText().trim());
                     producto.setMarca(box_marca_art.getText().trim());
@@ -358,11 +370,10 @@ public class VentanaModificar extends javax.swing.JFrame {
                 }
             }
 
-            // Guardar los productos actualizados en el archivo JSON
             archivo.guardarArchivo(ruta, productos);
 
             javax.swing.JOptionPane.showMessageDialog(this, "Producto modificado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            dispose(); // Cerrar la ventana actual
+            dispose();
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar los cambios: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
@@ -377,36 +388,31 @@ public class VentanaModificar extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_art2ActionPerformed
 
-    public void cargarDatosProducto(int codigoArticulo) {
-        String ruta = "productos.json";
-        Archivo archivo = new Archivo();
+    private void cargarDatosProducto(Producto producto) {
+        box_codigo_art.setText(String.valueOf(producto.getCodigoArticulo()));
 
-        try {
-            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
+        // Cargar los tipos de producto en el comboBox
+        Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
 
-            if (productos == null) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
+        // Seleccionar el tipo de producto correspondiente
+        for (int i = 0; i < box_codigo_prod.getItemCount(); i++) {
+            String item = (String) box_codigo_prod.getItemAt(i);
+            int codigo = Integer.parseInt(item.split(" - ")[0]);
+            if (codigo == producto.getCodigoProducto()) {
+                box_codigo_prod.setSelectedIndex(i);
+                break;
             }
-
-            for (Producto p : productos) {
-                if (p.getCodigoArticulo() == codigoArticulo) {
-                    // Llenar los campos con los datos del producto
-                    box_codigo_art.setText(String.valueOf(p.getCodigoArticulo()));
-                    box_codigo_prod.setSelectedItem(String.valueOf(p.getCodigoProducto()));
-                    combo_tipo_art.setSelectedItem(p.getTipoArticulo());
-                    combo_tammanio_bici.setSelectedItem(p.getTamanoBici());
-                    box_nombre_art.setText(p.getNombre());
-                    box_marca_art.setText(p.getMarca());
-                    box_marca_art1.setText(String.valueOf(p.getPrecio()));
-                    box_marca_art2.setText(String.valueOf(p.getCantidad()));
-                    break;
-                }
-            }
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar datos: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+
+        // Configurar otros valores
+        combo_tipo_art.setSelectedItem(producto.getTipoArticulo());
+        combo_tammanio_bici.setSelectedItem(producto.getTamanoBici());
+        box_nombre_art.setText(producto.getNombre());
+        box_marca_art.setText(producto.getMarca());
+        box_marca_art1.setText(String.valueOf(producto.getPrecio()));
+        box_marca_art2.setText(String.valueOf(producto.getCantidad()));
     }
+
 
     
     

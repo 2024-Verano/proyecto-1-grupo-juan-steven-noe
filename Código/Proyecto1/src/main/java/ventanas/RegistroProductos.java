@@ -134,6 +134,7 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
+        setMaximumSize(new java.awt.Dimension(1000, 800));
         setMinimumSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
@@ -144,7 +145,7 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         jSeparator1.setEnabled(false);
         jSeparator1.setRequestFocusEnabled(false);
-        jSeparator1.setSeparatorSize(new java.awt.Dimension(275, 10));
+        jSeparator1.setSeparatorSize(new java.awt.Dimension(250, 10));
         funciones.add(jSeparator1);
 
         agregar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -167,7 +168,7 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         modificar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         modificar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modify.png"))); // NOI18N
-        modificar_prod.setText("Modificar producto");
+        modificar_prod.setText("Modificar/eliminar producto");
         modificar_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         modificar_prod.setFocusable(false);
         modificar_prod.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -984,17 +985,22 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_tipo_artActionPerformed
 
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
-        // Detectar doble clic
         if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
-            // Obtener el código del artículo de la fila seleccionada
             int selectedRow = tabla_resultado.getSelectedRow();
             int codigoArticulo = (int) tabla_resultado.getValueAt(selectedRow, 0);
+            Archivo archivo = new Archivo();
+            Producto[] productos = (Producto[]) archivo.leerArchivo("productos.json", Producto[].class);
 
-            // Crear y mostrar la ventana de modificación
-            VentanaModificar ventana = new VentanaModificar();
-            ventana.cargarDatosProducto(codigoArticulo); // Cargar los datos correspondientes
-            ventana.setVisible(true);
-            ventana.setLocationRelativeTo(this); // Centrar respecto al formulario principal
+            if (productos != null) {
+                for (Producto producto : productos) {
+                    if (producto.getCodigoArticulo() == codigoArticulo) {
+                        VentanaModificar ventana = new VentanaModificar(producto);
+                        ventana.setVisible(true);
+                        ventana.setLocationRelativeTo(this);
+                        break;
+                    }
+                }
+            }
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
 
