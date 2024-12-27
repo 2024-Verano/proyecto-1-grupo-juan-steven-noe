@@ -367,7 +367,6 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         box_codigo_prod.setBackground(new java.awt.Color(255, 255, 255));
         box_codigo_prod.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        box_codigo_prod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "tipo prod" }));
         box_codigo_prod.setBorder(null);
         box_codigo_prod.setFocusable(false);
         box_codigo_prod.setRequestFocusEnabled(false);
@@ -916,55 +915,30 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
-  
-        String ruta = "tiposProductos.json";
-        Archivo archivo = new Archivo();
-        String nombre = box_nombre_tipo_prod.getText().trim();
 
-        // Validar la entrada (nombre del tipo de producto)
-        if (!Validador.validarAlfabetico(nombre)) {
-            javax.swing.JOptionPane.showMessageDialog(this, "El nombre del tipo de producto es inválido. Solo se permiten caracteres alfabéticos y no puede estar vacío.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
-        }
+        boolean isVisible = opcionesTipoProducto.isVisible();
+        opcionesTipoProducto.setVisible(!isVisible);
 
-        try {
-            // Leer los tipos de productos existentes desde el archivo JSON
-            TipoProducto[] productos = (TipoProducto[]) archivo.leerArchivo(ruta, TipoProducto[].class);
+        // Si las opciones se hacen visibles, cargar el siguiente código
+        if (!isVisible) {
+            String ruta = "tiposProductos.json";
+            Archivo archivo = new Archivo();
 
-            // Inicializar la lista con los productos
-            List<TipoProducto> listaProductos = productos != null 
-                    ? new ArrayList<>(List.of(productos)) 
-                    : new ArrayList<>();
+            try {
+                // Usar el método de Archivo para obtener el siguiente código
+                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
 
-            // Calcular el siguiente código
-            int nuevoCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+                // Mostrar el código en el campo correspondiente
+                box_codigo_tipo_prod.setText(String.valueOf(siguienteCodigo));
 
-            // Crear un nuevo tipo de producto y agregarlo a la lista
-            TipoProducto nuevoProducto = new TipoProducto(nuevoCodigo, nombre);
-            listaProductos.add(nuevoProducto);
-
-            // Guardar la lista actualizada en el archivo JSON
-            archivo.guardarArchivo(ruta, listaProductos);
-
-            javax.swing.JOptionPane.showMessageDialog(this, "Tipo de producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
-            // Actualizar el comboBox en tiempo real
-            if (box_codigo_prod.getItemCount() == 1 && "No hay tipos".equals(box_codigo_prod.getItemAt(0))) {
-                box_codigo_prod.removeAllItems();
+            } catch (Exception e) {
+                box_codigo_tipo_prod.setText("AUTOMÁTICO");
+                javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-            box_codigo_prod.addItem(nuevoProducto.getCodigo() + " - " + nuevoProducto.getNombre());
-            
-            // Limpiar los campos de texto
-            box_nombre_tipo_prod.setText("");
-            box_codigo_tipo_prod.setText("AUTOMÁTICO");
-            
-            // Actualizar el siguiente código disponible
-            int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
-            box_codigo_tipo_prod.setText(String.valueOf(siguienteCodigo));
-
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Ocurrió un error al guardar el tipo de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+
+        this.revalidate();
+        this.repaint();
     }//GEN-LAST:event_guardar_tipo_prodActionPerformed
 
     private void combo_tammanio_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tammanio_biciActionPerformed
@@ -1004,6 +978,18 @@ public class RegistroProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
 
+    // Método para refrescar un panel
+    public void restablecerPanel(String nombrePanel) {
+        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+        layout.show(SubFrameContainer, nombrePanel);
+
+        // Forzar actualización visual para reflejar los cambios
+        SubFrameContainer.revalidate();
+        SubFrameContainer.repaint();
+    }
+    
+    
+    
     /**
      * @param args the command line arguments
      */

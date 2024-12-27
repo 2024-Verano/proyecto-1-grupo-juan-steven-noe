@@ -14,6 +14,7 @@ import javax.swing.table.DefaultTableModel;
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Utilidades;
+import com.mycompany.proyecto1.Validador;
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Producto;
@@ -49,6 +50,7 @@ public class VentanaModificar extends javax.swing.JFrame {
             ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
         
             hoverEffect.applyTo(guardar_cambios);
+            hoverEffect.applyTo(eliminar_producto);
     }
 
     /**
@@ -80,6 +82,7 @@ public class VentanaModificar extends javax.swing.JFrame {
         box_marca_art2 = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
+        eliminar_producto = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -161,8 +164,8 @@ public class VentanaModificar extends javax.swing.JFrame {
             }
         });
 
-        guardar_cambios.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        guardar_cambios.setText("G U A R D A R");
+        guardar_cambios.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        guardar_cambios.setText("GUARDAR");
         guardar_cambios.setBorder(null);
         guardar_cambios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         guardar_cambios.addActionListener(new java.awt.event.ActionListener() {
@@ -192,6 +195,17 @@ public class VentanaModificar extends javax.swing.JFrame {
         box_marca_art2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_marca_art2ActionPerformed(evt);
+            }
+        });
+
+        eliminar_producto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        eliminar_producto.setForeground(new java.awt.Color(204, 0, 0));
+        eliminar_producto.setText("ELIMINAR");
+        eliminar_producto.setBorder(null);
+        eliminar_producto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminar_producto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar_productoActionPerformed(evt);
             }
         });
 
@@ -230,15 +244,17 @@ public class VentanaModificar extends javax.swing.JFrame {
                                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                                         .addComponent(marca_art2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(box_marca_art2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(box_marca_art1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                        .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                            .addComponent(box_marca_art2, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(box_marca_art1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 43, Short.MAX_VALUE))))
                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
-                        .addComponent(jSeparator7)))
+                        .addComponent(jSeparator7))
+                    .addGroup(opcionesProductoLayout.createSequentialGroup()
+                        .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(eliminar_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         opcionesProductoLayout.setVerticalGroup(
@@ -281,7 +297,9 @@ public class VentanaModificar extends javax.swing.JFrame {
                     .addComponent(marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(box_marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(eliminar_producto, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
+                    .addComponent(guardar_cambios, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(17, 17, 17))
         );
 
@@ -303,7 +321,7 @@ public class VentanaModificar extends javax.swing.JFrame {
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(opcionesProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addContainerGap(10, Short.MAX_VALUE)))
         );
 
         pack();
@@ -352,24 +370,50 @@ public class VentanaModificar extends javax.swing.JFrame {
             int codigoArticulo = Integer.parseInt(box_codigo_art.getText());
             for (Producto producto : productos) {
                 if (producto.getCodigoArticulo() == codigoArticulo) {
-                    // Obtener el código del producto seleccionado en el comboBox
+                    // Obtener y validar los datos del formulario
                     String codigoProductoTexto = (String) box_codigo_prod.getSelectedItem();
                     int codigoProducto = Integer.parseInt(codigoProductoTexto.split(" - ")[0]);
+                    String tipoArticulo = combo_tipo_art.getSelectedItem().toString();
+                    String tamanoBici = "Bicicleta".equals(tipoArticulo) ? combo_tammanio_bici.getSelectedItem().toString() : null;
+                    String nombre = box_nombre_art.getText().trim();
+                    String marca = box_marca_art.getText().trim();
+                    String precioTexto = box_marca_art1.getText().trim();
+                    String cantidadTexto = box_marca_art2.getText().trim();
 
-                    // Actualizar los valores
+                    // Validaciones
+                    if (!Validador.validarAlfabetico(nombre)) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "El nombre solo puede contener letras.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    if (!Validador.validarAlfabetico(marca)) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La marca solo puede contener letras.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    if (!Validador.validarNumerico(precioTexto) || Integer.parseInt(precioTexto) <= 0) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "El precio debe ser un número mayor a 0.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    if (!Validador.validarNumerico(cantidadTexto) || Integer.parseInt(cantidadTexto) < 0) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La cantidad debe ser un número no negativo.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    // Actualizar los valores del producto
                     producto.setCodigoProducto(codigoProducto);
-                    producto.setTipoArticulo(combo_tipo_art.getSelectedItem().toString());
-                    producto.setTamanoBici("Bicicleta".equals(combo_tipo_art.getSelectedItem().toString())
-                        ? combo_tammanio_bici.getSelectedItem().toString()
-                        : null);
-                    producto.setNombre(box_nombre_art.getText().trim());
-                    producto.setMarca(box_marca_art.getText().trim());
-                    producto.setPrecio(Integer.parseInt(box_marca_art1.getText().trim()));
-                    producto.setCantidad(Integer.parseInt(box_marca_art2.getText().trim()));
+                    producto.setTipoArticulo(tipoArticulo);
+                    producto.setTamanoBici(tamanoBici);
+                    producto.setNombre(nombre);
+                    producto.setMarca(marca);
+                    producto.setPrecio(Integer.parseInt(precioTexto));
+                    producto.setCantidad(Integer.parseInt(cantidadTexto));
                     break;
                 }
             }
 
+            // Guardar los cambios en el archivo
             archivo.guardarArchivo(ruta, productos);
 
             javax.swing.JOptionPane.showMessageDialog(this, "Producto modificado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
@@ -387,6 +431,47 @@ public class VentanaModificar extends javax.swing.JFrame {
     private void box_marca_art2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art2ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_art2ActionPerformed
+
+    private void eliminar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_productoActionPerformed
+        String ruta = "productos.json";
+        Archivo archivo = new Archivo();
+
+        try {
+            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
+            if (productos == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int codigoArticulo = Integer.parseInt(box_codigo_art.getText());
+
+            // Validar si el producto puede ser eliminado (lógica futura para ProductoFacturado)
+            // Por ahora, no hay validaciones adicionales
+            int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
+                "¿Está seguro de que desea eliminar este producto?", 
+                "Confirmación de eliminación", 
+                javax.swing.JOptionPane.YES_NO_OPTION);
+        
+            if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            // Filtrar el producto a eliminar
+            Producto[] productosActualizados = Arrays.stream(productos)
+                .filter(producto -> producto.getCodigoArticulo() != codigoArticulo)
+                .toArray(Producto[]::new);
+
+            // Guardar los productos actualizados
+            archivo.guardarArchivo(ruta, productosActualizados);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Producto eliminado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            
+            dispose();
+
+        } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_eliminar_productoActionPerformed
 
     private void cargarDatosProducto(Producto producto) {
         box_codigo_art.setText(String.valueOf(producto.getCodigoArticulo()));
@@ -462,6 +547,7 @@ public class VentanaModificar extends javax.swing.JFrame {
     private javax.swing.JLabel codigo_prod;
     private javax.swing.JComboBox<String> combo_tammanio_bici;
     private javax.swing.JComboBox<String> combo_tipo_art;
+    private javax.swing.JButton eliminar_producto;
     private javax.swing.JButton guardar_cambios;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
