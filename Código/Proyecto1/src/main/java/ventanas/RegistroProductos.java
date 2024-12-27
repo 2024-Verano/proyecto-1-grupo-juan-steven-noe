@@ -800,22 +800,37 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_box_nombre_artActionPerformed
 
     private void guardar_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_artActionPerformed
-         // Actualizar el comboBox con los tipos de producto
-        Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
-
-        String ruta = "productos.json";
-        Archivo archivo = new Archivo();
+        String rutaTipos = "tiposProductos.json";
+        String rutaProductos = "productos.json";
 
         try {
+            Archivo archivo = new Archivo();
+
+            // Guardar la selección actual del ComboBox
+            String seleccionActual = (String) box_codigo_prod.getSelectedItem();
+
+            // Actualizar el ComboBox con los tipos de producto
+            Utilidades.cargarTiposDeProducto(rutaTipos, box_codigo_prod);
+
+            // Restaurar la selección previa si existe
+            if (seleccionActual != null) {
+                box_codigo_prod.setSelectedItem(seleccionActual);
+            }
+
             // Validar las entradas
-            int codigoArticulo = archivo.obtenerSiguienteCodigo(ruta, Producto[].class);
+            int codigoArticulo = archivo.obtenerSiguienteCodigo(rutaProductos, Producto[].class);
             String codigoProductoTexto = (String) box_codigo_prod.getSelectedItem();
+            if (codigoProductoTexto == null || !codigoProductoTexto.contains(" - ")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un tipo de producto válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
             int codigoProducto = Integer.parseInt(codigoProductoTexto.split(" - ")[0]);
             String tipoArticulo = (String) combo_tipo_art.getSelectedItem();
             String tamanoBici = "Bicicleta".equals(tipoArticulo) ? (String) combo_tammanio_bici.getSelectedItem() : null;
             String nombre = box_nombre_art.getText().trim();
             String marca = box_marca_art.getText().trim();
-            int precio = (int) Double.parseDouble(box_marca_art1.getText().trim());
+            int precio = Integer.parseInt(box_marca_art1.getText().trim());
             int cantidad = Integer.parseInt(box_marca_art2.getText().trim());
 
             // Validar los campos no vacíos
@@ -828,34 +843,35 @@ public class RegistroProductos extends javax.swing.JFrame {
             Producto nuevoProducto = new Producto(codigoArticulo, codigoProducto, tipoArticulo, tamanoBici, nombre, marca, precio, cantidad);
 
             // Leer productos existentes del archivo
-            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
+            Producto[] productos = (Producto[]) archivo.leerArchivo(rutaProductos, Producto[].class);
             List<Producto> listaProductos = productos != null 
                 ? new ArrayList<>(List.of(productos)) 
-                    : new ArrayList<>();
+                : new ArrayList<>();
 
             // Agregar el nuevo producto a la lista
             listaProductos.add(nuevoProducto);
 
             // Guardar la lista actualizada en el archivo JSON
-            archivo.guardarArchivo(ruta, listaProductos);
+            archivo.guardarArchivo(rutaProductos, listaProductos);
 
+            // Mostrar mensaje de confirmación antes de limpiar los campos
             javax.swing.JOptionPane.showMessageDialog(this, "Producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-            // Limpiar los campos del formulario
-            box_codigo_art.setText("");
+            // Limpiar los campos del formulario después de la confirmación
             box_nombre_art.setText("");
             box_marca_art.setText("");
             box_marca_art1.setText("");
             box_marca_art2.setText("");
             combo_tammanio_bici.setSelectedIndex(-1);
 
-        // Actualizar el siguiente código disponible para el artículo (tiempo real)
-        int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Producto[].class);
-        box_codigo_art.setText(String.valueOf(siguienteCodigo));
+            // Actualizar el siguiente código disponible para el artículo
+            int siguienteCodigo = archivo.obtenerSiguienteCodigo(rutaProductos, Producto[].class);
+            box_codigo_art.setText(String.valueOf(siguienteCodigo));
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_guardar_artActionPerformed
 
     private void box_marca_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_artActionPerformed
@@ -915,30 +931,47 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
+        String ruta = "tiposProductos.json";
+        Archivo archivo = new Archivo();
 
-        boolean isVisible = opcionesTipoProducto.isVisible();
-        opcionesTipoProducto.setVisible(!isVisible);
-
-        // Si las opciones se hacen visibles, cargar el siguiente código
-        if (!isVisible) {
-            String ruta = "tiposProductos.json";
-            Archivo archivo = new Archivo();
-
-            try {
-                // Usar el método de Archivo para obtener el siguiente código
-                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
-
-                // Mostrar el código en el campo correspondiente
-                box_codigo_tipo_prod.setText(String.valueOf(siguienteCodigo));
-
-            } catch (Exception e) {
-                box_codigo_tipo_prod.setText("AUTOMÁTICO");
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        try {
+            // Validar el nombre del tipo de producto
+            String nombreTipo = box_nombre_tipo_prod.getText().trim();
+            if (nombreTipo.isEmpty()) {
+                javax.swing.JOptionPane.showMessageDialog(this, "El nombre del tipo de producto no puede estar vacío.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
             }
-        }
 
-        this.revalidate();
-        this.repaint();
+            // Generar el código automáticamente
+            int codigoTipo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+
+            // Crear un nuevo objeto TipoProducto
+            TipoProducto nuevoTipo = new TipoProducto(codigoTipo, nombreTipo);
+
+            // Leer los tipos de producto existentes
+            TipoProducto[] tiposExistentes = (TipoProducto[]) archivo.leerArchivo(ruta, TipoProducto[].class);
+            List<TipoProducto> listaTipos = tiposExistentes != null 
+                ? new ArrayList<>(List.of(tiposExistentes)) 
+                : new ArrayList<>();
+
+            // Agregar el nuevo tipo a la lista
+            listaTipos.add(nuevoTipo);
+
+            // Guardar la lista actualizada en el archivo
+            archivo.guardarArchivo(ruta, listaTipos);
+            
+            // Actualizar el ComboBox de tipos de producto (box_codigo_prod)
+            Utilidades.cargarTiposDeProducto(ruta, box_codigo_prod);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Tipo de producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+            // Limpiar los campos
+            box_nombre_tipo_prod.setText("");
+            box_codigo_tipo_prod.setText(String.valueOf(codigoTipo + 1));
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el tipo de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_guardar_tipo_prodActionPerformed
 
     private void combo_tammanio_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tammanio_biciActionPerformed
