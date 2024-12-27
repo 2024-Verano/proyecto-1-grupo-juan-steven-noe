@@ -37,7 +37,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
 
         // Aplicar el efecto hover y selección a los botones (TOOLBAR)
-        ButtonHoverEffect.applySelectableHoverEffect(agregar_prod);
+        ButtonHoverEffect.applySelectableHoverEffect(agregar_cliente);
         ButtonHoverEffect.applySelectableHoverEffect(modificar_prod);
         ButtonHoverEffect.applySelectableHoverEffect(salir);
 
@@ -84,7 +84,7 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         funciones = new javax.swing.JToolBar();
         jSeparator1 = new javax.swing.JToolBar.Separator();
-        agregar_prod = new javax.swing.JButton();
+        agregar_cliente = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
         modificar_prod = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
@@ -93,7 +93,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         bienvenidaPanel = new javax.swing.JPanel();
         bienvenidaLabel = new javax.swing.JLabel();
         bienvenidaLabel1 = new javax.swing.JLabel();
-        ciclista_icon = new javax.swing.JLabel();
+        usuario_icon = new javax.swing.JLabel();
         agregarPanel = new javax.swing.JPanel();
         crear_tipo_prod = new javax.swing.JButton();
         crear_prod = new javax.swing.JButton();
@@ -147,27 +147,27 @@ public class RegistroClientes extends javax.swing.JFrame {
         jSeparator1.setSeparatorSize(new java.awt.Dimension(250, 10));
         funciones.add(jSeparator1);
 
-        agregar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        agregar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add_item.png"))); // NOI18N
-        agregar_prod.setText("Agregar producto");
-        agregar_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        agregar_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        agregar_prod.setFocusable(false);
-        agregar_prod.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        agregar_prod.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        agregar_prod.addActionListener(new java.awt.event.ActionListener() {
+        agregar_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        agregar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add_item.png"))); // NOI18N
+        agregar_cliente.setText("Agregar Cliente");
+        agregar_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        agregar_cliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        agregar_cliente.setFocusable(false);
+        agregar_cliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        agregar_cliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        agregar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                agregar_prodActionPerformed(evt);
+                agregar_clienteActionPerformed(evt);
             }
         });
-        funciones.add(agregar_prod);
+        funciones.add(agregar_cliente);
 
         jSeparator2.setSeparatorSize(new java.awt.Dimension(25, 10));
         funciones.add(jSeparator2);
 
         modificar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         modificar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modify.png"))); // NOI18N
-        modificar_prod.setText("Modificar/eliminar producto");
+        modificar_prod.setText("Modificar/eliminar cliente");
         modificar_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         modificar_prod.setFocusable(false);
         modificar_prod.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -199,28 +199,29 @@ public class RegistroClientes extends javax.swing.JFrame {
         SubFrameContainer.setLayout(new java.awt.CardLayout());
 
         bienvenidaLabel.setFont(new java.awt.Font("Century Gothic", 1, 36)); // NOI18N
-        bienvenidaLabel.setText("¡Bienvenido al menú de registro de productos!");
+        bienvenidaLabel.setText("¡Bienvenido al menú de registro de clientes!");
 
         bienvenidaLabel1.setFont(new java.awt.Font("Century Gothic", 0, 36)); // NOI18N
         bienvenidaLabel1.setText("Elija una opción para comenzar");
 
-        ciclista_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/cycling.png"))); // NOI18N
+        usuario_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/users-alt.png"))); // NOI18N
 
         javax.swing.GroupLayout bienvenidaPanelLayout = new javax.swing.GroupLayout(bienvenidaPanel);
         bienvenidaPanel.setLayout(bienvenidaPanelLayout);
         bienvenidaPanelLayout.setHorizontalGroup(
             bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
                 .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(bienvenidaLabel)
                     .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(129, 129, 129)
+                        .addGap(203, 203, 203)
                         .addComponent(bienvenidaLabel1))
                     .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(362, 362, 362)
-                        .addComponent(ciclista_icon)))
-                .addContainerGap(108, Short.MAX_VALUE))
+                        .addGap(97, 97, 97)
+                        .addComponent(bienvenidaLabel))
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(436, 436, 436)
+                        .addComponent(usuario_icon)))
+                .addContainerGap(127, Short.MAX_VALUE))
         );
         bienvenidaPanelLayout.setVerticalGroup(
             bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -230,7 +231,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bienvenidaLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(ciclista_icon)
+                .addComponent(usuario_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(333, Short.MAX_VALUE))
         );
 
@@ -708,11 +709,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_prodActionPerformed
+    private void agregar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_clienteActionPerformed
         // Mostrar el SubFrame de "agregar producto"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "agregarPanel");
-    }//GEN-LAST:event_agregar_prodActionPerformed
+    }//GEN-LAST:event_agregar_clienteActionPerformed
 
     private void modificar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_prodActionPerformed
         // Mostrar el SubFrame de "modificar producto"
@@ -1063,7 +1064,7 @@ public class RegistroClientes extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubFrameContainer;
     private javax.swing.JPanel agregarPanel;
-    private javax.swing.JButton agregar_prod;
+    private javax.swing.JButton agregar_cliente;
     private javax.swing.JLabel bienvenidaLabel;
     private javax.swing.JLabel bienvenidaLabel1;
     private javax.swing.JPanel bienvenidaPanel;
@@ -1077,7 +1078,6 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JTextField box_nombre_tipo_prod;
     private javax.swing.JTextField buscador_agregar;
     private javax.swing.JButton button_buscar_modificar;
-    private javax.swing.JLabel ciclista_icon;
     private javax.swing.JLabel codigo_art;
     private javax.swing.JLabel codigo_defecto1;
     private javax.swing.JLabel codigo_prod;
@@ -1110,5 +1110,6 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JLabel tammanio_bici1;
     private javax.swing.JLabel text_buscar_agregar;
     private javax.swing.JLabel tipo_art;
+    private javax.swing.JLabel usuario_icon;
     // End of variables declaration//GEN-END:variables
 }
