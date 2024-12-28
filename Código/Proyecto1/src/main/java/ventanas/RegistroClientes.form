@@ -240,7 +240,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace min="-2" pref="298" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="opcionesTipoProducto" max="32767" attributes="0"/>
+                          <Component id="opcionesAgregarCliente" max="32767" attributes="0"/>
                           <Component id="crear_usuario" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace pref="335" max="32767" attributes="0"/>
@@ -253,7 +253,7 @@
                       <EmptySpace max="-2" attributes="0"/>
                       <Component id="crear_usuario" min="-2" pref="79" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="opcionesTipoProducto" min="-2" max="-2" attributes="0"/>
+                      <Component id="opcionesAgregarCliente" min="-2" max="-2" attributes="0"/>
                       <EmptySpace pref="22" max="32767" attributes="0"/>
                   </Group>
               </Group>
@@ -294,7 +294,7 @@
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="crear_usuarioActionPerformed"/>
               </Events>
             </Component>
-            <Container class="javax.swing.JPanel" name="opcionesTipoProducto">
+            <Container class="javax.swing.JPanel" name="opcionesAgregarCliente">
               <Properties>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
@@ -319,7 +319,7 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="140" max="-2" attributes="0"/>
-                                  <Component id="codigo_defecto1" min="-2" max="-2" attributes="0"/>
+                                  <Component id="codigo_defectoCliente" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="106" max="32767" attributes="0"/>
@@ -384,7 +384,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="codigo_defecto1" min="-2" pref="35" max="-2" attributes="0"/>
+                          <Component id="codigo_defectoCliente" min="-2" pref="35" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="box_codigo_cliente" min="-2" pref="30" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -427,7 +427,7 @@
                 </DimensionLayout>
               </Layout>
               <SubComponents>
-                <Component class="javax.swing.JLabel" name="codigo_defecto1">
+                <Component class="javax.swing.JLabel" name="codigo_defectoCliente">
                   <Properties>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="18" style="1"/>
@@ -520,6 +520,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Century Gothic" size="14" style="0"/>
                     </Property>
+                    <Property name="horizontalAlignment" type="int" value="0"/>
                     <Property name="text" type="java.lang.String" value=" "/>
                     <Property name="toolTipText" type="java.lang.String" value=""/>
                     <Property name="actionCommand" type="java.lang.String" value="&lt;Not Set&gt;"/>
