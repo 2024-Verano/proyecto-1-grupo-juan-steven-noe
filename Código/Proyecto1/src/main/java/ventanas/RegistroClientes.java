@@ -34,11 +34,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         initComponents();
         
         // Cargar los tipos de producto en el comboBox al iniciar el formulario
-        Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
+        //Utilidades.cargarTiposDeProducto("registroUsuarios.json", box_codigo_cliente);
 
         // Aplicar el efecto hover y selección a los botones (TOOLBAR)
         ButtonHoverEffect.applySelectableHoverEffect(agregar_cliente);
-        ButtonHoverEffect.applySelectableHoverEffect(modificar_prod);
+        ButtonHoverEffect.applySelectableHoverEffect(modificar_cliente);
         ButtonHoverEffect.applySelectableHoverEffect(salir);
 
 
@@ -50,10 +50,10 @@ public class RegistroClientes extends javax.swing.JFrame {
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
         // Aplica el efecto hover a cada botón (Agregar Producto)
-        hoverEffect.applyTo(crear_tipo_prod);
-        hoverEffect.applyTo(crear_prod);
-        hoverEffect.applyTo(guardar_tipo_prod);
-        hoverEffect.applyTo(guardar_art);
+        hoverEffect.applyTo(crear_usuario);
+        //hoverEffect.applyTo(crear_prod);
+        hoverEffect.applyTo(guardar_cliente);
+        //hoverEffect.applyTo(guardar_art);
         
         // Aplica el efecto hover a cada botón (Modificar Productoi)
         hoverEffect.applyTo(button_buscar_modificar);
@@ -65,7 +65,7 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         // Ocultar los paneles de opcion de "agregar productos"
         opcionesTipoProducto.setVisible(false);
-        opcionesProducto.setVisible(false);
+        //opcionesProducto.setVisible(false);
         
         // Mostrar la bienvenida al inicio
         SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
@@ -86,7 +86,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         jSeparator1 = new javax.swing.JToolBar.Separator();
         agregar_cliente = new javax.swing.JButton();
         jSeparator2 = new javax.swing.JToolBar.Separator();
-        modificar_prod = new javax.swing.JButton();
+        modificar_cliente = new javax.swing.JButton();
         jSeparator5 = new javax.swing.JToolBar.Separator();
         salir = new javax.swing.JButton();
         SubFrameContainer = new javax.swing.JPanel();
@@ -94,35 +94,6 @@ public class RegistroClientes extends javax.swing.JFrame {
         bienvenidaLabel = new javax.swing.JLabel();
         bienvenidaLabel1 = new javax.swing.JLabel();
         usuario_icon = new javax.swing.JLabel();
-        agregarPanel = new javax.swing.JPanel();
-        crear_tipo_prod = new javax.swing.JButton();
-        crear_prod = new javax.swing.JButton();
-        opcionesTipoProducto = new javax.swing.JPanel();
-        codigo_defecto1 = new javax.swing.JLabel();
-        box_codigo_tipo_prod = new javax.swing.JTextField();
-        nombre_prod = new javax.swing.JLabel();
-        box_nombre_tipo_prod = new javax.swing.JTextField();
-        guardar_tipo_prod = new javax.swing.JButton();
-        opcionesProducto = new javax.swing.JPanel();
-        codigo_art = new javax.swing.JLabel();
-        box_codigo_art = new javax.swing.JTextField();
-        codigo_prod = new javax.swing.JLabel();
-        box_codigo_prod = new javax.swing.JComboBox<>();
-        tipo_art = new javax.swing.JLabel();
-        combo_tipo_art = new javax.swing.JComboBox<>();
-        tammanio_bici1 = new javax.swing.JLabel();
-        combo_tammanio_bici = new javax.swing.JComboBox<>();
-        nombre_art = new javax.swing.JLabel();
-        box_nombre_art = new javax.swing.JTextField();
-        marca_art = new javax.swing.JLabel();
-        box_marca_art = new javax.swing.JTextField();
-        guardar_art = new javax.swing.JButton();
-        marca_art1 = new javax.swing.JLabel();
-        box_marca_art1 = new javax.swing.JTextField();
-        marca_art2 = new javax.swing.JLabel();
-        box_marca_art2 = new javax.swing.JTextField();
-        jSeparator6 = new javax.swing.JSeparator();
-        jSeparator7 = new javax.swing.JSeparator();
         modificarPanel = new javax.swing.JPanel();
         filtro_agregar = new javax.swing.JLabel();
         combo_filtro_agregar = new javax.swing.JComboBox<>();
@@ -131,6 +102,24 @@ public class RegistroClientes extends javax.swing.JFrame {
         text_buscar_agregar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_resultado = new javax.swing.JTable();
+        agregarPanel = new javax.swing.JPanel();
+        crear_usuario = new javax.swing.JButton();
+        opcionesTipoProducto = new javax.swing.JPanel();
+        codigo_defecto1 = new javax.swing.JLabel();
+        box_codigo_cliente = new javax.swing.JTextField();
+        nombre_cliente = new javax.swing.JLabel();
+        box_nombre_cliente = new javax.swing.JTextField();
+        guardar_cliente = new javax.swing.JButton();
+        num_telefono = new javax.swing.JLabel();
+        box_num_telefono = new javax.swing.JTextField();
+        correo_cliente = new javax.swing.JLabel();
+        box_correo_cliente = new javax.swing.JTextField();
+        distrito = new javax.swing.JLabel();
+        jComboBox_provincias = new javax.swing.JComboBox<>();
+        provincia1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        fecha_nacimiento = new javax.swing.JLabel();
+        formatt_fecha_nacimiento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -165,19 +154,19 @@ public class RegistroClientes extends javax.swing.JFrame {
         jSeparator2.setSeparatorSize(new java.awt.Dimension(25, 10));
         funciones.add(jSeparator2);
 
-        modificar_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        modificar_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modify.png"))); // NOI18N
-        modificar_prod.setText("Modificar/eliminar cliente");
-        modificar_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        modificar_prod.setFocusable(false);
-        modificar_prod.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        modificar_prod.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        modificar_prod.addActionListener(new java.awt.event.ActionListener() {
+        modificar_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        modificar_cliente.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modify.png"))); // NOI18N
+        modificar_cliente.setText("Modificar/eliminar cliente");
+        modificar_cliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        modificar_cliente.setFocusable(false);
+        modificar_cliente.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        modificar_cliente.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        modificar_cliente.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                modificar_prodActionPerformed(evt);
+                modificar_clienteActionPerformed(evt);
             }
         });
-        funciones.add(modificar_prod);
+        funciones.add(modificar_cliente);
 
         jSeparator5.setSeparatorSize(new java.awt.Dimension(25, 10));
         funciones.add(jSeparator5);
@@ -206,380 +195,6 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         usuario_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/users-alt.png"))); // NOI18N
 
-        javax.swing.GroupLayout bienvenidaPanelLayout = new javax.swing.GroupLayout(bienvenidaPanel);
-        bienvenidaPanel.setLayout(bienvenidaPanelLayout);
-        bienvenidaPanelLayout.setHorizontalGroup(
-            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(bienvenidaLabel1))
-                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(bienvenidaLabel))
-                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(436, 436, 436)
-                        .addComponent(usuario_icon)))
-                .addContainerGap(127, Short.MAX_VALUE))
-        );
-        bienvenidaPanelLayout.setVerticalGroup(
-            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(bienvenidaLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bienvenidaLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(usuario_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
-        );
-
-        SubFrameContainer.add(bienvenidaPanel, "card2");
-
-        crear_tipo_prod.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
-        crear_tipo_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/new-product.png"))); // NOI18N
-        crear_tipo_prod.setText("Crear tipo de producto");
-        crear_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        crear_tipo_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        crear_tipo_prod.setFocusable(false);
-        crear_tipo_prod.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        crear_tipo_prod.setIconTextGap(10);
-        crear_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crear_tipo_prodActionPerformed(evt);
-            }
-        });
-
-        crear_prod.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
-        crear_prod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add_product.png"))); // NOI18N
-        crear_prod.setText("Crear producto nuevo");
-        crear_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        crear_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        crear_prod.setFocusable(false);
-        crear_prod.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        crear_prod.setIconTextGap(10);
-        crear_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crear_prodActionPerformed(evt);
-            }
-        });
-
-        opcionesTipoProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        codigo_defecto1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        codigo_defecto1.setText("Código");
-
-        box_codigo_tipo_prod.setEditable(false);
-        box_codigo_tipo_prod.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_tipo_prod.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        box_codigo_tipo_prod.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        box_codigo_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_codigo_tipo_prod.setEnabled(false);
-        box_codigo_tipo_prod.setFocusable(false);
-        box_codigo_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_codigo_tipo_prodActionPerformed(evt);
-            }
-        });
-
-        nombre_prod.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        nombre_prod.setText("Nombre del tipo de producto");
-
-        box_nombre_tipo_prod.setBackground(new java.awt.Color(255, 255, 255));
-        box_nombre_tipo_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_nombre_tipo_prod.setText(" ");
-        box_nombre_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_nombre_tipo_prod.setSelectionColor(new java.awt.Color(0, 0, 0));
-        box_nombre_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_nombre_tipo_prodActionPerformed(evt);
-            }
-        });
-
-        guardar_tipo_prod.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        guardar_tipo_prod.setText("G U A R D A R");
-        guardar_tipo_prod.setBorder(null);
-        guardar_tipo_prod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardar_tipo_prodActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout opcionesTipoProductoLayout = new javax.swing.GroupLayout(opcionesTipoProducto);
-        opcionesTipoProducto.setLayout(opcionesTipoProductoLayout);
-        opcionesTipoProductoLayout.setHorizontalGroup(
-            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addGap(113, 113, 113)
-                .addComponent(codigo_defecto1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionesTipoProductoLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(box_codigo_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addGap(16, 16, 16)
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(box_nombre_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(nombre_prod))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addComponent(guardar_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        opcionesTipoProductoLayout.setVerticalGroup(
-            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(codigo_defecto1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(box_codigo_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(nombre_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(box_nombre_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(guardar_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(103, 103, 103))
-        );
-
-        opcionesProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        codigo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        codigo_art.setText("Código artículo");
-
-        box_codigo_art.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_art.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
-        box_codigo_art.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        box_codigo_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_codigo_art.setEnabled(false);
-        box_codigo_art.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_codigo_artActionPerformed(evt);
-            }
-        });
-
-        codigo_prod.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        codigo_prod.setText("Código producto");
-
-        box_codigo_prod.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_prod.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        box_codigo_prod.setBorder(null);
-        box_codigo_prod.setFocusable(false);
-        box_codigo_prod.setRequestFocusEnabled(false);
-
-        tipo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        tipo_art.setText("Tipo de artículo");
-
-        combo_tipo_art.setBackground(new java.awt.Color(255, 255, 255));
-        combo_tipo_art.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        combo_tipo_art.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Bicicleta", "Accesorio", "Suplemento" }));
-        combo_tipo_art.setBorder(null);
-        combo_tipo_art.setFocusable(false);
-        combo_tipo_art.setRequestFocusEnabled(false);
-        combo_tipo_art.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_tipo_artActionPerformed(evt);
-            }
-        });
-
-        tammanio_bici1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        tammanio_bici1.setText("Tamaño (bici)");
-
-        combo_tammanio_bici.setBackground(new java.awt.Color(255, 255, 255));
-        combo_tammanio_bici.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        combo_tammanio_bici.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "12", "16", "22", "26", "27", "27.5", "29" }));
-        combo_tammanio_bici.setBorder(null);
-        combo_tammanio_bici.setFocusable(false);
-        combo_tammanio_bici.setRequestFocusEnabled(false);
-        combo_tammanio_bici.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_tammanio_biciActionPerformed(evt);
-            }
-        });
-
-        nombre_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        nombre_art.setText("Nombre");
-
-        box_nombre_art.setBackground(new java.awt.Color(255, 255, 255));
-        box_nombre_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_nombre_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_nombre_art.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_nombre_artActionPerformed(evt);
-            }
-        });
-
-        marca_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        marca_art.setText("Marca");
-
-        box_marca_art.setBackground(new java.awt.Color(255, 255, 255));
-        box_marca_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_marca_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_marca_art.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_marca_artActionPerformed(evt);
-            }
-        });
-
-        guardar_art.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        guardar_art.setText("G U A R D A R");
-        guardar_art.setBorder(null);
-        guardar_art.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar_art.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardar_artActionPerformed(evt);
-            }
-        });
-
-        marca_art1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        marca_art1.setText("Precio");
-
-        box_marca_art1.setBackground(new java.awt.Color(255, 255, 255));
-        box_marca_art1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_marca_art1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_marca_art1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_marca_art1ActionPerformed(evt);
-            }
-        });
-
-        marca_art2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
-        marca_art2.setText("Cantidad");
-
-        box_marca_art2.setBackground(new java.awt.Color(255, 255, 255));
-        box_marca_art2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_marca_art2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_marca_art2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_marca_art2ActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout opcionesProductoLayout = new javax.swing.GroupLayout(opcionesProducto);
-        opcionesProducto.setLayout(opcionesProductoLayout);
-        opcionesProductoLayout.setHorizontalGroup(
-            opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(opcionesProductoLayout.createSequentialGroup()
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(opcionesProductoLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jSeparator6)
-                            .addGroup(opcionesProductoLayout.createSequentialGroup()
-                                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                        .addComponent(box_nombre_art, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(opcionesProductoLayout.createSequentialGroup()
-                                            .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(codigo_prod)
-                                                .addComponent(codigo_art)
-                                                .addComponent(tammanio_bici1))
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                            .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(combo_tammanio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(box_codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(combo_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addComponent(box_codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                        .addGroup(opcionesProductoLayout.createSequentialGroup()
-                                            .addComponent(marca_art)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                            .addComponent(box_marca_art, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                    .addComponent(tipo_art)
-                                    .addComponent(nombre_art)
-                                    .addComponent(marca_art1)
-                                    .addGroup(opcionesProductoLayout.createSequentialGroup()
-                                        .addComponent(marca_art2)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(guardar_art, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(box_marca_art2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(box_marca_art1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 39, Short.MAX_VALUE))))
-                    .addGroup(opcionesProductoLayout.createSequentialGroup()
-                        .addGap(12, 12, 12)
-                        .addComponent(jSeparator7)))
-                .addContainerGap())
-        );
-        opcionesProductoLayout.setVerticalGroup(
-            opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(opcionesProductoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_codigo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_codigo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_tipo_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(tammanio_bici1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_tammanio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jSeparator7, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(2, 2, 2)
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(nombre_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_nombre_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(marca_art, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_marca_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(guardar_art, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17))
-        );
-
-        javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
-        agregarPanel.setLayout(agregarPanelLayout);
-        agregarPanelLayout.setHorizontalGroup(
-            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(149, 149, 149)
-                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(crear_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(102, 102, 102)
-                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(opcionesProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(crear_prod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(138, Short.MAX_VALUE))
-        );
-        agregarPanelLayout.setVerticalGroup(
-            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(crear_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(crear_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(opcionesProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(86, Short.MAX_VALUE))
-        );
-
-        SubFrameContainer.add(agregarPanel, "card2");
-
         filtro_agregar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         filtro_agregar.setText("Filtro");
 
@@ -602,7 +217,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         });
 
         text_buscar_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        text_buscar_agregar.setText("Buscar un producto para modificar");
+        text_buscar_agregar.setText("Buscar un cliente para modificar");
 
         tabla_resultado.setBackground(new java.awt.Color(255, 255, 255));
         tabla_resultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -687,7 +302,256 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addContainerGap(265, Short.MAX_VALUE))
         );
 
-        SubFrameContainer.add(modificarPanel, "card2");
+        javax.swing.GroupLayout bienvenidaPanelLayout = new javax.swing.GroupLayout(bienvenidaPanel);
+        bienvenidaPanel.setLayout(bienvenidaPanelLayout);
+        bienvenidaPanelLayout.setHorizontalGroup(
+            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(bienvenidaLabel1))
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(bienvenidaLabel))
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(436, 436, 436)
+                        .addComponent(usuario_icon))
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(modificarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        bienvenidaPanelLayout.setVerticalGroup(
+            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(bienvenidaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bienvenidaLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(usuario_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(modificarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        SubFrameContainer.add(bienvenidaPanel, "card2");
+
+        crear_usuario.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        crear_usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add-user.png"))); // NOI18N
+        crear_usuario.setText("Agregar cliente");
+        crear_usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        crear_usuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crear_usuario.setFocusable(false);
+        crear_usuario.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        crear_usuario.setIconTextGap(10);
+        crear_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crear_usuarioActionPerformed(evt);
+            }
+        });
+
+        opcionesTipoProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        codigo_defecto1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        codigo_defecto1.setText("Código");
+
+        box_codigo_cliente.setEditable(false);
+        box_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        box_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        box_codigo_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        box_codigo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_codigo_cliente.setEnabled(false);
+        box_codigo_cliente.setFocusable(false);
+        box_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_codigo_clienteActionPerformed(evt);
+            }
+        });
+
+        nombre_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        nombre_cliente.setText("Nombre y apellidos del cliente");
+
+        box_nombre_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        box_nombre_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_nombre_cliente.setText(" ");
+        box_nombre_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_nombre_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
+        box_nombre_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_nombre_clienteActionPerformed(evt);
+            }
+        });
+
+        guardar_cliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        guardar_cliente.setText("G U A R D A R");
+        guardar_cliente.setBorder(null);
+        guardar_cliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardar_clienteActionPerformed(evt);
+            }
+        });
+
+        num_telefono.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        num_telefono.setText("Teléfono");
+
+        box_num_telefono.setBackground(new java.awt.Color(255, 255, 255));
+        box_num_telefono.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_num_telefono.setText(" ");
+        box_num_telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_num_telefono.setSelectionColor(new java.awt.Color(0, 0, 0));
+        box_num_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_num_telefonoActionPerformed(evt);
+            }
+        });
+
+        correo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        correo_cliente.setText("Correo electronico");
+
+        box_correo_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        box_correo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_correo_cliente.setText("  Ejemplo: juan@gmail.com");
+        box_correo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_correo_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
+        box_correo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_correo_clienteActionPerformed(evt);
+            }
+        });
+
+        distrito.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        distrito.setText("Distrito");
+
+        jComboBox_provincias.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        jComboBox_provincias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alajuela", "Cartago", "Guanacaste", "Heredia", "Limón", "Punatrenas", "San José" }));
+        jComboBox_provincias.setToolTipText("");
+
+        provincia1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        provincia1.setText("Provincia");
+
+        jComboBox1.setMaximumRowCount(84);
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox1.setToolTipText("");
+
+        fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        fecha_nacimiento.setText("Fecha de nacimiento:");
+
+        formatt_fecha_nacimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        formatt_fecha_nacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        formatt_fecha_nacimiento.setToolTipText("");
+        formatt_fecha_nacimiento.setActionCommand("<Not Set>");
+        formatt_fecha_nacimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatt_fecha_nacimientoActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout opcionesTipoProductoLayout = new javax.swing.GroupLayout(opcionesTipoProducto);
+        opcionesTipoProducto.setLayout(opcionesTipoProductoLayout);
+        opcionesTipoProductoLayout.setHorizontalGroup(
+            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                            .addGap(33, 33, 33)
+                            .addComponent(nombre_cliente))
+                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                            .addGap(131, 131, 131)
+                            .addComponent(codigo_defecto1))
+                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                            .addGap(107, 107, 107)
+                            .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                            .addGap(125, 125, 125)
+                            .addComponent(num_telefono))
+                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                            .addGap(87, 87, 87)
+                            .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(correo_cliente)
+                                .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                            .addGap(99, 99, 99)
+                            .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                            .addGap(50, 50, 50)
+                            .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                                    .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(provincia1)
+                                        .addComponent(distrito))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(jComboBox_provincias, 0, 125, Short.MAX_VALUE)
+                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                                    .addComponent(fecha_nacimiento)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(76, Short.MAX_VALUE))
+        );
+        opcionesTipoProductoLayout.setVerticalGroup(
+            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(codigo_defecto1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(provincia1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(distrito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(31, 31, 31)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
+        agregarPanel.setLayout(agregarPanelLayout);
+        agregarPanelLayout.setHorizontalGroup(
+            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarPanelLayout.createSequentialGroup()
+                .addGap(290, 290, 290)
+                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(crear_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(389, Short.MAX_VALUE))
+        );
+        agregarPanelLayout.setVerticalGroup(
+            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarPanelLayout.createSequentialGroup()
+                .addGap(24, 24, 24)
+                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(373, Short.MAX_VALUE))
+        );
+
+        SubFrameContainer.add(agregarPanel, "card2");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -710,16 +574,16 @@ public class RegistroClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_clienteActionPerformed
-        // Mostrar el SubFrame de "agregar producto"
+        // Mostrar el SubFrame de "agregar cliente"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "agregarPanel");
     }//GEN-LAST:event_agregar_clienteActionPerformed
 
-    private void modificar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_prodActionPerformed
-        // Mostrar el SubFrame de "modificar producto"
+    private void modificar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_clienteActionPerformed
+        // Mostrar el SubFrame de "modificar cliente"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "modificarPanel");
-    }//GEN-LAST:event_modificar_prodActionPerformed
+    }//GEN-LAST:event_modificar_clienteActionPerformed
 
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
@@ -731,7 +595,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             opciones.setVisible(true);
     }//GEN-LAST:event_salirActionPerformed
 
-    private void crear_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_tipo_prodActionPerformed
+    private void crear_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_usuarioActionPerformed
 
         boolean isVisible = opcionesTipoProducto.isVisible();
         opcionesTipoProducto.setVisible(!isVisible);
@@ -746,145 +610,25 @@ public class RegistroClientes extends javax.swing.JFrame {
                 int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
 
                 // Mostrar el código en el campo correspondiente
-                box_codigo_tipo_prod.setText(String.valueOf(siguienteCodigo));
+                box_codigo_cliente.setText(String.valueOf(siguienteCodigo));
 
             } catch (Exception e) {
-                box_codigo_tipo_prod.setText("AUTOMÁTICO");
+                box_codigo_cliente.setText("AUTOMÁTICO");
                 javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
     }
 
     this.revalidate();
     this.repaint();
-    }//GEN-LAST:event_crear_tipo_prodActionPerformed
+    }//GEN-LAST:event_crear_usuarioActionPerformed
 
-    private void crear_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_prodActionPerformed
-        boolean isVisible = opcionesProducto.isVisible();
-        opcionesProducto.setVisible(!isVisible);
-
-        if (!isVisible) {
-            String ruta = "productos.json";
-            Archivo archivo = new Archivo();
-
-            try {
-                // Usar el método de Archivo para obtener el siguiente código
-                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Producto[].class);
-
-                // Mostrar el código en el campo correspondiente
-            box_codigo_art.setText(String.valueOf(siguienteCodigo));
-
-            } catch (Exception e) {
-                box_codigo_art.setText("AUTOMÁTICO");
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
-    }
-
-    this.revalidate();
-    this.repaint();
-    }//GEN-LAST:event_crear_prodActionPerformed
-
-    private void box_nombre_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_tipo_prodActionPerformed
+    private void box_nombre_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_clienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_box_nombre_tipo_prodActionPerformed
+    }//GEN-LAST:event_box_nombre_clienteActionPerformed
 
-    private void box_codigo_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_tipo_prodActionPerformed
+    private void box_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_clienteActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_box_codigo_tipo_prodActionPerformed
-
-    private void box_codigo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_artActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_codigo_artActionPerformed
-
-    private void box_nombre_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_artActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_nombre_artActionPerformed
-
-    private void guardar_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_artActionPerformed
-        String rutaTipos = "tiposProductos.json";
-        String rutaProductos = "productos.json";
-
-        try {
-            Archivo archivo = new Archivo();
-
-            // Guardar la selección actual del ComboBox
-            String seleccionActual = (String) box_codigo_prod.getSelectedItem();
-
-            // Actualizar el ComboBox con los tipos de producto
-            Utilidades.cargarTiposDeProducto(rutaTipos, box_codigo_prod);
-
-            // Restaurar la selección previa si existe
-            if (seleccionActual != null) {
-                box_codigo_prod.setSelectedItem(seleccionActual);
-            }
-
-            // Validar las entradas
-            int codigoArticulo = archivo.obtenerSiguienteCodigo(rutaProductos, Producto[].class);
-            String codigoProductoTexto = (String) box_codigo_prod.getSelectedItem();
-            if (codigoProductoTexto == null || !codigoProductoTexto.contains(" - ")) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Seleccione un tipo de producto válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            int codigoProducto = Integer.parseInt(codigoProductoTexto.split(" - ")[0]);
-            String tipoArticulo = (String) combo_tipo_art.getSelectedItem();
-            String tamanoBici = "Bicicleta".equals(tipoArticulo) ? (String) combo_tammanio_bici.getSelectedItem() : null;
-            String nombre = box_nombre_art.getText().trim();
-            String marca = box_marca_art.getText().trim();
-            int precio = Integer.parseInt(box_marca_art1.getText().trim());
-            int cantidad = Integer.parseInt(box_marca_art2.getText().trim());
-
-            // Validar los campos no vacíos
-            if (nombre.isEmpty() || marca.isEmpty() || precio <= 0 || cantidad < 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor complete todos los campos correctamente.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                return;
-            }
-
-            // Crear un nuevo producto
-            Producto nuevoProducto = new Producto(codigoArticulo, codigoProducto, tipoArticulo, tamanoBici, nombre, marca, precio, cantidad);
-
-            // Leer productos existentes del archivo
-            Producto[] productos = (Producto[]) archivo.leerArchivo(rutaProductos, Producto[].class);
-            List<Producto> listaProductos = productos != null 
-                ? new ArrayList<>(List.of(productos)) 
-                : new ArrayList<>();
-
-            // Agregar el nuevo producto a la lista
-            listaProductos.add(nuevoProducto);
-
-            // Guardar la lista actualizada en el archivo JSON
-            archivo.guardarArchivo(rutaProductos, listaProductos);
-
-            // Mostrar mensaje de confirmación antes de limpiar los campos
-            javax.swing.JOptionPane.showMessageDialog(this, "Producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-
-            // Limpiar los campos del formulario después de la confirmación
-            box_nombre_art.setText("");
-            box_marca_art.setText("");
-            box_marca_art1.setText("");
-            box_marca_art2.setText("");
-            combo_tammanio_bici.setSelectedIndex(-1);
-
-            // Actualizar el siguiente código disponible para el artículo
-            int siguienteCodigo = archivo.obtenerSiguienteCodigo(rutaProductos, Producto[].class);
-            box_codigo_art.setText(String.valueOf(siguienteCodigo));
-
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
-        
-    }//GEN-LAST:event_guardar_artActionPerformed
-
-    private void box_marca_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_artActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_marca_artActionPerformed
-
-    private void box_marca_art1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_marca_art1ActionPerformed
-
-    private void box_marca_art2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art2ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_marca_art2ActionPerformed
+    }//GEN-LAST:event_box_codigo_clienteActionPerformed
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         String ruta = "productos.json";
@@ -930,13 +674,13 @@ public class RegistroClientes extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
-    private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
+    private void guardar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_clienteActionPerformed
         String ruta = "tiposProductos.json";
         Archivo archivo = new Archivo();
 
         try {
             // Validar el nombre del tipo de producto
-            String nombreTipo = box_nombre_tipo_prod.getText().trim();
+            String nombreTipo = box_nombre_cliente.getText().trim();
             if (nombreTipo.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "El nombre del tipo de producto no puede estar vacío.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
@@ -961,35 +705,18 @@ public class RegistroClientes extends javax.swing.JFrame {
             archivo.guardarArchivo(ruta, listaTipos);
             
             // Actualizar el ComboBox de tipos de producto (box_codigo_prod)
-            Utilidades.cargarTiposDeProducto(ruta, box_codigo_prod);
+            //Utilidades.cargarTiposDeProducto(ruta, box_codigo_prod);
 
             javax.swing.JOptionPane.showMessageDialog(this, "Tipo de producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
             // Limpiar los campos
-            box_nombre_tipo_prod.setText("");
-            box_codigo_tipo_prod.setText(String.valueOf(codigoTipo + 1));
+            box_nombre_cliente.setText("");
+            box_codigo_cliente.setText(String.valueOf(codigoTipo + 1));
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el tipo de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
-    }//GEN-LAST:event_guardar_tipo_prodActionPerformed
-
-    private void combo_tammanio_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tammanio_biciActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_combo_tammanio_biciActionPerformed
-
-    private void combo_tipo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_artActionPerformed
-
-        String tipoSeleccionado = (String) combo_tipo_art.getSelectedItem();
-
-        // Activar o desactivar el combo de tamaño de bicicleta
-        if ("Bicicleta".equals(tipoSeleccionado)) {
-            combo_tammanio_bici.setEnabled(true);
-        } else {
-            combo_tammanio_bici.setEnabled(false);
-        combo_tammanio_bici.setSelectedIndex(-1);
-        }
-    }//GEN-LAST:event_combo_tipo_artActionPerformed
+    }//GEN-LAST:event_guardar_clienteActionPerformed
 
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
@@ -1010,6 +737,18 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
+
+    private void box_num_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_num_telefonoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_num_telefonoActionPerformed
+
+    private void box_correo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_correo_clienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_correo_clienteActionPerformed
+
+    private void formatt_fecha_nacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_nacimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formatt_fecha_nacimientoActionPerformed
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
@@ -1068,48 +807,37 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JLabel bienvenidaLabel;
     private javax.swing.JLabel bienvenidaLabel1;
     private javax.swing.JPanel bienvenidaPanel;
-    private javax.swing.JTextField box_codigo_art;
-    private javax.swing.JComboBox<String> box_codigo_prod;
-    private javax.swing.JTextField box_codigo_tipo_prod;
-    private javax.swing.JTextField box_marca_art;
-    private javax.swing.JTextField box_marca_art1;
-    private javax.swing.JTextField box_marca_art2;
-    private javax.swing.JTextField box_nombre_art;
-    private javax.swing.JTextField box_nombre_tipo_prod;
+    private javax.swing.JTextField box_codigo_cliente;
+    private javax.swing.JTextField box_correo_cliente;
+    private javax.swing.JTextField box_nombre_cliente;
+    private javax.swing.JTextField box_num_telefono;
     private javax.swing.JTextField buscador_agregar;
     private javax.swing.JButton button_buscar_modificar;
-    private javax.swing.JLabel codigo_art;
     private javax.swing.JLabel codigo_defecto1;
-    private javax.swing.JLabel codigo_prod;
     private javax.swing.JComboBox<String> combo_filtro_agregar;
-    private javax.swing.JComboBox<String> combo_tammanio_bici;
-    private javax.swing.JComboBox<String> combo_tipo_art;
-    private javax.swing.JButton crear_prod;
-    private javax.swing.JButton crear_tipo_prod;
+    private javax.swing.JLabel correo_cliente;
+    private javax.swing.JButton crear_usuario;
+    private javax.swing.JLabel distrito;
+    private javax.swing.JLabel fecha_nacimiento;
     private javax.swing.JLabel filtro_agregar;
+    private javax.swing.JFormattedTextField formatt_fecha_nacimiento;
     private javax.swing.JToolBar funciones;
-    private javax.swing.JButton guardar_art;
-    private javax.swing.JButton guardar_tipo_prod;
+    private javax.swing.JButton guardar_cliente;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_provincias;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
     private javax.swing.JToolBar.Separator jSeparator2;
     private javax.swing.JToolBar.Separator jSeparator5;
-    private javax.swing.JSeparator jSeparator6;
-    private javax.swing.JSeparator jSeparator7;
-    private javax.swing.JLabel marca_art;
-    private javax.swing.JLabel marca_art1;
-    private javax.swing.JLabel marca_art2;
     private javax.swing.JPanel modificarPanel;
-    private javax.swing.JButton modificar_prod;
-    private javax.swing.JLabel nombre_art;
-    private javax.swing.JLabel nombre_prod;
-    private javax.swing.JPanel opcionesProducto;
+    private javax.swing.JButton modificar_cliente;
+    private javax.swing.JLabel nombre_cliente;
+    private javax.swing.JLabel num_telefono;
     private javax.swing.JPanel opcionesTipoProducto;
+    private javax.swing.JLabel provincia1;
     private javax.swing.JButton salir;
     private javax.swing.JTable tabla_resultado;
-    private javax.swing.JLabel tammanio_bici1;
     private javax.swing.JLabel text_buscar_agregar;
-    private javax.swing.JLabel tipo_art;
     private javax.swing.JLabel usuario_icon;
     // End of variables declaration//GEN-END:variables
 }
