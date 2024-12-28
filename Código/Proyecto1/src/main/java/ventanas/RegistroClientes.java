@@ -94,14 +94,6 @@ public class RegistroClientes extends javax.swing.JFrame {
         bienvenidaLabel = new javax.swing.JLabel();
         bienvenidaLabel1 = new javax.swing.JLabel();
         usuario_icon = new javax.swing.JLabel();
-        modificarPanel = new javax.swing.JPanel();
-        filtro_agregar = new javax.swing.JLabel();
-        combo_filtro_agregar = new javax.swing.JComboBox<>();
-        buscador_agregar = new javax.swing.JTextField();
-        button_buscar_modificar = new javax.swing.JButton();
-        text_buscar_agregar = new javax.swing.JLabel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tabla_resultado = new javax.swing.JTable();
         agregarPanel = new javax.swing.JPanel();
         crear_usuario = new javax.swing.JButton();
         opcionesTipoProducto = new javax.swing.JPanel();
@@ -122,6 +114,14 @@ public class RegistroClientes extends javax.swing.JFrame {
         formatt_fecha_nacimiento = new javax.swing.JFormattedTextField();
         cantones = new javax.swing.JLabel();
         jComboBox_cantones = new javax.swing.JComboBox<>();
+        modificarPanel = new javax.swing.JPanel();
+        filtro_agregar = new javax.swing.JLabel();
+        combo_filtro_agregar = new javax.swing.JComboBox<>();
+        buscador_agregar = new javax.swing.JTextField();
+        button_buscar_modificar = new javax.swing.JButton();
+        text_buscar_agregar = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tabla_resultado = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -196,6 +196,289 @@ public class RegistroClientes extends javax.swing.JFrame {
         bienvenidaLabel1.setText("Elija una opción para comenzar");
 
         usuario_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/users-alt.png"))); // NOI18N
+
+        javax.swing.GroupLayout bienvenidaPanelLayout = new javax.swing.GroupLayout(bienvenidaPanel);
+        bienvenidaPanel.setLayout(bienvenidaPanelLayout);
+        bienvenidaPanelLayout.setHorizontalGroup(
+            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(203, 203, 203)
+                        .addComponent(bienvenidaLabel1))
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(97, 97, 97)
+                        .addComponent(bienvenidaLabel))
+                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                        .addGap(436, 436, 436)
+                        .addComponent(usuario_icon)))
+                .addContainerGap(127, Short.MAX_VALUE))
+        );
+        bienvenidaPanelLayout.setVerticalGroup(
+            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                .addGap(175, 175, 175)
+                .addComponent(bienvenidaLabel)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(bienvenidaLabel1)
+                .addGap(18, 18, 18)
+                .addComponent(usuario_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(382, Short.MAX_VALUE))
+        );
+
+        SubFrameContainer.add(bienvenidaPanel, "card2");
+
+        crear_usuario.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
+        crear_usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add-user.png"))); // NOI18N
+        crear_usuario.setText("Agregar cliente");
+        crear_usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        crear_usuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crear_usuario.setFocusable(false);
+        crear_usuario.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        crear_usuario.setIconTextGap(10);
+        crear_usuario.setMaximumSize(new java.awt.Dimension(361, 79));
+        crear_usuario.setMinimumSize(new java.awt.Dimension(361, 79));
+        crear_usuario.setPreferredSize(new java.awt.Dimension(361, 79));
+        crear_usuario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crear_usuarioActionPerformed(evt);
+            }
+        });
+
+        opcionesTipoProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+
+        codigo_defecto1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        codigo_defecto1.setText("Código");
+
+        box_codigo_cliente.setEditable(false);
+        box_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        box_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        box_codigo_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        box_codigo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_codigo_cliente.setEnabled(false);
+        box_codigo_cliente.setFocusable(false);
+        box_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_codigo_clienteActionPerformed(evt);
+            }
+        });
+
+        nombre_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        nombre_cliente.setText("Nombre y apellidos del cliente");
+
+        box_nombre_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        box_nombre_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_nombre_cliente.setText(" ");
+        box_nombre_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_nombre_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
+        box_nombre_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_nombre_clienteActionPerformed(evt);
+            }
+        });
+
+        guardar_cliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        guardar_cliente.setText("G U A R D A R");
+        guardar_cliente.setBorder(null);
+        guardar_cliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardar_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                guardar_clienteActionPerformed(evt);
+            }
+        });
+
+        num_telefono.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        num_telefono.setText("Teléfono");
+
+        box_num_telefono.setBackground(new java.awt.Color(255, 255, 255));
+        box_num_telefono.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_num_telefono.setText(" ");
+        box_num_telefono.setToolTipText("");
+        box_num_telefono.setActionCommand("<Not Set>");
+        box_num_telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_num_telefono.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+        box_num_telefono.setSelectionColor(new java.awt.Color(0, 0, 0));
+        box_num_telefono.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_num_telefonoActionPerformed(evt);
+            }
+        });
+
+        correo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        correo_cliente.setText("Correo electronico");
+
+        box_correo_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        box_correo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_correo_cliente.setText("  Ejemplo: juan@gmail.com");
+        box_correo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_correo_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
+        box_correo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_correo_clienteActionPerformed(evt);
+            }
+        });
+
+        distrito.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        distrito.setText("Distrito");
+
+        jComboBox_provincias.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox_provincias.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jComboBox_provincias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alajuela", "Cartago", "Guanacaste", "Heredia", "Limón", "Punatrenas", "San José" }));
+        jComboBox_provincias.setToolTipText("");
+        jComboBox_provincias.setFocusable(false);
+
+        provincia1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        provincia1.setText("Provincia");
+
+        jComboBox_distritos.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox_distritos.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jComboBox_distritos.setMaximumRowCount(84);
+        jComboBox_distritos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_distritos.setToolTipText("");
+
+        fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        fecha_nacimiento.setText("Fecha de nacimiento:");
+
+        formatt_fecha_nacimiento.setBackground(new java.awt.Color(255, 255, 255));
+        formatt_fecha_nacimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        formatt_fecha_nacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        formatt_fecha_nacimiento.setToolTipText("");
+        formatt_fecha_nacimiento.setActionCommand("<Not Set>");
+        formatt_fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        formatt_fecha_nacimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatt_fecha_nacimientoActionPerformed(evt);
+            }
+        });
+
+        cantones.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        cantones.setText("Cantón");
+
+        jComboBox_cantones.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox_cantones.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        jComboBox_cantones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_cantones.setFocusable(false);
+
+        javax.swing.GroupLayout opcionesTipoProductoLayout = new javax.swing.GroupLayout(opcionesTipoProducto);
+        opcionesTipoProducto.setLayout(opcionesTipoProductoLayout);
+        opcionesTipoProductoLayout.setHorizontalGroup(
+            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGap(100, 100, 100)
+                .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(117, 117, 117)
+                        .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(codigo_defecto1)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(correo_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(box_num_telefono))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionesTipoProductoLayout.createSequentialGroup()
+                        .addComponent(fecha_nacimiento)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(box_nombre_cliente)
+                            .addComponent(nombre_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(16, 16, 16)))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGap(139, 139, 139)
+                .addComponent(num_telefono)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addComponent(provincia1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(distrito)
+                            .addComponent(cantones))
+                        .addGap(22, 22, 22)
+                        .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jComboBox_distritos, 0, 125, Short.MAX_VALUE)
+                            .addComponent(jComboBox_cantones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        opcionesTipoProductoLayout.setVerticalGroup(
+            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(codigo_defecto1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(provincia1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(distrito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_distritos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cantones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_cantones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(24, 24, 24)
+                .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
+        agregarPanel.setLayout(agregarPanelLayout);
+        agregarPanelLayout.setHorizontalGroup(
+            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarPanelLayout.createSequentialGroup()
+                .addGap(298, 298, 298)
+                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crear_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
+        );
+        agregarPanelLayout.setVerticalGroup(
+            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(agregarPanelLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(22, Short.MAX_VALUE))
+        );
+
+        SubFrameContainer.add(agregarPanel, "card2");
 
         filtro_agregar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         filtro_agregar.setText("Filtro");
@@ -301,278 +584,10 @@ public class RegistroClientes extends javax.swing.JFrame {
                     .addComponent(filtro_agregar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(265, Short.MAX_VALUE))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
 
-        javax.swing.GroupLayout bienvenidaPanelLayout = new javax.swing.GroupLayout(bienvenidaPanel);
-        bienvenidaPanel.setLayout(bienvenidaPanelLayout);
-        bienvenidaPanelLayout.setHorizontalGroup(
-            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(203, 203, 203)
-                        .addComponent(bienvenidaLabel1))
-                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(97, 97, 97)
-                        .addComponent(bienvenidaLabel))
-                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addGap(436, 436, 436)
-                        .addComponent(usuario_icon))
-                    .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(modificarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        bienvenidaPanelLayout.setVerticalGroup(
-            bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
-                .addComponent(bienvenidaLabel)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(bienvenidaLabel1)
-                .addGap(18, 18, 18)
-                .addComponent(usuario_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(modificarPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
-        SubFrameContainer.add(bienvenidaPanel, "card2");
-
-        crear_usuario.setFont(new java.awt.Font("Century Gothic", 3, 18)); // NOI18N
-        crear_usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/add-user.png"))); // NOI18N
-        crear_usuario.setText("Agregar cliente");
-        crear_usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        crear_usuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        crear_usuario.setFocusable(false);
-        crear_usuario.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        crear_usuario.setIconTextGap(10);
-        crear_usuario.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crear_usuarioActionPerformed(evt);
-            }
-        });
-
-        opcionesTipoProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-
-        codigo_defecto1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        codigo_defecto1.setText("Código");
-
-        box_codigo_cliente.setEditable(false);
-        box_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        box_codigo_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        box_codigo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_codigo_cliente.setEnabled(false);
-        box_codigo_cliente.setFocusable(false);
-        box_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_codigo_clienteActionPerformed(evt);
-            }
-        });
-
-        nombre_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        nombre_cliente.setText("Nombre y apellidos del cliente");
-
-        box_nombre_cliente.setBackground(new java.awt.Color(255, 255, 255));
-        box_nombre_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_nombre_cliente.setText(" ");
-        box_nombre_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_nombre_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
-        box_nombre_cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_nombre_clienteActionPerformed(evt);
-            }
-        });
-
-        guardar_cliente.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        guardar_cliente.setText("G U A R D A R");
-        guardar_cliente.setBorder(null);
-        guardar_cliente.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar_cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardar_clienteActionPerformed(evt);
-            }
-        });
-
-        num_telefono.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        num_telefono.setText("Teléfono");
-
-        box_num_telefono.setBackground(new java.awt.Color(255, 255, 255));
-        box_num_telefono.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_num_telefono.setText(" ");
-        box_num_telefono.setToolTipText("");
-        box_num_telefono.setActionCommand("<Not Set>");
-        box_num_telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_num_telefono.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
-        box_num_telefono.setSelectionColor(new java.awt.Color(0, 0, 0));
-        box_num_telefono.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_num_telefonoActionPerformed(evt);
-            }
-        });
-
-        correo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        correo_cliente.setText("Correo electronico");
-
-        box_correo_cliente.setBackground(new java.awt.Color(255, 255, 255));
-        box_correo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_correo_cliente.setText("  Ejemplo: juan@gmail.com");
-        box_correo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_correo_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
-        box_correo_cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_correo_clienteActionPerformed(evt);
-            }
-        });
-
-        distrito.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        distrito.setText("Distrito");
-
-        jComboBox_provincias.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        jComboBox_provincias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alajuela", "Cartago", "Guanacaste", "Heredia", "Limón", "Punatrenas", "San José" }));
-        jComboBox_provincias.setToolTipText("");
-
-        provincia1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        provincia1.setText("Provincia");
-
-        jComboBox_distritos.setMaximumRowCount(84);
-        jComboBox_distritos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox_distritos.setToolTipText("");
-
-        fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        fecha_nacimiento.setText("Fecha de nacimiento:");
-
-        formatt_fecha_nacimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        formatt_fecha_nacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        formatt_fecha_nacimiento.setToolTipText("");
-        formatt_fecha_nacimiento.setActionCommand("<Not Set>");
-        formatt_fecha_nacimiento.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                formatt_fecha_nacimientoActionPerformed(evt);
-            }
-        });
-
-        cantones.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        cantones.setText("Cantón");
-
-        jComboBox_cantones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        javax.swing.GroupLayout opcionesTipoProductoLayout = new javax.swing.GroupLayout(opcionesTipoProducto);
-        opcionesTipoProducto.setLayout(opcionesTipoProductoLayout);
-        opcionesTipoProductoLayout.setHorizontalGroup(
-            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(107, 107, 107)
-                        .addComponent(nombre_cliente))
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(99, 99, 99)
-                        .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 92, Short.MAX_VALUE))
-            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(192, 192, 192)
-                        .addComponent(num_telefono))
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(170, 170, 170)
-                        .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(188, 188, 188)
-                        .addComponent(codigo_defecto1))
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(140, 140, 140)
-                        .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(correo_cliente)
-                            .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                        .addGap(50, 50, 50)
-                        .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                                    .addComponent(fecha_nacimiento)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                                    .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(provincia1)
-                                        .addComponent(distrito)
-                                        .addComponent(cantones))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                        .addComponent(jComboBox_provincias, 0, 125, Short.MAX_VALUE)
-                                        .addComponent(jComboBox_distritos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                        .addComponent(jComboBox_cantones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        opcionesTipoProductoLayout.setVerticalGroup(
-            opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(codigo_defecto1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(provincia1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(distrito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox_distritos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cantones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox_cantones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
-                .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-
-        javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
-        agregarPanel.setLayout(agregarPanelLayout);
-        agregarPanelLayout.setHorizontalGroup(
-            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(298, 298, 298)
-                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(crear_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(315, Short.MAX_VALUE))
-        );
-        agregarPanelLayout.setVerticalGroup(
-            agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(384, Short.MAX_VALUE))
-        );
-
-        SubFrameContainer.add(agregarPanel, "card2");
+        SubFrameContainer.add(modificarPanel, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
