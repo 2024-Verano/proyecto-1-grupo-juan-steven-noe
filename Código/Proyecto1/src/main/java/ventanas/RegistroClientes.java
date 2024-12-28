@@ -513,11 +513,11 @@ public class RegistroClientes extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo art.", "Codigo prod.", "Tipo", "Tamaño", "Nombre", "Marca", "Precio", "Cantidad"
+                "Codigo", "Nombre", "Apellidos", "Telefono", "Email", "Provincia", "Canton", "Distrito", "F. Nacimiento"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -546,6 +546,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             tabla_resultado.getColumnModel().getColumn(5).setResizable(false);
             tabla_resultado.getColumnModel().getColumn(6).setResizable(false);
             tabla_resultado.getColumnModel().getColumn(7).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(8).setResizable(false);
         }
 
         javax.swing.GroupLayout modificarPanelLayout = new javax.swing.GroupLayout(modificarPanel);
