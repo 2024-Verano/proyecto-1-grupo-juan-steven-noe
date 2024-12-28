@@ -117,9 +117,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         distrito = new javax.swing.JLabel();
         jComboBox_provincias = new javax.swing.JComboBox<>();
         provincia1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox_distritos = new javax.swing.JComboBox<>();
         fecha_nacimiento = new javax.swing.JLabel();
         formatt_fecha_nacimiento = new javax.swing.JFormattedTextField();
+        cantones = new javax.swing.JLabel();
+        jComboBox_cantones = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -399,7 +401,10 @@ public class RegistroClientes extends javax.swing.JFrame {
         box_num_telefono.setBackground(new java.awt.Color(255, 255, 255));
         box_num_telefono.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_num_telefono.setText(" ");
+        box_num_telefono.setToolTipText("");
+        box_num_telefono.setActionCommand("<Not Set>");
         box_num_telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_num_telefono.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         box_num_telefono.setSelectionColor(new java.awt.Color(0, 0, 0));
         box_num_telefono.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -431,9 +436,9 @@ public class RegistroClientes extends javax.swing.JFrame {
         provincia1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         provincia1.setText("Provincia");
 
-        jComboBox1.setMaximumRowCount(84);
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        jComboBox1.setToolTipText("");
+        jComboBox_distritos.setMaximumRowCount(84);
+        jComboBox_distritos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        jComboBox_distritos.setToolTipText("");
 
         fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         fecha_nacimiento.setText("Fecha de nacimiento:");
@@ -448,51 +453,63 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
         });
 
+        cantones.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        cantones.setText("Cantón");
+
+        jComboBox_cantones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout opcionesTipoProductoLayout = new javax.swing.GroupLayout(opcionesTipoProducto);
         opcionesTipoProducto.setLayout(opcionesTipoProductoLayout);
         opcionesTipoProductoLayout.setHorizontalGroup(
             opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 278, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                            .addGap(33, 33, 33)
-                            .addComponent(nombre_cliente))
-                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                            .addGap(131, 131, 131)
-                            .addComponent(codigo_defecto1))
-                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                            .addGap(107, 107, 107)
-                            .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                            .addGap(125, 125, 125)
-                            .addComponent(num_telefono))
-                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                            .addGap(87, 87, 87)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(107, 107, 107)
+                        .addComponent(nombre_cliente))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(99, 99, 99)
+                        .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 286, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 92, Short.MAX_VALUE))
+            .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(192, 192, 192)
+                        .addComponent(num_telefono))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(170, 170, 170)
+                        .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(188, 188, 188)
+                        .addComponent(codigo_defecto1))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(correo_cliente)
+                            .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                        .addGap(50, 50, 50)
+                        .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(correo_cliente)
-                                .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                            .addGap(99, 99, 99)
-                            .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                            .addGap(50, 50, 50)
-                            .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
+                                    .addComponent(fecha_nacimiento)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
                                     .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addComponent(provincia1)
-                                        .addComponent(distrito))
+                                        .addComponent(distrito)
+                                        .addComponent(cantones))
                                     .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                     .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                         .addComponent(jComboBox_provincias, 0, 125, Short.MAX_VALUE)
-                                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                                .addGroup(opcionesTipoProductoLayout.createSequentialGroup()
-                                    .addComponent(fecha_nacimiento)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(76, Short.MAX_VALUE))
+                                        .addComponent(jComboBox_distritos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                        .addComponent(jComboBox_cantones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         opcionesTipoProductoLayout.setVerticalGroup(
             opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -505,7 +522,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addComponent(nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(box_nombre_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGap(18, 18, 18)
                 .addComponent(num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(box_num_telefono, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -520,12 +537,16 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(distrito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                    .addComponent(jComboBox_distritos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(cantones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jComboBox_cantones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(opcionesTipoProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 50, Short.MAX_VALUE)
+                .addGap(29, 29, 29)
                 .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -535,20 +556,20 @@ public class RegistroClientes extends javax.swing.JFrame {
         agregarPanelLayout.setHorizontalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(290, 290, 290)
+                .addGap(298, 298, 298)
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(crear_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(389, Short.MAX_VALUE))
+                .addContainerGap(315, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(24, 24, 24)
+                .addContainerGap()
                 .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opcionesTipoProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(373, Short.MAX_VALUE))
+                .addContainerGap(384, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(agregarPanel, "card2");
@@ -813,6 +834,7 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JTextField box_num_telefono;
     private javax.swing.JTextField buscador_agregar;
     private javax.swing.JButton button_buscar_modificar;
+    private javax.swing.JLabel cantones;
     private javax.swing.JLabel codigo_defecto1;
     private javax.swing.JComboBox<String> combo_filtro_agregar;
     private javax.swing.JLabel correo_cliente;
@@ -823,7 +845,8 @@ public class RegistroClientes extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField formatt_fecha_nacimiento;
     private javax.swing.JToolBar funciones;
     private javax.swing.JButton guardar_cliente;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox_cantones;
+    private javax.swing.JComboBox<String> jComboBox_distritos;
     private javax.swing.JComboBox<String> jComboBox_provincias;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JToolBar.Separator jSeparator1;
