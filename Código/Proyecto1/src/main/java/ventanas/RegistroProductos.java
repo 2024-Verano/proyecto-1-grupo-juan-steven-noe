@@ -140,7 +140,6 @@ public class RegistroProductos extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1000, 800));
 
         funciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        funciones.setFloatable(false);
         funciones.setRollover(true);
 
         jSeparator1.setEnabled(false);
