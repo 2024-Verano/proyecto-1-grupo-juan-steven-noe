@@ -4,6 +4,7 @@ ventanas\RegistroProductos$20.class
 ventanas\ButtonHoverEffect$1.class
 ventanas\RegistroProductos$10.class
 ventanas\RegistroMantenimiento$17.class
+com\mycompany\proyecto1\Facturas\DetalleFactura.class
 ventanas\VentanaModificar$6.class
 ventanas\MenuOpciones$6.class
 ventanas\RegistroClientes$7.class
@@ -14,7 +15,6 @@ ventanas\RegistroMantenimiento$14.class
 ventanas\RegistroClientes$4.class
 ventanas\RegistroProductos$13.class
 com\mycompany\proyecto1\Archivo.class
-com\mycompany\proyecto1\facturacion\EncabezadoFactura.class
 ventanas\Facturacion$3.class
 ventanas\RegistroClientes$13.class
 ventanas\RegistroMantenimiento$7.class
@@ -24,7 +24,6 @@ ventanas\Facturacion.class
 ventanas\RegistroMantenimiento.class
 ventanas\Facturacion$6.class
 ventanas\RegistroClientes.class
-com\mycompany\proyecto1\facturacion\Facturacion.class
 ventanas\MenuOpciones.class
 ventanas\RegistroMantenimiento$4.class
 ventanas\Facturacion$9.class
@@ -87,7 +86,6 @@ ventanas\VentanaModificar.class
 ventanas\RegistroProductos$15.class
 ventanas\RegistroClientes$6.class
 ventanas\VentanaModificar$1.class
-com\mycompany\proyecto1\facturacion\DetalleFactura.class
 ventanas\RegistroClientes$10.class
 com\mycompany\proyecto1\Validador.class
 ventanas\Credenciales.class
@@ -96,8 +94,10 @@ ventanas\RegistroProductos$16.class
 ventanas\RegistroMantenimiento$5.class
 ventanas\RegistroClientes$11.class
 ventanas\RegistroProductos$6.class
+com\mycompany\proyecto1\Facturas\EncabezadoFactura.class
 ventanas\Facturacion$5.class
 ventanas\VentanaModificar$10.class
 ventanas\MenuOpciones$5.class
 com\mycompany\proyecto1\Usuario.class
+com\mycompany\proyecto1\Facturas\Facturacion.class
 ventanas\VentanaModificar$7.class
