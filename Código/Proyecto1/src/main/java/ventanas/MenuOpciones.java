@@ -205,7 +205,12 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_registro_mantActionPerformed
 
     private void facturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturacionActionPerformed
-        // TODO add your handling code here:
+        // Cierra el frame actual    
+        this.dispose();
+        
+        // Abre el frame de Facturacion
+        Facturacion opciones = new Facturacion();
+        opciones.setVisible(true);
     }//GEN-LAST:event_facturacionActionPerformed
 
     private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
