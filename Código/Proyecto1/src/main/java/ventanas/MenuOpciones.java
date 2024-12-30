@@ -196,7 +196,12 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_registro_clientesActionPerformed
 
     private void registro_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_mantActionPerformed
-        // TODO add your handling code here:
+        // Cierra el frame actual    
+        this.dispose();
+        
+        // Abre el frame de Registro Mantenimiento
+        RegistroMantenimiento opciones = new RegistroMantenimiento();
+        opciones.setVisible(true);
     }//GEN-LAST:event_registro_mantActionPerformed
 
     private void facturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturacionActionPerformed

@@ -3,6 +3,7 @@ ventanas\MenuOpciones$3.class
 ventanas\RegistroProductos$20.class
 ventanas\ButtonHoverEffect$1.class
 ventanas\RegistroProductos$10.class
+ventanas\RegistroMantenimiento$17.class
 ventanas\VentanaModificar$6.class
 ventanas\MenuOpciones$6.class
 ventanas\RegistroClientes$7.class
@@ -66,7 +67,9 @@ ventanas\RegistroClientes$5.class
 ventanas\ButtonHoverEffect$2.class
 ventanas\RegistroClientes$8.class
 com\mycompany\proyecto1\Cliente.class
+ventanas\RegistroMantenimiento$18.class
 ventanas\VentanaModificar$8.class
+ventanas\RegistroMantenimiento$15.class
 ventanas\RegistroProductos$5.class
 ventanas\VentanaModificar.class
 ventanas\RegistroProductos$15.class
@@ -75,6 +78,7 @@ ventanas\VentanaModificar$1.class
 ventanas\RegistroClientes$10.class
 com\mycompany\proyecto1\Validador.class
 ventanas\Credenciales.class
+ventanas\RegistroMantenimiento$16.class
 ventanas\RegistroProductos$16.class
 ventanas\RegistroMantenimiento$5.class
 ventanas\RegistroClientes$11.class
