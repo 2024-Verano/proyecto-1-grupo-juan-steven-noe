@@ -530,6 +530,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         combo_filtro_agregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         combo_filtro_agregar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
         combo_filtro_agregar.setFocusable(false);
+        combo_filtro_agregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_filtro_agregarActionPerformed(evt);
+            }
+        });
 
         buscador_agregar.setBackground(new java.awt.Color(255, 255, 255));
         buscador_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
@@ -556,7 +561,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Codigo", "Nombre", "Apellidos", "Telefono", "Email", "Provincia", "Canton", "Distrito", "F. Nacimiento"
+                "Cod. Servicio", "Cod. Cliente", "Marca", "Descripción", "Precio", "F. Recibido", "F. Entrega", "Observación", "Estado"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -596,24 +601,23 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         modificarPanel.setLayout(modificarPanelLayout);
         modificarPanelLayout.setHorizontalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
-                .addContainerGap(205, Short.MAX_VALUE)
+            .addGroup(modificarPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(filtro_agregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
-                        .addComponent(filtro_agregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(text_buscar_agregar)
-                            .addGroup(modificarPanelLayout.createSequentialGroup()
-                                .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(119, 119, 119))
+                    .addComponent(text_buscar_agregar)
                     .addGroup(modificarPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(119, 119, 119))
+            .addGroup(modificarPanelLayout.createSequentialGroup()
+                .addGap(87, 87, 87)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(93, Short.MAX_VALUE))
         );
         modificarPanelLayout.setVerticalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -626,9 +630,9 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                     .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(filtro_agregar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(334, Short.MAX_VALUE))
+                .addContainerGap(335, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(modificarPanel, "card4");
@@ -845,6 +849,10 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox1ActionPerformed
+
+    private void combo_filtro_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_filtro_agregarActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_filtro_agregarActionPerformed
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
