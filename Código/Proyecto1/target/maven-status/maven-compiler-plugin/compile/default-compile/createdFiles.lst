@@ -22,11 +22,13 @@ ventanas\RegistroMantenimiento$7.class
 ventanas\RegistroMantenimiento$11.class
 ventanas\VentanaModificar$9.class
 ventanas\Facturacion.class
+ventanas\VentanaFacturacion$10.class
 ventanas\RegistroMantenimiento.class
 ventanas\Facturacion$6.class
 ventanas\RegistroClientes.class
 ventanas\MenuOpciones.class
 ventanas\RegistroMantenimiento$4.class
+ventanas\VentanaFacturacion$7.class
 ventanas\Facturacion$9.class
 ventanas\RegistroClientes$9.class
 com\mycompany\proyecto1\ConCodigo.class
@@ -63,6 +65,7 @@ ventanas\RegistroMantenimiento$10.class
 ventanas\RegistroProductos$17.class
 ventanas\RegistroClientes$12.class
 ventanas\RegistroMantenimiento$6.class
+ventanas\VentanaFacturacion$9.class
 com\mycompany\proyecto1\Producto.class
 ventanas\RegistroMantenimiento$3.class
 ventanas\VentanaFacturacion$6.class
@@ -96,6 +99,7 @@ com\mycompany\proyecto1\Validador.class
 ventanas\Credenciales.class
 ventanas\VentanaFacturacion$3.class
 ventanas\RegistroMantenimiento$16.class
+ventanas\VentanaFacturacion$8.class
 ventanas\RegistroProductos$16.class
 ventanas\RegistroMantenimiento$5.class
 ventanas\VentanaFacturacion.class

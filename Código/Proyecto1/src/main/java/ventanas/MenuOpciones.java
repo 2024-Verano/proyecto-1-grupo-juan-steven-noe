@@ -185,6 +185,7 @@ public class MenuOpciones extends javax.swing.JFrame {
             // Abre el nuevo frame
             RegistroProductos opciones = new RegistroProductos(); // Reemplaza con el nombre de tu clase para el nuevo frame
             opciones.setVisible(true);
+            opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_registro_productoActionPerformed
 
     private void registro_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_clientesActionPerformed
@@ -193,6 +194,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         
             RegistroClientes opciones = new RegistroClientes();
             opciones.setVisible(true);
+            opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_registro_clientesActionPerformed
 
     private void registro_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_mantActionPerformed
@@ -202,6 +204,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         // Abre el frame de Registro Mantenimiento
         RegistroMantenimiento opciones = new RegistroMantenimiento();
         opciones.setVisible(true);
+        opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_registro_mantActionPerformed
 
     private void facturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturacionActionPerformed
@@ -211,6 +214,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         // Abre el frame de Facturacion
         Facturacion opciones = new Facturacion();
         opciones.setVisible(true);
+        opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturacionActionPerformed
 
     private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
@@ -220,6 +224,7 @@ public class MenuOpciones extends javax.swing.JFrame {
         // Abre el nuevo frame
         Credenciales opciones = new Credenciales(); // Reemplaza con el nombre de tu clase para el nuevo frame
         opciones.setVisible(true);
+        opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_cerrar_sesionActionPerformed
 
     /**

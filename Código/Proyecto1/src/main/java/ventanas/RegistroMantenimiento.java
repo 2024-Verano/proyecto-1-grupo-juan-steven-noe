@@ -657,6 +657,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             // Abre el nuevo frame
             MenuOpciones opciones = new MenuOpciones(); // Reemplaza con el nombre de tu clase para el nuevo frame
             opciones.setVisible(true);
+            opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_salirActionPerformed
 
     private void crear_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_usuarioActionPerformed

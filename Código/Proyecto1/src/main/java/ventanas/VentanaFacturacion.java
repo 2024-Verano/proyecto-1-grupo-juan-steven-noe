@@ -25,21 +25,15 @@ import com.mycompany.proyecto1.Producto;
  */
 public class VentanaFacturacion extends javax.swing.JFrame {
     
-    // Constructor vacío para que VentanaModificar pueda recibir parámetros sin conflictos en el main
-    public VentanaFacturacion(){
-        initComponents();
-    }
     /**
      * Creates new form VentanaModificar
-     * @param producto
      */
-    public VentanaFacturacion(Producto producto) {
-        initComponents();
+    public VentanaFacturacion() {
+        initComponents();       
         
         // Evitar que la ventana emergente VentanaModificar cierre el programa
         setDefaultCloseOperation(VentanaFacturacion.DISPOSE_ON_CLOSE);
-        
-        
+                
             // Define los colores
             Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
             Color originalColor = Color.BLACK; // Negro (borde inicial)
@@ -72,6 +66,18 @@ public class VentanaFacturacion extends javax.swing.JFrame {
         box_num_fact3 = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jSeparator2 = new javax.swing.JSeparator();
+        jLabel1 = new javax.swing.JLabel();
+        jSeparator3 = new javax.swing.JSeparator();
+        jSeparator4 = new javax.swing.JSeparator();
+        codigo_cliente1 = new javax.swing.JLabel();
+        combo_codigo_cliente1 = new javax.swing.JComboBox<>();
+        num_fact5 = new javax.swing.JLabel();
+        box_num_fact4 = new javax.swing.JTextField();
+        num_fact6 = new javax.swing.JLabel();
+        box_num_fact5 = new javax.swing.JTextField();
+        num_fact7 = new javax.swing.JLabel();
+        box_num_fact6 = new javax.swing.JTextField();
+        crear_fact = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -152,6 +158,67 @@ public class VentanaFacturacion extends javax.swing.JFrame {
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        jLabel1.setText("Detalle de la factura");
+
+        codigo_cliente1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        codigo_cliente1.setText("Código artículo");
+
+        combo_codigo_cliente1.setBackground(new java.awt.Color(255, 255, 255));
+        combo_codigo_cliente1.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        combo_codigo_cliente1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "tipo prod" }));
+        combo_codigo_cliente1.setBorder(null);
+        combo_codigo_cliente1.setFocusable(false);
+        combo_codigo_cliente1.setRequestFocusEnabled(false);
+
+        num_fact5.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        num_fact5.setText("Cantidad (und)");
+
+        box_num_fact4.setBackground(new java.awt.Color(255, 255, 255));
+        box_num_fact4.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_num_fact4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_num_fact4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_num_fact4ActionPerformed(evt);
+            }
+        });
+
+        num_fact6.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        num_fact6.setText("Precio (und)");
+
+        box_num_fact5.setBackground(new java.awt.Color(255, 255, 255));
+        box_num_fact5.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_num_fact5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_num_fact5.setEnabled(false);
+        box_num_fact5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_num_fact5ActionPerformed(evt);
+            }
+        });
+
+        num_fact7.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
+        num_fact7.setText("Total a pagar");
+
+        box_num_fact6.setBackground(new java.awt.Color(255, 255, 255));
+        box_num_fact6.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_num_fact6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_num_fact6.setEnabled(false);
+        box_num_fact6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                box_num_fact6ActionPerformed(evt);
+            }
+        });
+
+        crear_fact.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        crear_fact.setText("CREAR FACTURA");
+        crear_fact.setBorder(null);
+        crear_fact.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crear_fact.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                crear_factActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -160,6 +227,7 @@ public class VentanaFacturacion extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jSeparator1)
+                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
@@ -185,9 +253,27 @@ public class VentanaFacturacion extends javax.swing.JFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(num_fact3)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(box_num_fact1, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(box_num_fact1, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(codigo_cliente1)
+                                    .addComponent(num_fact5)
+                                    .addComponent(num_fact6)
+                                    .addComponent(num_fact7))
+                                .addGap(18, 18, 18)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(box_num_fact6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(box_num_fact5, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(combo_codigo_cliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(box_num_fact4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(crear_fact, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGap(0, 5, Short.MAX_VALUE))
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel1)
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator4)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -200,22 +286,47 @@ public class VentanaFacturacion extends javax.swing.JFrame {
                     .addComponent(codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(combo_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(num_fact4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(num_fact1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(box_num_fact3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(num_fact2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(box_num_fact2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(num_fact3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(box_num_fact1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jLabel1)
+                            .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(num_fact4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormattedTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                    .addComponent(codigo_cliente1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo_codigo_cliente1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(num_fact1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_num_fact3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(num_fact2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_num_fact2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(num_fact3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_num_fact1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(662, Short.MAX_VALUE))
+                    .addComponent(num_fact5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_num_fact4, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(num_fact6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_num_fact5, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(num_fact7, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(box_num_fact6, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(42, 42, 42)
+                .addComponent(crear_fact, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(36, Short.MAX_VALUE))
         );
 
         pack();
@@ -240,6 +351,22 @@ public class VentanaFacturacion extends javax.swing.JFrame {
     private void box_num_fact3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_num_fact3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_num_fact3ActionPerformed
+
+    private void box_num_fact4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_num_fact4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_num_fact4ActionPerformed
+
+    private void box_num_fact5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_num_fact5ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_num_fact5ActionPerformed
+
+    private void box_num_fact6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_num_fact6ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_box_num_fact6ActionPerformed
+
+    private void crear_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_factActionPerformed
+
+    }//GEN-LAST:event_crear_factActionPerformed
 
 
 
@@ -286,15 +413,27 @@ public class VentanaFacturacion extends javax.swing.JFrame {
     private javax.swing.JTextField box_num_fact1;
     private javax.swing.JTextField box_num_fact2;
     private javax.swing.JTextField box_num_fact3;
+    private javax.swing.JTextField box_num_fact4;
+    private javax.swing.JTextField box_num_fact5;
+    private javax.swing.JTextField box_num_fact6;
     private javax.swing.JLabel codigo_cliente;
+    private javax.swing.JLabel codigo_cliente1;
     private javax.swing.JComboBox<String> combo_codigo_cliente;
+    private javax.swing.JComboBox<String> combo_codigo_cliente1;
+    private javax.swing.JButton crear_fact;
     private javax.swing.JFormattedTextField jFormattedTextField2;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
+    private javax.swing.JSeparator jSeparator3;
+    private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel num_fact;
     private javax.swing.JLabel num_fact1;
     private javax.swing.JLabel num_fact2;
     private javax.swing.JLabel num_fact3;
     private javax.swing.JLabel num_fact4;
+    private javax.swing.JLabel num_fact5;
+    private javax.swing.JLabel num_fact6;
+    private javax.swing.JLabel num_fact7;
     // End of variables declaration//GEN-END:variables
 }

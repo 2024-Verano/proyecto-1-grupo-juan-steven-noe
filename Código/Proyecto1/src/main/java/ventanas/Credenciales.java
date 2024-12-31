@@ -189,6 +189,7 @@ public class Credenciales extends javax.swing.JFrame {
             // Abre el nuevo frame
             MenuOpciones opciones = new MenuOpciones(); // Reemplaza con el nombre de tu clase para el nuevo frame
             opciones.setVisible(true);
+            opciones.setLocationRelativeTo(this);
             
         } else {
             JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos.", "Error", JOptionPane.ERROR_MESSAGE);
@@ -229,7 +230,9 @@ public class Credenciales extends javax.swing.JFrame {
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
-            new Credenciales().setVisible(true);
+            Credenciales credenciales = new Credenciales();
+            credenciales.setVisible(true);
+            credenciales.setLocationRelativeTo(null);
         });
     }
 

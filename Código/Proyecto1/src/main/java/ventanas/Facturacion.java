@@ -438,10 +438,13 @@ public class Facturacion extends javax.swing.JFrame {
             // Abre el nuevo frame
             MenuOpciones opciones = new MenuOpciones(); // Reemplaza con el nombre de tu clase para el nuevo frame
             opciones.setVisible(true);
+            opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_salirActionPerformed
 
     private void facturar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_productoActionPerformed
-
+    VentanaFacturacion ventana = new VentanaFacturacion();
+    ventana.setVisible(true);
+    ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_productoActionPerformed
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
