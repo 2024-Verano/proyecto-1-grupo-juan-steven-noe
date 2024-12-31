@@ -14,7 +14,11 @@ import ventanas.Credenciales;
  */
 public class Proyecto1 {
     public static void main(String[] args) {
-        // Crear y mostrar la interfaz gráfica
-        java.awt.EventQueue.invokeLater(() -> new Credenciales().setVisible(true));
+        // Crear y mostrar la interfaz gráfica (centrado)
+        java.awt.EventQueue.invokeLater(() -> {
+            Credenciales credenciales = new Credenciales();
+            credenciales.setLocationRelativeTo(null);
+            credenciales.setVisible(true);
+        });
     }
 }
