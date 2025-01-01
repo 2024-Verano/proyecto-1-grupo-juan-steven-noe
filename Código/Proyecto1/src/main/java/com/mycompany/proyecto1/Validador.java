@@ -42,5 +42,15 @@ public class Validador {
         }
         return entrada.equals(entrada.trim());
     }
+    /**
+    * Verifica si un número de teléfono es válido.
+    *
+    * @param telefono El número de teléfono a validar.
+    * @return true si el número de teléfono tiene 8 dígitos y comienza con 2, 4, 6 o 8; de lo contrario, false.
+    */
+    public static boolean validarTelefono(int telefono){
+        String telefonoStr = String.valueOf(telefono);
+        return telefonoStr.length() == 8 && "2468".contains(telefonoStr.substring(0, 1));
+    }
 }
 

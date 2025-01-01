@@ -10,11 +10,14 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
+import java.util.Date;
 
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
+import com.mycompany.proyecto1.Cliente;
+
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.TipoProducto;
@@ -51,9 +54,7 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         // Aplica el efecto hover a cada botón (Agregar Producto)
         hoverEffect.applyTo(crear_usuario);
-        //hoverEffect.applyTo(crear_prod);
         hoverEffect.applyTo(guardar_cliente);
-        //hoverEffect.applyTo(guardar_art);
         
         // Aplica el efecto hover a cada botón (Modificar Productoi)
         hoverEffect.applyTo(button_buscar_modificar);
@@ -65,7 +66,7 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         // Ocultar los paneles de opcion de "agregar productos"
         opcionesAgregarCliente.setVisible(false);
-        //opcionesProducto.setVisible(false);
+        
         
         // Mostrar la bienvenida al inicio
         SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
@@ -365,10 +366,6 @@ public class RegistroClientes extends javax.swing.JFrame {
         opcionesAgregarClienteLayout.setHorizontalGroup(
             opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
-                .addGap(100, 100, 100)
-                .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                 .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                         .addGap(117, 117, 117)
@@ -417,6 +414,10 @@ public class RegistroClientes extends javax.swing.JFrame {
                             .addComponent(jComboBox_distritos, 0, 125, Short.MAX_VALUE)
                             .addComponent(jComboBox_cantones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
+                .addGap(101, 101, 101)
+                .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         opcionesAgregarClienteLayout.setVerticalGroup(
             opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -453,9 +454,9 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(24, 24, 24)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(33, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
@@ -463,11 +464,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         agregarPanelLayout.setHorizontalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(298, 298, 298)
+                .addGap(319, 319, 319)
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(opcionesAgregarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(crear_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(335, Short.MAX_VALUE))
+                .addContainerGap(314, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -641,14 +642,12 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         // Si las opciones se hacen visibles, cargar el siguiente código
         if (!isVisible) {
-            String ruta = "tiposProductos.json";
+            String ruta = "registroClientes.json";
             Archivo archivo = new Archivo();
 
             try {
                 // Usar el método de Archivo para obtener el siguiente código
                 int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
-
-                // Mostrar el código en el campo correspondiente
                 box_codigo_cliente.setText(String.valueOf(siguienteCodigo));
 
             } catch (Exception e) {
@@ -668,92 +667,106 @@ public class RegistroClientes extends javax.swing.JFrame {
     private void box_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_clienteActionPerformed
+    
+    private void cargarClientesEnTabla() {
+    String ruta = "registroClientes.json";
+    Archivo archivo = new Archivo();
+
+    try {
+        Cliente[] clientes = (Cliente[]) archivo.leerArchivo(ruta, Cliente[].class);
+        DefaultTableModel model = (DefaultTableModel) tabla_resultado.getModel();
+        model.setRowCount(0);
+
+        if (clientes != null) {
+            for (Cliente cliente : clientes) {
+                model.addRow(new Object[] {
+                    cliente.codigo,
+                    cliente.getNombre(),
+                    cliente.getApellidos(),
+                    cliente.getTelefono(),
+                    cliente.getCorreo(),
+                    cliente.getProvincia(),
+                    cliente.getCanton(),
+                    cliente.getDistrito(),
+                    cliente.getFecha()
+                });
+            }
+        }
+    } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar los clientes: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+    }
+}
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
-        String ruta = "productos.json";
-        Archivo archivo = new Archivo();
-
-        try {
-            // Obtener el criterio seleccionado y el valor ingresado
-            String criterio = combo_filtro_agregar.getSelectedItem().toString();
-            String valor = buscador_agregar.getText().trim();
-
-            if (valor.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor para buscar.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            // Leer productos del archivo
-            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
-            if (productos == null || productos.length == 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            // Filtrar productos según el criterio
-            List<Producto> resultados = new ArrayList<>();
-            for (Producto producto : productos) {
-                if ("Codigo".equals(criterio) && String.valueOf(producto.getCodigoArticulo()).equals(valor)) {
-                    resultados.add(producto);
-                } else if ("Nombre".equals(criterio) && producto.getNombre().toLowerCase().contains(valor.toLowerCase())) {
-                    resultados.add(producto);
-                }
-            }
-
-            // Verificar si hay resultados
-            if (resultados.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron productos.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            }
-
-            // Cargar resultados en la tabla
-            Utilidades.cargarResultadosEnTabla((DefaultTableModel) tabla_resultado.getModel(), resultados);
-
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+        cargarClientesEnTabla();
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     private void guardar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_clienteActionPerformed
-        String ruta = "tiposProductos.json";
+        String ruta = "registroClientes.json";
         Archivo archivo = new Archivo();
 
         try {
             // Validar el nombre del tipo de producto
-            String nombreTipo = box_nombre_cliente.getText().trim();
-            if (nombreTipo.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "El nombre del tipo de producto no puede estar vacío.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            String nombre = box_nombre_cliente.getText().trim();
+            String[] nombres = nombre.split(" ", 2); // Dividir nombre completo en nombre y apellidos
+            if (nombre.isEmpty() || nombres.length < 2) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el nombre completo del cliente.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
+            String apellidos = nombres[1].trim();
+            
+            int telefono;
+            try {
+                telefono = Integer.parseInt(box_num_telefono.getText().trim());
+                if (!Validador.validarTelefono(telefono)) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "El teléfono es inválido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+            } catch (NumberFormatException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "El teléfono debe ser un número válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            String correo = box_correo_cliente.getText().trim();
+            if (!Validador.validarCorreo(correo)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "El correo tiene un formato inválido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            String provincia = jComboBox_provincias.getSelectedItem().toString();
+            String canton = jComboBox_cantones.getSelectedItem().toString();
+            String distrito = jComboBox_distritos.getSelectedItem().toString();
+            Date fechaNacimiento = (Date) formatt_fecha_nacimiento.getValue();
 
             // Generar el código automáticamente
-            int codigoTipo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+            int codigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
 
-            // Crear un nuevo objeto TipoProducto
-            TipoProducto nuevoTipo = new TipoProducto(codigoTipo, nombreTipo);
+            // Crear el cliente
+            Cliente cliente = new Cliente(codigo, nombres[0], apellidos, telefono, correo, provincia, canton, distrito, fechaNacimiento);
 
-            // Leer los tipos de producto existentes
-            TipoProducto[] tiposExistentes = (TipoProducto[]) archivo.leerArchivo(ruta, TipoProducto[].class);
-            List<TipoProducto> listaTipos = tiposExistentes != null 
-                ? new ArrayList<>(List.of(tiposExistentes)) 
-                : new ArrayList<>();
+            // Leer clientes existentes del archivo
+            Cliente[] clientesExistentes = (Cliente[]) archivo.leerArchivo(ruta, Cliente[].class);
+            List<Cliente> listaClientes = clientesExistentes != null 
+            ? new ArrayList<>(List.of(clientesExistentes)) 
+            : new ArrayList<>();
 
-            // Agregar el nuevo tipo a la lista
-            listaTipos.add(nuevoTipo);
+            // Agregar el nuevo cliente
+            listaClientes.add(cliente);
 
             // Guardar la lista actualizada en el archivo
-            archivo.guardarArchivo(ruta, listaTipos);
-            
-            // Actualizar el ComboBox de tipos de producto (box_codigo_prod)
-            //Utilidades.cargarTiposDeProducto(ruta, box_codigo_prod);
+            archivo.guardarArchivo(ruta, listaClientes);
 
-            javax.swing.JOptionPane.showMessageDialog(this, "Tipo de producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Cliente guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
-            // Limpiar los campos
+            // Limpiar campos
             box_nombre_cliente.setText("");
-            box_codigo_cliente.setText(String.valueOf(codigoTipo + 1));
+            box_num_telefono.setText("");
+            box_correo_cliente.setText("");
+            box_codigo_cliente.setText(String.valueOf(codigo + 1));
+            formatt_fecha_nacimiento.setValue(null);
 
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el tipo de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el cliente: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_guardar_clienteActionPerformed
 
@@ -762,7 +775,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             int selectedRow = tabla_resultado.getSelectedRow();
             int codigoArticulo = (int) tabla_resultado.getValueAt(selectedRow, 0);
             Archivo archivo = new Archivo();
-            Producto[] productos = (Producto[]) archivo.leerArchivo("productos.json", Producto[].class);
+            Producto[] productos = (Producto[]) archivo.leerArchivo("registroClientes.json", Producto[].class);
 
             if (productos != null) {
                 for (Producto producto : productos) {
