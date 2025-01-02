@@ -32,6 +32,7 @@ ventanas\VentanaFacturacion$7.class
 ventanas\Facturacion$9.class
 ventanas\RegistroClientes$9.class
 com\mycompany\proyecto1\ConCodigo.class
+com\mycompany\proyecto1\Utilidades$1.class
 ventanas\Facturacion$2.class
 ventanas\RegistroClientes$2.class
 ventanas\RegistroProductos$12.class
@@ -98,6 +99,7 @@ ventanas\RegistroClientes$10.class
 com\mycompany\proyecto1\Validador.class
 ventanas\Credenciales.class
 ventanas\VentanaFacturacion$3.class
+com\mycompany\proyecto1\Mantenimiento.class
 ventanas\RegistroMantenimiento$16.class
 ventanas\VentanaFacturacion$8.class
 ventanas\RegistroProductos$16.class

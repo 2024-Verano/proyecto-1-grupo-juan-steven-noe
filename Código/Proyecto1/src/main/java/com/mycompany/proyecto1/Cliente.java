@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.proyecto1;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 
 /**
@@ -18,47 +19,60 @@ public class Cliente {
     /**
      * Código único del cliente.
      */
+    @JsonProperty("codigo")
     public int codigo;
 
     /**
      * Nombre del cliente.
      */
+    @JsonProperty("nombre")
     private String nombre;
 
     /**
      * Apellidos del cliente.
      */
+    @JsonProperty("apellidos")
     private String apellidos;
 
     /**
      * Teléfono del cliente. Debe tener 8 dígitos y comenzar con 2, 4, 6 o 8.
      */
+    @JsonProperty("telefono")
     private int telefono;
 
     /**
      * Correo electrónico del cliente en un formato válido.
      */
+    @JsonProperty("correo")
     private String correo;
 
     /**
      * Provincia donde reside el cliente.
      */
+    @JsonProperty("provincia")
     private String provincia;
 
     /**
      * Cantón donde reside el cliente.
      */
+    @JsonProperty("canton")
     private String canton;
 
     /**
      * Distrito donde reside el cliente.
      */
+    @JsonProperty("distrito")
     private String distrito;
 
     /**
      * Fecha de nacimiento del cliente.
      */
+    @JsonProperty("fecha")
     private Date fecha;
+
+    // Constructor predeterminado para Jackson
+    public Cliente() {
+    }
 
     /**
      * Constructor de la clase Cliente.
@@ -85,6 +99,23 @@ public class Cliente {
         this.canton = canton;
         this.distrito = distrito;
         this.fecha = fecha;
+    }
+     /**
+     * Obtiene el código único del cliente.
+     *
+     * @return El código del cliente.
+     */
+    public int getCodigo() {
+        return codigo;
+    }
+
+    /**
+     * Establece el código único del cliente.
+     *
+     * @param codigo El código a establecer.
+     */
+    public void setCodigo(int codigo) {
+        this.codigo = codigo;
     }
 
     /**

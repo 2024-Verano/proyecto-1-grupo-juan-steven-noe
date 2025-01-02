@@ -10,6 +10,9 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.DateFormatter;
 
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
@@ -17,7 +20,7 @@ import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
 
 // Importar las clases de objetos:
-import com.mycompany.proyecto1.TipoProducto;
+import com.mycompany.proyecto1.Mantenimiento;
 import com.mycompany.proyecto1.Producto;
 
 
@@ -33,8 +36,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     public RegistroMantenimiento() {
         initComponents();
         
-        // Cargar los tipos de producto en el comboBox al iniciar el formulario
-        //Utilidades.cargarTiposDeProducto("registroUsuarios.json", box_codigo_cliente);
+        // Cargar los clientes en el comboBox de clientes al iniciar el formulario
+        Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
 
         // Aplicar el efecto hover y selección a los botones (TOOLBAR)
         ButtonHoverEffect.applySelectableHoverEffect(agregar_mant);
@@ -50,7 +53,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
         // Aplica el efecto hover a cada botón (Agregar Producto)
-        hoverEffect.applyTo(crear_usuario);
+        hoverEffect.applyTo(crear_mant);
         //hoverEffect.applyTo(crear_prod);
         hoverEffect.applyTo(guardar_mant);
         //hoverEffect.applyTo(guardar_art);
@@ -61,7 +64,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
 
         // Registrar los paneles en el CardLayout
         SubFrameContainer.add(agregarPanel, "agregarPanel");
-        SubFrameContainer.add(modificarPanel, "modificarPanel");
+        SubFrameContainer.add(modificarPanel_mant, "modificarPanel");
 
         // Ocultar los paneles de opcion de "agregar productos"
         opcionesAgregarMant.setVisible(false);
@@ -71,6 +74,10 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "bienvenidaPanel");
+        
+        // Configurar los campos de fecha
+        Utilidades.configurarCampoFecha(formatt_fecha_recibido);
+        Utilidades.configurarCampoFecha(formatt_fecha_entrega);
     }
     
     /**
@@ -95,12 +102,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         bienvenidaLabel1 = new javax.swing.JLabel();
         mant_icon = new javax.swing.JLabel();
         agregarPanel = new javax.swing.JPanel();
-        crear_usuario = new javax.swing.JButton();
+        crear_mant = new javax.swing.JButton();
         opcionesAgregarMant = new javax.swing.JPanel();
         codigo_servicio = new javax.swing.JLabel();
         box_codigo_mant = new javax.swing.JTextField();
         label_cliente = new javax.swing.JLabel();
-        box_codigo_cliente = new javax.swing.JTextField();
         jSeparator5 = new javax.swing.JSeparator();
         label_marca_bici = new javax.swing.JLabel();
         box_marca_bici = new javax.swing.JTextField();
@@ -116,7 +122,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         label_observaciones = new javax.swing.JLabel();
         box_observaciones = new javax.swing.JTextField();
         guardar_mant = new javax.swing.JButton();
-        modificarPanel = new javax.swing.JPanel();
+        combo_codigo_cliente = new javax.swing.JComboBox<>();
+        modificarPanel_mant = new javax.swing.JPanel();
         filtro_agregar = new javax.swing.JLabel();
         combo_filtro_agregar = new javax.swing.JComboBox<>();
         buscador_agregar = new javax.swing.JTextField();
@@ -133,6 +140,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1000, 800));
 
         funciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        funciones.setFloatable(false);
         funciones.setRollover(true);
 
         jSeparator1.setEnabled(false);
@@ -231,21 +239,21 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
 
         SubFrameContainer.add(bienvenidaPanel, "card2");
 
-        crear_usuario.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
-        crear_usuario.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wrench.png"))); // NOI18N
-        crear_usuario.setText("Agregar mantenimiento");
-        crear_usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
-        crear_usuario.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        crear_usuario.setFocusable(false);
-        crear_usuario.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        crear_usuario.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        crear_usuario.setIconTextGap(60);
-        crear_usuario.setMaximumSize(new java.awt.Dimension(560, 79));
-        crear_usuario.setMinimumSize(new java.awt.Dimension(560, 79));
-        crear_usuario.setPreferredSize(new java.awt.Dimension(560, 79));
-        crear_usuario.addActionListener(new java.awt.event.ActionListener() {
+        crear_mant.setFont(new java.awt.Font("Century Gothic", 3, 24)); // NOI18N
+        crear_mant.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/wrench.png"))); // NOI18N
+        crear_mant.setText("Agregar mantenimiento");
+        crear_mant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        crear_mant.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        crear_mant.setFocusable(false);
+        crear_mant.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        crear_mant.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        crear_mant.setIconTextGap(60);
+        crear_mant.setMaximumSize(new java.awt.Dimension(560, 79));
+        crear_mant.setMinimumSize(new java.awt.Dimension(560, 79));
+        crear_mant.setPreferredSize(new java.awt.Dimension(560, 79));
+        crear_mant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                crear_usuarioActionPerformed(evt);
+                crear_mantActionPerformed(evt);
             }
         });
 
@@ -254,10 +262,13 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         codigo_servicio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         codigo_servicio.setText("Código servicio");
 
+        box_codigo_mant.setEditable(false);
         box_codigo_mant.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_mant.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_codigo_mant.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        box_codigo_mant.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         box_codigo_mant.setText(" ");
         box_codigo_mant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_codigo_mant.setEnabled(false);
         box_codigo_mant.setSelectionColor(new java.awt.Color(0, 0, 0));
         box_codigo_mant.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -267,19 +278,6 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
 
         label_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         label_cliente.setText("Código cliente");
-
-        box_codigo_cliente.setEditable(false);
-        box_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        box_codigo_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        box_codigo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_codigo_cliente.setEnabled(false);
-        box_codigo_cliente.setFocusable(false);
-        box_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_codigo_clienteActionPerformed(evt);
-            }
-        });
 
         label_marca_bici.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         label_marca_bici.setText("Marca bicicleta");
@@ -336,6 +334,9 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         formatt_fecha_recibido.setToolTipText("");
         formatt_fecha_recibido.setActionCommand("<Not Set>");
         formatt_fecha_recibido.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        formatt_fecha_recibido.setMaximumSize(new java.awt.Dimension(95, 25));
+        formatt_fecha_recibido.setMinimumSize(new java.awt.Dimension(95, 25));
+        formatt_fecha_recibido.setPreferredSize(new java.awt.Dimension(95, 25));
         formatt_fecha_recibido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 formatt_fecha_recibidoActionPerformed(evt);
@@ -384,6 +385,15 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             }
         });
 
+        combo_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        combo_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        combo_codigo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        combo_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_codigo_clienteActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout opcionesAgregarMantLayout = new javax.swing.GroupLayout(opcionesAgregarMant);
         opcionesAgregarMant.setLayout(opcionesAgregarMantLayout);
         opcionesAgregarMantLayout.setHorizontalGroup(
@@ -412,8 +422,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                                 .addComponent(box_codigo_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(18, 18, 18)
                                 .addComponent(label_cliente)
-                                .addGap(18, 18, 18)
-                                .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(combo_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
@@ -431,7 +441,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                         .addGroup(opcionesAgregarMantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(box_observaciones)
                             .addGroup(opcionesAgregarMantLayout.createSequentialGroup()
-                                .addComponent(formatt_fecha_recibido, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(formatt_fecha_recibido, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(label_entrega)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -446,8 +456,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                     .addComponent(codigo_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(box_codigo_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                    .addComponent(combo_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
                 .addComponent(jSeparator5, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(opcionesAgregarMantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -488,14 +498,14 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                 .addGap(212, 212, 212)
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(opcionesAgregarMant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(crear_mant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(222, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(crear_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opcionesAgregarMant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(125, Short.MAX_VALUE))
@@ -577,35 +587,35 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             tabla_resultado.getColumnModel().getColumn(8).setResizable(false);
         }
 
-        javax.swing.GroupLayout modificarPanelLayout = new javax.swing.GroupLayout(modificarPanel);
-        modificarPanel.setLayout(modificarPanelLayout);
-        modificarPanelLayout.setHorizontalGroup(
-            modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarPanelLayout.createSequentialGroup()
+        javax.swing.GroupLayout modificarPanel_mantLayout = new javax.swing.GroupLayout(modificarPanel_mant);
+        modificarPanel_mant.setLayout(modificarPanel_mantLayout);
+        modificarPanel_mantLayout.setHorizontalGroup(
+            modificarPanel_mantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarPanel_mantLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(filtro_agregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(modificarPanel_mantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(text_buscar_agregar)
-                    .addGroup(modificarPanelLayout.createSequentialGroup()
+                    .addGroup(modificarPanel_mantLayout.createSequentialGroup()
                         .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(119, 119, 119))
-            .addGroup(modificarPanelLayout.createSequentialGroup()
+            .addGroup(modificarPanel_mantLayout.createSequentialGroup()
                 .addGap(87, 87, 87)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(27, Short.MAX_VALUE))
         );
-        modificarPanelLayout.setVerticalGroup(
-            modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarPanelLayout.createSequentialGroup()
+        modificarPanel_mantLayout.setVerticalGroup(
+            modificarPanel_mantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(modificarPanel_mantLayout.createSequentialGroup()
                 .addGap(37, 37, 37)
                 .addComponent(text_buscar_agregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(modificarPanel_mantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -615,7 +625,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                 .addContainerGap(253, Short.MAX_VALUE))
         );
 
-        SubFrameContainer.add(modificarPanel, "card4");
+        SubFrameContainer.add(modificarPanel_mant, "card4");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -660,40 +670,36 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_salirActionPerformed
 
-    private void crear_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_usuarioActionPerformed
+    private void crear_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_mantActionPerformed
 
         boolean isVisible = opcionesAgregarMant.isVisible();
         opcionesAgregarMant.setVisible(!isVisible);
 
         // Si las opciones se hacen visibles, cargar el siguiente código
         if (!isVisible) {
-            String ruta = "tiposProductos.json";
+            String ruta = "mantenimiento.json";
             Archivo archivo = new Archivo();
 
             try {
                 // Usar el método de Archivo para obtener el siguiente código
-                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Mantenimiento[].class);
 
                 // Mostrar el código en el campo correspondiente
-                box_codigo_cliente.setText(String.valueOf(siguienteCodigo));
+                box_codigo_mant.setText(String.valueOf(siguienteCodigo));
 
             } catch (Exception e) {
-                box_codigo_cliente.setText("AUTOMÁTICO");
+                box_codigo_mant.setText("AUTOMÁTICO");
                 javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
     }
 
     this.revalidate();
     this.repaint();
-    }//GEN-LAST:event_crear_usuarioActionPerformed
+    }//GEN-LAST:event_crear_mantActionPerformed
 
     private void box_codigo_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_mantActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_mantActionPerformed
-
-    private void box_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_clienteActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_box_codigo_clienteActionPerformed
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         String ruta = "productos.json";
@@ -740,46 +746,78 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     private void guardar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_mantActionPerformed
-        String ruta = "tiposProductos.json";
+
+        String ruta = "mantenimiento.json";
         Archivo archivo = new Archivo();
 
         try {
-            // Validar el nombre del tipo de producto
-            String nombreTipo = box_codigo_mant.getText().trim();
-            if (nombreTipo.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "El nombre del tipo de producto no puede estar vacío.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            // Validar los campos
+            String codigoClienteTexto = (String) combo_codigo_cliente.getSelectedItem();
+            if (codigoClienteTexto == null || codigoClienteTexto.trim().isEmpty() || "No hay clientes".equals(codigoClienteTexto)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Generar el código automáticamente
-            int codigoTipo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+            // Extraer el código del cliente del formato "1 - Juan"
+            String codigoClienteSolo = codigoClienteTexto.split(" - ")[0].trim();
+            int codigoCliente = Integer.parseInt(codigoClienteSolo);
 
-            // Crear un nuevo objeto TipoProducto
-            TipoProducto nuevoTipo = new TipoProducto(codigoTipo, nombreTipo);
+            String marcaBici = box_marca_bici.getText().trim();
+            if (!Validador.validarAlfabetico(marcaBici)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "La marca de la bicicleta debe contener solo letras.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
 
-            // Leer los tipos de producto existentes
-            TipoProducto[] tiposExistentes = (TipoProducto[]) archivo.leerArchivo(ruta, TipoProducto[].class);
-            List<TipoProducto> listaTipos = tiposExistentes != null 
-                ? new ArrayList<>(List.of(tiposExistentes)) 
+            String precioTexto = box_precio_bici.getText().trim();
+            if (!Validador.validarNumerico(precioTexto)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "El precio debe ser un número válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int precio = Integer.parseInt(precioTexto);
+
+            String descripcion = box_descrip_bici.getText().trim();
+
+            String fechaRecibido = formatt_fecha_recibido.getText().trim();
+            String fechaEntrega = formatt_fecha_entrega.getText().trim();
+
+            // Generar un código único para el mantenimiento
+            int codigoMantenimiento = archivo.obtenerSiguienteCodigo(ruta, Mantenimiento[].class);
+
+            Mantenimiento nuevoMantenimiento = new Mantenimiento(
+                codigoMantenimiento,
+                codigoCliente,
+                marcaBici,
+                descripcion,
+                precio,
+                fechaRecibido,
+                fechaEntrega,
+                "Sin observaciones",
+                "Abierto"
+            );
+
+            // Leer los mantenimientos existentes
+            Mantenimiento[] mantenimientos = (Mantenimiento[]) archivo.leerArchivo(ruta, Mantenimiento[].class);
+            List<Mantenimiento> listaMantenimientos = mantenimientos != null 
+                ? new ArrayList<>(List.of(mantenimientos)) 
                 : new ArrayList<>();
 
-            // Agregar el nuevo tipo a la lista
-            listaTipos.add(nuevoTipo);
+            // Agregar el nuevo mantenimiento a la lista
+            listaMantenimientos.add(nuevoMantenimiento);
 
-            // Guardar la lista actualizada en el archivo
-            archivo.guardarArchivo(ruta, listaTipos);
-            
-            // Actualizar el ComboBox de tipos de producto (box_codigo_prod)
-            //Utilidades.cargarTiposDeProducto(ruta, box_codigo_prod);
+            // Guardar la lista actualizada en el archivo JSON
+            archivo.guardarArchivo(ruta, listaMantenimientos);
 
-            javax.swing.JOptionPane.showMessageDialog(this, "Tipo de producto guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Mantenimiento guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
 
             // Limpiar los campos
-            box_codigo_mant.setText("");
-            box_codigo_cliente.setText(String.valueOf(codigoTipo + 1));
+            box_marca_bici.setText("");
+            box_precio_bici.setText("");
+            box_descrip_bici.setText("");
+            formatt_fecha_recibido.setText("dd/MM/yyyy");
+            formatt_fecha_entrega.setText("dd/MM/yyyy");
 
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el tipo de producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el mantenimiento: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_guardar_mantActionPerformed
 
@@ -830,6 +868,10 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     private void box_observacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_observacionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_observacionesActionPerformed
+
+    private void combo_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_clienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_codigo_clienteActionPerformed
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
@@ -892,7 +934,6 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     private javax.swing.JLabel bienvenidaLabel;
     private javax.swing.JLabel bienvenidaLabel1;
     private javax.swing.JPanel bienvenidaPanel;
-    private javax.swing.JTextField box_codigo_cliente;
     private javax.swing.JTextField box_codigo_mant;
     private javax.swing.JTextField box_descrip_bici;
     private javax.swing.JTextField box_marca_bici;
@@ -901,8 +942,9 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     private javax.swing.JTextField buscador_agregar;
     private javax.swing.JButton button_buscar_modificar;
     private javax.swing.JLabel codigo_servicio;
+    private javax.swing.JComboBox<String> combo_codigo_cliente;
     private javax.swing.JComboBox<String> combo_filtro_agregar;
-    private javax.swing.JButton crear_usuario;
+    private javax.swing.JButton crear_mant;
     private javax.swing.JLabel filtro_agregar;
     private javax.swing.JFormattedTextField formatt_fecha_entrega;
     private javax.swing.JFormattedTextField formatt_fecha_recibido;
@@ -922,7 +964,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     private javax.swing.JLabel label_precio_bici;
     private javax.swing.JLabel label_recibido;
     private javax.swing.JLabel mant_icon;
-    private javax.swing.JPanel modificarPanel;
+    private javax.swing.JPanel modificarPanel_mant;
     private javax.swing.JButton modificar_mant;
     private javax.swing.JPanel opcionesAgregarMant;
     private javax.swing.JButton salir;
