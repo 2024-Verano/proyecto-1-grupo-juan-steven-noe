@@ -264,7 +264,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
 
         box_codigo_mant.setEditable(false);
         box_codigo_mant.setBackground(new java.awt.Color(255, 255, 255));
-        box_codigo_mant.setFont(new java.awt.Font("Century Gothic", 3, 14)); // NOI18N
+        box_codigo_mant.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         box_codigo_mant.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         box_codigo_mant.setText(" ");
         box_codigo_mant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -691,7 +691,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                 box_codigo_mant.setText("AUTOMÁTICO");
                 javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             }
-    }
+        }
 
     this.revalidate();
     this.repaint();
@@ -808,7 +808,13 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             archivo.guardarArchivo(ruta, listaMantenimientos);
 
             javax.swing.JOptionPane.showMessageDialog(this, "Mantenimiento guardado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                
+            // Usar el método de Archivo para obtener el siguiente código
+            int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Mantenimiento[].class);
 
+            // Mostrar el código en el campo correspondiente
+            box_codigo_mant.setText(String.valueOf(siguienteCodigo));
+                
             // Limpiar los campos
             box_marca_bici.setText("");
             box_precio_bici.setText("");

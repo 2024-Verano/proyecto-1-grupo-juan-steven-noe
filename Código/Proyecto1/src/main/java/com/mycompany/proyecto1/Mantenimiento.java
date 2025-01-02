@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package com.mycompany.proyecto1;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  *
@@ -38,6 +39,11 @@ public class Mantenimiento implements ConCodigo {
 
     @JsonProperty("estado")
     private String estado;
+    
+    // Constructor predeterminado para Jackson
+    public Mantenimiento(){
+    
+    }
 
     // Constructor
     public Mantenimiento(int codigoServicio, int codigoCliente, String marcaBicicleta, 
@@ -55,6 +61,7 @@ public class Mantenimiento implements ConCodigo {
     }
 
     // Implementación del método getCodigo() de ConCodigo
+    @JsonIgnore // Para evitar sobreescribir otro código
     @Override
     public int getCodigo() {
         return this.codigoServicio;
