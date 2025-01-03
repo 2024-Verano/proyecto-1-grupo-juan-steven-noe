@@ -15,7 +15,7 @@ import java.util.Date;
  * Esta clase es responsable de encapsular los datos de un cliente y garantizar
  * que sean válidos al momento de su creación o modificación.
  */
-public class Cliente {
+public class Cliente implements ConCodigo{
     /**
      * Código único del cliente.
      */

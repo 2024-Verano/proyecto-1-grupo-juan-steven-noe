@@ -16,12 +16,14 @@ import java.util.Date;
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
-import com.mycompany.proyecto1.Cliente;
+import com.fasterxml.jackson.databind.JsonNode;
+
 
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Producto;
+import com.mycompany.proyecto1.Cliente;
 
 
 /**
@@ -33,11 +35,14 @@ public class RegistroClientes extends javax.swing.JFrame {
     /**
      * Creates new form MenuOpciones
      */
+    
+    private JsonNode provinciasData; // Variable para almacenar los datos del JSON
+    
     public RegistroClientes() {
         initComponents();
+        cargarProvinciasCantonesDistritos();
+        configurarListeners();
         
-        // Cargar los tipos de producto en el comboBox al iniciar el formulario
-        //Utilidades.cargarTiposDeProducto("registroUsuarios.json", box_codigo_cliente);
 
         // Aplicar el efecto hover y selección a los botones (TOOLBAR)
         ButtonHoverEffect.applySelectableHoverEffect(agregar_cliente);
@@ -269,6 +274,7 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         box_nombre_cliente.setBackground(new java.awt.Color(255, 255, 255));
         box_nombre_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_nombre_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         box_nombre_cliente.setText(" ");
         box_nombre_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_nombre_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
@@ -311,6 +317,7 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         box_correo_cliente.setBackground(new java.awt.Color(255, 255, 255));
         box_correo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_correo_cliente.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         box_correo_cliente.setText("  Ejemplo: juan@gmail.com");
         box_correo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_correo_cliente.setSelectionColor(new java.awt.Color(0, 0, 0));
@@ -328,6 +335,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         jComboBox_provincias.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alajuela", "Cartago", "Guanacaste", "Heredia", "Limón", "Punatrenas", "San José" }));
         jComboBox_provincias.setToolTipText("");
         jComboBox_provincias.setFocusable(false);
+        jComboBox_provincias.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_provinciasActionPerformed(evt);
+            }
+        });
 
         provincia1.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         provincia1.setText("Provincia");
@@ -337,6 +349,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         jComboBox_distritos.setMaximumRowCount(84);
         jComboBox_distritos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_distritos.setToolTipText("");
+        jComboBox_distritos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_distritosActionPerformed(evt);
+            }
+        });
 
         fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         fecha_nacimiento.setText("Fecha de nacimiento:");
@@ -344,6 +361,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         formatt_fecha_nacimiento.setBackground(new java.awt.Color(255, 255, 255));
         formatt_fecha_nacimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         formatt_fecha_nacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        formatt_fecha_nacimiento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         formatt_fecha_nacimiento.setToolTipText("");
         formatt_fecha_nacimiento.setActionCommand("<Not Set>");
         formatt_fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -360,6 +378,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         jComboBox_cantones.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         jComboBox_cantones.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         jComboBox_cantones.setFocusable(false);
+        jComboBox_cantones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_cantonesActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout opcionesAgregarClienteLayout = new javax.swing.GroupLayout(opcionesAgregarCliente);
         opcionesAgregarCliente.setLayout(opcionesAgregarClienteLayout);
@@ -373,7 +396,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                     .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(codigo_defectoCliente)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(106, 126, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -382,42 +405,44 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionesAgregarClienteLayout.createSequentialGroup()
+                .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                         .addComponent(fecha_nacimiento)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionesAgregarClienteLayout.createSequentialGroup()
-                        .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(box_nombre_cliente)
-                            .addComponent(nombre_cliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(16, 16, 16)))
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(nombre_cliente, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(box_nombre_cliente)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                 .addGap(139, 139, 139)
                 .addComponent(num_telefono)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(28, Short.MAX_VALUE)
+                .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
+                        .addComponent(distrito)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox_distritos, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
+                        .addComponent(cantones)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jComboBox_cantones, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                         .addComponent(provincia1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
-                        .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(distrito)
-                            .addComponent(cantones))
-                        .addGap(22, 22, 22)
-                        .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jComboBox_distritos, 0, 125, Short.MAX_VALUE)
-                            .addComponent(jComboBox_cantones, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(117, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, opcionesAgregarClienteLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(box_correo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(68, 68, 68))
         );
         opcionesAgregarClienteLayout.setVerticalGroup(
             opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -444,12 +469,12 @@ public class RegistroClientes extends javax.swing.JFrame {
                     .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jComboBox_cantones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cantones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11)
+                .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(distrito, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jComboBox_distritos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cantones, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox_cantones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -464,20 +489,21 @@ public class RegistroClientes extends javax.swing.JFrame {
         agregarPanelLayout.setHorizontalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(319, 319, 319)
-                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(opcionesAgregarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(crear_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(314, Short.MAX_VALUE))
+                .addContainerGap()
+                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(opcionesAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(319, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
+                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(agregarPanelLayout.createSequentialGroup()
                 .addComponent(opcionesAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGap(0, 108, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(agregarPanel, "card2");
@@ -611,6 +637,75 @@ public class RegistroClientes extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+    
+    // Método para cargar provincias, cantones y distritos desde el archivo JSON usando Archivo
+    private void cargarProvinciasCantonesDistritos() {
+        try {
+            Archivo archivo = new Archivo();
+            provinciasData = (JsonNode) archivo.leerArchivo("Provincias_Cantones.json", JsonNode.class);
+
+            // Llenar el ComboBox de provincias
+            jComboBox_provincias.removeAllItems();
+            provinciasData.fieldNames().forEachRemaining(provincia -> {
+                jComboBox_provincias.addItem(provincia);
+            });
+        } catch (Exception e) {
+        javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar las provincias: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    
+    // Método para cargar cantones según la provincia seleccionada
+    private void cargarCantones(String provincia) {
+        try {
+            JsonNode cantonesNode = provinciasData.get(provincia).get("cantones");
+            jComboBox_cantones.removeAllItems();
+            if (cantonesNode != null) {
+                cantonesNode.fieldNames().forEachRemaining(canton -> {
+                    jComboBox_cantones.addItem(canton);
+                });
+            }
+            // Limpiar los distritos al cambiar de cantón
+            jComboBox_distritos.removeAllItems();
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar los cantones: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Método para cargar distritos según el cantón seleccionado
+    private void cargarDistritos(String provincia, String canton) {
+        try {
+            JsonNode cantonesNode = provinciasData.get(provincia).get("cantones");
+            if (cantonesNode != null && cantonesNode.has(canton)) {
+                JsonNode distritosNode = cantonesNode.get(canton);
+                jComboBox_distritos.removeAllItems();
+                if (distritosNode.isArray()) {
+                    for (JsonNode distrito : distritosNode) {
+                        jComboBox_distritos.addItem(distrito.asText());
+                    }
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar los distritos: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    // Configuración de listeners para los ComboBox
+    private void configurarListeners() {
+        jComboBox_provincias.addActionListener(e -> {
+            String provinciaSeleccionada = (String) jComboBox_provincias.getSelectedItem();
+            if (provinciaSeleccionada != null) {
+                cargarCantones(provinciaSeleccionada);
+            }
+        });
+
+        jComboBox_cantones.addActionListener(e -> {
+            String provinciaSeleccionada = (String) jComboBox_provincias.getSelectedItem();
+            String cantonSeleccionado = (String) jComboBox_cantones.getSelectedItem();
+            if (provinciaSeleccionada != null && cantonSeleccionado != null) {
+                cargarDistritos(provinciaSeleccionada, cantonSeleccionado);
+            }
+        });
+    }
 
     private void agregar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_clienteActionPerformed
         // Mostrar el SubFrame de "agregar cliente"
@@ -647,7 +742,7 @@ public class RegistroClientes extends javax.swing.JFrame {
 
             try {
                 // Usar el método de Archivo para obtener el siguiente código
-                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Cliente[].class);
                 box_codigo_cliente.setText(String.valueOf(siguienteCodigo));
 
             } catch (Exception e) {
@@ -706,7 +801,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         Archivo archivo = new Archivo();
 
         try {
-            // Validar el nombre del tipo de producto
+            
             String nombre = box_nombre_cliente.getText().trim();
             String[] nombres = nombre.split(" ", 2); // Dividir nombre completo en nombre y apellidos
             if (nombre.isEmpty() || nombres.length < 2) {
@@ -739,7 +834,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             Date fechaNacimiento = (Date) formatt_fecha_nacimiento.getValue();
 
             // Generar el código automáticamente
-            int codigo = archivo.obtenerSiguienteCodigo(ruta, TipoProducto[].class);
+            int codigo = archivo.obtenerSiguienteCodigo(ruta, Cliente[].class);
 
             // Crear el cliente
             Cliente cliente = new Cliente(codigo, nombres[0], apellidos, telefono, correo, provincia, canton, distrito, fechaNacimiento);
@@ -773,14 +868,14 @@ public class RegistroClientes extends javax.swing.JFrame {
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
             int selectedRow = tabla_resultado.getSelectedRow();
-            int codigoArticulo = (int) tabla_resultado.getValueAt(selectedRow, 0);
+            int codigoCliente = (int) tabla_resultado.getValueAt(selectedRow, 0);
             Archivo archivo = new Archivo();
-            Producto[] productos = (Producto[]) archivo.leerArchivo("registroClientes.json", Producto[].class);
+            Cliente[] clientes = (Cliente[]) archivo.leerArchivo("registroClientes.json", Cliente[].class);
 
-            if (productos != null) {
-                for (Producto producto : productos) {
-                    if (producto.getCodigoArticulo() == codigoArticulo) {
-                        VentanaModificar ventana = new VentanaModificar(producto);
+            if (clientes != null) {
+                for (Cliente cliente : clientes) {
+                    if (cliente.getCodigo() == codigoCliente) {
+                        ModificarCliente ventana = new ModificarCliente(cliente);
                         ventana.setVisible(true);
                         ventana.setLocationRelativeTo(this);
                         break;
@@ -801,6 +896,25 @@ public class RegistroClientes extends javax.swing.JFrame {
     private void formatt_fecha_nacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_nacimientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_nacimientoActionPerformed
+
+    private void jComboBox_provinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_provinciasActionPerformed
+        String provinciaSeleccionada = (String) jComboBox_provincias.getSelectedItem();
+        if (provinciaSeleccionada != null) {
+            cargarCantones(provinciaSeleccionada);
+        }
+    }//GEN-LAST:event_jComboBox_provinciasActionPerformed
+
+    private void jComboBox_cantonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_cantonesActionPerformed
+        String provinciaSeleccionada = (String) jComboBox_provincias.getSelectedItem();
+        String cantonSeleccionado = (String) jComboBox_cantones.getSelectedItem();
+        if (provinciaSeleccionada != null && cantonSeleccionado != null) {
+            cargarDistritos(provinciaSeleccionada, cantonSeleccionado);
+        }
+    }//GEN-LAST:event_jComboBox_cantonesActionPerformed
+
+    private void jComboBox_distritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_distritosActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_distritosActionPerformed
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
