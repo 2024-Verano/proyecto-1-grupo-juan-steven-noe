@@ -518,7 +518,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
 
         combo_filtro_agregar.setBackground(new java.awt.Color(255, 255, 255));
         combo_filtro_agregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        combo_filtro_agregar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
+        combo_filtro_agregar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre cliente" }));
         combo_filtro_agregar.setFocusable(false);
         combo_filtro_agregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -654,7 +654,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_mantActionPerformed
 
     private void modificar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_mantActionPerformed
-        // Mostrar el SubFrame de "modificar cliente"
+        // Mostrar el SubFrame de "modificar mantenimiento"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "modificarPanel");
     }//GEN-LAST:event_modificar_mantActionPerformed
@@ -702,47 +702,10 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_box_codigo_mantActionPerformed
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
-        String ruta = "productos.json";
-        Archivo archivo = new Archivo();
-
-        try {
-            // Obtener el criterio seleccionado y el valor ingresado
-            String criterio = combo_filtro_agregar.getSelectedItem().toString();
-            String valor = buscador_agregar.getText().trim();
-
-            if (valor.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor para buscar.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            // Leer productos del archivo
-            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
-            if (productos == null || productos.length == 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            // Filtrar productos según el criterio
-            List<Producto> resultados = new ArrayList<>();
-            for (Producto producto : productos) {
-                if ("Codigo".equals(criterio) && String.valueOf(producto.getCodigoArticulo()).equals(valor)) {
-                    resultados.add(producto);
-                } else if ("Nombre".equals(criterio) && producto.getNombre().toLowerCase().contains(valor.toLowerCase())) {
-                    resultados.add(producto);
-                }
-            }
-
-            // Verificar si hay resultados
-            if (resultados.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron productos.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            }
-
-            // Cargar resultados en la tabla
-            Utilidades.cargarResultadosEnTabla((DefaultTableModel) tabla_resultado.getModel(), resultados);
-
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-        }
+        String criterio = combo_filtro_agregar.getSelectedItem().toString();
+        String valor = buscador_agregar.getText().trim();
+    
+        Utilidades.buscarMantenimientos(criterio, valor, tabla_resultado);
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     private void guardar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_mantActionPerformed
@@ -828,21 +791,10 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_guardar_mantActionPerformed
 
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
-        if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
-            int selectedRow = tabla_resultado.getSelectedRow();
-            int codigoArticulo = (int) tabla_resultado.getValueAt(selectedRow, 0);
-            Archivo archivo = new Archivo();
-            Producto[] productos = (Producto[]) archivo.leerArchivo("productos.json", Producto[].class);
-
-            if (productos != null) {
-                for (Producto producto : productos) {
-                    if (producto.getCodigoArticulo() == codigoArticulo) {
-                        VentanaModificar ventana = new VentanaModificar(producto);
-                        ventana.setVisible(true);
-                        ventana.setLocationRelativeTo(this);
-                        break;
-                    }
-                }
+        if (evt.getClickCount() == 2) { // Detecta doble clic
+            int filaSeleccionada = tabla_resultado.getSelectedRow();
+            if (filaSeleccionada != -1) {
+                Utilidades.abrirVentanaModificarMant(filaSeleccionada, tabla_resultado);
             }
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked

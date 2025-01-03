@@ -18,6 +18,7 @@ import com.mycompany.proyecto1.Validador;
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Producto;
+import com.mycompany.proyecto1.TipoProducto;
 
 /**
  *
@@ -497,6 +498,31 @@ public class VentanaModificar extends javax.swing.JFrame {
         box_marca_art.setText(producto.getMarca());
         box_marca_art1.setText(String.valueOf(producto.getPrecio()));
         box_marca_art2.setText(String.valueOf(producto.getCantidad()));
+    }
+
+    //Clase para obtener los datos de un tipo de producto
+    public static String obtenerNombreTipoProducto(int codigoProducto) {
+        String ruta = "tiposProductos.json";
+        Archivo archivo = new Archivo();
+
+        try {
+            // Leer los tipos de productos desde el archivo JSON
+            TipoProducto[] tipos = (TipoProducto[]) archivo.leerArchivo(ruta, TipoProducto[].class);
+
+            if (tipos != null) {
+                // Buscar el nombre del tipo de producto correspondiente al código
+                for (TipoProducto tipo : tipos) {
+                    if (tipo.getCodigo() == codigoProducto) {
+                        return tipo.getNombre();
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println("Error al obtener el nombre del tipo de producto: " + e.getMessage());
+        }
+
+        // Retornar "Desconocido" si no se encuentra el código
+        return "Desconocido";
     }
 
 
