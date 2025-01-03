@@ -442,9 +442,9 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void facturar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_productoActionPerformed
-    VentanaFacturacion ventana = new VentanaFacturacion();
-    ventana.setVisible(true);
-    ventana.setLocationRelativeTo(this);
+        VentanaFacturacion_prod ventana = new VentanaFacturacion_prod();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_productoActionPerformed
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
@@ -516,7 +516,9 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_filtro_agregarActionPerformed
 
     private void facturar_servicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_servicioActionPerformed
-        // TODO add your handling code here:
+        VentanaFacturacion_mant ventana = new VentanaFacturacion_mant();
+        ventana.setVisible(true);
+        ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_servicioActionPerformed
 
     // Método para refrescar un panel

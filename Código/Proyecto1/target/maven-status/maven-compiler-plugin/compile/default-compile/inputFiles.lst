@@ -3,7 +3,8 @@ C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\ConCodigo.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Facturas\DetalleFactura.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Facturas\EncabezadoFactura.java
-C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Facturas\Facturacion.java
+C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Facturas\Factura.java
+C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Facturas\UtilidadesFacturas.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Mantenimiento.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Producto\Producto.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\com\mycompany\proyecto1\Producto\TipoProducto.java
@@ -20,5 +21,6 @@ C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\ventanas\RegistroClientes.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\ventanas\RegistroMantenimiento.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\ventanas\RegistroProductos.java
-C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\ventanas\VentanaFacturacion.java
+C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\ventanas\VentanaFacturacion_mant.java
+C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\ventanas\VentanaFacturacion_prod.java
 C:\Users\noe\Desktop\proyecto-1-grupo-juan-steven-noe\Código\Proyecto1\src\main\java\ventanas\VentanaModificar.java

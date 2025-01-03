@@ -25,6 +25,10 @@ public class DetalleFactura {
 
     @JsonProperty("total")
     private int total;
+    
+    public DetalleFactura(){
+        
+    }
 
     public DetalleFactura(int codigoArticulo, int numeroFactura, int cantidad, int precioUnitario) {
         this.codigoArticulo = codigoArticulo;

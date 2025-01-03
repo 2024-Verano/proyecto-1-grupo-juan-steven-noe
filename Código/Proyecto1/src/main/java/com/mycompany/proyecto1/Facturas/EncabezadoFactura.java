@@ -32,6 +32,10 @@ public class EncabezadoFactura {
 
     @JsonProperty("total")
     private int total;
+    
+    public EncabezadoFactura(){
+        
+    }
 
     public EncabezadoFactura(int numeroFactura, int codigoCliente, String fechaRecibido, String estado) {
         this.numeroFactura = numeroFactura;
@@ -82,5 +86,6 @@ public class EncabezadoFactura {
     public void setTotal(int total) {
         this.total = total;
     }
+
 }
 

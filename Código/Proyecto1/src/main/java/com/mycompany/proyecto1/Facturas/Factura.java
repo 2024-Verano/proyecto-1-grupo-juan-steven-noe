@@ -3,7 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package com.mycompany.proyecto1.Facturas;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.mycompany.proyecto1.ConCodigo;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,14 +15,18 @@ import java.util.List;
  */
 
 // Clase para crear una factura con encabezado y detalle
-public class Facturacion {
+public class Factura implements ConCodigo{
     @JsonProperty("encabezado")
     private EncabezadoFactura encabezado;
 
     @JsonProperty("detalles")
     private List<DetalleFactura> detalles;
+    
+    public Factura(){
+        
+    }
 
-    public Facturacion(EncabezadoFactura encabezado) {
+    public Factura(EncabezadoFactura encabezado) {
         this.encabezado = encabezado;
         this.detalles = new ArrayList<>();
     }
@@ -46,6 +52,12 @@ public class Facturacion {
         encabezado.setSubtotal(subtotal);
         encabezado.setImpuesto((int) (subtotal * 0.13)); // 13% impuesto
         encabezado.setTotal(subtotal + encabezado.getImpuesto());
+    }
+    
+    @JsonIgnore
+    @Override
+    public int getCodigo() {
+        return encabezado.getNumeroFactura();
     }
 }
 
