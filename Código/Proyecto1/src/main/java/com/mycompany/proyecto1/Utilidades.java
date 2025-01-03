@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
+import javax.swing.JFrame;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.DefaultFormatterFactory;
@@ -205,7 +206,7 @@ public class Utilidades {
     }
  
     // Método para abrir ventana de modificar mantenimiento (enfoque más limpio con respecto a RegistroProducto)
-    public static void abrirVentanaModificarMant(int filaSeleccionada, JTable tabla) {
+    public static void abrirVentanaModificarMant(int filaSeleccionada, JTable tabla, JFrame parent) {
         String codigoServicioTexto = tabla.getValueAt(filaSeleccionada, 0).toString();
         int codigoServicio = Integer.parseInt(codigoServicioTexto);
 
@@ -215,7 +216,8 @@ public class Utilidades {
         if (mantenimientos != null) {
             for (Mantenimiento mantenimiento : mantenimientos) {
                 if (mantenimiento.getCodigoServicio() == codigoServicio) {
-                    ModificarMant ventanaModificar = new ModificarMant(mantenimiento);
+                    ModificarMant ventanaModificar = new ModificarMant(mantenimiento, parent);
+                    ventanaModificar.setLocationRelativeTo(parent); // Centra la ventana
                     ventanaModificar.setVisible(true);
                     return;
                 }

@@ -19,6 +19,7 @@ import com.mycompany.proyecto1.Validador;
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Mantenimiento;
+import javax.swing.JFrame;
 
 /**
  *
@@ -33,12 +34,19 @@ public class ModificarMant extends javax.swing.JFrame {
     /**
      * Creates new form VentanaModificar
      * @param mantenimiento
+     * @param parent
      */
-    public ModificarMant(Mantenimiento mantenimiento) {
+    public ModificarMant(Mantenimiento mantenimiento, JFrame parent) {
         initComponents();
+        
+        // Configurar los campos de fecha para forzar formato dd/MM/yyyy
+        Utilidades.configurarCampoFecha(formatt_fecha_recibido);
+        Utilidades.configurarCampoFecha(formatt_fecha_entrega);
         
         // Evitar que la ventana emergente VentanaModificar cierre el programa
         setDefaultCloseOperation(ModificarMant.DISPOSE_ON_CLOSE);
+        // Centrar con respecto a la ventana de RegistroMantenimiento
+        setLocationRelativeTo(parent);
         
         // Cargar los clientes en el combo box antes de seleccionar uno
         Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
@@ -61,7 +69,8 @@ public class ModificarMant extends javax.swing.JFrame {
             ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
         
             hoverEffect.applyTo(guardar_cambios);
-            hoverEffect.applyTo(eliminar_producto);
+            hoverEffect.applyTo(eliminar_mant);
+            hoverEffect.applyTo(facturar_mant);
     }
 
     /**
@@ -73,11 +82,10 @@ public class ModificarMant extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        guardar_cambios = new javax.swing.JButton();
-        eliminar_producto = new javax.swing.JButton();
         codigo_servicio = new javax.swing.JLabel();
         box_codigo_mant = new javax.swing.JTextField();
         label_cliente = new javax.swing.JLabel();
+        combo_codigo_cliente = new javax.swing.JComboBox<>();
         jSeparator5 = new javax.swing.JSeparator();
         label_marca_bici = new javax.swing.JLabel();
         box_marca_bici = new javax.swing.JTextField();
@@ -92,31 +100,12 @@ public class ModificarMant extends javax.swing.JFrame {
         formatt_fecha_entrega = new javax.swing.JFormattedTextField();
         label_observaciones = new javax.swing.JLabel();
         box_observaciones = new javax.swing.JTextField();
-        combo_codigo_cliente = new javax.swing.JComboBox<>();
+        guardar_cambios = new javax.swing.JButton();
+        eliminar_mant = new javax.swing.JButton();
+        facturar_mant = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
-
-        guardar_cambios.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        guardar_cambios.setText("GUARDAR");
-        guardar_cambios.setBorder(null);
-        guardar_cambios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        guardar_cambios.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardar_cambiosActionPerformed(evt);
-            }
-        });
-
-        eliminar_producto.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
-        eliminar_producto.setForeground(new java.awt.Color(204, 0, 0));
-        eliminar_producto.setText("ELIMINAR");
-        eliminar_producto.setBorder(null);
-        eliminar_producto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        eliminar_producto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                eliminar_productoActionPerformed(evt);
-            }
-        });
 
         codigo_servicio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         codigo_servicio.setText("Código servicio");
@@ -137,6 +126,15 @@ public class ModificarMant extends javax.swing.JFrame {
 
         label_cliente.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         label_cliente.setText("Código cliente");
+
+        combo_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
+        combo_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
+        combo_codigo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        combo_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_codigo_clienteActionPerformed(evt);
+            }
+        });
 
         label_marca_bici.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         label_marca_bici.setText("Marca bicicleta");
@@ -234,12 +232,34 @@ public class ModificarMant extends javax.swing.JFrame {
             }
         });
 
-        combo_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
-        combo_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        combo_codigo_cliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        combo_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
+        guardar_cambios.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        guardar_cambios.setText("GUARDAR");
+        guardar_cambios.setBorder(null);
+        guardar_cambios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        guardar_cambios.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_codigo_clienteActionPerformed(evt);
+                guardar_cambiosActionPerformed(evt);
+            }
+        });
+
+        eliminar_mant.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        eliminar_mant.setForeground(new java.awt.Color(204, 0, 0));
+        eliminar_mant.setText("ELIMINAR");
+        eliminar_mant.setBorder(null);
+        eliminar_mant.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        eliminar_mant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                eliminar_mantActionPerformed(evt);
+            }
+        });
+
+        facturar_mant.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
+        facturar_mant.setText("FACTURAR");
+        facturar_mant.setBorder(null);
+        facturar_mant.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        facturar_mant.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                facturar_mantActionPerformed(evt);
             }
         });
 
@@ -247,53 +267,57 @@ public class ModificarMant extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(eliminar_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(136, 136, 136))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(label_marca_bici)
-                                .addComponent(label_precio_bici))
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(box_marca_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(box_precio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGap(18, 18, 18)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(box_descrip_bici)
-                                .addComponent(label_descrip_bici)))
-                        .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(layout.createSequentialGroup()
-                            .addComponent(codigo_servicio)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(box_codigo_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(18, 18, 18)
-                            .addComponent(label_cliente)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                            .addComponent(combo_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 566, Short.MAX_VALUE)
+                    .addComponent(jSeparator4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 560, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(label_recibido)
-                            .addComponent(label_observaciones))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(box_observaciones)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(label_marca_bici)
+                                        .addComponent(label_precio_bici))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(box_marca_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(box_precio_bici, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(18, 18, 18)
+                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                        .addComponent(box_descrip_bici)
+                                        .addComponent(label_descrip_bici)))
+                                .addComponent(jSeparator5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 544, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createSequentialGroup()
+                                    .addComponent(codigo_servicio)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(box_codigo_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(label_cliente)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                    .addComponent(combo_codigo_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)))
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(formatt_fecha_recibido, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(label_entrega)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(label_recibido)
+                                    .addComponent(label_observaciones))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(formatt_fecha_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(box_observaciones)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(formatt_fecha_recibido, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(label_entrega)
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(formatt_fecha_entrega, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
+            .addGroup(layout.createSequentialGroup()
+                .addGap(52, 52, 52)
+                .addComponent(facturar_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(eliminar_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -334,8 +358,9 @@ public class ModificarMant extends javax.swing.JFrame {
                     .addComponent(label_observaciones, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(48, 48, 48)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(eliminar_producto, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(eliminar_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(facturar_mant, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20))
         );
 
@@ -343,12 +368,104 @@ public class ModificarMant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void guardar_cambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_cambiosActionPerformed
+        String ruta = "mantenimiento.json";
+        Archivo archivo = new Archivo();
 
+        try {
+            // Leer el JSON de mantenimientos
+            Mantenimiento[] mantenimientos = (Mantenimiento[]) archivo.leerArchivo(ruta, Mantenimiento[].class);
+            if (mantenimientos == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No hay servicios registrados.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int codigoServicio = Integer.parseInt(box_codigo_mant.getText());
+            for (Mantenimiento mantenimiento : mantenimientos) {
+                if (mantenimiento.getCodigoServicio() == codigoServicio) {
+                    // Obtener y validar los datos del formulario
+                    String codigoClienteTexto = (String) combo_codigo_cliente.getSelectedItem();
+                    int codigoCliente = Integer.parseInt(codigoClienteTexto.split(" - ")[0]);
+
+                    String marcaBici = box_marca_bici.getText().trim();
+                    if (!Validador.validarAlfabetico(marcaBici)) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La marca debe contener solo letras.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
+                    String precioTexto = box_precio_bici.getText().trim();
+                    if (!Validador.validarNumerico(precioTexto) || Integer.parseInt(precioTexto) <= 0) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "El precio debe ser un número mayor a 0.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    int precio = Integer.parseInt(precioTexto);
+
+                    String descripcion = box_descrip_bici.getText().trim();
+                    String fechaRecibido = formatt_fecha_recibido.getText().trim();
+                    String fechaEntrega = formatt_fecha_entrega.getText().trim();
+                    String observaciones = box_observaciones.getText().trim();
+
+                    // Actualizar los valores del mantenimiento
+                    mantenimiento.setCodigoCliente(codigoCliente);
+                    mantenimiento.setMarcaBicicleta(marcaBici);
+                    mantenimiento.setDescripcionBicicleta(descripcion);
+                    mantenimiento.setPrecio(precio);
+                    mantenimiento.setFechaRecibido(fechaRecibido);
+                    mantenimiento.setFechaEntrega(fechaEntrega);
+                    mantenimiento.setObservaciones(observaciones);
+                    break;
+                }
+            }
+
+            // Guardar los cambios en el archivo
+            archivo.guardarArchivo(ruta, mantenimientos);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Servicio modificado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar los cambios: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_guardar_cambiosActionPerformed
 
-    private void eliminar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_productoActionPerformed
+    private void eliminar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_mantActionPerformed
+        String ruta = "mantenimiento.json";
+        Archivo archivo = new Archivo();
 
-    }//GEN-LAST:event_eliminar_productoActionPerformed
+        try {
+            // Leer el JSON de mantenimientos
+            Mantenimiento[] mantenimientos = (Mantenimiento[]) archivo.leerArchivo(ruta, Mantenimiento[].class);
+            if (mantenimientos == null) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No hay servicios registrados.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            int codigoServicio = Integer.parseInt(box_codigo_mant.getText());
+
+            // Confirmación antes de eliminar
+            int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
+                "¿Está seguro de que desea eliminar este servicio?", 
+                "Confirmación de eliminación", 
+                javax.swing.JOptionPane.YES_NO_OPTION);
+
+            if (confirm != javax.swing.JOptionPane.YES_OPTION) {
+                return;
+            }
+
+            // Filtrar los servicios sin el eliminado
+            Mantenimiento[] mantenimientosActualizados = Arrays.stream(mantenimientos)
+                .filter(mantenimiento -> mantenimiento.getCodigoServicio() != codigoServicio)
+                .toArray(Mantenimiento[]::new);
+
+            // Guardar los servicios actualizados
+            archivo.guardarArchivo(ruta, mantenimientosActualizados);
+
+            javax.swing.JOptionPane.showMessageDialog(this, "Servicio eliminado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            dispose();
+
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el servicio: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_eliminar_mantActionPerformed
 
     private void box_codigo_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_mantActionPerformed
         // TODO add your handling code here:
@@ -381,6 +498,10 @@ public class ModificarMant extends javax.swing.JFrame {
     private void combo_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
+
+    private void facturar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_mantActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_facturar_mantActionPerformed
 
     // Método para obtener nombre de cliente para mostrar en combo box de código cliente
     public static String obtenerNombreCliente(int codigoCliente) {
@@ -445,7 +566,8 @@ public class ModificarMant extends javax.swing.JFrame {
     private javax.swing.JTextField box_precio_bici;
     private javax.swing.JLabel codigo_servicio;
     private javax.swing.JComboBox<String> combo_codigo_cliente;
-    private javax.swing.JButton eliminar_producto;
+    private javax.swing.JButton eliminar_mant;
+    private javax.swing.JButton facturar_mant;
     private javax.swing.JFormattedTextField formatt_fecha_entrega;
     private javax.swing.JFormattedTextField formatt_fecha_recibido;
     private javax.swing.JButton guardar_cambios;

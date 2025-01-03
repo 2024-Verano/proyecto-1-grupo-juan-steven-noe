@@ -794,7 +794,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         if (evt.getClickCount() == 2) { // Detecta doble clic
             int filaSeleccionada = tabla_resultado.getSelectedRow();
             if (filaSeleccionada != -1) {
-                Utilidades.abrirVentanaModificarMant(filaSeleccionada, tabla_resultado);
+                Utilidades.abrirVentanaModificarMant(filaSeleccionada, tabla_resultado, this);
             }
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
