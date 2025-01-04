@@ -764,27 +764,44 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_codigo_clienteActionPerformed
     
     private void cargarClientesEnTabla() {
-    String ruta = "registroClientes.json";
-    Archivo archivo = new Archivo();
+        String ruta = "registroClientes.json";
+        Archivo archivo = new Archivo();
 
-    try {
-        Cliente[] clientes = (Cliente[]) archivo.leerArchivo(ruta, Cliente[].class);
-        DefaultTableModel model = (DefaultTableModel) tabla_resultado.getModel();
-        model.setRowCount(0);
+        try {
+            Cliente[] clientes = (Cliente[]) archivo.leerArchivo(ruta, Cliente[].class);
+            DefaultTableModel model = (DefaultTableModel) tabla_resultado.getModel();
+            model.setRowCount(0);
 
-        if (clientes != null) {
-            for (Cliente cliente : clientes) {
-                model.addRow(new Object[] {
-                    cliente.codigo,
-                    cliente.getNombre(),
-                    cliente.getApellidos(),
-                    cliente.getTelefono(),
-                    cliente.getCorreo(),
-                    cliente.getProvincia(),
-                    cliente.getCanton(),
-                    cliente.getDistrito(),
-                    cliente.getFecha()
-                });
+            // Obtener el valor ingresado en el campo de búsqueda
+            String textoBusqueda = buscador_agregar.getText().trim().toLowerCase();
+            String filtroSeleccionado = (String) combo_filtro_agregar.getSelectedItem();
+
+            if (clientes != null) {
+                for (Cliente cliente : clientes) {
+                    boolean coincide = false;
+
+                    // Filtrar por nombre o código según el filtro seleccionado
+                    if ("Nombre".equalsIgnoreCase(filtroSeleccionado)) {
+                        String nombreCompleto = cliente.getNombre() + " " + cliente.getApellidos();
+                        coincide = nombreCompleto.toLowerCase().contains(textoBusqueda);
+                    } else if ("Codigo".equalsIgnoreCase(filtroSeleccionado)) {
+                        coincide = String.valueOf(cliente.getCodigo()).equals(textoBusqueda);
+                    }
+
+                    // Agregar cliente a la tabla si coincide con el filtro
+                    if (coincide || textoBusqueda.isEmpty()) {
+                        model.addRow(new Object[]{
+                        cliente.getCodigo(),
+                        cliente.getNombre(),
+                        cliente.getApellidos(),
+                        cliente.getTelefono(),
+                        cliente.getCorreo(),
+                        cliente.getProvincia(),
+                        cliente.getCanton(),
+                        cliente.getDistrito(),
+                        cliente.getFecha()
+                    });
+                }
             }
         }
     } catch (Exception e) {
