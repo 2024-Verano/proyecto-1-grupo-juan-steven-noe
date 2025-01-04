@@ -13,12 +13,18 @@ import javax.swing.table.DefaultTableModel;
 
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
+import com.mycompany.proyecto1.Facturas.BuscarFactura;
+import com.mycompany.proyecto1.Facturas.DetalleFactura;
+import com.mycompany.proyecto1.Facturas.EncabezadoFactura;
+import com.mycompany.proyecto1.Facturas.Factura;
+import com.mycompany.proyecto1.Facturas.UtilidadesFacturas;
 import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Producto;
+import javax.swing.JOptionPane;
 
 
 /**
@@ -33,38 +39,39 @@ public class Facturacion extends javax.swing.JFrame {
     public Facturacion() {
         initComponents();
         
-        // Cargar los tipos de producto en el comboBox al iniciar el formulario
-        //Utilidades.cargarTiposDeProducto("registroUsuarios.json", box_codigo_cliente);
-
-        // Aplicar el efecto hover y selección a los botones (TOOLBAR)
-        ButtonHoverEffect.applySelectableHoverEffect(agregar_fact);
-        ButtonHoverEffect.applySelectableHoverEffect(modificar_fact);
-        ButtonHoverEffect.applySelectableHoverEffect(salir);
+            // Quitar la visibilidad del botón de anular factura
+            button_anular_factura.setVisible(false);
 
 
-        // Define los colores
-        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-        Color originalColor = Color.BLACK; // Negro (borde inicial)
+            // Aplicar el efecto hover y selección a los botones (TOOLBAR)
+            ButtonHoverEffect.applySelectableHoverEffect(agregar_fact);
+            ButtonHoverEffect.applySelectableHoverEffect(modificar_fact);
+            ButtonHoverEffect.applySelectableHoverEffect(salir);
 
-        // Crear la instancia de ButtonHoverEffect para el efecto
-        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-        // Aplica el efecto hover a cada botón
-        hoverEffect.applyTo(facturar_producto);
-        hoverEffect.applyTo(facturar_servicio);
+            // Define los colores
+            Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
+            Color originalColor = Color.BLACK; // Negro (borde inicial)
+
+            // Crear la instancia de ButtonHoverEffect para el efecto
+            ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+
+            // Aplica el efecto hover a cada botón
+            hoverEffect.applyTo(facturar_producto);
+            hoverEffect.applyTo(facturar_servicio);
         
-        // Aplica el efecto hover a cada botón (Buscar/eliminar factura)
-        hoverEffect.applyTo(button_buscar_modificar);
-        
+            // Aplica el efecto hover a cada botón (Buscar y anular factura)
+            hoverEffect.applyTo(button_buscar_factura);
+            hoverEffect.applyTo(button_anular_factura);
 
-        // Registrar los paneles en el CardLayout
-        SubFrameContainer.add(agregarPanel, "agregarPanel");
-        SubFrameContainer.add(modificarPanel, "modificarPanel");
+            // Registrar los paneles en el CardLayout
+            SubFrameContainer.add(agregarPanel, "agregarPanel");
+            SubFrameContainer.add(modificarPanel, "modificarPanel");
         
-        // Mostrar la bienvenida al inicio
-        SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
-        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
-        layout.show(SubFrameContainer, "bienvenidaPanel");
+            // Mostrar la bienvenida al inicio
+            SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
+            java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+            layout.show(SubFrameContainer, "bienvenidaPanel");
     }
     
     /**
@@ -94,13 +101,16 @@ public class Facturacion extends javax.swing.JFrame {
         label_descripcion_prod = new javax.swing.JLabel();
         label_descripcion_prod1 = new javax.swing.JLabel();
         modificarPanel = new javax.swing.JPanel();
+        label_tipo_factura = new javax.swing.JLabel();
+        combo_tipo_factura = new javax.swing.JComboBox<>();
         filtro_agregar = new javax.swing.JLabel();
-        combo_filtro_agregar = new javax.swing.JComboBox<>();
-        buscador_agregar = new javax.swing.JTextField();
-        button_buscar_modificar = new javax.swing.JButton();
+        combo_criterio_busqueda = new javax.swing.JComboBox<>();
+        box_busqueda = new javax.swing.JTextField();
+        button_buscar_factura = new javax.swing.JButton();
         text_buscar_agregar = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla_resultado = new javax.swing.JTable();
+        button_anular_factura = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -284,34 +294,47 @@ public class Facturacion extends javax.swing.JFrame {
 
         SubFrameContainer.add(agregarPanel, "card2");
 
-        filtro_agregar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
-        filtro_agregar.setText("Filtro");
+        label_tipo_factura.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        label_tipo_factura.setText("Tipo");
 
-        combo_filtro_agregar.setBackground(new java.awt.Color(255, 255, 255));
-        combo_filtro_agregar.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        combo_filtro_agregar.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Codigo", "Nombre" }));
-        combo_filtro_agregar.setFocusable(false);
-        combo_filtro_agregar.addActionListener(new java.awt.event.ActionListener() {
+        combo_tipo_factura.setBackground(new java.awt.Color(255, 255, 255));
+        combo_tipo_factura.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        combo_tipo_factura.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Producto", "Mantenimiento" }));
+        combo_tipo_factura.setFocusable(false);
+        combo_tipo_factura.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                combo_filtro_agregarActionPerformed(evt);
+                combo_tipo_facturaActionPerformed(evt);
             }
         });
 
-        buscador_agregar.setBackground(new java.awt.Color(255, 255, 255));
-        buscador_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        buscador_agregar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        filtro_agregar.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        filtro_agregar.setText("Filtro");
 
-        button_buscar_modificar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        button_buscar_modificar.setText("B U S C A R");
-        button_buscar_modificar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        button_buscar_modificar.addActionListener(new java.awt.event.ActionListener() {
+        combo_criterio_busqueda.setBackground(new java.awt.Color(255, 255, 255));
+        combo_criterio_busqueda.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        combo_criterio_busqueda.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Num. Factura", "Fecha", "Nombre Cliente" }));
+        combo_criterio_busqueda.setFocusable(false);
+        combo_criterio_busqueda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                button_buscar_modificarActionPerformed(evt);
+                combo_criterio_busquedaActionPerformed(evt);
+            }
+        });
+
+        box_busqueda.setBackground(new java.awt.Color(255, 255, 255));
+        box_busqueda.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        box_busqueda.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+
+        button_buscar_factura.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        button_buscar_factura.setText("B U S C A R");
+        button_buscar_factura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        button_buscar_factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_buscar_facturaActionPerformed(evt);
             }
         });
 
         text_buscar_agregar.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
-        text_buscar_agregar.setText("Buscar un cliente para modificar");
+        text_buscar_agregar.setText("Buscar una factura");
 
         tabla_resultado.setBackground(new java.awt.Color(255, 255, 255));
         tabla_resultado.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -322,11 +345,11 @@ public class Facturacion extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Cod. Servicio", "Cod. Cliente", "Marca", "Descripción", "Precio", "F. Recibido", "F. Entrega", "Observación", "Estado"
+                "Num. Fact", "Cod. Cliente", "Recibido", "Estado", "Subtotal", "IVA (13%)", "Total", "Cod. Art", "Cantidad", "Precio (und)"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false, false, false
+                false, false, false, false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -356,44 +379,63 @@ public class Facturacion extends javax.swing.JFrame {
             tabla_resultado.getColumnModel().getColumn(6).setResizable(false);
             tabla_resultado.getColumnModel().getColumn(7).setResizable(false);
             tabla_resultado.getColumnModel().getColumn(8).setResizable(false);
+            tabla_resultado.getColumnModel().getColumn(9).setResizable(false);
         }
+
+        button_anular_factura.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
+        button_anular_factura.setForeground(new java.awt.Color(204, 0, 51));
+        button_anular_factura.setText("ANULAR FACTURA");
+        button_anular_factura.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        button_anular_factura.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_anular_facturaActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout modificarPanelLayout = new javax.swing.GroupLayout(modificarPanel);
         modificarPanel.setLayout(modificarPanelLayout);
         modificarPanelLayout.setHorizontalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(modificarPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(filtro_agregar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(text_buscar_agregar)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
+                .addContainerGap(26, Short.MAX_VALUE)
+                .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(modificarPanelLayout.createSequentialGroup()
-                        .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(label_tipo_factura)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(119, 119, 119))
-            .addGroup(modificarPanelLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                        .addComponent(combo_tipo_factura, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(filtro_agregar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(combo_criterio_busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(text_buscar_agregar)
+                            .addGroup(modificarPanelLayout.createSequentialGroup()
+                                .addComponent(box_busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(button_buscar_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 966, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_anular_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 181, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(25, 25, 25))
         );
         modificarPanelLayout.setVerticalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarPanelLayout.createSequentialGroup()
-                .addGap(37, 37, 37)
+                .addGap(34, 34, 34)
                 .addComponent(text_buscar_agregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(filtro_agregar))
+                    .addComponent(box_busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(combo_criterio_busqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(button_buscar_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(filtro_agregar)
+                    .addComponent(combo_tipo_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(label_tipo_factura))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 314, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(253, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(button_anular_factura, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(197, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(modificarPanel, "card4");
@@ -447,79 +489,97 @@ public class Facturacion extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_productoActionPerformed
 
-    private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
-        String ruta = "productos.json";
-        Archivo archivo = new Archivo();
+    private void button_buscar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_facturaActionPerformed
+        String tipoFactura = (String) combo_tipo_factura.getSelectedItem();
+        String criterio = (String) combo_criterio_busqueda.getSelectedItem();
+        String valor = box_busqueda.getText().trim();
 
-        try {
-            // Obtener el criterio seleccionado y el valor ingresado
-            String criterio = combo_filtro_agregar.getSelectedItem().toString();
-            String valor = buscador_agregar.getText().trim();
-
-            if (valor.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "Por favor, ingrese un valor para buscar.", "Advertencia", javax.swing.JOptionPane.WARNING_MESSAGE);
-                return;
-            }
-
-            // Leer productos del archivo
-            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
-            if (productos == null || productos.length == 0) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No hay productos registrados.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-                return;
-            }
-
-            // Filtrar productos según el criterio
-            List<Producto> resultados = new ArrayList<>();
-            for (Producto producto : productos) {
-                if ("Codigo".equals(criterio) && String.valueOf(producto.getCodigoArticulo()).equals(valor)) {
-                    resultados.add(producto);
-                } else if ("Nombre".equals(criterio) && producto.getNombre().toLowerCase().contains(valor.toLowerCase())) {
-                    resultados.add(producto);
-                }
-            }
-
-            // Verificar si hay resultados
-            if (resultados.isEmpty()) {
-                javax.swing.JOptionPane.showMessageDialog(this, "No se encontraron productos.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            }
-
-            // Cargar resultados en la tabla
-            Utilidades.cargarResultadosEnTabla((DefaultTableModel) tabla_resultado.getModel(), resultados);
-
-        } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(this, "Error al realizar la búsqueda: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        if (valor.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese un valor de búsqueda.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
         }
-    }//GEN-LAST:event_button_buscar_modificarActionPerformed
+
+        // Buscar facturas
+        List<Factura> resultados = BuscarFactura.buscarFactura(tipoFactura, criterio, valor);
+
+        // Limpiar la tabla antes de llenar nuevos datos
+        DefaultTableModel model = (DefaultTableModel) tabla_resultado.getModel();
+        model.setRowCount(0);
+
+        // Agregar resultados a la tabla
+        for (Factura factura : resultados) {
+            // Obtener datos del encabezado
+            EncabezadoFactura encabezado = factura.getEncabezado();
+
+            // Obtener detalle (puede haber más de un artículo por factura)
+            for (DetalleFactura detalle : factura.getDetalles()) {
+                model.addRow(new Object[]{
+                    encabezado.getNumeroFactura(),  // Número de factura
+                    encabezado.getCodigoCliente(),  // Código del cliente
+                    encabezado.getFechaRecibido(),  // Fecha de recibido
+                    encabezado.getEstado(),         // Estado
+                    encabezado.getSubtotal(),       // Subtotal
+                    encabezado.getImpuesto(),       // Impuesto 13%
+                    encabezado.getTotal(),          // Total de la factura
+                    detalle.getCodigoArticulo(),    // Código del artículo
+                    detalle.getCantidad(),          // Cantidad de productos/servicio
+                    detalle.getPrecioUnitario(),    // Precio unitario
+                    detalle.getTotal()              // Total del artículo
+                });
+            }
+        }
+
+        if (resultados.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "No se encontraron facturas.", "Información", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+        // Ocultar el botón de anular hasta que se seleccione una fila
+        button_anular_factura.setVisible(false);
+    }//GEN-LAST:event_button_buscar_facturaActionPerformed
 
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
-        if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
-            int selectedRow = tabla_resultado.getSelectedRow();
-            int codigoArticulo = (int) tabla_resultado.getValueAt(selectedRow, 0);
-            Archivo archivo = new Archivo();
-            Producto[] productos = (Producto[]) archivo.leerArchivo("productos.json", Producto[].class);
-
-            if (productos != null) {
-                for (Producto producto : productos) {
-                    if (producto.getCodigoArticulo() == codigoArticulo) {
-                        VentanaModificar ventana = new VentanaModificar(producto);
-                        ventana.setVisible(true);
-                        ventana.setLocationRelativeTo(this);
-                        break;
-                    }
-                }
-            }
+        int filaSeleccionada = tabla_resultado.getSelectedRow();
+    
+        // Si se selecciona una fila, mostrar el botón de anulación
+        if (filaSeleccionada != -1) {
+            button_anular_factura.setVisible(true);
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
 
-    private void combo_filtro_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_filtro_agregarActionPerformed
+    private void combo_criterio_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_criterio_busquedaActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_combo_filtro_agregarActionPerformed
+    }//GEN-LAST:event_combo_criterio_busquedaActionPerformed
 
     private void facturar_servicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_servicioActionPerformed
         VentanaFacturacionMant ventana = new VentanaFacturacionMant();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_servicioActionPerformed
+
+    private void combo_tipo_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_facturaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_tipo_facturaActionPerformed
+
+    private void button_anular_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_anular_facturaActionPerformed
+        int filaSeleccionada = tabla_resultado.getSelectedRow();
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Seleccione una factura para anular.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        int numeroFactura = (int) tabla_resultado.getValueAt(filaSeleccionada, 0);
+        String tipoFactura = (String) combo_tipo_factura.getSelectedItem();
+
+        int confirmacion = JOptionPane.showConfirmDialog(this, 
+            "¿Está seguro de que desea anular la factura " + numeroFactura + "?", 
+            "Confirmar Anulación", JOptionPane.YES_NO_OPTION);
+    
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            if (UtilidadesFacturas.anularFactura(numeroFactura, tipoFactura)) {
+                button_buscar_facturaActionPerformed(null); // Refrescar la tabla después de la anulación
+            }
+        }
+    }//GEN-LAST:event_button_anular_facturaActionPerformed
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
@@ -590,9 +650,11 @@ public class Facturacion extends javax.swing.JFrame {
     private javax.swing.JLabel bienvenidaLabel;
     private javax.swing.JLabel bienvenidaLabel1;
     private javax.swing.JPanel bienvenidaPanel;
-    private javax.swing.JTextField buscador_agregar;
-    private javax.swing.JButton button_buscar_modificar;
-    private javax.swing.JComboBox<String> combo_filtro_agregar;
+    private javax.swing.JTextField box_busqueda;
+    private javax.swing.JButton button_anular_factura;
+    private javax.swing.JButton button_buscar_factura;
+    private javax.swing.JComboBox<String> combo_criterio_busqueda;
+    private javax.swing.JComboBox<String> combo_tipo_factura;
     private javax.swing.JButton facturar_producto;
     private javax.swing.JButton facturar_servicio;
     private javax.swing.JLabel filtro_agregar;
@@ -603,6 +665,7 @@ public class Facturacion extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator jSeparator3;
     private javax.swing.JLabel label_descripcion_prod;
     private javax.swing.JLabel label_descripcion_prod1;
+    private javax.swing.JLabel label_tipo_factura;
     private javax.swing.JLabel mant_icon;
     private javax.swing.JPanel modificarPanel;
     private javax.swing.JButton modificar_fact;

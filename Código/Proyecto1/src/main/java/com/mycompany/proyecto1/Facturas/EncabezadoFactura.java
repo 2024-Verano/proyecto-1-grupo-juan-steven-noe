@@ -75,6 +75,10 @@ public class EncabezadoFactura {
         return total;
     }
 
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
+    
     public void setSubtotal(int subtotal) {
         this.subtotal = subtotal;
     }

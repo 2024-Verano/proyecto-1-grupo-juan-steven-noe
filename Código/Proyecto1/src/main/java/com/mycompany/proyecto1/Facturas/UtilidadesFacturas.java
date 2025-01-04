@@ -170,4 +170,30 @@ public class UtilidadesFacturas {
         }
     }
 
+    public static boolean anularFactura(int numeroFactura, String tipoFactura) {
+        Archivo archivo = new Archivo();
+        String ruta = tipoFactura.equals("Producto") ? "facturas_productos.json" : "facturas_mantenimiento.json";
+
+        try {
+            Factura[] facturas = (Factura[]) archivo.leerArchivo(ruta, Factura[].class);
+            if (facturas == null) return false;
+
+            List<Factura> listaFacturas = new ArrayList<>(List.of(facturas));
+
+            for (Factura factura : listaFacturas) {
+                if (factura.getEncabezado().getNumeroFactura() == numeroFactura) {
+                    factura.getEncabezado().setEstado("Anulado");
+                    archivo.guardarArchivo(ruta, listaFacturas);
+                    JOptionPane.showMessageDialog(null, "Factura anulada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    return true;
+                }
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al anular la factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return false;
+    }
+    
 }

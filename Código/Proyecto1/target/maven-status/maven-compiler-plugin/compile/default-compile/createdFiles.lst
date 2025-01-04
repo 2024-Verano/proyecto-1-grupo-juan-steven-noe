@@ -40,6 +40,7 @@ ventanas\Facturacion$6.class
 ventanas\ModificarCliente$9.class
 ventanas\RegistroClientes.class
 ventanas\VentanaFacturacionProd$8.class
+com\mycompany\proyecto1\Facturas\BuscarFactura.class
 ventanas\MenuOpciones.class
 ventanas\RegistroMantenimiento$4.class
 ventanas\ModificarMant$3.class
@@ -70,6 +71,7 @@ ventanas\RegistroClientes$3.class
 ventanas\ModificarMant$12.class
 ventanas\RegistroMantenimiento$2.class
 com\mycompany\proyecto1\TipoProducto.class
+ventanas\Facturacion$11.class
 ventanas\ModificarMant$4.class
 ventanas\Facturacion$1.class
 ventanas\Credenciales$1.class
@@ -86,6 +88,7 @@ ventanas\VentanaFacturacionMant$8.class
 ventanas\VentanaFacturacionProd$6.class
 ventanas\Facturacion$8.class
 ventanas\MenuOpciones$2.class
+ventanas\Facturacion$12.class
 ventanas\RegistroMantenimiento$10.class
 ventanas\ModificarCliente$7.class
 ventanas\RegistroProductos$17.class
