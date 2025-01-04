@@ -363,7 +363,7 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     private void guardar_cambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_cambiosActionPerformed
         String ruta = "registroClientes.json";
-    Archivo archivo = new Archivo();
+        Archivo archivo = new Archivo();
 
     try {
         Cliente[] clientes = (Cliente[]) archivo.leerArchivo(ruta, Cliente[].class);
@@ -384,6 +384,8 @@ public class ModificarCliente extends javax.swing.JFrame {
                 cliente.setProvincia((String) box_provincias.getSelectedItem());
                 cliente.setCanton((String) combo_cantones.getSelectedItem());
                 cliente.setDistrito((String) combo_distritos.getSelectedItem());
+                
+                
                 break;
             }
         }
@@ -430,6 +432,7 @@ public class ModificarCliente extends javax.swing.JFrame {
                     cliente.setProvincia((String) box_provincias.getSelectedItem());
                     cliente.setCanton((String) combo_cantones.getSelectedItem());
                     cliente.setDistrito((String) combo_distritos.getSelectedItem());
+                     
                     break;
                 }
             }
