@@ -7,6 +7,9 @@ package com.mycompany.proyecto1.Facturas;
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Mantenimiento;
 import com.mycompany.proyecto1.Producto;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import javax.swing.JComboBox;
 
 /**
@@ -56,5 +59,74 @@ public class UtilidadesFacturas {
             javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar productos: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }
+    
+    // Método para encontrar un producto
+    public static Producto obtenerProductoPorCodigo(int codigoProducto) {
+        Archivo archivo = new Archivo();
+        Producto[] productos = (Producto[]) archivo.leerArchivo("productos.json", Producto[].class);
+        
+        if (productos != null) {
+            for (Producto producto : productos) {
+                if (producto.getCodigoArticulo() == codigoProducto) {
+                    return producto;
+                }
+            }
+        }
+        return null; // Si no se encuentra el producto
+    }
+    
+    // Método para disminuir la cantidad de productos y validar que existen suficientes para facturar
+    public static boolean actualizarStockProducto(int codigoProducto, int cantidad) {
+        Archivo archivo = new Archivo();
+        String ruta = "productos.json";
+
+        try {
+            // Leer productos del JSON
+            Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
+            if (productos == null) return false;
+
+            List<Producto> listaProductos = new ArrayList<>(Arrays.asList(productos));
+
+            for (Producto producto : listaProductos) {
+                if (producto.getCodigoArticulo() == codigoProducto) {
+                    
+                    // Verificar si hay stock suficiente
+                    if (producto.getCantidad() < cantidad) {
+                        javax.swing.JOptionPane.showMessageDialog(null, 
+                            "No hay suficiente stock para facturar este producto.\n"
+                            + "Disponibles: " + producto.getCantidad(), 
+                            "Error", 
+                            javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return false;
+                    }
+
+                    // Disminuir la cantidad
+                    producto.setCantidad(producto.getCantidad() - cantidad);
+                    int stockRestante = producto.getCantidad();
+
+                    // Guardar cambios en el JSON
+                    archivo.guardarArchivo(ruta, listaProductos);
+
+                    // Mensaje confirmando la actualización del stock
+                    javax.swing.JOptionPane.showMessageDialog(null, 
+                        "Stock actualizado.\n"
+                        + "Código del Producto: " + codigoProducto + "\n"
+                        + "Cantidad restante en inventario: " + stockRestante, 
+                        "Stock Actualizado", 
+                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+
+                    return true;
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(null, 
+                "Error al actualizar stock: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+
+        return false;
+    }
+
 
 }

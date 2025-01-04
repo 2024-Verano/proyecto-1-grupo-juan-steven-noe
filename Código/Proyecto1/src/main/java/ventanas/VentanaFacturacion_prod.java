@@ -13,13 +13,21 @@ import javax.swing.table.DefaultTableModel;
 
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
+import com.mycompany.proyecto1.Facturas.DetalleFactura;
+import com.mycompany.proyecto1.Facturas.EncabezadoFactura;
 import com.mycompany.proyecto1.Facturas.Factura;
+import com.mycompany.proyecto1.Facturas.GuardarFactura;
 import com.mycompany.proyecto1.Facturas.UtilidadesFacturas;
 import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Producto;
+
+// Importar liberías para fecha real
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,6 +40,7 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
      */
     public VentanaFacturacion_prod() {
         initComponents();
+        
             // Cargar el siguiente número de factura automáticamente
             Archivo archivo = new Archivo();
             int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas.json", Factura[].class);
@@ -39,6 +48,9 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         
             // Cargar los clientes en el comboBox de clientes al iniciar el formulario
             Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
+            
+            // Cargar los productos en el comboBox de clientes al iniciar el formulario
+            UtilidadesFacturas.cargarProductos("productos.json", combo_codigo_articulo);
         
             // Evitar que la ventana emergente VentanaModificar cierre el programa
             setDefaultCloseOperation(VentanaFacturacion_prod.DISPOSE_ON_CLOSE);
@@ -49,9 +61,17 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
 
             // Crear la instancia de ButtonHoverEffect para el efecto
             ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+            hoverEffect.applyTo(crear_fact);
         
             // Configurar el campo de fecha
             Utilidades.configurarCampoFecha(formatt_fecha_recibido);
+            
+            // Obtener la fecha de hoy en formato "dd/MM/yyyy"
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaHoy = formatoFecha.format(new Date());
+
+            // Asignar la fecha actual al campo formateado
+            formatt_fecha_recibido.setText(fechaHoy);
     }
 
     /**
@@ -120,6 +140,7 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         label_fecha_recibido.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_fecha_recibido.setText("Fecha recibido");
 
+        formatt_fecha_recibido.setEditable(false);
         formatt_fecha_recibido.setBackground(new java.awt.Color(255, 255, 255));
         formatt_fecha_recibido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         formatt_fecha_recibido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
@@ -133,10 +154,10 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         label_subtotal.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_subtotal.setText("Subtotal");
 
+        box_subtotal.setEditable(false);
         box_subtotal.setBackground(new java.awt.Color(255, 255, 255));
         box_subtotal.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_subtotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_subtotal.setEnabled(false);
         box_subtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_subtotalActionPerformed(evt);
@@ -146,10 +167,10 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         label_iva.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_iva.setText("I.V.A");
 
+        box_iva.setEditable(false);
         box_iva.setBackground(new java.awt.Color(255, 255, 255));
         box_iva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_iva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_iva.setEnabled(false);
         box_iva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_ivaActionPerformed(evt);
@@ -159,10 +180,10 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         label_total.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_total.setText("TOTAL");
 
+        box_total.setEditable(false);
         box_total.setBackground(new java.awt.Color(255, 255, 255));
-        box_total.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_total.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         box_total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_total.setEnabled(false);
         box_total.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_totalActionPerformed(evt);
@@ -181,26 +202,36 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         combo_codigo_articulo.setBorder(null);
         combo_codigo_articulo.setFocusable(false);
         combo_codigo_articulo.setRequestFocusEnabled(false);
+        combo_codigo_articulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_codigo_articuloActionPerformed(evt);
+            }
+        });
 
         label_cantidad.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_cantidad.setText("Cantidad (und)");
 
         box_cantidad.setBackground(new java.awt.Color(255, 255, 255));
-        box_cantidad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_cantidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_cantidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_cantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_cantidadActionPerformed(evt);
             }
         });
+        box_cantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                box_cantidadKeyReleased(evt);
+            }
+        });
 
         label_precio_und.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_precio_und.setText("Precio (und)");
 
+        box_precio_und.setEditable(false);
         box_precio_und.setBackground(new java.awt.Color(255, 255, 255));
-        box_precio_und.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_precio_und.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_precio_und.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_precio_und.setEnabled(false);
         box_precio_und.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_precio_undActionPerformed(evt);
@@ -210,10 +241,10 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         label_total_pagar.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_total_pagar.setText("Total a pagar");
 
+        box_total_pagar.setEditable(false);
         box_total_pagar.setBackground(new java.awt.Color(255, 255, 255));
         box_total_pagar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         box_total_pagar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_total_pagar.setEnabled(false);
         box_total_pagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_total_pagarActionPerformed(evt);
@@ -376,8 +407,95 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
     }//GEN-LAST:event_box_total_pagarActionPerformed
 
     private void crear_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_factActionPerformed
+        try {
+            int numeroFactura = Integer.parseInt(box_num_fact.getText().trim());
 
+            String codigoClienteTexto = (String) combo_codigo_cliente.getSelectedItem();
+            if (codigoClienteTexto == null || codigoClienteTexto.trim().isEmpty() || "No hay clientes".equals(codigoClienteTexto)) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int codigoCliente = Integer.parseInt(codigoClienteTexto.split(" - ")[0]);
+
+            String fechaRecibido = formatt_fecha_recibido.getText().trim();
+
+            String codigoProductoTexto = (String) combo_codigo_articulo.getSelectedItem();
+            if (codigoProductoTexto == null || codigoProductoTexto.trim().isEmpty() || "No hay productos".equals(codigoProductoTexto)) {
+                JOptionPane.showMessageDialog(this, "Debe seleccionar un producto.", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            int codigoProducto = Integer.parseInt(codigoProductoTexto.split(" - ")[0]);
+
+            int cantidad = Integer.parseInt(box_cantidad.getText().trim());
+            int precioUnitario = Integer.parseInt(box_precio_und.getText().trim());
+
+            // Guardar la factura usando la nueva clase GuardarFactura
+            boolean guardado = GuardarFactura.guardarFacturaProducto(numeroFactura, codigoCliente, fechaRecibido, codigoProducto, cantidad, precioUnitario);
+
+            if (guardado) {
+                // Limpiar los campos después de guardar
+                box_cantidad.setText("1");
+                box_subtotal.setText("");
+                box_iva.setText("");
+                box_total.setText("");
+                box_total_pagar.setText("");
+
+                // Generar el siguiente número de factura automáticamente
+                Archivo archivo = new Archivo();
+                int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas_productos.json", Factura[].class);
+                box_num_fact.setText(String.valueOf(siguienteNumeroFactura));
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al guardar la factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_crear_factActionPerformed
+
+    private void combo_codigo_articuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_articuloActionPerformed
+        String seleccion = (String) combo_codigo_articulo.getSelectedItem();
+        if (seleccion != null && seleccion.matches("\\d+ - .*")) {
+            int codigo = Integer.parseInt(seleccion.split(" - ")[0]);
+            llenarDatosProducto(codigo);
+        }
+    }//GEN-LAST:event_combo_codigo_articuloActionPerformed
+
+    // Método para calcular dinámicamente los montos al cambiar la cantidad
+    private void box_cantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_box_cantidadKeyReleased
+        calcularTotales();
+    }//GEN-LAST:event_box_cantidadKeyReleased
+
+    // Método para obtener el precio de un producto
+    private void llenarDatosProducto(int codigoProducto) {
+        Producto producto = UtilidadesFacturas.obtenerProductoPorCodigo(codigoProducto);
+
+        if (producto != null) {
+            box_precio_und.setText(String.valueOf(producto.getPrecio()));
+            box_cantidad.setText("1");
+            calcularTotales();
+        } else {
+            javax.swing.JOptionPane.showMessageDialog(this, "Producto no encontrado.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+    }
+    
+    // Método para calcular los montos e IVA
+    private void calcularTotales() {
+        try{
+            int cantidad = Integer.parseInt(box_cantidad.getText().trim());
+            int precioUnitario = Integer.parseInt(box_precio_und.getText().trim());
+
+            int subtotal = cantidad * precioUnitario;
+            int impuesto = (int) (subtotal * 0.13);
+            int total = subtotal + impuesto;
+
+            box_subtotal.setText(String.valueOf(subtotal));
+            box_iva.setText(String.valueOf(impuesto));
+            box_total.setText(String.valueOf(total));
+            box_total_pagar.setText(String.valueOf(total));
+            
+        } catch (NumberFormatException e) {
+            
+        }
+    }
 
 
 

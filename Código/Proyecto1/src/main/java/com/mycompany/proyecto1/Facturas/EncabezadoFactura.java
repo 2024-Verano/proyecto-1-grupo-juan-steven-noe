@@ -37,14 +37,14 @@ public class EncabezadoFactura {
         
     }
 
-    public EncabezadoFactura(int numeroFactura, int codigoCliente, String fechaRecibido, String estado) {
+    public EncabezadoFactura(int numeroFactura, int codigoCliente, String fechaRecibido, String estado, int subtotal, int impuesto, int total) {
         this.numeroFactura = numeroFactura;
         this.codigoCliente = codigoCliente;
         this.fechaRecibido = fechaRecibido;
         this.estado = estado;
-        this.subtotal = 0;
-        this.impuesto = 0;
-        this.total = 0;
+        this.subtotal = subtotal;
+        this.impuesto = impuesto;
+        this.total = total;
     }
 
     public int getNumeroFactura() {

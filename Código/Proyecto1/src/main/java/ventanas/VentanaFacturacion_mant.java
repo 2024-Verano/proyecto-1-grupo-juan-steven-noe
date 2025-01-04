@@ -32,6 +32,7 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
      */
     public VentanaFacturacion_mant() {
         initComponents();
+        
             // Cargar el siguiente número de factura automáticamente
             Archivo archivo = new Archivo();
             int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas.json", Factura[].class);
@@ -39,6 +40,9 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         
             // Cargar los clientes en el comboBox de clientes al iniciar el formulario
             Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
+            
+            // Cargar los productos en el comboBox de clientes al iniciar el formulario
+            UtilidadesFacturas.cargarMantenimientosAbiertos("mantenimiento.json", combo_codigo_articulo);
         
             // Evitar que la ventana emergente VentanaModificar cierre el programa
             setDefaultCloseOperation(VentanaFacturacion_mant.DISPOSE_ON_CLOSE);
@@ -49,6 +53,7 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
 
             // Crear la instancia de ButtonHoverEffect para el efecto
             ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+            hoverEffect.applyTo(crear_fact);
         
             // Configurar el campo de fecha
             Utilidades.configurarCampoFecha(formatt_fecha_recibido);

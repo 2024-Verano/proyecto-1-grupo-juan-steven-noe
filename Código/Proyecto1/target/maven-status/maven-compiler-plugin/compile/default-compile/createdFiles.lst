@@ -34,6 +34,7 @@ ventanas\Facturacion.class
 ventanas\ModificarCliente$3.class
 ventanas\RegistroClientes$16.class
 ventanas\RegistroMantenimiento.class
+com\mycompany\proyecto1\Facturas\GuardarFactura.class
 ventanas\Facturacion$6.class
 ventanas\ModificarCliente$9.class
 ventanas\RegistroClientes.class
@@ -85,6 +86,7 @@ ventanas\RegistroMantenimiento$10.class
 ventanas\ModificarCliente$7.class
 ventanas\RegistroProductos$17.class
 ventanas\RegistroClientes$12.class
+ventanas\VentanaFacturacion_prod$11.class
 ventanas\VentanaFacturacion_mant.class
 ventanas\ModificarMant$8.class
 com\mycompany\proyecto1\Facturas\UtilidadesFacturas.class
@@ -131,6 +133,7 @@ com\mycompany\proyecto1\Validador.class
 ventanas\VentanaFacturacion_mant$2.class
 ventanas\VentanaFacturacion_prod$7.class
 ventanas\Credenciales.class
+ventanas\VentanaFacturacion_prod$12.class
 com\mycompany\proyecto1\Mantenimiento.class
 ventanas\ModificarMant$6.class
 ventanas\RegistroMantenimiento$16.class
