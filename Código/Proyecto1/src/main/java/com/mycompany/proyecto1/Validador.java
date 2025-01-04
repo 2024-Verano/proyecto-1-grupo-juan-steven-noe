@@ -84,7 +84,7 @@ public class Validador {
                     // Validar la fecha ingresada
                     if (!validarFecha(fechaIngresada)) {
                         JOptionPane.showMessageDialog(null, 
-                            "Fecha inválida. Use el formato dd/MM/yyyy y asegúrese de que esté entre 01/01/2024 y 31/01/2025.", 
+                            "Fecha inválida. Use el formato dd/MM/yyyy", 
                             "Error de fecha", 
                             JOptionPane.ERROR_MESSAGE
                         );
