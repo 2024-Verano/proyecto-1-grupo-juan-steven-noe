@@ -20,12 +20,16 @@ import com.mycompany.proyecto1.Validador;
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Mantenimiento;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author noe
  */
 public class ModificarMant extends javax.swing.JFrame {
+    
+    // Variable global de estado
+    private String estado;
     
     // Constructor vacío para que ModificarMant pueda recibir parámetros sin conflictos en el main
     public ModificarMant(){
@@ -37,16 +41,15 @@ public class ModificarMant extends javax.swing.JFrame {
      * @param parent
      */
     public ModificarMant(Mantenimiento mantenimiento, JFrame parent) {
-        initComponents();
-        
-        // Configurar los campos de fecha para forzar formato dd/MM/yyyy
-        Utilidades.configurarCampoFecha(formatt_fecha_recibido);
-        Utilidades.configurarCampoFecha(formatt_fecha_entrega);
-        
+        initComponents();       
         // Evitar que la ventana emergente VentanaModificar cierre el programa
         setDefaultCloseOperation(ModificarMant.DISPOSE_ON_CLOSE);
         // Centrar con respecto a la ventana de RegistroMantenimiento
         setLocationRelativeTo(parent);
+        
+        // Configurar los campos de fecha para forzar formato dd/MM/yyyy
+        Validador.configurarCampoFecha(formatt_fecha_recibido);
+        Validador.configurarCampoFecha(formatt_fecha_entrega);
         
         // Cargar los clientes en el combo box antes de seleccionar uno
         Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
@@ -61,16 +64,20 @@ public class ModificarMant extends javax.swing.JFrame {
         formatt_fecha_entrega.setText(mantenimiento.getFechaEntrega());
         box_observaciones.setText(mantenimiento.getObservaciones());
         
-            // Define los colores
-            Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-            Color originalColor = Color.BLACK; // Negro (borde inicial)
-
-            // Crear la instancia de ButtonHoverEffect para el efecto
-            ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+        // Asignar valor a variable de estado
+        this.estado = mantenimiento.getEstado();
         
-            hoverEffect.applyTo(guardar_cambios);
-            hoverEffect.applyTo(eliminar_mant);
-            hoverEffect.applyTo(facturar_mant);
+        // Define los colores
+         Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
+         Color originalColor = Color.BLACK; // Negro (borde inicial)
+
+         // Crear la instancia de ButtonHoverEffect para el efecto
+         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+        
+         hoverEffect.applyTo(guardar_cambios);
+         hoverEffect.applyTo(eliminar_mant);
+         hoverEffect.applyTo(facturar_mant);
+         
     }
 
     /**
@@ -500,7 +507,25 @@ public class ModificarMant extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
 
     private void facturar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_mantActionPerformed
-        // TODO add your handling code here:
+        // Validar si el mantenimiento está cerrado
+        if ("Cerrado".equals(estado)) {
+            JOptionPane.showMessageDialog(this, 
+                "Este servicio ya fue facturado y está cerrado.", 
+                "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        // Obtener los datos del mantenimiento seleccionado
+        int codigoMantenimiento = Integer.parseInt(box_codigo_mant.getText().trim());
+        int codigoCliente = Integer.parseInt(combo_codigo_cliente.getSelectedItem().toString().split(" - ")[0]);
+        String fechaRecibido = formatt_fecha_recibido.getText().trim();
+        int precio = Integer.parseInt(box_precio_bici.getText().trim());
+
+        // Abrir la ventana de facturación con los datos llenos
+        VentanaFacturacionMant ventanaFacturacion = new VentanaFacturacionMant();
+        ventanaFacturacion.llenarDatosFactura(codigoMantenimiento, codigoCliente, fechaRecibido, precio);
+        ventanaFacturacion.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_facturar_mantActionPerformed
 
     // Método para obtener nombre de cliente para mostrar en combo box de código cliente

@@ -43,15 +43,16 @@ public class VentanaModificar extends javax.swing.JFrame {
         // Cargar los datos del producto en los espacios correspondientes
         cargarDatosProducto(producto);
         
-            // Define los colores
-            Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-            Color originalColor = Color.BLACK; // Negro (borde inicial)
+         // Define los colores
+         Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
+         Color originalColor = Color.BLACK; // Negro (borde inicial)
 
-            // Crear la instancia de ButtonHoverEffect para el efecto
-            ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+         // Crear la instancia de ButtonHoverEffect para el efecto
+         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
         
-            hoverEffect.applyTo(guardar_cambios);
-            hoverEffect.applyTo(eliminar_producto);
+         hoverEffect.applyTo(guardar_cambios);
+         hoverEffect.applyTo(eliminar_producto);
+         
     }
 
     /**
@@ -447,13 +448,21 @@ public class VentanaModificar extends javax.swing.JFrame {
 
             int codigoArticulo = Integer.parseInt(box_codigo_art.getText());
 
-            // Validar si el producto puede ser eliminado (lógica futura para ProductoFacturado)
-            // Por ahora, no hay validaciones adicionales
+            // Validar si el producto ya ha sido facturado
+            if (Validador.productoHaSidoFacturado(codigoArticulo)) {
+                javax.swing.JOptionPane.showMessageDialog(this, 
+                    "Este producto ya ha sido facturado y no puede eliminarse.", 
+                    "Error", 
+                    javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+
+            // Confirmación antes de eliminar
             int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
                 "¿Está seguro de que desea eliminar este producto?", 
                 "Confirmación de eliminación", 
                 javax.swing.JOptionPane.YES_NO_OPTION);
-        
+
             if (confirm != javax.swing.JOptionPane.YES_OPTION) {
                 return;
             }
@@ -467,12 +476,12 @@ public class VentanaModificar extends javax.swing.JFrame {
             archivo.guardarArchivo(ruta, productosActualizados);
 
             javax.swing.JOptionPane.showMessageDialog(this, "Producto eliminado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            
             dispose();
 
         } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el producto: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
+        
     }//GEN-LAST:event_eliminar_productoActionPerformed
 
     private void cargarDatosProducto(Producto producto) {

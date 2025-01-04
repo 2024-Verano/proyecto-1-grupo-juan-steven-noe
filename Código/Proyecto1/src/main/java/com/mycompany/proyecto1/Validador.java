@@ -4,6 +4,18 @@
  */
 package com.mycompany.proyecto1;
 
+import com.mycompany.proyecto1.Facturas.DetalleFactura;
+import com.mycompany.proyecto1.Facturas.Factura;
+import java.awt.event.FocusAdapter;
+import java.awt.event.FocusEvent;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.JFormattedTextField;
+import javax.swing.JOptionPane;
+import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.MaskFormatter;
+
 /**
  *
  * @author noe
@@ -52,5 +64,88 @@ public class Validador {
         String telefonoStr = String.valueOf(telefono);
         return telefonoStr.length() == 8 && "2468".contains(telefonoStr.substring(0, 1));
     }
+    
+    // Método único para configurar y validar campos de fecha
+    public static void configurarCampoFecha(JFormattedTextField campo) {
+        try {
+            // Define el formato de fecha
+            MaskFormatter formatoFecha = new MaskFormatter("##/##/####");
+            formatoFecha.setPlaceholderCharacter('_');
+
+            // Aplica el formato al campo
+            campo.setFormatterFactory(new DefaultFormatterFactory(formatoFecha));
+
+            // Agrega validación al salir del Box
+            campo.addFocusListener(new java.awt.event.FocusAdapter() {
+                @Override
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    String fechaIngresada = campo.getText().trim();
+
+                    // Validar la fecha ingresada
+                    if (!validarFecha(fechaIngresada)) {
+                        JOptionPane.showMessageDialog(null, 
+                            "Fecha inválida. Use el formato dd/MM/yyyy y asegúrese de que esté entre 01/01/2024 y 31/01/2025.", 
+                            "Error de fecha", 
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                        campo.setText("");
+                    }
+                }
+            });
+
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Error al configurar el campo de fecha: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    // Método de validación de fecha
+    private static boolean validarFecha(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        formato.setLenient(false);
+
+        try {
+            Date fechaIngresada = formato.parse(fecha);
+
+            Date fechaMinima = formato.parse("01/01/2024");
+            Date fechaMaxima = formato.parse("31/01/2025");
+
+            return !fechaIngresada.before(fechaMinima) && !fechaIngresada.after(fechaMaxima);
+
+        } catch (ParseException e) {
+            return false;
+        }
+    }
+
+    public static boolean productoHaSidoFacturado(int codigoProducto) {
+        Archivo archivo = new Archivo();
+        String ruta = "facturas_productos.json";
+
+        try {
+            Factura[] facturas = (Factura[]) archivo.leerArchivo(ruta, Factura[].class);
+            if (facturas == null) return false;
+
+            // Buscar en los detalles de cada factura
+            for (Factura factura : facturas) {
+                for (DetalleFactura detalle : factura.getDetalles()) {
+                    if (detalle.getCodigoArticulo() == codigoProducto) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(null, 
+                "Error al verificar facturación del producto: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+
+        return false;
+    }
+
 }
 

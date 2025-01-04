@@ -63,7 +63,7 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
             hoverEffect.applyTo(crear_fact);
         
             // Configurar el campo de fecha
-            Utilidades.configurarCampoFecha(formatt_fecha_recibido);
+            Validador.configurarCampoFecha(formatt_fecha_recibido);
            
             // Obtener la fecha de hoy en formato "dd/MM/yyyy"
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
@@ -477,6 +477,15 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
         }
     }
 
+    public void llenarDatosFactura(int codigoMantenimiento, int codigoCliente, String fechaRecibido, int precio) {
+        box_num_fact.setText(String.valueOf(new Archivo().obtenerSiguienteCodigo("facturas_mantenimiento.json", Factura[].class)));
+        combo_codigo_cliente.setSelectedItem(String.valueOf(codigoCliente));
+        formatt_fecha_recibido.setText(fechaRecibido);
+        combo_codigo_articulo.setSelectedItem(String.valueOf(codigoMantenimiento));
+        box_precio_und.setText(String.valueOf(precio));
+        box_cantidad.setText("1"); // Siempre es un solo servicio
+        calcularTotales(); // Llama al método que calcula los valores
+    }
 
 
     

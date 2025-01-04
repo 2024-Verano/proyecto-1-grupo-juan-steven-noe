@@ -11,6 +11,7 @@ ventanas\VentanaFacturacionMant$1.class
 ventanas\VentanaFacturacionMant$11.class
 ventanas\MenuOpciones$6.class
 ventanas\RegistroClientes$7.class
+com\mycompany\proyecto1\Validador$1.class
 ventanas\VentanaFacturacionProd$11.class
 ventanas\RegistroClientes$1.class
 ventanas\VentanaFacturacionMant$4.class
@@ -47,7 +48,6 @@ ventanas\ModificarMant$3.class
 ventanas\Facturacion$9.class
 ventanas\RegistroClientes$9.class
 com\mycompany\proyecto1\ConCodigo.class
-com\mycompany\proyecto1\Utilidades$1.class
 ventanas\Facturacion$2.class
 ventanas\RegistroClientes$2.class
 ventanas\RegistroProductos$12.class

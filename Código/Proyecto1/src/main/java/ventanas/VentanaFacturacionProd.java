@@ -64,7 +64,7 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
             hoverEffect.applyTo(crear_fact);
         
             // Configurar el campo de fecha
-            Utilidades.configurarCampoFecha(formatt_fecha_recibido);
+            Validador.configurarCampoFecha(formatt_fecha_recibido);
             
             // Obtener la fecha de hoy en formato "dd/MM/yyyy"
             SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");

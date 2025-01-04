@@ -76,8 +76,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         layout.show(SubFrameContainer, "bienvenidaPanel");
         
         // Configurar los campos de fecha
-        Utilidades.configurarCampoFecha(formatt_fecha_recibido);
-        Utilidades.configurarCampoFecha(formatt_fecha_entrega);
+        Validador.configurarCampoFecha(formatt_fecha_recibido);
+        Validador.configurarCampoFecha(formatt_fecha_entrega);
     }
     
     /**
