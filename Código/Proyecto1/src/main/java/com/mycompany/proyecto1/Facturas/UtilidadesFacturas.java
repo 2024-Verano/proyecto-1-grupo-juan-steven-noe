@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import javax.swing.JComboBox;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -128,5 +129,45 @@ public class UtilidadesFacturas {
         return false;
     }
 
+    // Método para obtener los datos de un servicio
+    public static Mantenimiento obtenerMantenimientoPorCodigo(int codigoServicio) {
+        Archivo archivo = new Archivo();
+        String ruta = "mantenimiento.json";
+
+        try {
+            // Leer los mantenimientos del archivo JSON
+            Mantenimiento[] mantenimientos = (Mantenimiento[]) archivo.leerArchivo(ruta, Mantenimiento[].class);
+
+            if (mantenimientos != null) {
+                for (Mantenimiento mantenimiento : mantenimientos) {
+                    if (mantenimiento.getCodigoServicio() == codigoServicio) {
+                        return mantenimiento; // Devuelve el mantenimiento encontrado
+                    }
+                }
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error al buscar el mantenimiento: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
+
+        return null;
+    }
+
+    
+    // Método para cerrar el estado Abierto de un servicio
+    public static void cerrarMantenimiento(int codigoServicio) {
+        Archivo archivo = new Archivo();
+        String ruta = "mantenimiento.json";
+
+        Mantenimiento[] mantenimientos = (Mantenimiento[]) archivo.leerArchivo(ruta, Mantenimiento[].class);
+        if (mantenimientos != null) {
+            for (Mantenimiento mantenimiento : mantenimientos) {
+                if (mantenimiento.getCodigoServicio() == codigoServicio) {
+                    mantenimiento.setEstado("Cerrado");
+                    break;
+                }
+            }
+            archivo.guardarArchivo(ruta, Arrays.asList(mantenimientos));
+        }
+    }
 
 }

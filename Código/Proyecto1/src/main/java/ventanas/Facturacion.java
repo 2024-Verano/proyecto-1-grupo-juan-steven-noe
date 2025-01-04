@@ -442,7 +442,7 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void facturar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_productoActionPerformed
-        VentanaFacturacion_prod ventana = new VentanaFacturacion_prod();
+        VentanaFacturacionProd ventana = new VentanaFacturacionProd();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_productoActionPerformed
@@ -516,7 +516,7 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_filtro_agregarActionPerformed
 
     private void facturar_servicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_servicioActionPerformed
-        VentanaFacturacion_mant ventana = new VentanaFacturacion_mant();
+        VentanaFacturacionMant ventana = new VentanaFacturacionMant();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_servicioActionPerformed

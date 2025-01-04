@@ -14,23 +14,30 @@ import javax.swing.table.DefaultTableModel;
 // Importar las clases de lógica:
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Facturas.Factura;
+import com.mycompany.proyecto1.Facturas.GuardarFactura;
 import com.mycompany.proyecto1.Facturas.UtilidadesFacturas;
 import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
+import javax.swing.JOptionPane;
 
 // Importar las clases de objetos:
-import com.mycompany.proyecto1.Producto;
+import com.mycompany.proyecto1.Mantenimiento;
+
+// Importar liberías para fecha real
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 
 /**
  *
  * @author noe
  */
-public class VentanaFacturacion_mant extends javax.swing.JFrame {
+public class VentanaFacturacionMant extends javax.swing.JFrame {
     
     /**
      * Creates new form VentanaModificar
      */
-    public VentanaFacturacion_mant() {
+    public VentanaFacturacionMant() {
         initComponents();
         
             // Cargar el siguiente número de factura automáticamente
@@ -45,7 +52,7 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
             UtilidadesFacturas.cargarMantenimientosAbiertos("mantenimiento.json", combo_codigo_articulo);
         
             // Evitar que la ventana emergente VentanaModificar cierre el programa
-            setDefaultCloseOperation(VentanaFacturacion_mant.DISPOSE_ON_CLOSE);
+            setDefaultCloseOperation(VentanaFacturacionMant.DISPOSE_ON_CLOSE);
                 
             // Define los colores
             Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
@@ -57,6 +64,13 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         
             // Configurar el campo de fecha
             Utilidades.configurarCampoFecha(formatt_fecha_recibido);
+           
+            // Obtener la fecha de hoy en formato "dd/MM/yyyy"
+            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+            String fechaHoy = formatoFecha.format(new Date());
+
+            // Asignar la fecha actual al campo formateado
+            formatt_fecha_recibido.setText(fechaHoy);
     }
 
     /**
@@ -101,6 +115,7 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         label_num_fact.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_num_fact.setText("Num. Factura");
 
+        box_num_fact.setEditable(false);
         box_num_fact.setBackground(new java.awt.Color(255, 255, 255));
         box_num_fact.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         box_num_fact.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -117,14 +132,20 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
 
         combo_codigo_cliente.setBackground(new java.awt.Color(255, 255, 255));
         combo_codigo_cliente.setFont(new java.awt.Font("Century Gothic", 0, 12)); // NOI18N
-        combo_codigo_cliente.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "tipo prod" }));
         combo_codigo_cliente.setBorder(null);
+        combo_codigo_cliente.setEnabled(false);
         combo_codigo_cliente.setFocusable(false);
         combo_codigo_cliente.setRequestFocusEnabled(false);
+        combo_codigo_cliente.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_codigo_clienteActionPerformed(evt);
+            }
+        });
 
         label_fecha_recibido.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_fecha_recibido.setText("Fecha recibido");
 
+        formatt_fecha_recibido.setEditable(false);
         formatt_fecha_recibido.setBackground(new java.awt.Color(255, 255, 255));
         formatt_fecha_recibido.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         formatt_fecha_recibido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
@@ -138,10 +159,10 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         label_subtotal.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_subtotal.setText("Subtotal");
 
+        box_subtotal.setEditable(false);
         box_subtotal.setBackground(new java.awt.Color(255, 255, 255));
         box_subtotal.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_subtotal.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_subtotal.setEnabled(false);
         box_subtotal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_subtotalActionPerformed(evt);
@@ -151,10 +172,10 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         label_iva.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_iva.setText("I.V.A");
 
+        box_iva.setEditable(false);
         box_iva.setBackground(new java.awt.Color(255, 255, 255));
         box_iva.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_iva.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_iva.setEnabled(false);
         box_iva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_ivaActionPerformed(evt);
@@ -164,10 +185,10 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         label_total.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_total.setText("TOTAL");
 
+        box_total.setEditable(false);
         box_total.setBackground(new java.awt.Color(255, 255, 255));
-        box_total.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_total.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         box_total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_total.setEnabled(false);
         box_total.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_totalActionPerformed(evt);
@@ -186,12 +207,19 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         combo_codigo_articulo.setBorder(null);
         combo_codigo_articulo.setFocusable(false);
         combo_codigo_articulo.setRequestFocusEnabled(false);
+        combo_codigo_articulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                combo_codigo_articuloActionPerformed(evt);
+            }
+        });
 
         label_cantidad.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_cantidad.setText("Cantidad (und)");
 
+        box_cantidad.setEditable(false);
         box_cantidad.setBackground(new java.awt.Color(255, 255, 255));
-        box_cantidad.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_cantidad.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_cantidad.setText("1");
         box_cantidad.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_cantidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,10 +230,10 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         label_precio_und.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_precio_und.setText("Precio (und)");
 
+        box_precio_und.setEditable(false);
         box_precio_und.setBackground(new java.awt.Color(255, 255, 255));
-        box_precio_und.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
+        box_precio_und.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_precio_und.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_precio_und.setEnabled(false);
         box_precio_und.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_precio_undActionPerformed(evt);
@@ -215,10 +243,10 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         label_total_pagar.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_total_pagar.setText("Total a pagar");
 
+        box_total_pagar.setEditable(false);
         box_total_pagar.setBackground(new java.awt.Color(255, 255, 255));
         box_total_pagar.setFont(new java.awt.Font("Century Gothic", 1, 14)); // NOI18N
         box_total_pagar.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_total_pagar.setEnabled(false);
         box_total_pagar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_total_pagarActionPerformed(evt);
@@ -381,8 +409,73 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
     }//GEN-LAST:event_box_total_pagarActionPerformed
 
     private void crear_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_factActionPerformed
+        try {
+            int numeroFactura = Integer.parseInt(box_num_fact.getText().trim());
+            int codigoCliente = Integer.parseInt(combo_codigo_cliente.getSelectedItem().toString().split(" - ")[0]);
+            int codigoServicio = Integer.parseInt(combo_codigo_articulo.getSelectedItem().toString().split(" - ")[0]);
+            String fecha = formatt_fecha_recibido.getText().trim();
 
+            GuardarFactura.guardarFacturaMantenimiento(numeroFactura, codigoCliente, codigoServicio, fecha);
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(this, "Error al crear factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        }
     }//GEN-LAST:event_crear_factActionPerformed
+
+    private void combo_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_clienteActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_combo_codigo_clienteActionPerformed
+
+    private void combo_codigo_articuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_articuloActionPerformed
+        combo_codigo_articulo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                actualizarDatosMantenimiento();
+            }
+        });
+    }//GEN-LAST:event_combo_codigo_articuloActionPerformed
+    
+    // Método para llenar los campos con los datos del mantenimiento
+    private void actualizarDatosMantenimiento() {
+        String seleccion = (String) combo_codigo_articulo.getSelectedItem();
+        if (seleccion != null && !seleccion.equals("No hay mantenimientos abiertos")) {
+            int codigoServicio = Integer.parseInt(seleccion.split(" - ")[0]);
+
+            // Obtener el mantenimiento correspondiente
+            Mantenimiento mantenimiento = UtilidadesFacturas.obtenerMantenimientoPorCodigo(codigoServicio);
+            if (mantenimiento != null) {
+                // Establecer el código del cliente en el comboBox
+                for (int i = 0; i < combo_codigo_cliente.getItemCount(); i++) {
+                    String item = combo_codigo_cliente.getItemAt(i);
+                    if (item.startsWith(mantenimiento.getCodigoCliente() + " - ")) { 
+                        combo_codigo_cliente.setSelectedIndex(i);
+                        break;
+                    }
+                }
+
+                // Llenar los demás datos
+                box_precio_und.setText(String.valueOf(mantenimiento.getPrecio()));
+                calcularTotales();
+            } else {
+                JOptionPane.showMessageDialog(this, "No se encontró el mantenimiento seleccionado.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+    }
+
+    // Método para calcular los montos automáticamente
+    private void calcularTotales() {
+        try {
+            int precio = Integer.parseInt(box_precio_und.getText().trim());
+            int subtotal = precio;
+            int impuesto = (int) (subtotal * 0.13);
+            int total = subtotal + impuesto;
+
+            box_subtotal.setText(String.valueOf(subtotal));
+            box_iva.setText(String.valueOf(impuesto));
+            box_total.setText(String.valueOf(total));
+            box_total_pagar.setText(String.valueOf(total));
+        } catch (Exception e) {
+            System.out.println("Error en cálculo de totales: " + e.getMessage());
+        }
+    }
 
 
 
@@ -405,14 +498,22 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_mant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionMant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_mant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionMant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_mant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionMant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_mant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionMant.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -425,7 +526,7 @@ public class VentanaFacturacion_mant extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaFacturacion_mant().setVisible(true);
+                new VentanaFacturacionMant().setVisible(true);
             }
         });
     }

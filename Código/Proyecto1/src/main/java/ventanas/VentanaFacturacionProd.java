@@ -33,12 +33,12 @@ import javax.swing.JOptionPane;
  *
  * @author noe
  */
-public class VentanaFacturacion_prod extends javax.swing.JFrame {
+public class VentanaFacturacionProd extends javax.swing.JFrame {
     
     /**
      * Creates new form VentanaModificar
      */
-    public VentanaFacturacion_prod() {
+    public VentanaFacturacionProd() {
         initComponents();
         
             // Cargar el siguiente número de factura automáticamente
@@ -53,7 +53,7 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
             UtilidadesFacturas.cargarProductos("productos.json", combo_codigo_articulo);
         
             // Evitar que la ventana emergente VentanaModificar cierre el programa
-            setDefaultCloseOperation(VentanaFacturacion_prod.DISPOSE_ON_CLOSE);
+            setDefaultCloseOperation(VentanaFacturacionProd.DISPOSE_ON_CLOSE);
                 
             // Define los colores
             Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
@@ -518,14 +518,18 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_prod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_prod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_prod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(VentanaFacturacion_prod.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(VentanaFacturacionProd.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
         //</editor-fold>
@@ -534,7 +538,7 @@ public class VentanaFacturacion_prod extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaFacturacion_prod().setVisible(true);
+                new VentanaFacturacionProd().setVisible(true);
             }
         });
     }
