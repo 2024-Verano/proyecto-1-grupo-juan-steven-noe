@@ -17,11 +17,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
+import java.util.Date;
 
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Cliente;
-
+import ventanas.RegistroClientes;
 
 /**
  *
@@ -384,7 +385,26 @@ public class ModificarCliente extends javax.swing.JFrame {
                 cliente.setProvincia((String) box_provincias.getSelectedItem());
                 cliente.setCanton((String) combo_cantones.getSelectedItem());
                 cliente.setDistrito((String) combo_distritos.getSelectedItem());
+                String fechaTexto = jFormatted_fecha_nacimiento.getText().trim();
                 
+                if(!fechaTexto.isEmpty()){
+                    try {
+                        // Validar y asignar la fecha
+                        java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("dd/MM/yyyy");
+                        formatoFecha.setLenient(false); // Asegurar validación estricta de la fecha
+                        java.util.Date fechaNacimiento = formatoFecha.parse(fechaTexto);
+                        
+                        // Validar que la fecha no sea futura
+                        if (fechaNacimiento.after(new java.util.Date())) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no puede ser una fecha futura.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                       cliente.setFecha(fechaNacimiento);
+                    } catch (java.text.ParseException e) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no tiene un formato válido. Use dd/MM/yyyy.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                }
                 
                 break;
             }
@@ -394,6 +414,10 @@ public class ModificarCliente extends javax.swing.JFrame {
         archivo.guardarArchivo(ruta, clientes);
 
         javax.swing.JOptionPane.showMessageDialog(this, "Cliente modificado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+        
+        RegistroClientes refresh = new RegistroClientes();
+        refresh.cargarClientesEnTabla();
+        
         dispose();
 
         } catch (Exception e) {
@@ -420,31 +444,35 @@ public class ModificarCliente extends javax.swing.JFrame {
                 return;
             }
 
-            int codigoCliente = Integer.parseInt(box_codigo_cliente.getText());
-            for (Cliente cliente : clientes) {
-                if (cliente.getCodigo() == codigoCliente) {
-                    // Actualizar los datos del cliente
-                    String[] nombres = box_nombre_cliente.getText().split(" ", 2);
-                    cliente.setNombre(nombres[0]);
-                    cliente.setApellidos(nombres.length > 1 ? nombres[1] : "");
-                    cliente.setCorreo(box_correo_cliente.getText().trim());
-                    cliente.setTelefono(Integer.parseInt(box_telefono.getText().trim()));
-                    cliente.setProvincia((String) box_provincias.getSelectedItem());
-                    cliente.setCanton((String) combo_cantones.getSelectedItem());
-                    cliente.setDistrito((String) combo_distritos.getSelectedItem());
-                     
-                    break;
+             int codigoCliente = Integer.parseInt(box_codigo_cliente.getText());
+
+            // Confirmación para eliminar el cliente
+            int confirmacion = javax.swing.JOptionPane.showConfirmDialog(
+            this,
+            "¿Está seguro de que desea eliminar este cliente?",
+            "Confirmar eliminación",
+            javax.swing.JOptionPane.YES_NO_OPTION,
+            javax.swing.JOptionPane.WARNING_MESSAGE
+             );
+
+            if (confirmacion == javax.swing.JOptionPane.YES_OPTION) {
+                List<Cliente> listaClientes = new ArrayList<>(List.of(clientes));
+
+                // Filtrar al cliente para eliminarlo
+                boolean clienteEliminado = listaClientes.removeIf(cliente -> cliente.getCodigo() == codigoCliente);
+
+                if (clienteEliminado) {
+                    // Guardar los cambios en el archivo
+                    archivo.guardarArchivo(ruta, listaClientes.toArray(new Cliente[0]));
+
+                    javax.swing.JOptionPane.showMessageDialog(this, "Cliente eliminado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                    dispose();
+                } else {
+                    javax.swing.JOptionPane.showMessageDialog(this, "No se encontró el cliente a eliminar.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 }
             }
-
-            // Guardar los cambios en el archivo
-            archivo.guardarArchivo(ruta, clientes);
-
-            javax.swing.JOptionPane.showMessageDialog(this, "Cliente modificado exitosamente.", "Éxito", javax.swing.JOptionPane.INFORMATION_MESSAGE);
-            dispose();
-
         } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el cliente: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al eliminar el cliente: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_eliminar_clienteActionPerformed
 

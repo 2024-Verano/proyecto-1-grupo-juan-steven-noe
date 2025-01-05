@@ -5,6 +5,7 @@
 package com.mycompany.proyecto1;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
+import com.mycompany.proyecto1.Validador;
 
 /**
  *
@@ -287,5 +288,9 @@ public class Cliente implements ConCodigo{
      */
     public Object[] toArray() {
         return new Object[]{codigo, nombre, apellidos, telefono, correo, provincia, canton, distrito, fecha};
+    }
+
+    private String String(Date fecha) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 }

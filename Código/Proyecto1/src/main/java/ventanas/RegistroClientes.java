@@ -583,22 +583,21 @@ public class RegistroClientes extends javax.swing.JFrame {
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
                 .addContainerGap(146, Short.MAX_VALUE)
+                .addComponent(filtro_agregar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
-                        .addComponent(filtro_agregar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(text_buscar_agregar)
-                            .addGroup(modificarPanelLayout.createSequentialGroup()
-                                .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(119, 119, 119))
+                    .addComponent(text_buscar_agregar)
                     .addGroup(modificarPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 729, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addComponent(buscador_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 466, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(119, 119, 119))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, modificarPanelLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 778, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         modificarPanelLayout.setVerticalGroup(
             modificarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -763,7 +762,7 @@ public class RegistroClientes extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_clienteActionPerformed
     
-    private void cargarClientesEnTabla() {
+    void cargarClientesEnTabla() {
         String ruta = "registroClientes.json";
         Archivo archivo = new Archivo();
 
@@ -775,7 +774,7 @@ public class RegistroClientes extends javax.swing.JFrame {
             // Obtener el valor ingresado en el campo de búsqueda
             String textoBusqueda = buscador_agregar.getText().trim().toLowerCase();
             String filtroSeleccionado = (String) combo_filtro_agregar.getSelectedItem();
-
+            boolean clienteEncontrado = false;
             if (clientes != null) {
                 for (Cliente cliente : clientes) {
                     boolean coincide = false;
@@ -801,13 +800,18 @@ public class RegistroClientes extends javax.swing.JFrame {
                         cliente.getDistrito(),
                         cliente.getFecha()
                     });
+                    clienteEncontrado = true;
                 }
             }
+                
         }
-    } catch (Exception e) {
-        javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar los clientes: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            if(!clienteEncontrado){
+                javax.swing.JOptionPane.showMessageDialog(this, "No se encontró ningún cliente con el filtro proporcionado.", "Información", javax.swing.JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar los clientes: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
     }
-}
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         cargarClientesEnTabla();
@@ -848,7 +852,31 @@ public class RegistroClientes extends javax.swing.JFrame {
             String provincia = jComboBox_provincias.getSelectedItem().toString();
             String canton = jComboBox_cantones.getSelectedItem().toString();
             String distrito = jComboBox_distritos.getSelectedItem().toString();
-            Date fechaNacimiento = (Date) formatt_fecha_nacimiento.getValue();
+             
+            // Validar la fecha de nacimiento
+            String fechaTexto = formatt_fecha_nacimiento.getText().trim();
+            
+            if(fechaTexto.isEmpty()){
+                javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de nacimiento.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+            }
+            java.util.Date fechaNacimiento;
+            
+            try{
+                java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("dd/MM/yyyy");
+                formatoFecha.setLenient(false); 
+                fechaNacimiento = formatoFecha.parse(fechaTexto);
+                
+                // Validar que la fecha no sea futura
+                if (fechaNacimiento.after(new java.util.Date())) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no puede ser futura.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+                }  
+            }catch (java.text.ParseException e) {
+                javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no tiene un formato válido. Use dd/MM/yyyy.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
 
             // Generar el código automáticamente
             int codigo = archivo.obtenerSiguienteCodigo(ruta, Cliente[].class);
