@@ -6,6 +6,7 @@ package com.mycompany.proyecto1;
 
 import com.mycompany.proyecto1.Facturas.DetalleFactura;
 import com.mycompany.proyecto1.Facturas.Factura;
+import java.awt.Toolkit;
 import java.awt.event.FocusAdapter;
 import java.awt.event.FocusEvent;
 import java.text.ParseException;
@@ -13,7 +14,12 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.JFormattedTextField;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
+import javax.swing.text.AbstractDocument;
+import javax.swing.text.AttributeSet;
+import javax.swing.text.BadLocationException;
 import javax.swing.text.DefaultFormatterFactory;
+import javax.swing.text.DocumentFilter;
 import javax.swing.text.MaskFormatter;
 
 /**
@@ -276,6 +282,21 @@ public class Validador {
             return false;
         }
     }
+    
+    // Método para limitar los carácteres en un campo
+    public static void setLimiteCaracteres(JTextField campo, int limite) {
+        ((AbstractDocument) campo.getDocument()).setDocumentFilter(new DocumentFilter() {
+                @Override
+                public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                    if (fb.getDocument().getLength() + text.length() - length <= limite) {
+                        super.replace(fb, offset, length, text, attrs);
+                    } else {
+                        Toolkit.getDefaultToolkit().beep();
+                    }
+                }
+            });
+        }
+    
 
 }
 

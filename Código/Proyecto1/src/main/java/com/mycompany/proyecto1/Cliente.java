@@ -69,7 +69,7 @@ public class Cliente implements ConCodigo{
      * Fecha de nacimiento del cliente.
      */
     @JsonProperty("fecha")
-    private Date fecha;
+    private String fecha;
 
     // Constructor predeterminado para Jackson
     public Cliente() {
@@ -90,7 +90,7 @@ public class Cliente implements ConCodigo{
      * @throws IllegalArgumentException si alguno de los parámetros no cumple con las validaciones.
      */
     public Cliente(int codigo, String nombre, String apellidos, int telefono, String correo,
-                   String provincia, String canton, String distrito, Date fecha) {
+                   String provincia, String canton, String distrito, String fecha) {
         this.codigo = codigo;
         setNombre(nombre);
         setApellidos(apellidos);
@@ -267,7 +267,7 @@ public class Cliente implements ConCodigo{
      *
      * @return La fecha de nacimiento del cliente.
      */
-    public Date getFecha() {
+    public String getFecha() {
         return fecha;
     }
 
@@ -276,7 +276,7 @@ public class Cliente implements ConCodigo{
      *
      * @param fecha La fecha de nacimiento a establecer.
      */
-    public void setFecha(Date fecha) {
+    public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 

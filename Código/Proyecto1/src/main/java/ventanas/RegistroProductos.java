@@ -33,6 +33,14 @@ public class RegistroProductos extends javax.swing.JFrame {
     public RegistroProductos() {
         initComponents();
         
+        // Establecer máximo de carácteres para campos (formato: (campo, largo))
+        Validador.setLimiteCaracteres(box_nombre_tipo_prod, 50);
+        
+        Validador.setLimiteCaracteres(box_nombre_art, 50);
+        Validador.setLimiteCaracteres(box_marca_art, 50);
+        Validador.setLimiteCaracteres(box_precio_art, 7);
+        Validador.setLimiteCaracteres(box_cantidad_art, 3);
+    
         // Cargar los tipos de producto en el comboBox al iniciar el formulario
         Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
 
@@ -118,9 +126,9 @@ public class RegistroProductos extends javax.swing.JFrame {
         box_marca_art = new javax.swing.JTextField();
         guardar_art = new javax.swing.JButton();
         marca_art1 = new javax.swing.JLabel();
-        box_marca_art1 = new javax.swing.JTextField();
+        box_precio_art = new javax.swing.JTextField();
         marca_art2 = new javax.swing.JLabel();
-        box_marca_art2 = new javax.swing.JTextField();
+        box_cantidad_art = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         modificarPanel = new javax.swing.JPanel();
@@ -140,6 +148,7 @@ public class RegistroProductos extends javax.swing.JFrame {
         setSize(new java.awt.Dimension(1000, 800));
 
         funciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        funciones.setFloatable(false);
         funciones.setRollover(true);
 
         jSeparator1.setEnabled(false);
@@ -437,24 +446,24 @@ public class RegistroProductos extends javax.swing.JFrame {
         marca_art1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         marca_art1.setText("Precio");
 
-        box_marca_art1.setBackground(new java.awt.Color(255, 255, 255));
-        box_marca_art1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_marca_art1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_marca_art1.addActionListener(new java.awt.event.ActionListener() {
+        box_precio_art.setBackground(new java.awt.Color(255, 255, 255));
+        box_precio_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_precio_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_precio_art.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_marca_art1ActionPerformed(evt);
+                box_precio_artActionPerformed(evt);
             }
         });
 
         marca_art2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         marca_art2.setText("Cantidad");
 
-        box_marca_art2.setBackground(new java.awt.Color(255, 255, 255));
-        box_marca_art2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_marca_art2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_marca_art2.addActionListener(new java.awt.event.ActionListener() {
+        box_cantidad_art.setBackground(new java.awt.Color(255, 255, 255));
+        box_cantidad_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_cantidad_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_cantidad_art.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_marca_art2ActionPerformed(evt);
+                box_cantidad_artActionPerformed(evt);
             }
         });
 
@@ -496,8 +505,8 @@ public class RegistroProductos extends javax.swing.JFrame {
                                         .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(guardar_art, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                                             .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                                .addComponent(box_marca_art2, javax.swing.GroupLayout.Alignment.LEADING)
-                                                .addComponent(box_marca_art1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                                .addComponent(box_cantidad_art, javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(box_precio_art, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                                 .addGap(0, 39, Short.MAX_VALUE))))
                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -538,11 +547,11 @@ public class RegistroProductos extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(box_precio_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(box_cantidad_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(guardar_art, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(17, 17, 17))
@@ -830,8 +839,8 @@ public class RegistroProductos extends javax.swing.JFrame {
             String tamanoBici = "Bicicleta".equals(tipoArticulo) ? (String) combo_tammanio_bici.getSelectedItem() : null;
             String nombre = box_nombre_art.getText().trim();
             String marca = box_marca_art.getText().trim();
-            int precio = Integer.parseInt(box_marca_art1.getText().trim());
-            int cantidad = Integer.parseInt(box_marca_art2.getText().trim());
+            int precio = Integer.parseInt(box_precio_art.getText().trim());
+            int cantidad = Integer.parseInt(box_cantidad_art.getText().trim());
 
             // Validar los campos no vacíos
             if (nombre.isEmpty() || marca.isEmpty() || precio <= 0 || cantidad < 0) {
@@ -860,8 +869,8 @@ public class RegistroProductos extends javax.swing.JFrame {
             // Limpiar los campos del formulario después de la confirmación
             box_nombre_art.setText("");
             box_marca_art.setText("");
-            box_marca_art1.setText("");
-            box_marca_art2.setText("");
+            box_precio_art.setText("");
+            box_cantidad_art.setText("");
             combo_tammanio_bici.setSelectedIndex(-1);
 
             // Actualizar el siguiente código disponible para el artículo
@@ -878,13 +887,13 @@ public class RegistroProductos extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_artActionPerformed
 
-    private void box_marca_art1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art1ActionPerformed
+    private void box_precio_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_precio_artActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_box_marca_art1ActionPerformed
+    }//GEN-LAST:event_box_precio_artActionPerformed
 
-    private void box_marca_art2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art2ActionPerformed
+    private void box_cantidad_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_cantidad_artActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_box_marca_art2ActionPerformed
+    }//GEN-LAST:event_box_cantidad_artActionPerformed
 
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         String ruta = "productos.json";
@@ -1066,14 +1075,14 @@ public class RegistroProductos extends javax.swing.JFrame {
     private javax.swing.JLabel bienvenidaLabel;
     private javax.swing.JLabel bienvenidaLabel1;
     private javax.swing.JPanel bienvenidaPanel;
+    private javax.swing.JTextField box_cantidad_art;
     private javax.swing.JTextField box_codigo_art;
     private javax.swing.JComboBox<String> box_codigo_prod;
     private javax.swing.JTextField box_codigo_tipo_prod;
     private javax.swing.JTextField box_marca_art;
-    private javax.swing.JTextField box_marca_art1;
-    private javax.swing.JTextField box_marca_art2;
     private javax.swing.JTextField box_nombre_art;
     private javax.swing.JTextField box_nombre_tipo_prod;
+    private javax.swing.JTextField box_precio_art;
     private javax.swing.JTextField buscador_agregar;
     private javax.swing.JButton button_buscar_modificar;
     private javax.swing.JLabel ciclista_icon;

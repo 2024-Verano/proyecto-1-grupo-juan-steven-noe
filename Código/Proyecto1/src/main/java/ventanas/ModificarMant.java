@@ -78,6 +78,12 @@ public class ModificarMant extends javax.swing.JFrame {
          hoverEffect.applyTo(eliminar_mant);
          hoverEffect.applyTo(facturar_mant);
          
+         // Establecer máximo de carácteres por campo (formato: (campo, largo))
+        Validador.setLimiteCaracteres(box_marca_bici, 30);
+        Validador.setLimiteCaracteres(box_precio_bici, 7);
+        Validador.setLimiteCaracteres(box_descrip_bici, 100);
+        Validador.setLimiteCaracteres(box_observaciones, 100);
+         
     }
 
     /**

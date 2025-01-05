@@ -61,6 +61,7 @@
             <LineBorder/>
           </Border>
         </Property>
+        <Property name="floatable" type="boolean" value="false"/>
         <Property name="rollover" type="boolean" value="true"/>
       </Properties>
 
@@ -507,8 +508,8 @@
                                                   <Group type="103" groupAlignment="0" attributes="0">
                                                       <Component id="guardar_art" min="-2" pref="139" max="-2" attributes="0"/>
                                                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                                                          <Component id="box_marca_art2" alignment="0" max="32767" attributes="0"/>
-                                                          <Component id="box_marca_art1" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
+                                                          <Component id="box_cantidad_art" alignment="0" max="32767" attributes="0"/>
+                                                          <Component id="box_precio_art" alignment="0" min="-2" pref="74" max="-2" attributes="0"/>
                                                       </Group>
                                                   </Group>
                                               </Group>
@@ -566,12 +567,12 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="marca_art1" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="box_marca_art1" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="box_precio_art" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="marca_art2" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
-                              <Component id="box_marca_art2" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
+                              <Component id="box_cantidad_art" alignment="3" min="-2" pref="25" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="guardar_art" min="-2" pref="43" max="-2" attributes="0"/>
@@ -791,7 +792,7 @@
                     <Property name="text" type="java.lang.String" value="Precio"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="box_marca_art1">
+                <Component class="javax.swing.JTextField" name="box_precio_art">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -806,7 +807,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_marca_art1ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_precio_artActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JLabel" name="marca_art2">
@@ -817,7 +818,7 @@
                     <Property name="text" type="java.lang.String" value="Cantidad"/>
                   </Properties>
                 </Component>
-                <Component class="javax.swing.JTextField" name="box_marca_art2">
+                <Component class="javax.swing.JTextField" name="box_cantidad_art">
                   <Properties>
                     <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
                       <Color blue="ff" green="ff" red="ff" type="rgb"/>
@@ -832,7 +833,7 @@
                     </Property>
                   </Properties>
                   <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_marca_art2ActionPerformed"/>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="box_cantidad_artActionPerformed"/>
                   </Events>
                 </Component>
                 <Component class="javax.swing.JSeparator" name="jSeparator6">

@@ -35,8 +35,6 @@ public class ModificarCliente extends javax.swing.JFrame {
     // Constructor vacío para que VentanaModificar pueda recibir parámetros sin conflictos en el main
     public ModificarCliente(){
         initComponents();
-        // Configurar el campo de fecha de nacimiento
-        Validador.configurarCampoFechaNacimiento(formatt_fecha_nacimiento);
     }
     /**
      * Creates new form VentanaModificar
@@ -54,18 +52,26 @@ public class ModificarCliente extends javax.swing.JFrame {
         // Evitar que la ventana emergente VentanaModificar cierre el programa
         setDefaultCloseOperation(ModificarCliente.DISPOSE_ON_CLOSE);
         
+        // Configurar el campo de fecha de nacimiento
+        Validador.configurarCampoFechaNacimiento(formatt_fecha_nacimiento);
+        
         // Cargar los datos del cliente en los espacios correspondientes
         cargarDatosCliente(cliente);
+       
+        // Establecer el máximo de carácteres en cada campo (formato: (campo, largo))
+        Validador.setLimiteCaracteres(box_nombre_cliente, 50);
+        Validador.setLimiteCaracteres(box_telefono, 8);
+        Validador.setLimiteCaracteres(box_correo_cliente, 50);
         
             // Define los colores
-            Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-            Color originalColor = Color.BLACK; // Negro (borde inicial)
+        Color hoverColor = new Color(150,150,150);
+        Color originalColor = Color.BLACK;
 
-            // Crear la instancia de ButtonHoverEffect para el efecto
-            ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+        // Crear la instancia de ButtonHoverEffect para el efecto
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
         
-            hoverEffect.applyTo(guardar_cambios);
-            hoverEffect.applyTo(eliminar_cliente);
+        hoverEffect.applyTo(guardar_cambios);
+        hoverEffect.applyTo(eliminar_cliente);
             
     }
 
@@ -492,11 +498,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         box_telefono.setText(String.valueOf(cliente.getTelefono()));
 
         // Fecha de nacimiento
-        if (cliente.getFecha() != null) {
-            formatt_fecha_nacimiento.setValue(cliente.getFecha());
-        } else {
-            formatt_fecha_nacimiento.setValue(null);
-        }
+        formatt_fecha_nacimiento.setText(cliente.getFecha());
 
         // Configurar provincia
         String provincia = cliente.getProvincia();

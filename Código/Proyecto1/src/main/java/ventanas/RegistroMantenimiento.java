@@ -78,6 +78,12 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         // Configurar los campos de fecha
         Validador.configurarCampoFecha(formatt_fecha_recibido);
         Validador.configurarCampoFecha(formatt_fecha_entrega);
+        
+        // Establecer máximo de carácteres por campo (formato: (campo, largo))
+        Validador.setLimiteCaracteres(box_marca_bici, 30);
+        Validador.setLimiteCaracteres(box_precio_bici, 7);
+        Validador.setLimiteCaracteres(box_descrip_bici, 100);
+        Validador.setLimiteCaracteres(box_observaciones, 100);
     }
     
     /**
@@ -743,13 +749,13 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             
             String fechaRecibido = formatt_fecha_recibido.getText().trim();
             if (fechaRecibido.contains("_") || fechaRecibido.equals("__/__/____")) {
-                javax.swing.JOptionPane.showMessageDialog(this, "La fecha  de recibido no puede estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "La fecha  de recibido no puede estar vacía", "Error de fecha", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
             
             String fechaEntrega = formatt_fecha_entrega.getText().trim();
             if (fechaEntrega.contains("_") || fechaEntrega.equals("__/__/____")) {
-                javax.swing.JOptionPane.showMessageDialog(this, "La fecha de entrega no puede estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                javax.swing.JOptionPane.showMessageDialog(this, "La fecha de entrega no puede estar vacía", "Error de fecha", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
             

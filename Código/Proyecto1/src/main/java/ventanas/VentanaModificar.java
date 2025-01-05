@@ -37,6 +37,12 @@ public class VentanaModificar extends javax.swing.JFrame {
     public VentanaModificar(Producto producto) {
         initComponents();
         
+        // Establecer el máximo de carácteres en cada campo (formato: (campo, largo))
+        Validador.setLimiteCaracteres(box_nombre_art, 50);
+        Validador.setLimiteCaracteres(box_marca_art, 50);
+        Validador.setLimiteCaracteres(box_precio_art, 7);
+        Validador.setLimiteCaracteres(box_cantidad_art, 3);
+        
         // Evitar que la ventana emergente VentanaModificar cierre el programa
         setDefaultCloseOperation(VentanaModificar.DISPOSE_ON_CLOSE);
         
@@ -79,9 +85,9 @@ public class VentanaModificar extends javax.swing.JFrame {
         box_marca_art = new javax.swing.JTextField();
         guardar_cambios = new javax.swing.JButton();
         marca_art1 = new javax.swing.JLabel();
-        box_marca_art1 = new javax.swing.JTextField();
+        box_precio_art = new javax.swing.JTextField();
         marca_art2 = new javax.swing.JLabel();
-        box_marca_art2 = new javax.swing.JTextField();
+        box_cantidad_art = new javax.swing.JTextField();
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         eliminar_producto = new javax.swing.JButton();
@@ -180,24 +186,24 @@ public class VentanaModificar extends javax.swing.JFrame {
         marca_art1.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         marca_art1.setText("Precio");
 
-        box_marca_art1.setBackground(new java.awt.Color(255, 255, 255));
-        box_marca_art1.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_marca_art1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_marca_art1.addActionListener(new java.awt.event.ActionListener() {
+        box_precio_art.setBackground(new java.awt.Color(255, 255, 255));
+        box_precio_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_precio_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_precio_art.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_marca_art1ActionPerformed(evt);
+                box_precio_artActionPerformed(evt);
             }
         });
 
         marca_art2.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         marca_art2.setText("Cantidad");
 
-        box_marca_art2.setBackground(new java.awt.Color(255, 255, 255));
-        box_marca_art2.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_marca_art2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        box_marca_art2.addActionListener(new java.awt.event.ActionListener() {
+        box_cantidad_art.setBackground(new java.awt.Color(255, 255, 255));
+        box_cantidad_art.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        box_cantidad_art.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        box_cantidad_art.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                box_marca_art2ActionPerformed(evt);
+                box_cantidad_artActionPerformed(evt);
             }
         });
 
@@ -248,8 +254,8 @@ public class VentanaModificar extends javax.swing.JFrame {
                                         .addComponent(marca_art2)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                         .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                            .addComponent(box_marca_art2, javax.swing.GroupLayout.Alignment.LEADING)
-                                            .addComponent(box_marca_art1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(box_cantidad_art, javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(box_precio_art, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addGap(0, 43, Short.MAX_VALUE))))
                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
@@ -294,11 +300,11 @@ public class VentanaModificar extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_marca_art1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(box_precio_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_marca_art2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(box_cantidad_art, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(eliminar_producto, javax.swing.GroupLayout.DEFAULT_SIZE, 43, Short.MAX_VALUE)
@@ -380,8 +386,8 @@ public class VentanaModificar extends javax.swing.JFrame {
                     String tamanoBici = "Bicicleta".equals(tipoArticulo) ? combo_tammanio_bici.getSelectedItem().toString() : null;
                     String nombre = box_nombre_art.getText().trim();
                     String marca = box_marca_art.getText().trim();
-                    String precioTexto = box_marca_art1.getText().trim();
-                    String cantidadTexto = box_marca_art2.getText().trim();
+                    String precioTexto = box_precio_art.getText().trim();
+                    String cantidadTexto = box_cantidad_art.getText().trim();
 
                     // Validaciones
                     if (!Validador.validarAlfabetico(nombre)) {
@@ -399,8 +405,8 @@ public class VentanaModificar extends javax.swing.JFrame {
                         return;
                     }
 
-                    if (!Validador.validarNumerico(cantidadTexto) || Integer.parseInt(cantidadTexto) < 0) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "La cantidad debe ser un número no negativo.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    if (!Validador.validarNumerico(cantidadTexto) || Integer.parseInt(cantidadTexto) <= 0) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La cantidad debe ser mayor a cero.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                         return;
                     }
 
@@ -427,13 +433,13 @@ public class VentanaModificar extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardar_cambiosActionPerformed
 
-    private void box_marca_art1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art1ActionPerformed
+    private void box_precio_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_precio_artActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_box_marca_art1ActionPerformed
+    }//GEN-LAST:event_box_precio_artActionPerformed
 
-    private void box_marca_art2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_art2ActionPerformed
+    private void box_cantidad_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_cantidad_artActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_box_marca_art2ActionPerformed
+    }//GEN-LAST:event_box_cantidad_artActionPerformed
 
     private void eliminar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_productoActionPerformed
         String ruta = "productos.json";
@@ -505,8 +511,8 @@ public class VentanaModificar extends javax.swing.JFrame {
         combo_tammanio_bici.setSelectedItem(producto.getTamanoBici());
         box_nombre_art.setText(producto.getNombre());
         box_marca_art.setText(producto.getMarca());
-        box_marca_art1.setText(String.valueOf(producto.getPrecio()));
-        box_marca_art2.setText(String.valueOf(producto.getCantidad()));
+        box_precio_art.setText(String.valueOf(producto.getPrecio()));
+        box_cantidad_art.setText(String.valueOf(producto.getCantidad()));
     }
 
     //Clase para obtener los datos de un tipo de producto
@@ -573,12 +579,12 @@ public class VentanaModificar extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JTextField box_cantidad_art;
     private javax.swing.JTextField box_codigo_art;
     private javax.swing.JComboBox<String> box_codigo_prod;
     private javax.swing.JTextField box_marca_art;
-    private javax.swing.JTextField box_marca_art1;
-    private javax.swing.JTextField box_marca_art2;
     private javax.swing.JTextField box_nombre_art;
+    private javax.swing.JTextField box_precio_art;
     private javax.swing.JLabel codigo_art;
     private javax.swing.JLabel codigo_prod;
     private javax.swing.JComboBox<String> combo_tammanio_bici;

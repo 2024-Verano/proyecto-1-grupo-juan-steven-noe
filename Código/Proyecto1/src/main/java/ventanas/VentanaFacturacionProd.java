@@ -72,6 +72,9 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
 
             // Asignar la fecha actual al campo formateado
             formatt_fecha_recibido.setText(fechaHoy);
+            
+            // Establecer límite de carácteres por espacio
+            Validador.setLimiteCaracteres(box_cantidad, 3);
     }
 
     /**
