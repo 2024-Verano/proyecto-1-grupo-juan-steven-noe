@@ -455,6 +455,8 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al guardar la factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        this.dispose();
     }//GEN-LAST:event_crear_factActionPerformed
 
     private void combo_codigo_articuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_articuloActionPerformed

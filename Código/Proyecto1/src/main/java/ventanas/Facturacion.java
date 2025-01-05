@@ -18,6 +18,7 @@ import com.mycompany.proyecto1.Facturas.DetalleFactura;
 import com.mycompany.proyecto1.Facturas.EncabezadoFactura;
 import com.mycompany.proyecto1.Facturas.Factura;
 import com.mycompany.proyecto1.Facturas.UtilidadesFacturas;
+import com.mycompany.proyecto1.Mantenimiento;
 import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
 
@@ -32,6 +33,9 @@ import javax.swing.JOptionPane;
  * @author noe
  */
 public class Facturacion extends javax.swing.JFrame {
+    
+    // Variable global para validar el estado de la factura al anular
+    String estado;
 
     /**
      * Creates new form MenuOpciones
@@ -191,28 +195,27 @@ public class Facturacion extends javax.swing.JFrame {
         bienvenidaPanelLayout.setHorizontalGroup(
             bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addContainerGap(183, Short.MAX_VALUE)
+                .addGap(181, 181, 181)
                 .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
                         .addComponent(bienvenidaLabel1)
-                        .addGap(207, 207, 207))
+                        .addGap(36, 36, 36))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
                         .addComponent(mant_icon)
-                        .addGap(468, 468, 468))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                        .addComponent(bienvenidaLabel)
-                        .addGap(171, 171, 171))))
+                        .addGap(297, 297, 297))
+                    .addComponent(bienvenidaLabel, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addContainerGap(196, Short.MAX_VALUE))
         );
         bienvenidaPanelLayout.setVerticalGroup(
             bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
+                .addGap(177, 177, 177)
                 .addComponent(bienvenidaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bienvenidaLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(mant_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(bienvenidaPanel, "card2");
@@ -259,7 +262,7 @@ public class Facturacion extends javax.swing.JFrame {
 
         label_descripcion_prod1.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         label_descripcion_prod1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        label_descripcion_prod1.setText("<html>Facturar un servicio para un cliente.</html>");
+        label_descripcion_prod1.setText("<html>\nFacturar un servicio de mantenimiento\n<br>\npara un cliente.\n</html>");
 
         javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
         agregarPanel.setLayout(agregarPanelLayout);
@@ -274,7 +277,7 @@ public class Facturacion extends javax.swing.JFrame {
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(facturar_servicio, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_descripcion_prod1))
-                .addContainerGap(148, Short.MAX_VALUE))
+                .addContainerGap(146, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -287,7 +290,7 @@ public class Facturacion extends javax.swing.JFrame {
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_descripcion_prod, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(label_descripcion_prod1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(166, Short.MAX_VALUE))
+                .addContainerGap(145, Short.MAX_VALUE))
         );
 
         facturar_producto.getAccessibleContext().setAccessibleDescription("Facturar productos y artículos varios.");
@@ -484,6 +487,15 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     private void facturar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_productoActionPerformed
+        // Validar que existan productos para facturar
+        Archivo archivo = new Archivo();
+        String ruta = "productos.json";
+        Producto[] productos = (Producto[]) archivo.leerArchivo(ruta, Producto[].class);
+        if (productos == null || productos.length == 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No existen productos para facturar. Agregue primero un producto", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
         VentanaFacturacionProd ventana = new VentanaFacturacionProd();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(this);
@@ -513,19 +525,21 @@ public class Facturacion extends javax.swing.JFrame {
 
             // Obtener detalle (puede haber más de un artículo por factura)
             for (DetalleFactura detalle : factura.getDetalles()) {
+                estado = encabezado.getEstado();
                 model.addRow(new Object[]{
-                    encabezado.getNumeroFactura(),  // Número de factura
-                    encabezado.getCodigoCliente(),  // Código del cliente
-                    encabezado.getFechaRecibido(),  // Fecha de recibido
-                    encabezado.getEstado(),         // Estado
-                    encabezado.getSubtotal(),       // Subtotal
-                    encabezado.getImpuesto(),       // Impuesto 13%
-                    encabezado.getTotal(),          // Total de la factura
-                    detalle.getCodigoArticulo(),    // Código del artículo
-                    detalle.getCantidad(),          // Cantidad de productos/servicio
-                    detalle.getPrecioUnitario(),    // Precio unitario
-                    detalle.getTotal()              // Total del artículo
+                    encabezado.getNumeroFactura(),
+                    encabezado.getCodigoCliente(),
+                    encabezado.getFechaRecibido(),
+                    encabezado.getEstado(),
+                    encabezado.getSubtotal(),
+                    encabezado.getImpuesto(),
+                    encabezado.getTotal(),
+                    detalle.getCodigoArticulo(),
+                    detalle.getCantidad(),
+                    detalle.getPrecioUnitario(),
+                    detalle.getTotal()
                 });
+                
             }
         }
 
@@ -551,6 +565,15 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_criterio_busquedaActionPerformed
 
     private void facturar_servicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_servicioActionPerformed
+        // Validar que existan servicios para facturar
+        Archivo archivo = new Archivo();
+        String ruta = "mantenimiento.json";
+        Mantenimiento[] servicios = (Mantenimiento[]) archivo.leerArchivo(ruta, Mantenimiento[].class);
+        if (servicios == null || servicios.length == 0) {
+            javax.swing.JOptionPane.showMessageDialog(this, "No existen servicios para facturar. Agregue primero un servicio", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
         VentanaFacturacionMant ventana = new VentanaFacturacionMant();
         ventana.setVisible(true);
         ventana.setLocationRelativeTo(this);
@@ -564,6 +587,11 @@ public class Facturacion extends javax.swing.JFrame {
         int filaSeleccionada = tabla_resultado.getSelectedRow();
         if (filaSeleccionada == -1) {
             JOptionPane.showMessageDialog(this, "Seleccione una factura para anular.", "Error", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        
+        if (estado.equals("Anulado")) {
+            javax.swing.JOptionPane.showMessageDialog(this, "La factura ya está anulada", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
             return;
         }
 

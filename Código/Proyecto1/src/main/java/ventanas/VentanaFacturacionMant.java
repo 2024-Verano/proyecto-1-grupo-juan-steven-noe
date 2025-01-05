@@ -419,6 +419,8 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(this, "Error al crear factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
+        
+        this.dispose();
     }//GEN-LAST:event_crear_factActionPerformed
 
     private void combo_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_clienteActionPerformed

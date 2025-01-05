@@ -212,7 +212,6 @@ public class ModificarMant extends javax.swing.JFrame {
         formatt_fecha_entrega.setBackground(new java.awt.Color(255, 255, 255));
         formatt_fecha_entrega.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         formatt_fecha_entrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        formatt_fecha_entrega.setText("dd/mm/yyyy");
         formatt_fecha_entrega.setToolTipText("");
         formatt_fecha_entrega.setActionCommand("<Not Set>");
         formatt_fecha_entrega.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -423,6 +422,12 @@ public class ModificarMant extends javax.swing.JFrame {
                         return;
                     }
                     
+                    // Validar que fechaRecibido no sea después que fecha Entrega
+                    if (!Validador.esFechaAnterior(fechaRecibido, fechaEntrega)) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La fecha de recibido no puede ser mayor a la de entrega", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
                     String observaciones = box_observaciones.getText().trim();
                     if (observaciones == null || observaciones.trim().isEmpty()) {
                         observaciones = "Sin observaciones";
@@ -470,6 +475,11 @@ public class ModificarMant extends javax.swing.JFrame {
 
             int codigoServicio = Integer.parseInt(box_codigo_mant.getText());
 
+            if (Validador.mantenimientoHaSidoFacturado(codigoServicio)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "No se puede eliminar un servicio ya facturado", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             // Confirmación antes de eliminar
             int confirm = javax.swing.JOptionPane.showConfirmDialog(this, 
                 "¿Está seguro de que desea eliminar este servicio?", 
@@ -547,6 +557,7 @@ public class ModificarMant extends javax.swing.JFrame {
         VentanaFacturacionMant ventanaFacturacion = new VentanaFacturacionMant();
         ventanaFacturacion.llenarDatosFactura(codigoMantenimiento, codigoCliente, fechaRecibido, precio);
         ventanaFacturacion.setVisible(true);
+        ventanaFacturacion.setLocationRelativeTo(this);
         this.dispose();
     }//GEN-LAST:event_facturar_mantActionPerformed
 

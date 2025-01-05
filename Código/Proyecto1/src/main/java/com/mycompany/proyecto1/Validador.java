@@ -152,11 +152,11 @@ public class Validador {
                     // Validar la fecha ingresada
                     if (!validarFechaNacimiento(fechaIngresada)) {
                         JOptionPane.showMessageDialog(null, 
-                            "Fecha inválida. Use el formato dd/MM/yyyy y debe estar entre 01/01/1900 y 01/01/2024.", 
+                            "Fecha inválida. Debe estar entre 01/01/1900 y 01/01/2024.", 
                             "Error de fecha", 
                             JOptionPane.ERROR_MESSAGE
                         );
-                        campo.setText(""); // Limpiar el campo automáticamente
+                        campo.setText("");
                     }
                 }
             });
@@ -187,14 +187,17 @@ public class Validador {
             return false;
         }
     }
-
+    
+    // Método para validar si un producto ya fue facturado
     public static boolean productoHaSidoFacturado(int codigoProducto) {
         Archivo archivo = new Archivo();
         String ruta = "facturas_productos.json";
 
         try {
             Factura[] facturas = (Factura[]) archivo.leerArchivo(ruta, Factura[].class);
-            if (facturas == null) return false;
+            if (facturas == null) {
+                return false;
+            }
 
             // Buscar en los detalles de cada factura
             for (Factura factura : facturas) {
@@ -213,22 +216,66 @@ public class Validador {
 
         return false;
     }
-    
-    // Método para validar fecha anterior que otra
-    public static boolean esFechaAnterior(String fecha1, String fecha2) {
-        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
-        formato.setLenient(false);
+ 
+    // Método para validar si un mantenimiento ya fue facturado
+    public static boolean mantenimientoHaSidoFacturado(int codigoServicio) {
+        Archivo archivo = new Archivo();
+        String ruta = "facturas_mantenimiento.json";
 
         try {
+            Factura[] facturas = (Factura[]) archivo.leerArchivo(ruta, Factura[].class);
+            if (facturas == null) return false;
+
+            // Buscar en los detalles de cada factura
+            for (Factura factura : facturas) {
+                for (DetalleFactura detalle : factura.getDetalles()) {
+                    if (detalle.getCodigoArticulo() == codigoServicio) {
+                        return true;
+                    }
+                }
+            }
+        } catch (Exception e) {
+            javax.swing.JOptionPane.showMessageDialog(null, 
+                "Error al verificar facturación del servicio: " + e.getMessage(), 
+                "Error", 
+                javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+
+        return false;
+    }
+    
+    // Método para comparar dos fechas en formato dd/MM/yyyy con MaskFormatter
+    public static boolean esFechaAnterior(String fecha1, String fecha2) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        formato.setLenient(false); // Evita aceptar fechas inválidas
+
+        try {
+            // Limpiar la máscara antes de procesar las fechas
+            fecha1 = fecha1.replace("_", "").trim();
+            fecha2 = fecha2.replace("_", "").trim();
+
+            // Verificar que ambas fechas están completas
+            if (fecha1.equals("__/__/____") || fecha2.equals("__/__/____") || fecha1.length() < 10 || fecha2.length() < 10) {
+                JOptionPane.showMessageDialog(null, 
+                    "Debe ingresar fechas completas en formato dd/MM/yyyy.", 
+                    "Error de Fecha", 
+                    JOptionPane.ERROR_MESSAGE);
+                return false;
+            }
+
             Date primeraFecha = formato.parse(fecha1);
             Date segundaFecha = formato.parse(fecha2);
 
-            return primeraFecha.before(segundaFecha); // Retorna true si fecha1 < fecha2
+            return primeraFecha.before(segundaFecha);
 
         } catch (ParseException e) {
+            JOptionPane.showMessageDialog(null, 
+                "Error al comparar fechas. Asegúrese de usar el formato dd/MM/yyyy.", 
+                "Error de Fecha", 
+                JOptionPane.ERROR_MESSAGE);
             return false;
+        }
     }
-}
 
 }
 

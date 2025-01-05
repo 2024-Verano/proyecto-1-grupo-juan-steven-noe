@@ -211,30 +211,31 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         bienvenidaPanel.setLayout(bienvenidaPanelLayout);
         bienvenidaPanelLayout.setHorizontalGroup(
             bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                .addGap(0, 48, Short.MAX_VALUE)
-                .addComponent(bienvenidaLabel)
-                .addGap(45, 45, 45))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(bienvenidaPanelLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
                 .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(bienvenidaLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                        .addComponent(bienvenidaLabel1)
-                        .addGap(207, 207, 207))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                        .addComponent(mant_icon)
-                        .addGap(468, 468, 468))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
+                                .addComponent(bienvenidaLabel1)
+                                .addGap(162, 162, 162))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
+                                .addComponent(mant_icon)
+                                .addGap(423, 423, 423)))))
+                .addContainerGap(60, Short.MAX_VALUE))
         );
         bienvenidaPanelLayout.setVerticalGroup(
             bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(bienvenidaPanelLayout.createSequentialGroup()
-                .addGap(175, 175, 175)
+                .addGap(178, 178, 178)
                 .addComponent(bienvenidaLabel)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(bienvenidaLabel1)
                 .addGap(18, 18, 18)
                 .addComponent(mant_icon, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(333, Short.MAX_VALUE))
+                .addContainerGap(330, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(bienvenidaPanel, "card2");
@@ -590,7 +591,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         modificarPanel_mantLayout.setHorizontalGroup(
             modificarPanel_mantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(modificarPanel_mantLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(95, Short.MAX_VALUE)
                 .addComponent(filtro_agregar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(combo_filtro_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -603,9 +604,9 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                         .addComponent(button_buscar_modificar, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(119, 119, 119))
             .addGroup(modificarPanel_mantLayout.createSequentialGroup()
-                .addGap(87, 87, 87)
+                .addGap(55, 55, 55)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 880, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         modificarPanel_mantLayout.setVerticalGroup(
             modificarPanel_mantLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -752,6 +753,14 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                 return;
             }
             
+            // Validar que fechaRecibido no sea después que fecha Entrega
+            if (!Validador.esFechaAnterior(fechaRecibido, fechaEntrega)) {
+                javax.swing.JOptionPane.showMessageDialog(this, "La fecha de recibido no puede ser mayor a la de entrega", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                formatt_fecha_entrega.setText("");
+                formatt_fecha_recibido.setText("");
+                return;
+            }
+            
             String observaciones = box_observaciones.getText().trim();
             if (observaciones == null || observaciones.trim().isEmpty()) {
                 observaciones = "Sin observaciones";
@@ -801,8 +810,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             box_marca_bici.setText("");
             box_precio_bici.setText("");
             box_descrip_bici.setText("");
-            formatt_fecha_recibido.setText("dd/MM/yyyy");
-            formatt_fecha_entrega.setText("dd/MM/yyyy");
+            formatt_fecha_recibido.setText("");
+            formatt_fecha_entrega.setText("");
 
         } catch (Exception e) {
             javax.swing.JOptionPane.showMessageDialog(this, "Error al guardar el mantenimiento: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);

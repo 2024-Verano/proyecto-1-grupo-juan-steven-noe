@@ -1,1 +1,2 @@
-[{"encabezado":{"numeroFactura":1,"codigoCliente":1,"fechaRecibido":"05/01/2025","estado":"Anulado","subtotal":1750000,"impuesto":227500,"total":1977500},"detalles":[{"codigoArticulo":1,"numeroFactura":1,"cantidad":7,"precioUnitario":250000,"total":1750000}]}]
+[
+]
