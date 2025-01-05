@@ -330,7 +330,6 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         formatt_fecha_recibido.setBackground(new java.awt.Color(255, 255, 255));
         formatt_fecha_recibido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         formatt_fecha_recibido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        formatt_fecha_recibido.setText("dd/mm/yyyy");
         formatt_fecha_recibido.setToolTipText("");
         formatt_fecha_recibido.setActionCommand("<Not Set>");
         formatt_fecha_recibido.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -349,7 +348,6 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         formatt_fecha_entrega.setBackground(new java.awt.Color(255, 255, 255));
         formatt_fecha_entrega.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         formatt_fecha_entrega.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        formatt_fecha_entrega.setText("dd/mm/yyyy");
         formatt_fecha_entrega.setToolTipText("");
         formatt_fecha_entrega.setActionCommand("<Not Set>");
         formatt_fecha_entrega.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -648,6 +646,22 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void agregar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_mantActionPerformed
+        String ruta = "mantenimiento.json";
+        Archivo archivo = new Archivo();
+        
+         try {
+            // Usar el método de Archivo para obtener el siguiente código
+            int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Mantenimiento[].class);
+
+            // Mostrar el código en el campo correspondiente
+            box_codigo_mant.setText(String.valueOf(siguienteCodigo));
+
+        } catch (Exception e) {
+            box_codigo_mant.setText("AUTOMÁTICO");
+            javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+        }
+
+        
         // Mostrar el SubFrame de "agregar cliente"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "agregarPanel");
@@ -675,26 +689,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         boolean isVisible = opcionesAgregarMant.isVisible();
         opcionesAgregarMant.setVisible(!isVisible);
 
-        // Si las opciones se hacen visibles, cargar el siguiente código
-        if (!isVisible) {
-            String ruta = "mantenimiento.json";
-            Archivo archivo = new Archivo();
-
-            try {
-                // Usar el método de Archivo para obtener el siguiente código
-                int siguienteCodigo = archivo.obtenerSiguienteCodigo(ruta, Mantenimiento[].class);
-
-                // Mostrar el código en el campo correspondiente
-                box_codigo_mant.setText(String.valueOf(siguienteCodigo));
-
-            } catch (Exception e) {
-                box_codigo_mant.setText("AUTOMÁTICO");
-                javax.swing.JOptionPane.showMessageDialog(this, "Error al cargar el siguiente código: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            }
-        }
-
-    this.revalidate();
-    this.repaint();
+        this.revalidate();
+        this.repaint();
     }//GEN-LAST:event_crear_mantActionPerformed
 
     private void box_codigo_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_mantActionPerformed
@@ -713,15 +709,15 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         String ruta = "mantenimiento.json";
         Archivo archivo = new Archivo();
 
-        try {
-            // Validar los campos
+        try { // Validar los campos
+            
             String codigoClienteTexto = (String) combo_codigo_cliente.getSelectedItem();
             if (codigoClienteTexto == null || codigoClienteTexto.trim().isEmpty() || "No hay clientes".equals(codigoClienteTexto)) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Debe seleccionar un cliente.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
 
-            // Extraer el código del cliente del formato "1 - Juan"
+            // Extraer el código del cliente del formato
             String codigoClienteSolo = codigoClienteTexto.split(" - ")[0].trim();
             int codigoCliente = Integer.parseInt(codigoClienteSolo);
 
@@ -739,9 +735,32 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             int precio = Integer.parseInt(precioTexto);
 
             String descripcion = box_descrip_bici.getText().trim();
-
+            if (!Validador.validarAlfanumerico(descripcion, "ConTexto")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "La descripción debe ser válida y/o no estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             String fechaRecibido = formatt_fecha_recibido.getText().trim();
+            if (fechaRecibido.contains("_") || fechaRecibido.equals("__/__/____")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "La fecha  de recibido no puede estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
             String fechaEntrega = formatt_fecha_entrega.getText().trim();
+            if (fechaEntrega.contains("_") || fechaEntrega.equals("__/__/____")) {
+                javax.swing.JOptionPane.showMessageDialog(this, "La fecha de entrega no puede estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            String observaciones = box_observaciones.getText().trim();
+            if (observaciones == null || observaciones.trim().isEmpty()) {
+                observaciones = "Sin observaciones";
+            } else {
+                 if (!Validador.validarAlfanumerico(observaciones, "observaciones")) {
+                    javax.swing.JOptionPane.showMessageDialog(this, "Las observaciones deben ser válidas", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
+                 }
+            }
 
             // Generar un código único para el mantenimiento
             int codigoMantenimiento = archivo.obtenerSiguienteCodigo(ruta, Mantenimiento[].class);
@@ -754,7 +773,7 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                 precio,
                 fechaRecibido,
                 fechaEntrega,
-                "Sin observaciones",
+                observaciones,
                 "Abierto"
             );
 

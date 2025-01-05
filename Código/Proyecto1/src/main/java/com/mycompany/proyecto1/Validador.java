@@ -38,6 +38,18 @@ public class Validador {
         }
         return entrada.matches("\\d+");
     }
+    
+    // Valida que la entrada contenga solo carácteres alfanuméricos
+    public static boolean validarAlfanumerico(String entrada, String tipo) {
+        if (tipo.equals("ConTexto")) {
+            if (entrada == null || entrada.trim().isEmpty()) {
+                return false;
+            }
+        }
+        
+        return entrada.matches("[a-zA-Z0-9 ,.;]+");
+    }
+
 
     // Valida que la entrada sea un correo electrónico válido
     public static boolean validarCorreo(String entrada) {

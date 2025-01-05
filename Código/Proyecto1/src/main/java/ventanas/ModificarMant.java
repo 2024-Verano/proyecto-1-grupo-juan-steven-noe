@@ -194,7 +194,6 @@ public class ModificarMant extends javax.swing.JFrame {
         formatt_fecha_recibido.setBackground(new java.awt.Color(255, 255, 255));
         formatt_fecha_recibido.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         formatt_fecha_recibido.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        formatt_fecha_recibido.setText("dd/mm/yyyy");
         formatt_fecha_recibido.setToolTipText("");
         formatt_fecha_recibido.setActionCommand("<Not Set>");
         formatt_fecha_recibido.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
@@ -407,9 +406,32 @@ public class ModificarMant extends javax.swing.JFrame {
                     int precio = Integer.parseInt(precioTexto);
 
                     String descripcion = box_descrip_bici.getText().trim();
+                    if (!Validador.validarAlfanumerico(descripcion, "ConTexto")) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La descripción debe ser válida y no estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
                     String fechaRecibido = formatt_fecha_recibido.getText().trim();
+                    if (fechaRecibido.contains("_") || fechaRecibido.equals("__/__/____")) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La fecha  de recibido no puede estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
                     String fechaEntrega = formatt_fecha_entrega.getText().trim();
+                    if (fechaEntrega.contains("_") || fechaEntrega.equals("__/__/____")) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "La fecha  de entrega no puede estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
                     String observaciones = box_observaciones.getText().trim();
+                    if (observaciones == null || observaciones.trim().isEmpty()) {
+                        observaciones = "Sin observaciones";
+                    } else {
+                        if (!Validador.validarAlfanumerico(observaciones, "observaciones")) {
+                            javax.swing.JOptionPane.showMessageDialog(this, "Las observaciones deben ser válidas", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                            return;
+                        }
+                    }
 
                     // Actualizar los valores del mantenimiento
                     mantenimiento.setCodigoCliente(codigoCliente);
