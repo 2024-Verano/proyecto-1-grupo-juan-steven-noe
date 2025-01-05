@@ -19,6 +19,7 @@ import com.mycompany.proyecto1.Validador;
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Mantenimiento;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -119,6 +120,11 @@ public class ModificarMant extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         codigo_servicio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         codigo_servicio.setText("Código servicio");
@@ -566,6 +572,12 @@ public class ModificarMant extends javax.swing.JFrame {
         ventanaFacturacion.setLocationRelativeTo(this);
         this.dispose();
     }//GEN-LAST:event_facturar_mantActionPerformed
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Facturar/modificar/eliminar servicio");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     // Método para obtener nombre de cliente para mostrar en combo box de código cliente
     public static String obtenerNombreCliente(int codigoCliente) {

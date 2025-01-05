@@ -26,6 +26,7 @@ import com.mycompany.proyecto1.Mantenimiento;
 // Importar liberías para fecha real
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -111,6 +112,11 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         label_num_fact.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         label_num_fact.setText("Num. Factura");
@@ -434,6 +440,12 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
             }
         });
     }//GEN-LAST:event_combo_codigo_articuloActionPerformed
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Facturar un servicio");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
     
     // Método para llenar los campos con los datos del mantenimiento
     private void actualizarDatosMantenimiento() {

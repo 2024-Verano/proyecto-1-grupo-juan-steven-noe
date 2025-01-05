@@ -7,6 +7,7 @@ package ventanas;
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Usuario;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 /**
@@ -55,6 +56,11 @@ public class Credenciales extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -80,7 +86,9 @@ public class Credenciales extends javax.swing.JFrame {
         label_inciar_sesion.setFont(new java.awt.Font("Century Gothic", 0, 24)); // NOI18N
         label_inciar_sesion.setText("INICIAR SESIÓN");
 
+        box_usuario.setBackground(new java.awt.Color(255, 255, 255));
         box_usuario.setFont(new java.awt.Font("Century Gothic", 0, 18)); // NOI18N
+        box_usuario.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_usuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_usuarioActionPerformed(evt);
@@ -101,6 +109,8 @@ public class Credenciales extends javax.swing.JFrame {
             }
         });
 
+        box_contrasenia.setBackground(new java.awt.Color(255, 255, 255));
+        box_contrasenia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_contrasenia.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 box_contraseniaActionPerformed(evt);
@@ -148,12 +158,12 @@ public class Credenciales extends javax.swing.JFrame {
                 .addGap(51, 51, 51)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(label_iniciar_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(box_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(box_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(label_iniciar_contrasenia, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(box_contrasenia))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 21, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, 22, Short.MAX_VALUE)
                 .addComponent(button_ingresar, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34))
         );
@@ -199,6 +209,12 @@ public class Credenciales extends javax.swing.JFrame {
     private void box_contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_contraseniaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_contraseniaActionPerformed
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Iniciar Sesión");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments

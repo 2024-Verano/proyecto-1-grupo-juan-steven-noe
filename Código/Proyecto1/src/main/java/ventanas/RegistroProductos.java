@@ -19,6 +19,7 @@ import com.mycompany.proyecto1.Utilidades;
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Producto;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -146,6 +147,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         funciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         funciones.setFloatable(false);
@@ -296,7 +302,6 @@ public class RegistroProductos extends javax.swing.JFrame {
 
         box_nombre_tipo_prod.setBackground(new java.awt.Color(255, 255, 255));
         box_nombre_tipo_prod.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
-        box_nombre_tipo_prod.setText(" ");
         box_nombre_tipo_prod.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         box_nombre_tipo_prod.setSelectionColor(new java.awt.Color(0, 0, 0));
         box_nombre_tipo_prod.addActionListener(new java.awt.event.ActionListener() {
@@ -1019,6 +1024,12 @@ public class RegistroProductos extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Registro de productos");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {

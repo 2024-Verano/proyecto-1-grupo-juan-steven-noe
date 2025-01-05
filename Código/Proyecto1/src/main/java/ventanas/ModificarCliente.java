@@ -22,6 +22,7 @@ import java.util.Date;
 
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Cliente;
+import javax.swing.ImageIcon;
 import ventanas.RegistroClientes;
 
 /**
@@ -108,6 +109,11 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         codigo_cliente.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         codigo_cliente.setText("Código cliente");
@@ -396,15 +402,16 @@ public class ModificarCliente extends javax.swing.JFrame {
                 String[] nombres = box_nombre_cliente.getText().split(" ", 2);
                 cliente.setNombre(nombres[0]);
                 cliente.setApellidos(nombres.length > 1 ? nombres[1] : "");
+                cliente.setFecha(formatt_fecha_nacimiento.getText().trim());
                 cliente.setCorreo(box_correo_cliente.getText().trim());
                 cliente.setTelefono(Integer.parseInt(box_telefono.getText().trim()));
                 cliente.setProvincia((String) box_provincias.getSelectedItem());
                 cliente.setCanton((String) combo_cantones.getSelectedItem());
                 cliente.setDistrito((String) combo_distritos.getSelectedItem());
-                String fechaTexto = formatt_fecha_nacimiento.getText().trim();
                 
-                if(fechaTexto.isEmpty()){
-                    javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no tiene un formato válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                String fechaTexto = formatt_fecha_nacimiento.getText().trim();
+                if(fechaTexto.contains("_") || fechaTexto.equals("__/__/____")){
+                    javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no puede estar vacía.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                     return;
                     }
                 
@@ -485,6 +492,12 @@ public class ModificarCliente extends javax.swing.JFrame {
     private void formatt_fecha_nacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_nacimientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_nacimientoActionPerformed
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Modificar/eliminar cliente");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     private void cargarDatosCliente(Cliente cliente) {
         // Código del cliente

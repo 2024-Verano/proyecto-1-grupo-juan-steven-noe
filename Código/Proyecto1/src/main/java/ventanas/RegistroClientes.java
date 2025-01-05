@@ -25,6 +25,7 @@ import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Producto;
 import com.mycompany.proyecto1.Cliente;
 import java.text.SimpleDateFormat;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -144,6 +145,11 @@ public class RegistroClientes extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         funciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         funciones.setFloatable(false);
@@ -310,7 +316,6 @@ public class RegistroClientes extends javax.swing.JFrame {
         box_num_telefono.setBackground(new java.awt.Color(255, 255, 255));
         box_num_telefono.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
         box_num_telefono.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        box_num_telefono.setText(" ");
         box_num_telefono.setToolTipText("");
         box_num_telefono.setActionCommand("<Not Set>");
         box_num_telefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -947,6 +952,12 @@ public class RegistroClientes extends javax.swing.JFrame {
     private void jComboBox_distritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_distritosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jComboBox_distritosActionPerformed
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Registro de clientes");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {

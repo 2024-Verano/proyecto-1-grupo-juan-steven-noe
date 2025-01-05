@@ -19,6 +19,7 @@ import com.mycompany.proyecto1.Validador;
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Producto;
 import com.mycompany.proyecto1.TipoProducto;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -94,6 +95,11 @@ public class VentanaModificar extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         codigo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         codigo_art.setText("Código artículo");
@@ -489,6 +495,12 @@ public class VentanaModificar extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_eliminar_productoActionPerformed
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Modificar/eliminar un producto");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     private void cargarDatosProducto(Producto producto) {
         box_codigo_art.setText(String.valueOf(producto.getCodigoArticulo()));

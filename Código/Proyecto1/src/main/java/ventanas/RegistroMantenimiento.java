@@ -22,6 +22,7 @@ import com.mycompany.proyecto1.Utilidades;
 // Importar las clases de objetos:
 import com.mycompany.proyecto1.Mantenimiento;
 import com.mycompany.proyecto1.Producto;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -144,6 +145,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         setMinimumSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         funciones.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         funciones.setFloatable(false);
@@ -222,14 +228,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
                 .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(bienvenidaLabel, javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 176, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(bienvenidaPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                                .addComponent(bienvenidaLabel1)
-                                .addGap(162, 162, 162))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
-                                .addComponent(mant_icon)
-                                .addGap(423, 423, 423)))))
+                        .addComponent(bienvenidaLabel1)
+                        .addGap(162, 162, 162))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, bienvenidaPanelLayout.createSequentialGroup()
+                        .addComponent(mant_icon)
+                        .addGap(423, 423, 423)))
                 .addContainerGap(60, Short.MAX_VALUE))
         );
         bienvenidaPanelLayout.setVerticalGroup(
@@ -864,6 +867,12 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     private void combo_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
+
+    // Método para establecer el ícono del programa y un título de ventana
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Registro de servicios de mantenimiento");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {

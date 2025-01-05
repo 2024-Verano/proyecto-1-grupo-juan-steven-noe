@@ -4,6 +4,7 @@
  */
 package ventanas;
 import java.awt.Color;
+import javax.swing.ImageIcon;
 
 
 /**
@@ -59,6 +60,11 @@ public class MenuOpciones extends javax.swing.JFrame {
         setPreferredSize(new java.awt.Dimension(1000, 800));
         setResizable(false);
         setSize(new java.awt.Dimension(1000, 800));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowOpened(java.awt.event.WindowEvent evt) {
+                formWindowOpened(evt);
+            }
+        });
 
         ciclista_icon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/ciclista.png"))); // NOI18N
 
@@ -226,6 +232,11 @@ public class MenuOpciones extends javax.swing.JFrame {
         opciones.setVisible(true);
         opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_cerrar_sesionActionPerformed
+
+    private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
+        setTitle("Menú de opciones de administrador");
+        setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
+    }//GEN-LAST:event_formWindowOpened
 
     /**
      * @param args the command line arguments
