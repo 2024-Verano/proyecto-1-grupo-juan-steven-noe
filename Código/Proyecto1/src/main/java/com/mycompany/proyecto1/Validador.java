@@ -120,6 +120,61 @@ public class Validador {
             return false;
         }
     }
+    
+    // Método para validar fecha de nacimiento
+    public static void configurarCampoFechaNacimiento(JFormattedTextField campo) {
+        try {
+            // Define el formato de fecha
+            MaskFormatter formatoFecha = new MaskFormatter("##/##/####");
+            formatoFecha.setPlaceholderCharacter('_');
+
+            // Aplica el formato al campo
+            campo.setFormatterFactory(new DefaultFormatterFactory(formatoFecha));
+
+            // Agrega validación al salir del Box
+            campo.addFocusListener(new java.awt.event.FocusAdapter() {
+                @Override
+                public void focusLost(java.awt.event.FocusEvent evt) {
+                    String fechaIngresada = campo.getText().trim();
+
+                    // Validar la fecha ingresada
+                    if (!validarFechaNacimiento(fechaIngresada)) {
+                        JOptionPane.showMessageDialog(null, 
+                            "Fecha inválida. Use el formato dd/MM/yyyy y debe estar entre 01/01/1900 y 01/01/2024.", 
+                            "Error de fecha", 
+                            JOptionPane.ERROR_MESSAGE
+                        );
+                        campo.setText(""); // Limpiar el campo automáticamente
+                    }
+                }
+            });
+
+        } catch (ParseException e) {
+            JOptionPane.showMessageDialog(
+                null, 
+                "Error al configurar el campo de fecha: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE
+            );
+        }
+    }
+
+    // Método de validación de fecha de nacimiento
+    public static boolean validarFechaNacimiento(String fecha) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        formato.setLenient(false);
+
+        try {
+            Date fechaIngresada = formato.parse(fecha);
+            Date fechaMinima = formato.parse("01/01/1900");
+            Date fechaMaxima = formato.parse("01/01/2024");
+
+            return !fechaIngresada.before(fechaMinima) && !fechaIngresada.after(fechaMaxima);
+
+        } catch (ParseException e) {
+            return false;
+        }
+    }
 
     public static boolean productoHaSidoFacturado(int codigoProducto) {
         Archivo archivo = new Archivo();

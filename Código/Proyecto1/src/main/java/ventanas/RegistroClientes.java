@@ -24,6 +24,7 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Producto;
 import com.mycompany.proyecto1.Cliente;
+import java.text.SimpleDateFormat;
 
 
 /**
@@ -77,6 +78,10 @@ public class RegistroClientes extends javax.swing.JFrame {
         SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "bienvenidaPanel");
+        
+        // Configurar el campo de fecha de nacimiento
+        Validador.configurarCampoFechaNacimiento(formatt_fecha_nacimiento);
+
     }
     
     /**
@@ -396,7 +401,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                     .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                         .addGap(140, 140, 140)
                         .addComponent(codigo_defectoCliente)))
-                .addGap(106, 126, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -420,7 +425,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                 .addComponent(num_telefono)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(opcionesAgregarClienteLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                         .addComponent(distrito)
@@ -434,7 +439,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                         .addComponent(provincia1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jComboBox_provincias, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(117, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(opcionesAgregarClienteLayout.createSequentialGroup()
                 .addGap(101, 101, 101)
                 .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -481,7 +486,7 @@ public class RegistroClientes extends javax.swing.JFrame {
                     .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(guardar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(24, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout agregarPanelLayout = new javax.swing.GroupLayout(agregarPanel);
@@ -489,21 +494,20 @@ public class RegistroClientes extends javax.swing.JFrame {
         agregarPanelLayout.setHorizontalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(opcionesAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(319, Short.MAX_VALUE))
+                .addGap(302, 302, 302)
+                .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(opcionesAgregarCliente, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(crear_usuario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(331, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(agregarPanelLayout.createSequentialGroup()
-                .addGap(12, 12, 12)
+                .addGap(13, 13, 13)
                 .addComponent(crear_usuario, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(agregarPanelLayout.createSequentialGroup()
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(opcionesAgregarCliente, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 108, Short.MAX_VALUE))
+                .addContainerGap(31, Short.MAX_VALUE))
         );
 
         SubFrameContainer.add(agregarPanel, "card2");
@@ -822,15 +826,14 @@ public class RegistroClientes extends javax.swing.JFrame {
         Archivo archivo = new Archivo();
 
         try {
-            
             String nombre = box_nombre_cliente.getText().trim();
-            String[] nombres = nombre.split(" ", 2); // Dividir nombre completo en nombre y apellidos
+            String[] nombres = nombre.split(" ", 2);
             if (nombre.isEmpty() || nombres.length < 2) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar el nombre completo del cliente.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
             String apellidos = nombres[1].trim();
-            
+
             int telefono;
             try {
                 telefono = Integer.parseInt(box_num_telefono.getText().trim());
@@ -842,41 +845,25 @@ public class RegistroClientes extends javax.swing.JFrame {
                 javax.swing.JOptionPane.showMessageDialog(this, "El teléfono debe ser un número válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             String correo = box_correo_cliente.getText().trim();
             if (!Validador.validarCorreo(correo)) {
                 javax.swing.JOptionPane.showMessageDialog(this, "El correo tiene un formato inválido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
             String provincia = jComboBox_provincias.getSelectedItem().toString();
             String canton = jComboBox_cantones.getSelectedItem().toString();
             String distrito = jComboBox_distritos.getSelectedItem().toString();
-             
+
             // Validar la fecha de nacimiento
             String fechaTexto = formatt_fecha_nacimiento.getText().trim();
-            
-            if(fechaTexto.isEmpty()){
+            if (fechaTexto.isEmpty()) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Debe ingresar una fecha de nacimiento.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-            return;
-            }
-            java.util.Date fechaNacimiento;
-            
-            try{
-                java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("dd/MM/yyyy");
-                formatoFecha.setLenient(false); 
-                fechaNacimiento = formatoFecha.parse(fechaTexto);
-                
-                // Validar que la fecha no sea futura
-                if (fechaNacimiento.after(new java.util.Date())) {
-                    javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no puede ser futura.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                    return;
-                }  
-            }catch (java.text.ParseException e) {
-                javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no tiene un formato válido. Use dd/MM/yyyy.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
-            
+
+            java.util.Date fechaNacimiento = new SimpleDateFormat("dd/MM/yyyy").parse(fechaTexto);
 
             // Generar el código automáticamente
             int codigo = archivo.obtenerSiguienteCodigo(ruta, Cliente[].class);
@@ -887,8 +874,8 @@ public class RegistroClientes extends javax.swing.JFrame {
             // Leer clientes existentes del archivo
             Cliente[] clientesExistentes = (Cliente[]) archivo.leerArchivo(ruta, Cliente[].class);
             List<Cliente> listaClientes = clientesExistentes != null 
-            ? new ArrayList<>(List.of(clientesExistentes)) 
-            : new ArrayList<>();
+                ? new ArrayList<>(List.of(clientesExistentes)) 
+                : new ArrayList<>();
 
             // Agregar el nuevo cliente
             listaClientes.add(cliente);

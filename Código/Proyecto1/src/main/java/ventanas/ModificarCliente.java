@@ -35,6 +35,8 @@ public class ModificarCliente extends javax.swing.JFrame {
     // Constructor vacío para que VentanaModificar pueda recibir parámetros sin conflictos en el main
     public ModificarCliente(){
         initComponents();
+        // Configurar el campo de fecha de nacimiento
+        Validador.configurarCampoFechaNacimiento(formatt_fecha_nacimiento);
     }
     /**
      * Creates new form VentanaModificar
@@ -64,6 +66,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         
             hoverEffect.applyTo(guardar_cambios);
             hoverEffect.applyTo(eliminar_cliente);
+            
     }
 
     /**
@@ -87,7 +90,6 @@ public class ModificarCliente extends javax.swing.JFrame {
         nombre_cliente = new javax.swing.JLabel();
         box_nombre_cliente = new javax.swing.JTextField();
         fecha_nacimiento = new javax.swing.JLabel();
-        jFormatted_fecha_nacimiento = new javax.swing.JFormattedTextField();
         guardar_cambios = new javax.swing.JButton();
         correo_cliente = new javax.swing.JLabel();
         box_correo_cliente = new javax.swing.JTextField();
@@ -96,6 +98,7 @@ public class ModificarCliente extends javax.swing.JFrame {
         jSeparator6 = new javax.swing.JSeparator();
         jSeparator7 = new javax.swing.JSeparator();
         eliminar_cliente = new javax.swing.JButton();
+        formatt_fecha_nacimiento = new javax.swing.JFormattedTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
@@ -178,11 +181,6 @@ public class ModificarCliente extends javax.swing.JFrame {
         fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         fecha_nacimiento.setText("Fecha de Nacimiento");
 
-        jFormatted_fecha_nacimiento.setBackground(new java.awt.Color(255, 255, 255));
-        jFormatted_fecha_nacimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jFormatted_fecha_nacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
-        jFormatted_fecha_nacimiento.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-
         guardar_cambios.setFont(new java.awt.Font("Century Gothic", 0, 16)); // NOI18N
         guardar_cambios.setText("GUARDAR");
         guardar_cambios.setBorder(null);
@@ -230,6 +228,18 @@ public class ModificarCliente extends javax.swing.JFrame {
             }
         });
 
+        formatt_fecha_nacimiento.setBackground(new java.awt.Color(255, 255, 255));
+        formatt_fecha_nacimiento.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        formatt_fecha_nacimiento.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.DateFormatter(java.text.DateFormat.getDateInstance(java.text.DateFormat.SHORT))));
+        formatt_fecha_nacimiento.setToolTipText("");
+        formatt_fecha_nacimiento.setActionCommand("<Not Set>");
+        formatt_fecha_nacimiento.setFont(new java.awt.Font("Century Gothic", 0, 14)); // NOI18N
+        formatt_fecha_nacimiento.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                formatt_fecha_nacimientoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout opcionesProductoLayout = new javax.swing.GroupLayout(opcionesProducto);
         opcionesProducto.setLayout(opcionesProductoLayout);
         opcionesProductoLayout.setHorizontalGroup(
@@ -269,14 +279,14 @@ public class ModificarCliente extends javax.swing.JFrame {
                                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                                         .addComponent(fecha_nacimiento)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(jFormatted_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                        .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jSeparator7))
                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                         .addComponent(guardar_cambios, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                         .addComponent(eliminar_cliente, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -308,7 +318,7 @@ public class ModificarCliente extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jFormatted_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(formatt_fecha_nacimiento, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jSeparator6, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -333,7 +343,7 @@ public class ModificarCliente extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(46, 46, 46)
                 .addComponent(opcionesProducto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(33, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -385,26 +395,12 @@ public class ModificarCliente extends javax.swing.JFrame {
                 cliente.setProvincia((String) box_provincias.getSelectedItem());
                 cliente.setCanton((String) combo_cantones.getSelectedItem());
                 cliente.setDistrito((String) combo_distritos.getSelectedItem());
-                String fechaTexto = jFormatted_fecha_nacimiento.getText().trim();
+                String fechaTexto = formatt_fecha_nacimiento.getText().trim();
                 
-                if(!fechaTexto.isEmpty()){
-                    try {
-                        // Validar y asignar la fecha
-                        java.text.SimpleDateFormat formatoFecha = new java.text.SimpleDateFormat("dd/MM/yyyy");
-                        formatoFecha.setLenient(false); // Asegurar validación estricta de la fecha
-                        java.util.Date fechaNacimiento = formatoFecha.parse(fechaTexto);
-                        
-                        // Validar que la fecha no sea futura
-                        if (fechaNacimiento.after(new java.util.Date())) {
-                            javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no puede ser una fecha futura.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                            return;
-                        }
-                       cliente.setFecha(fechaNacimiento);
-                    } catch (java.text.ParseException e) {
-                        javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no tiene un formato válido. Use dd/MM/yyyy.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
-                        return;
+                if(fechaTexto.isEmpty()){
+                    javax.swing.JOptionPane.showMessageDialog(this, "La fecha de nacimiento no tiene un formato válido.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                    return;
                     }
-                }
                 
                 break;
             }
@@ -480,6 +476,10 @@ public class ModificarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_provinciasActionPerformed
 
+    private void formatt_fecha_nacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_nacimientoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_formatt_fecha_nacimientoActionPerformed
+
     private void cargarDatosCliente(Cliente cliente) {
         // Código del cliente
         box_codigo_cliente.setText(String.valueOf(cliente.getCodigo()));
@@ -493,9 +493,9 @@ public class ModificarCliente extends javax.swing.JFrame {
 
         // Fecha de nacimiento
         if (cliente.getFecha() != null) {
-            jFormatted_fecha_nacimiento.setValue(cliente.getFecha());
+            formatt_fecha_nacimiento.setValue(cliente.getFecha());
         } else {
-            jFormatted_fecha_nacimiento.setValue(null);
+            formatt_fecha_nacimiento.setValue(null);
         }
 
         // Configurar provincia
@@ -657,8 +657,8 @@ public class ModificarCliente extends javax.swing.JFrame {
     private javax.swing.JLabel distrito;
     private javax.swing.JButton eliminar_cliente;
     private javax.swing.JLabel fecha_nacimiento;
+    private javax.swing.JFormattedTextField formatt_fecha_nacimiento;
     private javax.swing.JButton guardar_cambios;
-    private javax.swing.JFormattedTextField jFormatted_fecha_nacimiento;
     private javax.swing.JSeparator jSeparator6;
     private javax.swing.JSeparator jSeparator7;
     private javax.swing.JLabel nombre_cliente;
