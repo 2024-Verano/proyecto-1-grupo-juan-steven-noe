@@ -42,7 +42,7 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
         
             // Cargar el siguiente número de factura automáticamente
             Archivo archivo = new Archivo();
-            int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas.json", Factura[].class);
+            int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas_mantenimiento.json", Factura[].class);
             box_num_fact.setText(String.valueOf(siguienteNumeroFactura));
         
             // Cargar los clientes en el comboBox de clientes al iniciar el formulario

@@ -213,6 +213,22 @@ public class Validador {
 
         return false;
     }
+    
+    // Método para validar fecha anterior que otra
+    public static boolean esFechaAnterior(String fecha1, String fecha2) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        formato.setLenient(false);
+
+        try {
+            Date primeraFecha = formato.parse(fecha1);
+            Date segundaFecha = formato.parse(fecha2);
+
+            return primeraFecha.before(segundaFecha); // Retorna true si fecha1 < fecha2
+
+        } catch (ParseException e) {
+            return false;
+    }
+}
 
 }
 

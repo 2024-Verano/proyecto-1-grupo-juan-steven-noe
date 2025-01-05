@@ -43,7 +43,7 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
         
             // Cargar el siguiente número de factura automáticamente
             Archivo archivo = new Archivo();
-            int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas.json", Factura[].class);
+            int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas_productos.json", Factura[].class);
             box_num_fact.setText(String.valueOf(siguienteNumeroFactura));
         
             // Cargar los clientes en el comboBox de clientes al iniciar el formulario
@@ -425,8 +425,14 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
                 return;
             }
             int codigoProducto = Integer.parseInt(codigoProductoTexto.split(" - ")[0]);
-
+            
+            String cantidadTexto = box_cantidad.getText().trim();
+            if (!Validador.validarNumerico(cantidadTexto) || cantidadTexto.equals("0")){
+                javax.swing.JOptionPane.showMessageDialog(this, "La cantidad debe ser numérica, mayor a 0 y no puede estar vacía", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                return;                
+            }
             int cantidad = Integer.parseInt(box_cantidad.getText().trim());
+            
             int precioUnitario = Integer.parseInt(box_precio_und.getText().trim());
 
             // Guardar la factura usando la nueva clase GuardarFactura
