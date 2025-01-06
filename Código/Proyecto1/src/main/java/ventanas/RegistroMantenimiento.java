@@ -268,6 +268,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         });
 
         opcionesAgregarMant.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        opcionesAgregarMant.setMaximumSize(new java.awt.Dimension(560, 470));
+        opcionesAgregarMant.setMinimumSize(new java.awt.Dimension(560, 470));
 
         codigo_servicio.setFont(new java.awt.Font("Century Gothic", 1, 18)); // NOI18N
         codigo_servicio.setText("Código servicio");
@@ -505,9 +507,9 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             .addGroup(agregarPanelLayout.createSequentialGroup()
                 .addGap(212, 212, 212)
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(opcionesAgregarMant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(crear_mant, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(222, Short.MAX_VALUE))
+                    .addComponent(crear_mant, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                    .addComponent(opcionesAgregarMant, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(198, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
             agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

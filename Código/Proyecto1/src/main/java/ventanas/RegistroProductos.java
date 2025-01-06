@@ -273,6 +273,9 @@ public class RegistroProductos extends javax.swing.JFrame {
         crear_prod.setFocusable(false);
         crear_prod.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         crear_prod.setIconTextGap(10);
+        crear_prod.setMaximumSize(new java.awt.Dimension(308, 79));
+        crear_prod.setMinimumSize(new java.awt.Dimension(308, 79));
+        crear_prod.setPreferredSize(new java.awt.Dimension(308, 79));
         crear_prod.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 crear_prodActionPerformed(evt);
@@ -360,6 +363,8 @@ public class RegistroProductos extends javax.swing.JFrame {
         );
 
         opcionesProducto.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        opcionesProducto.setMaximumSize(new java.awt.Dimension(308, 444));
+        opcionesProducto.setMinimumSize(new java.awt.Dimension(308, 444));
 
         codigo_art.setFont(new java.awt.Font("Century Gothic", 1, 16)); // NOI18N
         codigo_art.setText("Código artículo");
@@ -512,7 +517,7 @@ public class RegistroProductos extends javax.swing.JFrame {
                                             .addGroup(opcionesProductoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                                 .addComponent(box_cantidad_art, javax.swing.GroupLayout.Alignment.LEADING)
                                                 .addComponent(box_precio_art, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                                .addGap(0, 39, Short.MAX_VALUE))))
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(opcionesProductoLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jSeparator7)))
@@ -573,8 +578,8 @@ public class RegistroProductos extends javax.swing.JFrame {
                     .addComponent(crear_tipo_prod, javax.swing.GroupLayout.PREFERRED_SIZE, 297, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(102, 102, 102)
                 .addGroup(agregarPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(opcionesProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(crear_prod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(crear_prod, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(opcionesProducto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(138, Short.MAX_VALUE))
         );
         agregarPanelLayout.setVerticalGroup(
