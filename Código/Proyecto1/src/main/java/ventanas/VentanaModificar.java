@@ -446,6 +446,11 @@ public class VentanaModificar extends javax.swing.JFrame {
                     String cantidadTexto = box_cantidad_art.getText().trim();
 
                     // Validaciones
+                    if (tamanoBici == null) {
+                        javax.swing.JOptionPane.showMessageDialog(this, "El tamaño de la bicicleta no puede estar vacío", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+                    
                     if (!Validador.validarAlfabetico(nombre)) {
                         javax.swing.JOptionPane.showMessageDialog(this, "El nombre solo puede contener letras.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                         return;

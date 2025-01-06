@@ -935,7 +935,7 @@ public class RegistroProductos extends javax.swing.JFrame {
             int cantidad = Integer.parseInt(box_cantidad_art.getText().trim());
 
             // Validar los campos no vacíos
-            if (nombre.isEmpty() || marca.isEmpty() || precio <= 0 || cantidad < 0) {
+            if (nombre.isEmpty() || marca.isEmpty() || tamanoBici == null || precio <= 0 || cantidad < 0) {
                 javax.swing.JOptionPane.showMessageDialog(this, "Por favor complete todos los campos correctamente.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
                 return;
             }
