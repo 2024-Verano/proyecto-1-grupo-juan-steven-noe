@@ -3,80 +3,60 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package com.mycompany.proyecto1;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
-import com.mycompany.proyecto1.Validador;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Cliente.
+ * Clase que representa un cliente con datos personales y validaciones básicas.
+ * 
+ * <p>Esta clase encapsula la información de un cliente, incluyendo su código, 
+ * nombre, apellidos, teléfono, correo y ubicación geográfica. Además, 
+ * proporciona validaciones mínimas para garantizar la integridad de los datos.</p>
  *
  * @author Steven Umaña
  */
-/**
- * Clase que representa un cliente con datos básicos y validaciones mínimas.
- * Esta clase es responsable de encapsular los datos de un cliente y garantizar
- * que sean válidos al momento de su creación o modificación.
- */
-public class Cliente implements ConCodigo{
-    /**
-     * Código único del cliente.
-     */
-    @JsonProperty("codigo")
-    public int codigo;
+public class Cliente implements ConCodigo {
 
-    /**
-     * Nombre del cliente.
-     */
+    /** Código único del cliente. */
+    @JsonProperty("codigo")
+    private int codigo;
+
+    /** Nombre del cliente. */
     @JsonProperty("nombre")
     private String nombre;
 
-    /**
-     * Apellidos del cliente.
-     */
+    /** Apellidos del cliente. */
     @JsonProperty("apellidos")
     private String apellidos;
 
-    /**
-     * Teléfono del cliente. Debe tener 8 dígitos y comenzar con 2, 4, 6 o 8.
-     */
+    /** Teléfono del cliente. Debe tener 8 dígitos y comenzar con 2, 4, 6 o 8. */
     @JsonProperty("telefono")
     private int telefono;
 
-    /**
-     * Correo electrónico del cliente en un formato válido.
-     */
+    /** Correo electrónico del cliente en un formato válido. */
     @JsonProperty("correo")
     private String correo;
 
-    /**
-     * Provincia donde reside el cliente.
-     */
+    /** Provincia donde reside el cliente. */
     @JsonProperty("provincia")
     private String provincia;
 
-    /**
-     * Cantón donde reside el cliente.
-     */
+    /** Cantón donde reside el cliente. */
     @JsonProperty("canton")
     private String canton;
 
-    /**
-     * Distrito donde reside el cliente.
-     */
+    /** Distrito donde reside el cliente. */
     @JsonProperty("distrito")
     private String distrito;
 
-    /**
-     * Fecha de nacimiento del cliente.
-     */
+    /** Fecha de nacimiento del cliente. */
     @JsonProperty("fecha")
     private String fecha;
 
     /**
-     * The Constructor.
+     * Constructor predeterminado requerido para la deserialización de JSON.
      */
-    // Constructor predeterminado para Jackson
     public Cliente() {
     }
 
@@ -106,29 +86,18 @@ public class Cliente implements ConCodigo{
         this.distrito = distrito;
         this.fecha = fecha;
     }
-     /**
-     * Obtiene el código único del cliente.
-     *
-     * @return El código del cliente.
-     */
+
+    /** @return El código único del cliente. */
     public int getCodigo() {
         return codigo;
     }
 
-    /**
-     * Establece el código único del cliente.
-     *
-     * @param codigo El código a establecer.
-     */
+    /** @param codigo El código a establecer. */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
-    /**
-     * Obtiene el nombre del cliente.
-     *
-     * @return El nombre del cliente.
-     */
+    /** @return El nombre del cliente. */
     public String getNombre() {
         return nombre;
     }
@@ -146,11 +115,7 @@ public class Cliente implements ConCodigo{
         this.nombre = nombre.trim();
     }
 
-    /**
-     * Obtiene los apellidos del cliente.
-     *
-     * @return Los apellidos del cliente.
-     */
+    /** @return Los apellidos del cliente. */
     public String getApellidos() {
         return apellidos;
     }
@@ -168,11 +133,7 @@ public class Cliente implements ConCodigo{
         this.apellidos = apellidos.trim();
     }
 
-    /**
-     * Obtiene el número de teléfono del cliente.
-     *
-     * @return El número de teléfono del cliente.
-     */
+    /** @return El número de teléfono del cliente. */
     public int getTelefono() {
         return telefono;
     }
@@ -191,11 +152,7 @@ public class Cliente implements ConCodigo{
         }
     }
 
-    /**
-     * Obtiene el correo electrónico del cliente.
-     *
-     * @return El correo electrónico del cliente.
-     */
+    /** @return El correo electrónico del cliente. */
     public String getCorreo() {
         return correo;
     }
@@ -213,81 +170,50 @@ public class Cliente implements ConCodigo{
         this.correo = correo.trim();
     }
 
-    /**
-     * Obtiene la provincia del cliente.
-     *
-     * @return La provincia del cliente.
-     */
+    /** @return La provincia del cliente. */
     public String getProvincia() {
         return provincia;
     }
 
-    /**
-     * Establece la provincia del cliente.
-     *
-     * @param provincia La provincia a establecer.
-     */
+    /** @param provincia La provincia a establecer. */
     public void setProvincia(String provincia) {
         this.provincia = provincia;
     }
 
-    /**
-     * Obtiene el cantón del cliente.
-     *
-     * @return El cantón del cliente.
-     */
+    /** @return El cantón del cliente. */
     public String getCanton() {
         return canton;
     }
 
-    /**
-     * Establece el cantón del cliente.
-     *
-     * @param canton El cantón a establecer.
-     */
+    /** @param canton El cantón a establecer. */
     public void setCanton(String canton) {
         this.canton = canton;
     }
 
-    /**
-     * Obtiene el distrito del cliente.
-     *
-     * @return El distrito del cliente.
-     */
+    /** @return El distrito del cliente. */
     public String getDistrito() {
         return distrito;
     }
 
-    /**
-     * Establece el distrito del cliente.
-     *
-     * @param distrito El distrito a establecer.
-     */
+    /** @param distrito El distrito a establecer. */
     public void setDistrito(String distrito) {
         this.distrito = distrito;
     }
 
-    /**
-     * Obtiene la fecha de nacimiento del cliente.
-     *
-     * @return La fecha de nacimiento del cliente.
-     */
+    /** @return La fecha de nacimiento del cliente. */
     public String getFecha() {
         return fecha;
     }
 
-    /**
-     * Establece la fecha de nacimiento del cliente.
-     *
-     * @param fecha La fecha de nacimiento a establecer.
-     */
+    /** @param fecha La fecha de nacimiento a establecer. */
     public void setFecha(String fecha) {
         this.fecha = fecha;
     }
 
     /**
      * Convierte los datos del cliente en un arreglo de objetos.
-     * Esto es útil para llenar tablas en interfaces gráficas.
+     * 
+     * <p>Este método es útil para representar los datos del cliente en tablas de interfaces gráficas.</p>
      *
      * @return Un arreglo de objetos que contiene los datos del cliente.
      */
@@ -296,12 +222,13 @@ public class Cliente implements ConCodigo{
     }
 
     /**
-     * String.
+     * Método no implementado. Lanza una excepción al ser invocado.
      *
-     * @param fecha the fecha
-     * @return the string
+     * @param fecha La fecha que se intentó convertir.
+     * @return No retorna ningún valor, ya que el método no está soportado.
+     * @throws UnsupportedOperationException al ser invocado.
      */
     private String String(Date fecha) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 }

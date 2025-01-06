@@ -12,24 +12,29 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class GuardarFactura.
+ * Clase encargada de la gestión y almacenamiento de facturas.
+ *
+ * <p>Proporciona métodos para guardar facturas de productos y facturas de mantenimiento,
+ * asegurando que los datos sean almacenados correctamente en archivos JSON.</p>
  *
  * @author noe
  */
 public class GuardarFactura {
 
     /**
-     * Guardar factura producto.
+     * Guarda una factura de producto en el sistema.
      *
-     * @param numeroFactura the numero factura
-     * @param codigoCliente the codigo cliente
-     * @param fechaRecibido the fecha recibido
-     * @param codigoProducto the codigo producto
-     * @param cantidad the cantidad
-     * @param precioUnitario the precio unitario
-     * @return true, if guardar factura producto
+     * <p>Este método verifica y actualiza el stock del producto, genera el encabezado
+     * y el detalle de la factura, y la almacena en el archivo JSON correspondiente.</p>
+     *
+     * @param numeroFactura el número único de la factura
+     * @param codigoCliente el código del cliente asociado a la factura
+     * @param fechaRecibido la fecha en que se emitió la factura, en formato {@code dd/MM/yyyy}
+     * @param codigoProducto el código del producto facturado
+     * @param cantidad la cantidad del producto facturado
+     * @param precioUnitario el precio unitario del producto
+     * @return {@code true} si la factura se guardó exitosamente, {@code false} en caso de error
      */
     public static boolean guardarFacturaProducto(int numeroFactura, int codigoCliente, String fechaRecibido, int codigoProducto, int cantidad, int precioUnitario) {
         Archivo archivo = new Archivo();
@@ -68,14 +73,17 @@ public class GuardarFactura {
     }
 
     /**
-     * Guardar factura mantenimiento.
+     * Guarda una factura de mantenimiento en el sistema.
      *
-     * @param numeroFactura the numero factura
-     * @param codigoCliente the codigo cliente
-     * @param codigoServicio the codigo servicio
-     * @param fecha the fecha
+     * <p>Este método obtiene el servicio de mantenimiento a facturar, calcula el subtotal,
+     * el impuesto y el total, genera el encabezado y el detalle de la factura, y la almacena
+     * en el archivo JSON correspondiente.</p>
+     *
+     * @param numeroFactura el número único de la factura
+     * @param codigoCliente el código del cliente asociado a la factura
+     * @param codigoServicio el código del servicio de mantenimiento facturado
+     * @param fecha la fecha en que se emitió la factura, en formato {@code dd/MM/yyyy}
      */
-    // Método para guardar las facturas de mantenimiento
     public static void guardarFacturaMantenimiento(int numeroFactura, int codigoCliente, int codigoServicio, String fecha) {
         Archivo archivo = new Archivo();
         String rutaFacturas = "facturas_mantenimiento.json";
@@ -134,5 +142,4 @@ public class GuardarFactura {
             JOptionPane.showMessageDialog(null, "Error al guardar la factura: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
     }
-    
 }

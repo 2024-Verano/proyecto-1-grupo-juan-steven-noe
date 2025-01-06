@@ -6,69 +6,73 @@ package com.mycompany.proyecto1;
 
 import java.util.Arrays;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Usuario.
- *
+ * Clase que representa un usuario con credenciales de acceso.
+ * 
+ * <p>Esta clase proporciona métodos para gestionar el nombre de usuario y contraseña, 
+ * además de validar credenciales contra un archivo JSON.</p>
+ * 
  * @author Steven Umaña
  */
 public class Usuario {
     
-    /** The nombre usuario. */
+    /** El nombre de usuario del usuario. */
     private String nombreUsuario;
     
-    /** The contrasena. */
+    /** La contraseña del usuario. */
     private String contrasena;
     
     /**
-     * The Constructor.
+     * Constructor vacío requerido por Jackson para la deserialización de objetos JSON.
      */
-    // Constructor vacío requerido por Jackson
     public Usuario() {
     }
     
     /**
-     * Gets the nombre usuario.
+     * Obtiene el nombre de usuario.
      *
-     * @return the nombre usuario
+     * @return el nombre de usuario del usuario
      */
     public String getNombreUsuario(){
         return nombreUsuario;
     }
     
     /**
-     * Sets the nombre usuario.
+     * Establece el nombre de usuario.
      *
-     * @param nombreUsuario the nombre usuario
+     * @param nombreUsuario el nuevo nombre de usuario
      */
     public void setNombreUsuario(String nombreUsuario){
         this.nombreUsuario = nombreUsuario;
     }
     
     /**
-     * Gets the contrasena.
+     * Obtiene la contraseña del usuario.
      *
-     * @return the contrasena
+     * @return la contraseña del usuario
      */
     public String getContrasena(){
         return contrasena;
     }
     
     /**
-     * Sets the contrasena.
+     * Establece la contraseña del usuario.
      *
-     * @param contrasena the contrasena
+     * @param contrasena la nueva contraseña del usuario
      */
     public void setContrasena(String contrasena){
         this.contrasena = contrasena;
     }
     
     /**
-     * Método para validar credenciales contra los datos del archivo JSON.
+     * Valida las credenciales ingresadas contra los datos almacenados en el archivo JSON.
      *
-     * @param usuario El nombre de usuario ingresado
-     * @param contrasena La contraseña ingresada
-     * @return true si las credenciales son válidas; false en caso contrario
+     * <p>Este método carga la lista de usuarios desde el archivo {@code usuarios.json} y
+     * verifica si existe un usuario con el nombre de usuario y contraseña proporcionados.</p>
+     *
+     * @param usuario el nombre de usuario ingresado
+     * @param contrasena la contraseña ingresada
+     * @return {@code true} si las credenciales son válidas, {@code false} en caso contrario
      */
     public boolean validarAcceso(String usuario, String contrasena) {
         Archivo archivo = new Archivo();
@@ -83,9 +87,9 @@ public class Usuario {
     }
     
     /**
-     * To string.
+     * Devuelve una representación en cadena del objeto Usuario.
      *
-     * @return the string
+     * @return una cadena con el nombre de usuario y la contraseña del usuario
      */
     @Override
     public String toString() {

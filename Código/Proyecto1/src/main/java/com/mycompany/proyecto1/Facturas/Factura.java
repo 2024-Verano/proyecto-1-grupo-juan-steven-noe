@@ -3,41 +3,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package com.mycompany.proyecto1.Facturas;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.mycompany.proyecto1.ConCodigo;
 import java.util.ArrayList;
 import java.util.List;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Factura.
+ * Clase que representa una factura con un encabezado y una lista de detalles.
+ *
+ * <p>Contiene información de la factura, incluyendo su encabezado y los detalles 
+ * de los productos o servicios facturados. Además, permite agregar detalles y 
+ * recalcular los totales automáticamente.</p>
+ * 
+ * <p>Implementa la interfaz {@code ConCodigo} para permitir la obtención de un 
+ * identificador único basado en el número de factura.</p>
  *
  * @author noe
  */
-
-// Clase para crear una factura con encabezado y detalle
-public class Factura implements ConCodigo{
+public class Factura implements ConCodigo {
     
-    /** The encabezado. */
+    /** Encabezado de la factura que contiene información general. */
     @JsonProperty("encabezado")
     private EncabezadoFactura encabezado;
 
-    /** The detalles. */
+    /** Lista de detalles de la factura, cada uno representando un producto o servicio. */
     @JsonProperty("detalles")
     private List<DetalleFactura> detalles;
     
     /**
-     * The Constructor.
+     * Constructor por defecto.
+     *
+     * <p>Este constructor es necesario para la serialización/deserialización JSON.</p>
      */
-    public Factura(){
-        
+    public Factura() {
+        // Constructor vacío requerido para la deserialización
     }
 
     /**
-     * The Constructor.
+     * Constructor que inicializa una factura con su encabezado.
      *
-     * @param encabezado the encabezado
+     * <p>La lista de detalles se inicializa como una lista vacía.</p>
+     *
+     * @param encabezado el encabezado de la factura, que contiene información general
      */
     public Factura(EncabezadoFactura encabezado) {
         this.encabezado = encabezado;
@@ -45,27 +54,30 @@ public class Factura implements ConCodigo{
     }
 
     /**
-     * Gets the encabezado.
+     * Obtiene el encabezado de la factura.
      *
-     * @return the encabezado
+     * @return el encabezado de la factura
      */
     public EncabezadoFactura getEncabezado() {
         return encabezado;
     }
 
     /**
-     * Gets the detalles.
+     * Obtiene la lista de detalles de la factura.
      *
-     * @return the detalles
+     * @return la lista de detalles de la factura
      */
     public List<DetalleFactura> getDetalles() {
         return detalles;
     }
 
     /**
-     * Agregar detalle.
+     * Agrega un nuevo detalle a la factura y recalcula los totales.
      *
-     * @param detalle the detalle
+     * <p>Este método añade un nuevo {@code DetalleFactura} a la lista de detalles y 
+     * automáticamente actualiza el subtotal, el impuesto y el total de la factura.</p>
+     *
+     * @param detalle el detalle de la factura que se agregará
      */
     public void agregarDetalle(DetalleFactura detalle) {
         detalles.add(detalle);
@@ -73,7 +85,11 @@ public class Factura implements ConCodigo{
     }
 
     /**
-     * Recalcular totales.
+     * Recalcula los totales de la factura con base en los detalles agregados.
+     *
+     * <p>Este método actualiza el subtotal sumando los totales de cada detalle, 
+     * calcula el impuesto como un 13% del subtotal y actualiza el total general 
+     * sumando el subtotal y el impuesto.</p>
      */
     private void recalcularTotales() {
         int subtotal = 0;
@@ -81,14 +97,17 @@ public class Factura implements ConCodigo{
             subtotal += detalle.getTotal();
         }
         encabezado.setSubtotal(subtotal);
-        encabezado.setImpuesto((int) (subtotal * 0.13)); // 13% impuesto
+        encabezado.setImpuesto((int) (subtotal * 0.13)); // 13% de impuesto
         encabezado.setTotal(subtotal + encabezado.getImpuesto());
     }
     
     /**
-     * Gets the codigo.
+     * Obtiene el código único de la factura, basado en su número de factura.
      *
-     * @return the codigo
+     * <p>Este método sobrescribe el método de la interfaz {@code ConCodigo} 
+     * y permite utilizar el número de factura como identificador único.</p>
+     *
+     * @return el número de factura como código único
      */
     @JsonIgnore
     @Override
@@ -96,4 +115,3 @@ public class Factura implements ConCodigo{
         return encabezado.getNumeroFactura();
     }
 }
-

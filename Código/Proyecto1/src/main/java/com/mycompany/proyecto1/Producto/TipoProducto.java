@@ -4,33 +4,37 @@
  */
 package com.mycompany.proyecto1;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class TipoProducto.
+ * Clase que representa un tipo de producto dentro del sistema.
  *
+ * <p>Contiene un identificador único y un nombre que describe el tipo de producto.</p>
+ *
+ * <p>Implementa la interfaz {@code ConCodigo} para proporcionar un identificador estándar.</p>
+ * 
  * @author noe
  */
-// Clase para los tipos de producto
 public class TipoProducto implements ConCodigo {
     
-    /** The codigo. */
+    /** Código único que identifica el tipo de producto. */
     private int codigo;
     
-    /** The nombre. */
+    /** Nombre descriptivo del tipo de producto. */
     private String nombre;
     
     /**
-     * The Constructor.
+     * Constructor por defecto.
+     *
+     * <p>Este constructor es necesario para la serialización/deserialización JSON.</p>
      */
-    // Constructor por defecto requerido por Jackson
     public TipoProducto() {
+        // Constructor vacío requerido por Jackson
     }
 
     /**
-     * The Constructor.
+     * Constructor que inicializa un tipo de producto con un código y un nombre.
      *
-     * @param codigo the codigo
-     * @param nombre the nombre
+     * @param codigo el código único del tipo de producto
+     * @param nombre el nombre descriptivo del tipo de producto
      */
     public TipoProducto(int codigo, String nombre) {
         this.codigo = codigo;
@@ -38,9 +42,11 @@ public class TipoProducto implements ConCodigo {
     }
 
     /**
-     * Gets the codigo.
+     * Obtiene el código único del tipo de producto.
      *
-     * @return the codigo
+     * <p>Este método sobrescribe la interfaz {@code ConCodigo} y retorna el código del producto.</p>
+     *
+     * @return el código del tipo de producto
      */
     @Override
     public int getCodigo() {
@@ -48,30 +54,29 @@ public class TipoProducto implements ConCodigo {
     }
 
     /**
-     * Sets the codigo.
+     * Establece el código único del tipo de producto.
      *
-     * @param codigo the codigo
+     * @param codigo el nuevo código del tipo de producto
      */
     public void setCodigo(int codigo) {
         this.codigo = codigo;
     }
 
     /**
-     * Gets the nombre.
+     * Obtiene el nombre descriptivo del tipo de producto.
      *
-     * @return the nombre
+     * @return el nombre del tipo de producto
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * Sets the nombre.
+     * Establece el nombre del tipo de producto.
      *
-     * @param nombre the nombre
+     * @param nombre el nuevo nombre del tipo de producto
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 }
-

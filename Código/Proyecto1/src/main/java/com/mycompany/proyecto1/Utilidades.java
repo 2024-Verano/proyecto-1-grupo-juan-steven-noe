@@ -18,21 +18,22 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import ventanas.ModificarMant;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Utilidades.
+ * Clase de utilidades que proporciona métodos auxiliares para la gestión 
+ * de productos, clientes y mantenimientos en la aplicación.
+ *
+ * <p>Incluye funciones para cargar datos en combo boxes y tablas, realizar 
+ * búsquedas y abrir ventanas de modificación.</p>
  *
  * @author noe
  */
-
-// Clase para funciones y métodos inespecíficos
 public class Utilidades {
 
     /**
-     * Cargar tipos de producto.
+     * Carga los tipos de productos en un JComboBox a partir de un archivo JSON.
      *
-     * @param ruta the ruta
-     * @param comboBox the combo box
+     * @param ruta la ruta del archivo JSON donde se almacenan los tipos de producto
+     * @param comboBox el JComboBox en el que se insertarán los tipos de producto
      */
     public static void cargarTiposDeProducto(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
@@ -58,12 +59,11 @@ public class Utilidades {
     }
     
     /**
-     * Cargar resultados en tabla.
+     * Carga los resultados en una tabla con los datos de productos.
      *
-     * @param modelo the modelo
-     * @param resultados the resultados
+     * @param modelo el modelo de la tabla a actualizar
+     * @param resultados la lista de productos que se insertarán en la tabla
      */
-    // Método para cargar resultados de búsqueda en las tablas de Agregar Producto
     public static void cargarResultadosEnTabla(DefaultTableModel modelo, List<Producto> resultados) {
         modelo.setRowCount(0);
 
@@ -82,12 +82,11 @@ public class Utilidades {
     }
 
     /**
-     * Cargar clientes.
+     * Carga la lista de clientes en un JComboBox a partir de un archivo JSON.
      *
-     * @param ruta the ruta
-     * @param comboBox the combo box
+     * @param ruta la ruta del archivo JSON donde se almacenan los clientes
+     * @param comboBox el JComboBox en el que se insertarán los clientes
      */
-    // Clase para cargar los clientes dentro del archivo de clientes.json
     public static void cargarClientes(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
         try {
@@ -106,13 +105,12 @@ public class Utilidades {
     }
  
     /**
-     * Buscar mantenimientos.
+     * Realiza una búsqueda de mantenimientos basada en un criterio y actualiza la tabla.
      *
-     * @param criterio the criterio
-     * @param valor the valor
-     * @param tabla the tabla
+     * @param criterio el criterio de búsqueda (por código o nombre del cliente)
+     * @param valor el valor a buscar dentro del criterio especificado
+     * @param tabla la JTable en la que se insertarán los resultados de la búsqueda
      */
-    // Método para buscar mantenimientos y actualizar la tabla
     public static void buscarMantenimientos(String criterio, String valor, JTable tabla) {
         String rutaMantenimiento = "mantenimiento.json";
         String rutaClientes = "registroClientes.json";
@@ -184,13 +182,12 @@ public class Utilidades {
     }
  
     /**
-     * Abrir ventana modificar mant.
+     * Abre la ventana de modificación de un mantenimiento seleccionado en la tabla.
      *
-     * @param filaSeleccionada the fila seleccionada
-     * @param tabla the tabla
-     * @param parent the parent
+     * @param filaSeleccionada el índice de la fila seleccionada en la tabla
+     * @param tabla la JTable que contiene los datos de mantenimientos
+     * @param parent la ventana principal que actúa como contenedor
      */
-    // Método para abrir ventana de modificar mantenimiento (enfoque más limpio con respecto a RegistroProducto)
     public static void abrirVentanaModificarMant(int filaSeleccionada, JTable tabla, JFrame parent) {
         String codigoServicioTexto = tabla.getValueAt(filaSeleccionada, 0).toString();
         int codigoServicio = Integer.parseInt(codigoServicioTexto);
@@ -211,5 +208,4 @@ public class Utilidades {
 
         javax.swing.JOptionPane.showMessageDialog(null, "No se encontró el mantenimiento seleccionado.", "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
     }
-
 }

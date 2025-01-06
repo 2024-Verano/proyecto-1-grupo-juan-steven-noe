@@ -7,56 +7,60 @@ package com.mycompany.proyecto1;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Producto.
+ * Clase que representa un producto en el sistema.
  *
+ * <p>Incluye información detallada del producto, como su código, tipo, tamaño, 
+ * marca, precio y cantidad en stock.</p>
+ *
+ * <p>Implementa la interfaz {@code ConCodigo} para proporcionar un identificador único.</p>
+ * 
  * @author noe
  */
-// Clase para los productos
 public class Producto implements ConCodigo {
     
-    /** The codigo articulo. */
+    /** Código único del artículo. */
     private int codigoArticulo;
     
-    /** The codigo producto. */
+    /** Código del producto asociado al artículo. */
     private int codigoProducto;
     
-    /** The tipo articulo. */
+    /** Tipo de artículo (por ejemplo, repuesto, accesorio, etc.). */
     private String tipoArticulo;
     
-    /** The tamano bici. */
+    /** Tamaño de la bicicleta compatible con el producto (si aplica). */
     private String tamanoBici;
     
-    /** The nombre. */
+    /** Nombre del producto. */
     private String nombre;
     
-    /** The marca. */
+    /** Marca del producto. */
     private String marca;
     
-    /** The precio. */
+    /** Precio del producto en unidades monetarias. */
     private int precio;
     
-    /** The cantidad. */
+    /** Cantidad disponible en inventario. */
     private int cantidad;
 
     /**
-     * The Constructor.
-     */
-    // Constructor vacío (requerido por Jackson)
-    public Producto() {}
-    
-    /**
-     * The Constructor.
+     * Constructor por defecto.
      *
-     * @param codigoArticulo the codigo articulo
-     * @param codigoProducto the codigo producto
-     * @param tipoArticulo the tipo articulo
-     * @param tamanoBici the tamano bici
-     * @param nombre the nombre
-     * @param marca the marca
-     * @param precio the precio
-     * @param cantidad the cantidad
+     * <p>Este constructor es necesario para la serialización/deserialización JSON.</p>
+     */
+    public Producto() {}
+
+    /**
+     * Constructor que inicializa un producto con todos sus atributos.
+     *
+     * @param codigoArticulo el código único del artículo
+     * @param codigoProducto el código del producto asociado
+     * @param tipoArticulo el tipo de artículo (ejemplo: repuesto, accesorio)
+     * @param tamanoBici el tamaño de bicicleta compatible con el producto (si aplica)
+     * @param nombre el nombre del producto
+     * @param marca la marca del producto
+     * @param precio el precio del producto
+     * @param cantidad la cantidad disponible en inventario
      */
     public Producto(int codigoArticulo, int codigoProducto, String tipoArticulo, String tamanoBici, String nombre, String marca, int precio, int cantidad) {
         this.codigoArticulo = codigoArticulo;
@@ -70,9 +74,11 @@ public class Producto implements ConCodigo {
     }
 
     /**
-     * Gets the codigo.
+     * Obtiene el código único del producto.
      *
-     * @return the codigo
+     * <p>Este método sobrescribe la interfaz {@code ConCodigo} y retorna el código del artículo.</p>
+     *
+     * @return el código único del producto
      */
     @Override
     @JsonIgnore
@@ -81,147 +87,146 @@ public class Producto implements ConCodigo {
     }
 
     /**
-     * Gets the codigo articulo.
+     * Obtiene el código único del artículo.
      *
-     * @return the codigo articulo
+     * @return el código del artículo
      */
     public int getCodigoArticulo() {
         return codigoArticulo;
     }
 
     /**
-     * Sets the codigo articulo.
+     * Establece el código único del artículo.
      *
-     * @param codigoArticulo the codigo articulo
+     * @param codigoArticulo el nuevo código del artículo
      */
     public void setCodigoArticulo(int codigoArticulo) {
         this.codigoArticulo = codigoArticulo;
     }
 
     /**
-     * Gets the codigo producto.
+     * Obtiene el código del producto asociado.
      *
-     * @return the codigo producto
+     * @return el código del producto
      */
     public int getCodigoProducto() {
         return codigoProducto;
     }
 
     /**
-     * Sets the codigo producto.
+     * Establece el código del producto asociado.
      *
-     * @param codigoProducto the codigo producto
+     * @param codigoProducto el nuevo código del producto
      */
     public void setCodigoProducto(int codigoProducto) {
         this.codigoProducto = codigoProducto;
     }
 
     /**
-     * Gets the tipo articulo.
+     * Obtiene el tipo de artículo.
      *
-     * @return the tipo articulo
+     * @return el tipo de artículo (ejemplo: repuesto, accesorio)
      */
     public String getTipoArticulo() {
         return tipoArticulo;
     }
 
     /**
-     * Sets the tipo articulo.
+     * Establece el tipo de artículo.
      *
-     * @param tipoArticulo the tipo articulo
+     * @param tipoArticulo el nuevo tipo de artículo
      */
     public void setTipoArticulo(String tipoArticulo) {
         this.tipoArticulo = tipoArticulo;
     }
 
     /**
-     * Gets the tamano bici.
+     * Obtiene el tamaño de la bicicleta compatible con el producto.
      *
-     * @return the tamano bici
+     * @return el tamaño de bicicleta compatible, o {@code null} si no aplica
      */
     public String getTamanoBici() {
         return tamanoBici;
     }
 
     /**
-     * Sets the tamano bici.
+     * Establece el tamaño de bicicleta compatible con el producto.
      *
-     * @param tamanoBici the tamano bici
+     * @param tamanoBici el nuevo tamaño de bicicleta compatible
      */
     public void setTamanoBici(String tamanoBici) {
         this.tamanoBici = tamanoBici;
     }
 
     /**
-     * Gets the nombre.
+     * Obtiene el nombre del producto.
      *
-     * @return the nombre
+     * @return el nombre del producto
      */
     public String getNombre() {
         return nombre;
     }
 
     /**
-     * Sets the nombre.
+     * Establece el nombre del producto.
      *
-     * @param nombre the nombre
+     * @param nombre el nuevo nombre del producto
      */
     public void setNombre(String nombre) {
         this.nombre = nombre;
     }
 
     /**
-     * Gets the marca.
+     * Obtiene la marca del producto.
      *
-     * @return the marca
+     * @return la marca del producto
      */
     public String getMarca() {
         return marca;
     }
 
     /**
-     * Sets the marca.
+     * Establece la marca del producto.
      *
-     * @param marca the marca
+     * @param marca la nueva marca del producto
      */
     public void setMarca(String marca) {
         this.marca = marca;
     }
 
     /**
-     * Gets the precio.
+     * Obtiene el precio del producto.
      *
-     * @return the precio
+     * @return el precio del producto en unidades monetarias
      */
     public int getPrecio() {
         return precio;
     }
 
     /**
-     * Sets the precio.
+     * Establece el precio del producto.
      *
-     * @param precio the precio
+     * @param precio el nuevo precio del producto
      */
     public void setPrecio(int precio) {
         this.precio = precio;
     }
 
     /**
-     * Gets the cantidad.
+     * Obtiene la cantidad disponible en inventario.
      *
-     * @return the cantidad
+     * @return la cantidad de productos disponibles en stock
      */
     public int getCantidad() {
         return cantidad;
     }
 
     /**
-     * Sets the cantidad.
+     * Establece la cantidad disponible en inventario.
      *
-     * @param cantidad the cantidad
+     * @param cantidad la nueva cantidad disponible en stock
      */
     public void setCantidad(int cantidad) {
         this.cantidad = cantidad;
     }
 }
-

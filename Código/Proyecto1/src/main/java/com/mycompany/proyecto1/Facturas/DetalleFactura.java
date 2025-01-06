@@ -3,52 +3,57 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Other/File.java to edit this template
  */
 package com.mycompany.proyecto1.Facturas;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
-// TODO: Auto-generated Javadoc
 
 /**
- * The Class DetalleFactura.
+ * Clase que representa el detalle de una factura.
+ *
+ * <p>Contiene información sobre el artículo facturado, incluyendo su código,
+ * número de factura, cantidad, precio unitario y total.</p>
  *
  * @author noe
  */
-
-// Clase para crear el detalle de una factura
 public class DetalleFactura {
     
-    /** The codigo articulo. */
+    /** Código del artículo facturado. */
     @JsonProperty("codigoArticulo")
     private int codigoArticulo;
 
-    /** The numero factura. */
+    /** Número de la factura a la que pertenece el detalle. */
     @JsonProperty("numeroFactura")
     private int numeroFactura;
 
-    /** The cantidad. */
+    /** Cantidad del artículo facturado. */
     @JsonProperty("cantidad")
     private int cantidad;
 
-    /** The precio unitario. */
+    /** Precio unitario del artículo. */
     @JsonProperty("precioUnitario")
     private int precioUnitario;
 
-    /** The total. */
+    /** Total calculado como {@code cantidad * precioUnitario}. */
     @JsonProperty("total")
     private int total;
     
     /**
-     * The Constructor.
+     * Constructor por defecto.
+     *
+     * <p>Este constructor es necesario para la serialización/deserialización JSON.</p>
      */
-    public DetalleFactura(){
-        
+    public DetalleFactura() {
+        // Constructor vacío requerido para la deserialización
     }
 
     /**
-     * The Constructor.
+     * Constructor que inicializa un detalle de factura con los valores proporcionados.
      *
-     * @param codigoArticulo the codigo articulo
-     * @param numeroFactura the numero factura
-     * @param cantidad the cantidad
-     * @param precioUnitario the precio unitario
+     * <p>El total se calcula automáticamente como {@code cantidad * precioUnitario}.</p>
+     *
+     * @param codigoArticulo el código del artículo facturado
+     * @param numeroFactura el número de la factura asociada
+     * @param cantidad la cantidad del artículo en la factura
+     * @param precioUnitario el precio unitario del artículo
      */
     public DetalleFactura(int codigoArticulo, int numeroFactura, int cantidad, int precioUnitario) {
         this.codigoArticulo = codigoArticulo;
@@ -59,48 +64,47 @@ public class DetalleFactura {
     }
 
     /**
-     * Gets the codigo articulo.
+     * Obtiene el código del artículo facturado.
      *
-     * @return the codigo articulo
+     * @return el código del artículo
      */
     public int getCodigoArticulo() {
         return codigoArticulo;
     }
 
     /**
-     * Gets the numero factura.
+     * Obtiene el número de la factura a la que pertenece este detalle.
      *
-     * @return the numero factura
+     * @return el número de la factura
      */
     public int getNumeroFactura() {
         return numeroFactura;
     }
 
     /**
-     * Gets the cantidad.
+     * Obtiene la cantidad del artículo facturado.
      *
-     * @return the cantidad
+     * @return la cantidad del artículo
      */
     public int getCantidad() {
         return cantidad;
     }
 
     /**
-     * Gets the precio unitario.
+     * Obtiene el precio unitario del artículo facturado.
      *
-     * @return the precio unitario
+     * @return el precio unitario del artículo
      */
     public int getPrecioUnitario() {
         return precioUnitario;
     }
 
     /**
-     * Gets the total.
+     * Obtiene el total calculado de la factura para este artículo.
      *
-     * @return the total
+     * @return el total calculado como {@code cantidad * precioUnitario}
      */
     public int getTotal() {
         return total;
     }
 }
-

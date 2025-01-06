@@ -9,19 +9,26 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Archivo.
- *
+ * Clase encargada de la gestión de archivos, permitiendo su almacenamiento y lectura 
+ * en formato JSON utilizando la biblioteca Jackson.
+ * 
+ * <p>Proporciona métodos para guardar y leer objetos desde archivos, además de obtener 
+ * un identificador único basado en los registros almacenados.</p>
+ * 
  * @author Steven Umaña
  */
 public class Archivo {
 
     /**
-     * Guardar archivo.
+     * Guarda un objeto en un archivo en formato JSON.
      *
-     * @param ruta the ruta
-     * @param data the data
+     * <p>Este método serializa el objeto proporcionado y lo almacena en la 
+     * ruta especificada.</p>
+     *
+     * @param ruta la ruta del archivo donde se almacenará el objeto
+     * @param data el objeto que será almacenado en el archivo
+     * @throws IOException si ocurre un error durante la escritura del archivo
      */
     public void guardarArchivo(String ruta, Object data) {
         try {
@@ -33,11 +40,15 @@ public class Archivo {
     }
 
     /**
-     * Leer archivo.
+     * Lee un archivo en formato JSON y lo convierte en un objeto del tipo especificado.
      *
-     * @param ruta the ruta
-     * @param clase the clase
-     * @return the object
+     * <p>Este método deserializa el archivo JSON en la ruta especificada y devuelve 
+     * un objeto de la clase indicada.</p>
+     *
+     * @param ruta la ruta del archivo que se leerá
+     * @param clase la clase del objeto que se espera recuperar
+     * @return el objeto deserializado, o {@code null} si ocurre un error durante la lectura
+     * @throws IOException si ocurre un error al leer el archivo
      */
     public Object leerArchivo(String ruta, Class<?> clase) {
         try {
@@ -50,14 +61,18 @@ public class Archivo {
     }
     
     /**
-     * Obtener siguiente codigo.
+     * Obtiene el siguiente código disponible basado en el conjunto de objetos almacenados.
      *
-     * @param <T> the generic type
-     * @param ruta the ruta
-     * @param clase the clase
-     * @return the int
+     * <p>Este método lee un archivo JSON que contiene una lista de objetos que implementan 
+     * la interfaz {@code ConCodigo}, y calcula el siguiente código disponible 
+     * incrementando el mayor valor encontrado en el conjunto.</p>
+     *
+     * @param <T> el tipo de objetos almacenados en el archivo, que deben implementar {@code ConCodigo}
+     * @param ruta la ruta del archivo JSON a leer
+     * @param clase la clase del array de objetos a deserializar
+     * @return el siguiente código disponible, comenzando desde 1 si el archivo está vacío o no existe
+     * @throws IOException si ocurre un error al leer el archivo
      */
-    // Calcula el siguiente código de cualquier objeto
     public <T extends ConCodigo> int obtenerSiguienteCodigo(String ruta, Class<T[]> clase) {
         try {
             ObjectMapper mapper = new ObjectMapper();

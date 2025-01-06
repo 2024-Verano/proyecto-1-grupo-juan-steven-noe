@@ -22,22 +22,22 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.MaskFormatter;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Validador.
- *
+ * Clase que proporciona validaciones para entradas de datos en un sistema.
+ * 
+ * <p>Incluye métodos para validar entradas alfabéticas, numéricas, alfanuméricas, 
+ * correos electrónicos, teléfonos y fechas en formato específico.</p>
+ * 
  * @author noe
  */
-// Clase para validaciones de entrada
 public class Validador {
 
     /**
-     * Validar alfabetico.
+     * Valida que una entrada contenga solo caracteres alfabéticos.
      *
-     * @param entrada the entrada
-     * @return true, if validar alfabetico
+     * @param entrada la cadena a validar
+     * @return {@code true} si la entrada solo contiene letras y espacios, {@code false} en caso contrario
      */
-    // Valida que la entrada contenga solo caracteres alfabéticos
     public static boolean validarAlfabetico(String entrada) {
         if (entrada == null || entrada.trim().isEmpty()) {
             return false;
@@ -46,45 +46,40 @@ public class Validador {
     }
 
     /**
-     * Validar numerico.
+     * Valida que una entrada contenga solo caracteres numéricos.
      *
-     * @param entrada the entrada
-     * @return true, if validar numerico
+     * @param entrada la cadena a validar
+     * @return {@code true} si la entrada solo contiene dígitos, {@code false} en caso contrario
      */
-    // Valida que la entrada contenga solo caracteres numéricos
     public static boolean validarNumerico(String entrada) {
         if (entrada == null || entrada.trim().isEmpty()) {
             return false;
         }
         return entrada.matches("\\d+");
     }
-    
+
     /**
-     * Validar alfanumerico.
+     * Valida que una entrada contenga solo caracteres alfanuméricos.
      *
-     * @param entrada the entrada
-     * @param tipo the tipo
-     * @return true, if validar alfanumerico
+     * @param entrada la cadena a validar
+     * @param tipo el tipo de validación a aplicar, "ConTexto" indica que la entrada no debe estar vacía
+     * @return {@code true} si la entrada cumple con el criterio, {@code false} en caso contrario
      */
-    // Valida que la entrada contenga solo carácteres alfanuméricos
     public static boolean validarAlfanumerico(String entrada, String tipo) {
         if (tipo.equals("ConTexto")) {
             if (entrada == null || entrada.trim().isEmpty()) {
                 return false;
             }
         }
-        
         return entrada.matches("[a-zA-Z0-9 ,.;]+");
     }
 
-
     /**
-     * Validar correo.
+     * Valida si una cadena es un correo electrónico con formato válido.
      *
-     * @param entrada the entrada
-     * @return true, if validar correo
+     * @param entrada la cadena a validar
+     * @return {@code true} si el formato es válido, {@code false} en caso contrario
      */
-    // Valida que la entrada sea un correo electrónico válido
     public static boolean validarCorreo(String entrada) {
         if (entrada == null || entrada.trim().isEmpty()) {
             return false;
@@ -93,35 +88,38 @@ public class Validador {
     }
 
     /**
-     * Validar sin espacios extremos.
+     * Valida que una cadena no contenga espacios en los extremos.
      *
-     * @param entrada the entrada
-     * @return true, if validar sin espacios extremos
+     * @param entrada la cadena a validar
+     * @return {@code true} si la cadena no tiene espacios iniciales o finales, {@code false} en caso contrario
      */
-    // Valida que no haya espacios vacíos en los extremos
     public static boolean validarSinEspaciosExtremos(String entrada) {
         if (entrada == null) {
             return false;
         }
         return entrada.equals(entrada.trim());
     }
+
     /**
-    * Verifica si un número de teléfono es válido.
-    *
-    * @param telefono El número de teléfono a validar.
-    * @return true si el número de teléfono tiene 8 dígitos y comienza con 2, 4, 6 o 8; de lo contrario, false.
-    */
-    public static boolean validarTelefono(int telefono){
+     * Valida si un número de teléfono es válido.
+     *
+     * <p>Un teléfono válido debe tener 8 dígitos y comenzar con 2, 4, 6 o 8.</p>
+     *
+     * @param telefono el número de teléfono a validar
+     * @return {@code true} si el número es válido, {@code false} en caso contrario
+     */
+    public static boolean validarTelefono(int telefono) {
         String telefonoStr = String.valueOf(telefono);
         return telefonoStr.length() == 8 && "2468".contains(telefonoStr.substring(0, 1));
     }
-    
+
     /**
-     * Configurar campo fecha.
+     * Configura un campo de entrada para aceptar fechas con formato {@code dd/MM/yyyy}.
      *
-     * @param campo the campo
+     * <p>Este método aplica un formato enmascarado y valida la fecha al perder el foco.</p>
+     *
+     * @param campo el campo de texto formateado que se configurará
      */
-    // Método único para configurar y validar campos de fecha
     public static void configurarCampoFecha(JFormattedTextField campo) {
         try {
             // Define el formato de fecha
@@ -131,19 +129,18 @@ public class Validador {
             // Aplica el formato al campo
             campo.setFormatterFactory(new DefaultFormatterFactory(formatoFecha));
 
-            // Agrega validación al salir del Box
-            campo.addFocusListener(new java.awt.event.FocusAdapter() {
+            // Agrega validación al perder el foco
+            campo.addFocusListener(new FocusAdapter() {
                 @Override
-                public void focusLost(java.awt.event.FocusEvent evt) {
+                public void focusLost(FocusEvent evt) {
                     String fechaIngresada = campo.getText().trim();
 
                     // Validar la fecha ingresada
                     if (!validarFecha(fechaIngresada)) {
-                        JOptionPane.showMessageDialog(null, 
-                            "Fecha inválida. Use el formato dd/MM/yyyy", 
-                            "Error de fecha", 
-                            JOptionPane.ERROR_MESSAGE
-                        );
+                        JOptionPane.showMessageDialog(null,
+                                "Fecha inválida. Use el formato dd/MM/yyyy",
+                                "Error de fecha",
+                                JOptionPane.ERROR_MESSAGE);
                         campo.setText("");
                     }
                 }
@@ -151,44 +148,47 @@ public class Validador {
 
         } catch (ParseException e) {
             JOptionPane.showMessageDialog(
-                null, 
-                "Error al configurar el campo de fecha: " + e.getMessage(), 
-                "Error", 
-                JOptionPane.ERROR_MESSAGE
+                    null,
+                    "Error al configurar el campo de fecha: " + e.getMessage(),
+                    "Error",
+                    JOptionPane.ERROR_MESSAGE
             );
         }
     }
 
     /**
-     * Validar fecha.
+     * Valida si una cadena representa una fecha en formato {@code dd/MM/yyyy} dentro de un rango permitido.
      *
-     * @param fecha the fecha
-     * @return true, if validar fecha
+     * <p>El rango permitido es desde el 01/01/2024 hasta el 31/01/2025.</p>
+     *
+     * @param fecha la cadena de fecha a validar
+     * @return {@code true} si la fecha es válida y está dentro del rango permitido, {@code false} en caso contrario
      */
-    // Método de validación de fecha
     private static boolean validarFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         formato.setLenient(false);
 
         try {
             Date fechaIngresada = formato.parse(fecha);
-
             Date fechaMinima = formato.parse("01/01/2024");
             Date fechaMaxima = formato.parse("31/01/2025");
 
             return !fechaIngresada.before(fechaMinima) && !fechaIngresada.after(fechaMaxima);
-
         } catch (ParseException e) {
             return false;
         }
     }
+
+
     
     /**
-     * Configurar campo fecha nacimiento.
+     * Configura un campo de entrada para aceptar fechas de nacimiento en formato {@code dd/MM/yyyy}.
      *
-     * @param campo the campo
+     * <p>Este método aplica un formato enmascarado y valida que la fecha ingresada 
+     * esté dentro del rango permitido (01/01/1900 - 01/01/2024).</p>
+     *
+     * @param campo el campo de texto formateado que se configurará
      */
-    // Método para validar fecha de nacimiento
     public static void configurarCampoFechaNacimiento(JFormattedTextField campo) {
         try {
             // Define el formato de fecha
@@ -198,7 +198,7 @@ public class Validador {
             // Aplica el formato al campo
             campo.setFormatterFactory(new DefaultFormatterFactory(formatoFecha));
 
-            // Agrega validación al salir del Box
+            // Agrega validación al perder el foco
             campo.addFocusListener(new java.awt.event.FocusAdapter() {
                 @Override
                 public void focusLost(java.awt.event.FocusEvent evt) {
@@ -227,12 +227,13 @@ public class Validador {
     }
 
     /**
-     * Validar fecha nacimiento.
+     * Valida si una fecha ingresada corresponde a una fecha de nacimiento válida.
      *
-     * @param fecha the fecha
-     * @return true, if validar fecha nacimiento
+     * <p>El rango permitido es desde el 01/01/1900 hasta el 01/01/2024.</p>
+     *
+     * @param fecha la cadena de fecha a validar en formato {@code dd/MM/yyyy}
+     * @return {@code true} si la fecha es válida y está dentro del rango permitido, {@code false} en caso contrario
      */
-    // Método de validación de fecha de nacimiento
     public static boolean validarFechaNacimiento(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         formato.setLenient(false);
@@ -248,14 +249,15 @@ public class Validador {
             return false;
         }
     }
-    
+
     /**
-     * Producto ha sido facturado.
+     * Verifica si un producto ha sido facturado en alguna factura existente.
      *
-     * @param codigoProducto the codigo producto
-     * @return true, if producto ha sido facturado
+     * <p>Este método busca el código del producto en los detalles de todas las facturas registradas.</p>
+     *
+     * @param codigoProducto el código del producto a verificar
+     * @return {@code true} si el producto ha sido facturado, {@code false} en caso contrario
      */
-    // Método para validar si un producto ya fue facturado
     public static boolean productoHaSidoFacturado(int codigoProducto) {
         Archivo archivo = new Archivo();
         String ruta = "facturas_productos.json";
@@ -275,22 +277,23 @@ public class Validador {
                 }
             }
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(null, 
                 "Error al verificar facturación del producto: " + e.getMessage(), 
                 "Error", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE);
         }
 
         return false;
     }
- 
+
     /**
-     * Mantenimiento ha sido facturado.
+     * Verifica si un servicio de mantenimiento ha sido facturado.
      *
-     * @param codigoServicio the codigo servicio
-     * @return true, if mantenimiento ha sido facturado
+     * <p>Este método busca el código del servicio en los detalles de todas las facturas registradas.</p>
+     *
+     * @param codigoServicio el código del servicio a verificar
+     * @return {@code true} si el servicio ha sido facturado, {@code false} en caso contrario
      */
-    // Método para validar si un mantenimiento ya fue facturado
     public static boolean mantenimientoHaSidoFacturado(int codigoServicio) {
         Archivo archivo = new Archivo();
         String ruta = "facturas_mantenimiento.json";
@@ -308,23 +311,24 @@ public class Validador {
                 }
             }
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(null, 
                 "Error al verificar facturación del servicio: " + e.getMessage(), 
                 "Error", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE);
         }
 
         return false;
     }
-    
+
     /**
-     * Es fecha anterior.
+     * Compara dos fechas y determina si la primera es anterior a la segunda.
      *
-     * @param fecha1 the fecha 1
-     * @param fecha2 the fecha 2
-     * @return true, if es fecha anterior
+     * <p>Ambas fechas deben estar en formato {@code dd/MM/yyyy} y ser completas.</p>
+     *
+     * @param fecha1 la primera fecha
+     * @param fecha2 la segunda fecha
+     * @return {@code true} si la primera fecha es anterior a la segunda, {@code false} en caso contrario
      */
-    // Método para comparar dos fechas en formato dd/MM/yyyy con MaskFormatter
     public static boolean esFechaAnterior(String fecha1, String fecha2) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
         formato.setLenient(false); // Evita aceptar fechas inválidas
@@ -356,26 +360,28 @@ public class Validador {
             return false;
         }
     }
-    
+
     /**
-     * Sets the limite caracteres.
+     * Establece un límite de caracteres para un campo de texto.
      *
-     * @param campo the campo
-     * @param limite the limite
+     * <p>Este método impide que el usuario ingrese más caracteres de los permitidos.</p>
+     *
+     * @param campo el campo de texto en el que se aplicará la restricción
+     * @param limite la cantidad máxima de caracteres permitidos
      */
-    // Método para limitar los carácteres en un campo
     public static void setLimiteCaracteres(JTextField campo, int limite) {
         ((AbstractDocument) campo.getDocument()).setDocumentFilter(new DocumentFilter() {
-                @Override
-                public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
-                    if (fb.getDocument().getLength() + text.length() - length <= limite) {
-                        super.replace(fb, offset, length, text, attrs);
-                    } else {
-                        Toolkit.getDefaultToolkit().beep();
-                    }
+            @Override
+            public void replace(FilterBypass fb, int offset, int length, String text, AttributeSet attrs) throws BadLocationException {
+                if (fb.getDocument().getLength() + text.length() - length <= limite) {
+                    super.replace(fb, offset, length, text, attrs);
+                } else {
+                    Toolkit.getDefaultToolkit().beep();
                 }
-            });
-        }
+            }
+        });
+    }
+
     
 
 }

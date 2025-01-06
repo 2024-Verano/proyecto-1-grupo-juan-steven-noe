@@ -13,21 +13,25 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class UtilidadesFacturas.
+ * Clase que proporciona utilidades para la gestión de facturas.
+ *
+ * <p>Incluye métodos para cargar mantenimientos abiertos, cargar productos y 
+ * obtener productos por código.</p>
  *
  * @author noe
  */
 public class UtilidadesFacturas {
     
     /**
-     * Cargar mantenimientos abiertos.
+     * Carga los mantenimientos abiertos desde un archivo JSON y los añade a un combo box.
      *
-     * @param ruta the ruta
-     * @param comboBox the combo box
+     * <p>Este método lee el archivo JSON de mantenimientos, filtra aquellos que tienen 
+     * el estado "Abierto" y los agrega al combo box con su código y descripción.</p>
+     *
+     * @param ruta la ruta del archivo JSON que contiene los mantenimientos
+     * @param comboBox el combo box en el que se cargarán los mantenimientos abiertos
      */
-    // Método para cargar los mantenimientos Abiertos del JSON
     public static void cargarMantenimientosAbiertos(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
         
@@ -45,17 +49,22 @@ public class UtilidadesFacturas {
                 comboBox.addItem("No hay mantenimientos abiertos");
             }
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar mantenimientos: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, 
+                "Error al cargar mantenimientos: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
         }
     }
     
     /**
-     * Cargar productos.
+     * Carga los productos disponibles desde un archivo JSON y los añade a un combo box.
      *
-     * @param ruta the ruta
-     * @param comboBox the combo box
+     * <p>Este método lee el archivo JSON de productos y los agrega al combo box con su 
+     * código y nombre.</p>
+     *
+     * @param ruta la ruta del archivo JSON que contiene los productos
+     * @param comboBox el combo box en el que se cargarán los productos disponibles
      */
-    // Método para cargar los productos dentro del JSON
     public static void cargarProductos(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
         
@@ -71,17 +80,22 @@ public class UtilidadesFacturas {
                 comboBox.addItem("No hay productos disponibles");
             }
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, "Error al cargar productos: " + e.getMessage(), "Error", javax.swing.JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(null, 
+                "Error al cargar productos: " + e.getMessage(), 
+                "Error", 
+                JOptionPane.ERROR_MESSAGE);
         }
     }
     
     /**
-     * Obtener producto por codigo.
+     * Obtiene un producto a partir de su código.
      *
-     * @param codigoProducto the codigo producto
-     * @return the producto
+     * <p>Este método busca en el archivo JSON de productos un producto cuyo código 
+     * coincida con el proporcionado y lo devuelve.</p>
+     *
+     * @param codigoProducto el código del producto a buscar
+     * @return el objeto {@code Producto} correspondiente si se encuentra, o {@code null} si no existe
      */
-    // Método para encontrar un producto
     public static Producto obtenerProductoPorCodigo(int codigoProducto) {
         Archivo archivo = new Archivo();
         Producto[] productos = (Producto[]) archivo.leerArchivo("productos.json", Producto[].class);
@@ -96,14 +110,16 @@ public class UtilidadesFacturas {
         return null; // Si no se encuentra el producto
     }
     
-    /**
-     * Actualizar stock producto.
+     /**
+     * Actualiza el stock de un producto al realizar una venta.
      *
-     * @param codigoProducto the codigo producto
-     * @param cantidad the cantidad
-     * @return true, if actualizar stock producto
+     * <p>Este método busca el producto por su código en el archivo JSON, verifica si 
+     * hay suficiente cantidad disponible y, si es posible, reduce la cantidad en stock.</p>
+     *
+     * @param codigoProducto el código del producto a actualizar
+     * @param cantidad la cantidad que se desea facturar
+     * @return {@code true} si el stock se actualiza correctamente, {@code false} si no hay suficiente stock o si ocurre un error
      */
-    // Método para disminuir la cantidad de productos y validar que existen suficientes para facturar
     public static boolean actualizarStockProducto(int codigoProducto, int cantidad) {
         Archivo archivo = new Archivo();
         String ruta = "productos.json";
@@ -120,11 +136,11 @@ public class UtilidadesFacturas {
                     
                     // Verificar si hay stock suficiente
                     if (producto.getCantidad() < cantidad) {
-                        javax.swing.JOptionPane.showMessageDialog(null, 
+                        JOptionPane.showMessageDialog(null, 
                             "No hay suficiente stock para facturar este producto.\n"
                             + "Disponibles: " + producto.getCantidad(), 
                             "Error", 
-                            javax.swing.JOptionPane.ERROR_MESSAGE);
+                            JOptionPane.ERROR_MESSAGE);
                         return false;
                     }
 
@@ -136,33 +152,34 @@ public class UtilidadesFacturas {
                     archivo.guardarArchivo(ruta, listaProductos);
 
                     // Mensaje confirmando la actualización del stock
-                    javax.swing.JOptionPane.showMessageDialog(null, 
+                    JOptionPane.showMessageDialog(null, 
                         "Stock actualizado.\n"
                         + "Código del Producto: " + codigoProducto + "\n"
                         + "Cantidad restante en inventario: " + stockRestante, 
                         "Stock Actualizado", 
-                        javax.swing.JOptionPane.INFORMATION_MESSAGE);
+                        JOptionPane.INFORMATION_MESSAGE);
 
                     return true;
                 }
             }
         } catch (Exception e) {
-            javax.swing.JOptionPane.showMessageDialog(null, 
+            JOptionPane.showMessageDialog(null, 
                 "Error al actualizar stock: " + e.getMessage(), 
                 "Error", 
-                javax.swing.JOptionPane.ERROR_MESSAGE);
+                JOptionPane.ERROR_MESSAGE);
         }
 
         return false;
     }
 
     /**
-     * Obtener mantenimiento por codigo.
+     * Obtiene un servicio de mantenimiento a partir de su código.
      *
-     * @param codigoServicio the codigo servicio
-     * @return the mantenimiento
+     * <p>Este método busca en el archivo JSON un mantenimiento que coincida con el código proporcionado.</p>
+     *
+     * @param codigoServicio el código del servicio de mantenimiento a buscar
+     * @return el objeto {@code Mantenimiento} si se encuentra, o {@code null} si no existe
      */
-    // Método para obtener los datos de un servicio
     public static Mantenimiento obtenerMantenimientoPorCodigo(int codigoServicio) {
         Archivo archivo = new Archivo();
         String ruta = "mantenimiento.json";
@@ -185,13 +202,13 @@ public class UtilidadesFacturas {
         return null;
     }
 
-    
     /**
-     * Cerrar mantenimiento.
+     * Cambia el estado de un mantenimiento a "Cerrado".
      *
-     * @param codigoServicio the codigo servicio
+     * <p>Este método busca el mantenimiento por código y actualiza su estado en el archivo JSON.</p>
+     *
+     * @param codigoServicio el código del servicio de mantenimiento a cerrar
      */
-    // Método para cerrar el estado Abierto de un servicio
     public static void cerrarMantenimiento(int codigoServicio) {
         Archivo archivo = new Archivo();
         String ruta = "mantenimiento.json";
@@ -209,11 +226,13 @@ public class UtilidadesFacturas {
     }
 
     /**
-     * Anular factura.
+     * Anula una factura, cambiando su estado a "Anulado".
      *
-     * @param numeroFactura the numero factura
-     * @param tipoFactura the tipo factura
-     * @return true, if anular factura
+     * <p>Este método busca la factura por su número y cambia su estado en el archivo JSON.</p>
+     *
+     * @param numeroFactura el número único de la factura a anular
+     * @param tipoFactura el tipo de factura ("Producto" o "Mantenimiento"), que determina en qué archivo buscar
+     * @return {@code true} si la factura se anuló correctamente, {@code false} si no se encontró la factura o si ocurrió un error
      */
     public static boolean anularFactura(int numeroFactura, String tipoFactura) {
         Archivo archivo = new Archivo();
@@ -240,5 +259,4 @@ public class UtilidadesFacturas {
 
         return false;
     }
-    
 }

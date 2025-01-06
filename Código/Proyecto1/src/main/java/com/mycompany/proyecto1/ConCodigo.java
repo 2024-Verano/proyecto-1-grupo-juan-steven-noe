@@ -4,19 +4,20 @@
  */
 package com.mycompany.proyecto1;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Interface ConCodigo.
- *
+ * Interfaz que define un método para obtener el código único de un objeto.
+ * 
+ * <p>Esta interfaz debe ser implementada por cualquier clase que requiera un 
+ * identificador único numérico.</p>
+ * 
  * @author noe
  */
-// Interfaz para los objetos con código
 public interface ConCodigo {
     
     /**
-     * Gets the codigo.
+     * Obtiene el código único del objeto.
      *
-     * @return the codigo
+     * @return el código del objeto.
      */
     int getCodigo();
 }
