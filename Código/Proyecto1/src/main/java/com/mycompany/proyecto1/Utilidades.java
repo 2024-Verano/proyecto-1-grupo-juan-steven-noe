@@ -18,7 +18,9 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.MaskFormatter;
 import ventanas.ModificarMant;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Utilidades.
  *
  * @author noe
  */
@@ -26,6 +28,12 @@ import ventanas.ModificarMant;
 // Clase para funciones y métodos inespecíficos
 public class Utilidades {
 
+    /**
+     * Cargar tipos de producto.
+     *
+     * @param ruta the ruta
+     * @param comboBox the combo box
+     */
     public static void cargarTiposDeProducto(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
 
@@ -49,6 +57,12 @@ public class Utilidades {
         }
     }
     
+    /**
+     * Cargar resultados en tabla.
+     *
+     * @param modelo the modelo
+     * @param resultados the resultados
+     */
     // Método para cargar resultados de búsqueda en las tablas de Agregar Producto
     public static void cargarResultadosEnTabla(DefaultTableModel modelo, List<Producto> resultados) {
         modelo.setRowCount(0);
@@ -67,6 +81,12 @@ public class Utilidades {
         }
     }
 
+    /**
+     * Cargar clientes.
+     *
+     * @param ruta the ruta
+     * @param comboBox the combo box
+     */
     // Clase para cargar los clientes dentro del archivo de clientes.json
     public static void cargarClientes(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
@@ -85,6 +105,13 @@ public class Utilidades {
         }
     }
  
+    /**
+     * Buscar mantenimientos.
+     *
+     * @param criterio the criterio
+     * @param valor the valor
+     * @param tabla the tabla
+     */
     // Método para buscar mantenimientos y actualizar la tabla
     public static void buscarMantenimientos(String criterio, String valor, JTable tabla) {
         String rutaMantenimiento = "mantenimiento.json";
@@ -156,6 +183,13 @@ public class Utilidades {
         }
     }
  
+    /**
+     * Abrir ventana modificar mant.
+     *
+     * @param filaSeleccionada the fila seleccionada
+     * @param tabla the tabla
+     * @param parent the parent
+     */
     // Método para abrir ventana de modificar mantenimiento (enfoque más limpio con respecto a RegistroProducto)
     public static void abrirVentanaModificarMant(int filaSeleccionada, JTable tabla, JFrame parent) {
         String codigoServicioTexto = tabla.getValueAt(filaSeleccionada, 0).toString();

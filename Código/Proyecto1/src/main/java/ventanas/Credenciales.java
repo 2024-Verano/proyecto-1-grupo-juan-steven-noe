@@ -10,14 +10,16 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Credenciales.
  *
  * @author Steven Umaña
  */
 public class Credenciales extends javax.swing.JFrame {
 
     /**
-     * Creates new form Interfaz
+     * Creates new form Interfaz.
      */
     public Credenciales() {
         initComponents();
@@ -171,10 +173,20 @@ public class Credenciales extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Box usuario action performed.
+     *
+     * @param evt the evt
+     */
     private void box_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_usuarioActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_usuarioActionPerformed
 
+    /**
+     * Button ingresar action performed.
+     *
+     * @param evt the evt
+     */
     private void button_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ingresarActionPerformed
 
         // Obtener el texto ingresado en los campos de usuario y contraseña
@@ -206,10 +218,20 @@ public class Credenciales extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_ingresarActionPerformed
 
+    /**
+     * Box contrasenia action performed.
+     *
+     * @param evt the evt
+     */
     private void box_contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_contraseniaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_contraseniaActionPerformed
 
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Iniciar Sesión");
@@ -217,6 +239,8 @@ public class Credenciales extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -252,14 +276,29 @@ public class Credenciales extends javax.swing.JFrame {
         });
     }
 
+    /** The box contrasenia. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPasswordField box_contrasenia;
+    
+    /** The box usuario. */
     private javax.swing.JTextField box_usuario;
+    
+    /** The button ingresar. */
     private javax.swing.JButton button_ingresar;
+    
+    /** The j panel 1. */
     private javax.swing.JPanel jPanel1;
+    
+    /** The label inciar sesion. */
     private javax.swing.JLabel label_inciar_sesion;
+    
+    /** The label iniciar contrasenia. */
     private javax.swing.JLabel label_iniciar_contrasenia;
+    
+    /** The label iniciar usuario. */
     private javax.swing.JLabel label_iniciar_usuario;
+    
+    /** The user icon. */
     private javax.swing.JLabel user_icon;
     // End of variables declaration//GEN-END:variables
 }

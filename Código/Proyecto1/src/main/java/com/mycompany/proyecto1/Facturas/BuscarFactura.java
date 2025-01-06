@@ -8,7 +8,9 @@ import com.mycompany.proyecto1.Archivo;
 import java.util.ArrayList;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class BuscarFactura.
  *
  * @author noe
  */
@@ -16,6 +18,14 @@ import java.util.List;
 // Clase para buscar una factura de producto o de mantenimiento
 public class BuscarFactura {
 
+    /**
+     * Buscar factura.
+     *
+     * @param tipoFactura the tipo factura
+     * @param criterio the criterio
+     * @param valor the valor
+     * @return the list< factura>
+     */
     public static List<Factura> buscarFactura(String tipoFactura, String criterio, String valor) {
         Archivo archivo = new Archivo();
         List<Factura> resultados = new ArrayList<>();
@@ -37,6 +47,14 @@ public class BuscarFactura {
         return resultados;
     }
 
+    /**
+     * Coincide con criterio.
+     *
+     * @param factura the factura
+     * @param criterio the criterio
+     * @param valor the valor
+     * @return true, if coincide con criterio
+     */
     private static boolean coincideConCriterio(Factura factura, String criterio, String valor) {
         switch (criterio) {
             case "Num. Factura":

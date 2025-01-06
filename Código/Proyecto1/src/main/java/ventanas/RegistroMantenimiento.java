@@ -25,14 +25,16 @@ import com.mycompany.proyecto1.Producto;
 import javax.swing.ImageIcon;
 
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class RegistroMantenimiento.
  *
  * @author noe
  */
 public class RegistroMantenimiento extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuOpciones
+     * Creates new form MenuOpciones.
      */
     public RegistroMantenimiento() {
         initComponents();
@@ -657,6 +659,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Agregar mant action performed.
+     *
+     * @param evt the evt
+     */
     private void agregar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_mantActionPerformed
         String ruta = "mantenimiento.json";
         Archivo archivo = new Archivo();
@@ -679,12 +686,22 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         layout.show(SubFrameContainer, "agregarPanel");
     }//GEN-LAST:event_agregar_mantActionPerformed
 
+    /**
+     * Modificar mant action performed.
+     *
+     * @param evt the evt
+     */
     private void modificar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_mantActionPerformed
         // Mostrar el SubFrame de "modificar mantenimiento"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "modificarPanel");
     }//GEN-LAST:event_modificar_mantActionPerformed
 
+    /**
+     * Salir action performed.
+     *
+     * @param evt the evt
+     */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
              // Cierra el frame actual
@@ -696,6 +713,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
             opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_salirActionPerformed
 
+    /**
+     * Crear mant action performed.
+     *
+     * @param evt the evt
+     */
     private void crear_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_mantActionPerformed
 
         boolean isVisible = opcionesAgregarMant.isVisible();
@@ -705,10 +727,20 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         this.repaint();
     }//GEN-LAST:event_crear_mantActionPerformed
 
+    /**
+     * Box codigo mant action performed.
+     *
+     * @param evt the evt
+     */
     private void box_codigo_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_mantActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_mantActionPerformed
 
+    /**
+     * Button buscar modificar action performed.
+     *
+     * @param evt the evt
+     */
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         String criterio = combo_filtro_agregar.getSelectedItem().toString();
         String valor = buscador_agregar.getText().trim();
@@ -716,6 +748,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         Utilidades.buscarMantenimientos(criterio, valor, tabla_resultado);
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
+    /**
+     * Guardar mant action performed.
+     *
+     * @param evt the evt
+     */
     private void guardar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_mantActionPerformed
 
         String ruta = "mantenimiento.json";
@@ -829,6 +866,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardar_mantActionPerformed
 
+    /**
+     * Tabla resultado mouse clicked.
+     *
+     * @param evt the evt
+     */
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         if (evt.getClickCount() == 2) { // Detecta doble clic
             int filaSeleccionada = tabla_resultado.getSelectedRow();
@@ -838,44 +880,94 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
 
+    /**
+     * Box marca bici action performed.
+     *
+     * @param evt the evt
+     */
     private void box_marca_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_biciActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_biciActionPerformed
 
+    /**
+     * Box descrip bici action performed.
+     *
+     * @param evt the evt
+     */
     private void box_descrip_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_descrip_biciActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_descrip_biciActionPerformed
 
+    /**
+     * Formatt fecha recibido action performed.
+     *
+     * @param evt the evt
+     */
     private void formatt_fecha_recibidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_recibidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_recibidoActionPerformed
 
+    /**
+     * Formatt fecha entrega action performed.
+     *
+     * @param evt the evt
+     */
     private void formatt_fecha_entregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_entregaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_entregaActionPerformed
 
+    /**
+     * Combo filtro agregar action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_filtro_agregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_filtro_agregarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_filtro_agregarActionPerformed
 
+    /**
+     * Box precio bici action performed.
+     *
+     * @param evt the evt
+     */
     private void box_precio_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_precio_biciActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_precio_biciActionPerformed
 
+    /**
+     * Box observaciones action performed.
+     *
+     * @param evt the evt
+     */
     private void box_observacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_observacionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_observacionesActionPerformed
 
+    /**
+     * Combo codigo cliente action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
 
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Registro de servicios de mantenimiento");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Restablecer panel.
+     *
+     * @param nombrePanel the nombre panel
+     */
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
@@ -889,6 +981,8 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     
     
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -930,48 +1024,131 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
         });
     }
 
+    /** The Sub frame container. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubFrameContainer;
+    
+    /** The agregar panel. */
     private javax.swing.JPanel agregarPanel;
+    
+    /** The agregar mant. */
     private javax.swing.JButton agregar_mant;
+    
+    /** The bienvenida label. */
     private javax.swing.JLabel bienvenidaLabel;
+    
+    /** The bienvenida label 1. */
     private javax.swing.JLabel bienvenidaLabel1;
+    
+    /** The bienvenida panel. */
     private javax.swing.JPanel bienvenidaPanel;
+    
+    /** The box codigo mant. */
     private javax.swing.JTextField box_codigo_mant;
+    
+    /** The box descrip bici. */
     private javax.swing.JTextField box_descrip_bici;
+    
+    /** The box marca bici. */
     private javax.swing.JTextField box_marca_bici;
+    
+    /** The box observaciones. */
     private javax.swing.JTextField box_observaciones;
+    
+    /** The box precio bici. */
     private javax.swing.JTextField box_precio_bici;
+    
+    /** The buscador agregar. */
     private javax.swing.JTextField buscador_agregar;
+    
+    /** The button buscar modificar. */
     private javax.swing.JButton button_buscar_modificar;
+    
+    /** The codigo servicio. */
     private javax.swing.JLabel codigo_servicio;
+    
+    /** The combo codigo cliente. */
     private javax.swing.JComboBox<String> combo_codigo_cliente;
+    
+    /** The combo filtro agregar. */
     private javax.swing.JComboBox<String> combo_filtro_agregar;
+    
+    /** The crear mant. */
     private javax.swing.JButton crear_mant;
+    
+    /** The filtro agregar. */
     private javax.swing.JLabel filtro_agregar;
+    
+    /** The formatt fecha entrega. */
     private javax.swing.JFormattedTextField formatt_fecha_entrega;
+    
+    /** The formatt fecha recibido. */
     private javax.swing.JFormattedTextField formatt_fecha_recibido;
+    
+    /** The funciones. */
     private javax.swing.JToolBar funciones;
+    
+    /** The guardar mant. */
     private javax.swing.JButton guardar_mant;
+    
+    /** The j scroll pane 1. */
     private javax.swing.JScrollPane jScrollPane1;
+    
+    /** The j separator 1. */
     private javax.swing.JToolBar.Separator jSeparator1;
+    
+    /** The j separator 2. */
     private javax.swing.JToolBar.Separator jSeparator2;
+    
+    /** The j separator 3. */
     private javax.swing.JToolBar.Separator jSeparator3;
+    
+    /** The j separator 4. */
     private javax.swing.JSeparator jSeparator4;
+    
+    /** The j separator 5. */
     private javax.swing.JSeparator jSeparator5;
+    
+    /** The label cliente. */
     private javax.swing.JLabel label_cliente;
+    
+    /** The label descrip bici. */
     private javax.swing.JLabel label_descrip_bici;
+    
+    /** The label entrega. */
     private javax.swing.JLabel label_entrega;
+    
+    /** The label marca bici. */
     private javax.swing.JLabel label_marca_bici;
+    
+    /** The label observaciones. */
     private javax.swing.JLabel label_observaciones;
+    
+    /** The label precio bici. */
     private javax.swing.JLabel label_precio_bici;
+    
+    /** The label recibido. */
     private javax.swing.JLabel label_recibido;
+    
+    /** The mant icon. */
     private javax.swing.JLabel mant_icon;
+    
+    /** The modificar panel mant. */
     private javax.swing.JPanel modificarPanel_mant;
+    
+    /** The modificar mant. */
     private javax.swing.JButton modificar_mant;
+    
+    /** The opciones agregar mant. */
     private javax.swing.JPanel opcionesAgregarMant;
+    
+    /** The salir. */
     private javax.swing.JButton salir;
+    
+    /** The tabla resultado. */
     private javax.swing.JTable tabla_resultado;
+    
+    /** The text buscar agregar. */
     private javax.swing.JLabel text_buscar_agregar;
     // End of variables declaration//GEN-END:variables
 }

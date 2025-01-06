@@ -22,13 +22,21 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.DocumentFilter;
 import javax.swing.text.MaskFormatter;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Validador.
  *
  * @author noe
  */
 // Clase para validaciones de entrada
 public class Validador {
 
+    /**
+     * Validar alfabetico.
+     *
+     * @param entrada the entrada
+     * @return true, if validar alfabetico
+     */
     // Valida que la entrada contenga solo caracteres alfabéticos
     public static boolean validarAlfabetico(String entrada) {
         if (entrada == null || entrada.trim().isEmpty()) {
@@ -37,6 +45,12 @@ public class Validador {
         return entrada.matches("[a-zA-ZáéíóúÁÉÍÓÚñÑ ]+");
     }
 
+    /**
+     * Validar numerico.
+     *
+     * @param entrada the entrada
+     * @return true, if validar numerico
+     */
     // Valida que la entrada contenga solo caracteres numéricos
     public static boolean validarNumerico(String entrada) {
         if (entrada == null || entrada.trim().isEmpty()) {
@@ -45,6 +59,13 @@ public class Validador {
         return entrada.matches("\\d+");
     }
     
+    /**
+     * Validar alfanumerico.
+     *
+     * @param entrada the entrada
+     * @param tipo the tipo
+     * @return true, if validar alfanumerico
+     */
     // Valida que la entrada contenga solo carácteres alfanuméricos
     public static boolean validarAlfanumerico(String entrada, String tipo) {
         if (tipo.equals("ConTexto")) {
@@ -57,6 +78,12 @@ public class Validador {
     }
 
 
+    /**
+     * Validar correo.
+     *
+     * @param entrada the entrada
+     * @return true, if validar correo
+     */
     // Valida que la entrada sea un correo electrónico válido
     public static boolean validarCorreo(String entrada) {
         if (entrada == null || entrada.trim().isEmpty()) {
@@ -65,6 +92,12 @@ public class Validador {
         return entrada.matches("^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,}$");
     }
 
+    /**
+     * Validar sin espacios extremos.
+     *
+     * @param entrada the entrada
+     * @return true, if validar sin espacios extremos
+     */
     // Valida que no haya espacios vacíos en los extremos
     public static boolean validarSinEspaciosExtremos(String entrada) {
         if (entrada == null) {
@@ -83,6 +116,11 @@ public class Validador {
         return telefonoStr.length() == 8 && "2468".contains(telefonoStr.substring(0, 1));
     }
     
+    /**
+     * Configurar campo fecha.
+     *
+     * @param campo the campo
+     */
     // Método único para configurar y validar campos de fecha
     public static void configurarCampoFecha(JFormattedTextField campo) {
         try {
@@ -121,6 +159,12 @@ public class Validador {
         }
     }
 
+    /**
+     * Validar fecha.
+     *
+     * @param fecha the fecha
+     * @return true, if validar fecha
+     */
     // Método de validación de fecha
     private static boolean validarFecha(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -139,6 +183,11 @@ public class Validador {
         }
     }
     
+    /**
+     * Configurar campo fecha nacimiento.
+     *
+     * @param campo the campo
+     */
     // Método para validar fecha de nacimiento
     public static void configurarCampoFechaNacimiento(JFormattedTextField campo) {
         try {
@@ -177,6 +226,12 @@ public class Validador {
         }
     }
 
+    /**
+     * Validar fecha nacimiento.
+     *
+     * @param fecha the fecha
+     * @return true, if validar fecha nacimiento
+     */
     // Método de validación de fecha de nacimiento
     public static boolean validarFechaNacimiento(String fecha) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -194,6 +249,12 @@ public class Validador {
         }
     }
     
+    /**
+     * Producto ha sido facturado.
+     *
+     * @param codigoProducto the codigo producto
+     * @return true, if producto ha sido facturado
+     */
     // Método para validar si un producto ya fue facturado
     public static boolean productoHaSidoFacturado(int codigoProducto) {
         Archivo archivo = new Archivo();
@@ -223,6 +284,12 @@ public class Validador {
         return false;
     }
  
+    /**
+     * Mantenimiento ha sido facturado.
+     *
+     * @param codigoServicio the codigo servicio
+     * @return true, if mantenimiento ha sido facturado
+     */
     // Método para validar si un mantenimiento ya fue facturado
     public static boolean mantenimientoHaSidoFacturado(int codigoServicio) {
         Archivo archivo = new Archivo();
@@ -250,6 +317,13 @@ public class Validador {
         return false;
     }
     
+    /**
+     * Es fecha anterior.
+     *
+     * @param fecha1 the fecha 1
+     * @param fecha2 the fecha 2
+     * @return true, if es fecha anterior
+     */
     // Método para comparar dos fechas en formato dd/MM/yyyy con MaskFormatter
     public static boolean esFechaAnterior(String fecha1, String fecha2) {
         SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
@@ -283,6 +357,12 @@ public class Validador {
         }
     }
     
+    /**
+     * Sets the limite caracteres.
+     *
+     * @param campo the campo
+     * @param limite the limite
+     */
     // Método para limitar los carácteres en un campo
     public static void setLimiteCaracteres(JTextField campo, int limite) {
         ((AbstractDocument) campo.getDocument()).setDocumentFilter(new DocumentFilter() {

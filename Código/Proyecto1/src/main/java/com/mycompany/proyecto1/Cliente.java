@@ -7,7 +7,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import java.util.Date;
 import com.mycompany.proyecto1.Validador;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Cliente.
  *
  * @author Steven Umaña
  */
@@ -71,6 +73,9 @@ public class Cliente implements ConCodigo{
     @JsonProperty("fecha")
     private String fecha;
 
+    /**
+     * The Constructor.
+     */
     // Constructor predeterminado para Jackson
     public Cliente() {
     }
@@ -290,6 +295,12 @@ public class Cliente implements ConCodigo{
         return new Object[]{codigo, nombre, apellidos, telefono, correo, provincia, canton, distrito, fecha};
     }
 
+    /**
+     * String.
+     *
+     * @param fecha the fecha
+     * @return the string
+     */
     private String String(Date fecha) {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }

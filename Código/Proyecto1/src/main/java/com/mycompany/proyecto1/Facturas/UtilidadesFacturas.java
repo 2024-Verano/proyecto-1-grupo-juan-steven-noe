@@ -13,12 +13,20 @@ import java.util.List;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class UtilidadesFacturas.
  *
  * @author noe
  */
 public class UtilidadesFacturas {
     
+    /**
+     * Cargar mantenimientos abiertos.
+     *
+     * @param ruta the ruta
+     * @param comboBox the combo box
+     */
     // Método para cargar los mantenimientos Abiertos del JSON
     public static void cargarMantenimientosAbiertos(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
@@ -41,6 +49,12 @@ public class UtilidadesFacturas {
         }
     }
     
+    /**
+     * Cargar productos.
+     *
+     * @param ruta the ruta
+     * @param comboBox the combo box
+     */
     // Método para cargar los productos dentro del JSON
     public static void cargarProductos(String ruta, JComboBox<String> comboBox) {
         Archivo archivo = new Archivo();
@@ -61,6 +75,12 @@ public class UtilidadesFacturas {
         }
     }
     
+    /**
+     * Obtener producto por codigo.
+     *
+     * @param codigoProducto the codigo producto
+     * @return the producto
+     */
     // Método para encontrar un producto
     public static Producto obtenerProductoPorCodigo(int codigoProducto) {
         Archivo archivo = new Archivo();
@@ -76,6 +96,13 @@ public class UtilidadesFacturas {
         return null; // Si no se encuentra el producto
     }
     
+    /**
+     * Actualizar stock producto.
+     *
+     * @param codigoProducto the codigo producto
+     * @param cantidad the cantidad
+     * @return true, if actualizar stock producto
+     */
     // Método para disminuir la cantidad de productos y validar que existen suficientes para facturar
     public static boolean actualizarStockProducto(int codigoProducto, int cantidad) {
         Archivo archivo = new Archivo();
@@ -129,6 +156,12 @@ public class UtilidadesFacturas {
         return false;
     }
 
+    /**
+     * Obtener mantenimiento por codigo.
+     *
+     * @param codigoServicio the codigo servicio
+     * @return the mantenimiento
+     */
     // Método para obtener los datos de un servicio
     public static Mantenimiento obtenerMantenimientoPorCodigo(int codigoServicio) {
         Archivo archivo = new Archivo();
@@ -153,6 +186,11 @@ public class UtilidadesFacturas {
     }
 
     
+    /**
+     * Cerrar mantenimiento.
+     *
+     * @param codigoServicio the codigo servicio
+     */
     // Método para cerrar el estado Abierto de un servicio
     public static void cerrarMantenimiento(int codigoServicio) {
         Archivo archivo = new Archivo();
@@ -170,6 +208,13 @@ public class UtilidadesFacturas {
         }
     }
 
+    /**
+     * Anular factura.
+     *
+     * @param numeroFactura the numero factura
+     * @param tipoFactura the tipo factura
+     * @return true, if anular factura
+     */
     public static boolean anularFactura(int numeroFactura, String tipoFactura) {
         Archivo archivo = new Archivo();
         String ruta = tipoFactura.equals("Producto") ? "facturas_productos.json" : "facturas_mantenimiento.json";

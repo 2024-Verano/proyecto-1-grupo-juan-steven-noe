@@ -22,14 +22,16 @@ import com.mycompany.proyecto1.Producto;
 import javax.swing.ImageIcon;
 
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class RegistroProductos.
  *
  * @author noe
  */
 public class RegistroProductos extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuOpciones
+     * Creates new form MenuOpciones.
      */
     public RegistroProductos() {
         initComponents();
@@ -727,18 +729,33 @@ public class RegistroProductos extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Agregar prod action performed.
+     *
+     * @param evt the evt
+     */
     private void agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_prodActionPerformed
         // Mostrar el SubFrame de "agregar producto"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "agregarPanel");
     }//GEN-LAST:event_agregar_prodActionPerformed
 
+    /**
+     * Modificar prod action performed.
+     *
+     * @param evt the evt
+     */
     private void modificar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_prodActionPerformed
         // Mostrar el SubFrame de "modificar producto"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "modificarPanel");
     }//GEN-LAST:event_modificar_prodActionPerformed
 
+    /**
+     * Salir action performed.
+     *
+     * @param evt the evt
+     */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
              // Cierra el frame actual
@@ -750,6 +767,11 @@ public class RegistroProductos extends javax.swing.JFrame {
             opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_salirActionPerformed
 
+    /**
+     * Crear tipo prod action performed.
+     *
+     * @param evt the evt
+     */
     private void crear_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_tipo_prodActionPerformed
 
         boolean isVisible = opcionesTipoProducto.isVisible();
@@ -777,6 +799,11 @@ public class RegistroProductos extends javax.swing.JFrame {
     this.repaint();
     }//GEN-LAST:event_crear_tipo_prodActionPerformed
 
+    /**
+     * Crear prod action performed.
+     *
+     * @param evt the evt
+     */
     private void crear_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_prodActionPerformed
         boolean isVisible = opcionesProducto.isVisible();
         opcionesProducto.setVisible(!isVisible);
@@ -802,22 +829,47 @@ public class RegistroProductos extends javax.swing.JFrame {
     this.repaint();
     }//GEN-LAST:event_crear_prodActionPerformed
 
+    /**
+     * Box nombre tipo prod action performed.
+     *
+     * @param evt the evt
+     */
     private void box_nombre_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_tipo_prodActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_nombre_tipo_prodActionPerformed
 
+    /**
+     * Box codigo tipo prod action performed.
+     *
+     * @param evt the evt
+     */
     private void box_codigo_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_tipo_prodActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_tipo_prodActionPerformed
 
+    /**
+     * Box codigo art action performed.
+     *
+     * @param evt the evt
+     */
     private void box_codigo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_artActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_artActionPerformed
 
+    /**
+     * Box nombre art action performed.
+     *
+     * @param evt the evt
+     */
     private void box_nombre_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_artActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_nombre_artActionPerformed
 
+    /**
+     * Guardar art action performed.
+     *
+     * @param evt the evt
+     */
     private void guardar_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_artActionPerformed
         String rutaTipos = "tiposProductos.json";
         String rutaProductos = "productos.json";
@@ -893,18 +945,38 @@ public class RegistroProductos extends javax.swing.JFrame {
         
     }//GEN-LAST:event_guardar_artActionPerformed
 
+    /**
+     * Box marca art action performed.
+     *
+     * @param evt the evt
+     */
     private void box_marca_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_artActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_artActionPerformed
 
+    /**
+     * Box precio art action performed.
+     *
+     * @param evt the evt
+     */
     private void box_precio_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_precio_artActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_precio_artActionPerformed
 
+    /**
+     * Box cantidad art action performed.
+     *
+     * @param evt the evt
+     */
     private void box_cantidad_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_cantidad_artActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_cantidad_artActionPerformed
 
+    /**
+     * Button buscar modificar action performed.
+     *
+     * @param evt the evt
+     */
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         String ruta = "productos.json";
         Archivo archivo = new Archivo();
@@ -949,6 +1021,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
+    /**
+     * Guardar tipo prod action performed.
+     *
+     * @param evt the evt
+     */
     private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
         String ruta = "tiposProductos.json";
         Archivo archivo = new Archivo();
@@ -993,10 +1070,20 @@ public class RegistroProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardar_tipo_prodActionPerformed
 
+    /**
+     * Combo tammanio bici action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_tammanio_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tammanio_biciActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_tammanio_biciActionPerformed
 
+    /**
+     * Combo tipo art action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_tipo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_artActionPerformed
 
         String tipoSeleccionado = (String) combo_tipo_art.getSelectedItem();
@@ -1010,6 +1097,11 @@ public class RegistroProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_combo_tipo_artActionPerformed
 
+    /**
+     * Tabla resultado mouse clicked.
+     *
+     * @param evt the evt
+     */
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
             int selectedRow = tabla_resultado.getSelectedRow();
@@ -1030,12 +1122,22 @@ public class RegistroProductos extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
 
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Registro de productos");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Restablecer panel.
+     *
+     * @param nombrePanel the nombre panel
+     */
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
@@ -1049,6 +1151,8 @@ public class RegistroProductos extends javax.swing.JFrame {
     
     
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -1084,55 +1188,152 @@ public class RegistroProductos extends javax.swing.JFrame {
         });
     }
 
+    /** The Sub frame container. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubFrameContainer;
+    
+    /** The agregar panel. */
     private javax.swing.JPanel agregarPanel;
+    
+    /** The agregar prod. */
     private javax.swing.JButton agregar_prod;
+    
+    /** The bienvenida label. */
     private javax.swing.JLabel bienvenidaLabel;
+    
+    /** The bienvenida label 1. */
     private javax.swing.JLabel bienvenidaLabel1;
+    
+    /** The bienvenida panel. */
     private javax.swing.JPanel bienvenidaPanel;
+    
+    /** The box cantidad art. */
     private javax.swing.JTextField box_cantidad_art;
+    
+    /** The box codigo art. */
     private javax.swing.JTextField box_codigo_art;
+    
+    /** The box codigo prod. */
     private javax.swing.JComboBox<String> box_codigo_prod;
+    
+    /** The box codigo tipo prod. */
     private javax.swing.JTextField box_codigo_tipo_prod;
+    
+    /** The box marca art. */
     private javax.swing.JTextField box_marca_art;
+    
+    /** The box nombre art. */
     private javax.swing.JTextField box_nombre_art;
+    
+    /** The box nombre tipo prod. */
     private javax.swing.JTextField box_nombre_tipo_prod;
+    
+    /** The box precio art. */
     private javax.swing.JTextField box_precio_art;
+    
+    /** The buscador agregar. */
     private javax.swing.JTextField buscador_agregar;
+    
+    /** The button buscar modificar. */
     private javax.swing.JButton button_buscar_modificar;
+    
+    /** The ciclista icon. */
     private javax.swing.JLabel ciclista_icon;
+    
+    /** The codigo art. */
     private javax.swing.JLabel codigo_art;
+    
+    /** The codigo defecto 1. */
     private javax.swing.JLabel codigo_defecto1;
+    
+    /** The codigo prod. */
     private javax.swing.JLabel codigo_prod;
+    
+    /** The combo filtro agregar. */
     private javax.swing.JComboBox<String> combo_filtro_agregar;
+    
+    /** The combo tammanio bici. */
     private javax.swing.JComboBox<String> combo_tammanio_bici;
+    
+    /** The combo tipo art. */
     private javax.swing.JComboBox<String> combo_tipo_art;
+    
+    /** The crear prod. */
     private javax.swing.JButton crear_prod;
+    
+    /** The crear tipo prod. */
     private javax.swing.JButton crear_tipo_prod;
+    
+    /** The filtro agregar. */
     private javax.swing.JLabel filtro_agregar;
+    
+    /** The funciones. */
     private javax.swing.JToolBar funciones;
+    
+    /** The guardar art. */
     private javax.swing.JButton guardar_art;
+    
+    /** The guardar tipo prod. */
     private javax.swing.JButton guardar_tipo_prod;
+    
+    /** The j scroll pane 1. */
     private javax.swing.JScrollPane jScrollPane1;
+    
+    /** The j separator 1. */
     private javax.swing.JToolBar.Separator jSeparator1;
+    
+    /** The j separator 2. */
     private javax.swing.JToolBar.Separator jSeparator2;
+    
+    /** The j separator 5. */
     private javax.swing.JToolBar.Separator jSeparator5;
+    
+    /** The j separator 6. */
     private javax.swing.JSeparator jSeparator6;
+    
+    /** The j separator 7. */
     private javax.swing.JSeparator jSeparator7;
+    
+    /** The marca art. */
     private javax.swing.JLabel marca_art;
+    
+    /** The marca art 1. */
     private javax.swing.JLabel marca_art1;
+    
+    /** The marca art 2. */
     private javax.swing.JLabel marca_art2;
+    
+    /** The modificar panel. */
     private javax.swing.JPanel modificarPanel;
+    
+    /** The modificar prod. */
     private javax.swing.JButton modificar_prod;
+    
+    /** The nombre art. */
     private javax.swing.JLabel nombre_art;
+    
+    /** The nombre prod. */
     private javax.swing.JLabel nombre_prod;
+    
+    /** The opciones producto. */
     private javax.swing.JPanel opcionesProducto;
+    
+    /** The opciones tipo producto. */
     private javax.swing.JPanel opcionesTipoProducto;
+    
+    /** The salir. */
     private javax.swing.JButton salir;
+    
+    /** The tabla resultado. */
     private javax.swing.JTable tabla_resultado;
+    
+    /** The tammanio bici 1. */
     private javax.swing.JLabel tammanio_bici1;
+    
+    /** The text buscar agregar. */
     private javax.swing.JLabel text_buscar_agregar;
+    
+    /** The tipo art. */
     private javax.swing.JLabel tipo_art;
     // End of variables declaration//GEN-END:variables
 }

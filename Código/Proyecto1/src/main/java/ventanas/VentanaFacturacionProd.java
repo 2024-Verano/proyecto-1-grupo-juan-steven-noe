@@ -30,14 +30,16 @@ import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class VentanaFacturacionProd.
  *
  * @author noe
  */
 public class VentanaFacturacionProd extends javax.swing.JFrame {
     
     /**
-     * Creates new form VentanaModificar
+     * Creates new form VentanaModificar.
      */
     public VentanaFacturacionProd() {
         initComponents();
@@ -383,38 +385,83 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Box num fact action performed.
+     *
+     * @param evt the evt
+     */
     private void box_num_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_num_factActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_num_factActionPerformed
 
+    /**
+     * Box total action performed.
+     *
+     * @param evt the evt
+     */
     private void box_totalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_totalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_totalActionPerformed
 
+    /**
+     * Box iva action performed.
+     *
+     * @param evt the evt
+     */
     private void box_ivaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_ivaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_ivaActionPerformed
 
+    /**
+     * Formatt fecha recibido action performed.
+     *
+     * @param evt the evt
+     */
     private void formatt_fecha_recibidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_recibidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_recibidoActionPerformed
 
+    /**
+     * Box subtotal action performed.
+     *
+     * @param evt the evt
+     */
     private void box_subtotalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_subtotalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_subtotalActionPerformed
 
+    /**
+     * Box cantidad action performed.
+     *
+     * @param evt the evt
+     */
     private void box_cantidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_cantidadActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_cantidadActionPerformed
 
+    /**
+     * Box precio und action performed.
+     *
+     * @param evt the evt
+     */
     private void box_precio_undActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_precio_undActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_precio_undActionPerformed
 
+    /**
+     * Box total pagar action performed.
+     *
+     * @param evt the evt
+     */
     private void box_total_pagarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_total_pagarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_total_pagarActionPerformed
 
+    /**
+     * Crear fact action performed.
+     *
+     * @param evt the evt
+     */
     private void crear_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_factActionPerformed
         try {
             int numeroFactura = Integer.parseInt(box_num_fact.getText().trim());
@@ -468,6 +515,11 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_crear_factActionPerformed
 
+    /**
+     * Combo codigo articulo action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_codigo_articuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_articuloActionPerformed
         String seleccion = (String) combo_codigo_articulo.getSelectedItem();
         if (seleccion != null && seleccion.matches("\\d+ - .*")) {
@@ -476,17 +528,32 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_combo_codigo_articuloActionPerformed
 
+    /**
+     * Box cantidad key released.
+     *
+     * @param evt the evt
+     */
     // Método para calcular dinámicamente los montos al cambiar la cantidad
     private void box_cantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_box_cantidadKeyReleased
         calcularTotales();
     }//GEN-LAST:event_box_cantidadKeyReleased
 
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Facturar un producto");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Llenar datos producto.
+     *
+     * @param codigoProducto the codigo producto
+     */
     // Método para obtener el precio de un producto
     private void llenarDatosProducto(int codigoProducto) {
         Producto producto = UtilidadesFacturas.obtenerProductoPorCodigo(codigoProducto);
@@ -500,6 +567,9 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Calcular totales.
+     */
     // Método para calcular los montos e IVA
     private void calcularTotales() {
         try{
@@ -525,6 +595,8 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
     
     
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -566,32 +638,83 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
         });
     }
 
+    /** The box cantidad. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField box_cantidad;
+    
+    /** The box iva. */
     private javax.swing.JTextField box_iva;
+    
+    /** The box num fact. */
     private javax.swing.JTextField box_num_fact;
+    
+    /** The box precio und. */
     private javax.swing.JTextField box_precio_und;
+    
+    /** The box subtotal. */
     private javax.swing.JTextField box_subtotal;
+    
+    /** The box total. */
     private javax.swing.JTextField box_total;
+    
+    /** The box total pagar. */
     private javax.swing.JTextField box_total_pagar;
+    
+    /** The combo codigo articulo. */
     private javax.swing.JComboBox<String> combo_codigo_articulo;
+    
+    /** The combo codigo cliente. */
     private javax.swing.JComboBox<String> combo_codigo_cliente;
+    
+    /** The crear fact. */
     private javax.swing.JButton crear_fact;
+    
+    /** The formatt fecha recibido. */
     private javax.swing.JFormattedTextField formatt_fecha_recibido;
+    
+    /** The j separator 1. */
     private javax.swing.JSeparator jSeparator1;
+    
+    /** The j separator 2. */
     private javax.swing.JSeparator jSeparator2;
+    
+    /** The j separator 3. */
     private javax.swing.JSeparator jSeparator3;
+    
+    /** The j separator 4. */
     private javax.swing.JSeparator jSeparator4;
+    
+    /** The label cantidad. */
     private javax.swing.JLabel label_cantidad;
+    
+    /** The label codigo articulo. */
     private javax.swing.JLabel label_codigo_articulo;
+    
+    /** The label codigo cliente. */
     private javax.swing.JLabel label_codigo_cliente;
+    
+    /** The label detalles. */
     private javax.swing.JLabel label_detalles;
+    
+    /** The label fecha recibido. */
     private javax.swing.JLabel label_fecha_recibido;
+    
+    /** The label iva. */
     private javax.swing.JLabel label_iva;
+    
+    /** The label num fact. */
     private javax.swing.JLabel label_num_fact;
+    
+    /** The label precio und. */
     private javax.swing.JLabel label_precio_und;
+    
+    /** The label subtotal. */
     private javax.swing.JLabel label_subtotal;
+    
+    /** The label total. */
     private javax.swing.JLabel label_total;
+    
+    /** The label total pagar. */
     private javax.swing.JLabel label_total_pagar;
     // End of variables declaration//GEN-END:variables
 }

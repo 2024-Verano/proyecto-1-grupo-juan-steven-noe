@@ -6,36 +6,65 @@ package com.mycompany.proyecto1;
 
 import java.util.Arrays;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Usuario.
  *
  * @author Steven Umaña
  */
 public class Usuario {
+    
+    /** The nombre usuario. */
     private String nombreUsuario;
+    
+    /** The contrasena. */
     private String contrasena;
     
+    /**
+     * The Constructor.
+     */
     // Constructor vacío requerido por Jackson
     public Usuario() {
     }
     
+    /**
+     * Gets the nombre usuario.
+     *
+     * @return the nombre usuario
+     */
     public String getNombreUsuario(){
         return nombreUsuario;
     }
     
+    /**
+     * Sets the nombre usuario.
+     *
+     * @param nombreUsuario the nombre usuario
+     */
     public void setNombreUsuario(String nombreUsuario){
         this.nombreUsuario = nombreUsuario;
     }
     
+    /**
+     * Gets the contrasena.
+     *
+     * @return the contrasena
+     */
     public String getContrasena(){
         return contrasena;
     }
     
+    /**
+     * Sets the contrasena.
+     *
+     * @param contrasena the contrasena
+     */
     public void setContrasena(String contrasena){
         this.contrasena = contrasena;
     }
     
     /**
-     * Método para validar credenciales contra los datos del archivo JSON
+     * Método para validar credenciales contra los datos del archivo JSON.
      *
      * @param usuario El nombre de usuario ingresado
      * @param contrasena La contraseña ingresada
@@ -54,8 +83,9 @@ public class Usuario {
     }
     
     /**
+     * To string.
      *
-     * @return
+     * @return the string
      */
     @Override
     public String toString() {

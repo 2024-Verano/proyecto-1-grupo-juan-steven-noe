@@ -25,21 +25,29 @@ import com.mycompany.proyecto1.Cliente;
 import javax.swing.ImageIcon;
 import ventanas.RegistroClientes;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class ModificarCliente.
  *
  * @author noe
  */
 public class ModificarCliente extends javax.swing.JFrame {
     
+    /** The provincias data. */
     private JsonNode provinciasData; // Variable para almacenar los datos del JSON
     
+    /**
+     * The Constructor.
+     */
     // Constructor vacío para que VentanaModificar pueda recibir parámetros sin conflictos en el main
     public ModificarCliente(){
         initComponents();
     }
+    
     /**
-     * Creates new form VentanaModificar
-     * @param cliente
+     * Creates new form VentanaModificar.
+     *
+     * @param cliente the cliente
      */
     public ModificarCliente(Cliente cliente) {
         initComponents();
@@ -368,22 +376,47 @@ public class ModificarCliente extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Box codigo cliente action performed.
+     *
+     * @param evt the evt
+     */
     private void box_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_clienteActionPerformed
 
+    /**
+     * Combo cantones action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_cantonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_cantonesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_cantonesActionPerformed
 
+    /**
+     * Combo distritos action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_distritosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_distritosActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_distritosActionPerformed
 
+    /**
+     * Box nombre cliente action performed.
+     *
+     * @param evt the evt
+     */
     private void box_nombre_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_nombre_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_nombre_clienteActionPerformed
 
+    /**
+     * Guardar cambios action performed.
+     *
+     * @param evt the evt
+     */
     private void guardar_cambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_cambiosActionPerformed
         String ruta = "registroClientes.json";
         Archivo archivo = new Archivo();
@@ -434,14 +467,29 @@ public class ModificarCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardar_cambiosActionPerformed
 
+    /**
+     * Box correo cliente action performed.
+     *
+     * @param evt the evt
+     */
     private void box_correo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_correo_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_correo_clienteActionPerformed
 
+    /**
+     * Box telefono action performed.
+     *
+     * @param evt the evt
+     */
     private void box_telefonoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_telefonoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_telefonoActionPerformed
 
+    /**
+     * Eliminar cliente action performed.
+     *
+     * @param evt the evt
+     */
     private void eliminar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_clienteActionPerformed
         String ruta = "registroClientes.json";
         Archivo archivo = new Archivo();
@@ -485,20 +533,40 @@ public class ModificarCliente extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_eliminar_clienteActionPerformed
 
+    /**
+     * Box provincias action performed.
+     *
+     * @param evt the evt
+     */
     private void box_provinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_provinciasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_provinciasActionPerformed
 
+    /**
+     * Formatt fecha nacimiento action performed.
+     *
+     * @param evt the evt
+     */
     private void formatt_fecha_nacimientoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_nacimientoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_nacimientoActionPerformed
 
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Modificar/eliminar cliente");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Cargar datos cliente.
+     *
+     * @param cliente the cliente
+     */
     private void cargarDatosCliente(Cliente cliente) {
         // Código del cliente
         box_codigo_cliente.setText(String.valueOf(cliente.getCodigo()));
@@ -538,6 +606,9 @@ public class ModificarCliente extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Cargar provincias cantones distritos.
+     */
     private void cargarProvinciasCantonesDistritos() {
         try {
             // Instancia de la clase Archivo para leer el JSON
@@ -567,6 +638,11 @@ public class ModificarCliente extends javax.swing.JFrame {
         }
     }
     
+    /**
+     * Cargar cantones.
+     *
+     * @param provincia the provincia
+     */
     private void cargarCantones(String provincia) {
         try {
             JsonNode cantonesNode = provinciasData.get(provincia).get("cantones");
@@ -584,6 +660,12 @@ public class ModificarCliente extends javax.swing.JFrame {
     }
 
     
+    /**
+     * Cargar distritos.
+     *
+     * @param provincia the provincia
+     * @param canton the canton
+     */
     private void cargarDistritos(String provincia, String canton) {
         try {
             JsonNode cantonesNode = provinciasData.get(provincia).get("cantones");
@@ -601,6 +683,9 @@ public class ModificarCliente extends javax.swing.JFrame {
         }
     }
 
+    /**
+     * Configurar listeners.
+     */
     private void configurarListeners() {
         box_provincias.addActionListener(e -> {
             String provinciaSeleccionada = (String) box_provincias.getSelectedItem();
@@ -623,6 +708,8 @@ public class ModificarCliente extends javax.swing.JFrame {
     
     
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -658,27 +745,68 @@ public class ModificarCliente extends javax.swing.JFrame {
         });
     }
 
+    /** The box codigo cliente. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField box_codigo_cliente;
+    
+    /** The box correo cliente. */
     private javax.swing.JTextField box_correo_cliente;
+    
+    /** The box nombre cliente. */
     private javax.swing.JTextField box_nombre_cliente;
+    
+    /** The box provincias. */
     private javax.swing.JComboBox<String> box_provincias;
+    
+    /** The box telefono. */
     private javax.swing.JTextField box_telefono;
+    
+    /** The canton. */
     private javax.swing.JLabel canton;
+    
+    /** The codigo cliente. */
     private javax.swing.JLabel codigo_cliente;
+    
+    /** The combo cantones. */
     private javax.swing.JComboBox<String> combo_cantones;
+    
+    /** The combo distritos. */
     private javax.swing.JComboBox<String> combo_distritos;
+    
+    /** The correo cliente. */
     private javax.swing.JLabel correo_cliente;
+    
+    /** The distrito. */
     private javax.swing.JLabel distrito;
+    
+    /** The eliminar cliente. */
     private javax.swing.JButton eliminar_cliente;
+    
+    /** The fecha nacimiento. */
     private javax.swing.JLabel fecha_nacimiento;
+    
+    /** The formatt fecha nacimiento. */
     private javax.swing.JFormattedTextField formatt_fecha_nacimiento;
+    
+    /** The guardar cambios. */
     private javax.swing.JButton guardar_cambios;
+    
+    /** The j separator 6. */
     private javax.swing.JSeparator jSeparator6;
+    
+    /** The j separator 7. */
     private javax.swing.JSeparator jSeparator7;
+    
+    /** The nombre cliente. */
     private javax.swing.JLabel nombre_cliente;
+    
+    /** The opciones producto. */
     private javax.swing.JPanel opcionesProducto;
+    
+    /** The provincia. */
     private javax.swing.JLabel provincia;
+    
+    /** The telefono. */
     private javax.swing.JLabel telefono;
     // End of variables declaration//GEN-END:variables
 }

@@ -29,17 +29,20 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Facturacion.
  *
  * @author noe
  */
 public class Facturacion extends javax.swing.JFrame {
     
+    /** The estado. */
     // Variable global para validar el estado de la factura al anular
     String estado;
 
     /**
-     * Creates new form MenuOpciones
+     * Creates new form MenuOpciones.
      */
     public Facturacion() {
         initComponents();
@@ -469,18 +472,33 @@ public class Facturacion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Agregar fact action performed.
+     *
+     * @param evt the evt
+     */
     private void agregar_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_factActionPerformed
         // Mostrar el SubFrame de "agregar cliente"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "agregarPanel");
     }//GEN-LAST:event_agregar_factActionPerformed
 
+    /**
+     * Modificar fact action performed.
+     *
+     * @param evt the evt
+     */
     private void modificar_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_factActionPerformed
         // Mostrar el SubFrame de "modificar cliente"
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "modificarPanel");
     }//GEN-LAST:event_modificar_factActionPerformed
 
+    /**
+     * Salir action performed.
+     *
+     * @param evt the evt
+     */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
              // Cierra el frame actual
@@ -492,6 +510,11 @@ public class Facturacion extends javax.swing.JFrame {
             opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_salirActionPerformed
 
+    /**
+     * Facturar producto action performed.
+     *
+     * @param evt the evt
+     */
     private void facturar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_productoActionPerformed
         // Validar que existan productos para facturar
         Archivo archivo = new Archivo();
@@ -507,6 +530,11 @@ public class Facturacion extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_productoActionPerformed
 
+    /**
+     * Button buscar factura action performed.
+     *
+     * @param evt the evt
+     */
     private void button_buscar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_facturaActionPerformed
         String tipoFactura = (String) combo_tipo_factura.getSelectedItem();
         String criterio = (String) combo_criterio_busqueda.getSelectedItem();
@@ -557,6 +585,11 @@ public class Facturacion extends javax.swing.JFrame {
         button_anular_factura.setVisible(false);
     }//GEN-LAST:event_button_buscar_facturaActionPerformed
 
+    /**
+     * Tabla resultado mouse clicked.
+     *
+     * @param evt the evt
+     */
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         int filaSeleccionada = tabla_resultado.getSelectedRow();
     
@@ -566,10 +599,20 @@ public class Facturacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_tabla_resultadoMouseClicked
 
+    /**
+     * Combo criterio busqueda action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_criterio_busquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_criterio_busquedaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_criterio_busquedaActionPerformed
 
+    /**
+     * Facturar servicio action performed.
+     *
+     * @param evt the evt
+     */
     private void facturar_servicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_servicioActionPerformed
         // Validar que existan servicios para facturar
         Archivo archivo = new Archivo();
@@ -585,10 +628,20 @@ public class Facturacion extends javax.swing.JFrame {
         ventana.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturar_servicioActionPerformed
 
+    /**
+     * Combo tipo factura action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_tipo_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_facturaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_tipo_facturaActionPerformed
 
+    /**
+     * Button anular factura action performed.
+     *
+     * @param evt the evt
+     */
     private void button_anular_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_anular_facturaActionPerformed
         int filaSeleccionada = tabla_resultado.getSelectedRow();
         if (filaSeleccionada == -1) {
@@ -615,12 +668,22 @@ public class Facturacion extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_anular_facturaActionPerformed
     
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Facturación de productos y servicios");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Restablecer panel.
+     *
+     * @param nombrePanel the nombre panel
+     */
     // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
@@ -634,6 +697,8 @@ public class Facturacion extends javax.swing.JFrame {
     
     
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -683,34 +748,89 @@ public class Facturacion extends javax.swing.JFrame {
         });
     }
 
+    /** The Sub frame container. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubFrameContainer;
+    
+    /** The agregar panel. */
     private javax.swing.JPanel agregarPanel;
+    
+    /** The agregar fact. */
     private javax.swing.JButton agregar_fact;
+    
+    /** The bienvenida label. */
     private javax.swing.JLabel bienvenidaLabel;
+    
+    /** The bienvenida label 1. */
     private javax.swing.JLabel bienvenidaLabel1;
+    
+    /** The bienvenida panel. */
     private javax.swing.JPanel bienvenidaPanel;
+    
+    /** The box busqueda. */
     private javax.swing.JTextField box_busqueda;
+    
+    /** The button anular factura. */
     private javax.swing.JButton button_anular_factura;
+    
+    /** The button buscar factura. */
     private javax.swing.JButton button_buscar_factura;
+    
+    /** The combo criterio busqueda. */
     private javax.swing.JComboBox<String> combo_criterio_busqueda;
+    
+    /** The combo tipo factura. */
     private javax.swing.JComboBox<String> combo_tipo_factura;
+    
+    /** The facturar producto. */
     private javax.swing.JButton facturar_producto;
+    
+    /** The facturar servicio. */
     private javax.swing.JButton facturar_servicio;
+    
+    /** The filtro agregar. */
     private javax.swing.JLabel filtro_agregar;
+    
+    /** The funciones. */
     private javax.swing.JToolBar funciones;
+    
+    /** The j scroll pane 1. */
     private javax.swing.JScrollPane jScrollPane1;
+    
+    /** The j separator 1. */
     private javax.swing.JToolBar.Separator jSeparator1;
+    
+    /** The j separator 2. */
     private javax.swing.JToolBar.Separator jSeparator2;
+    
+    /** The j separator 3. */
     private javax.swing.JToolBar.Separator jSeparator3;
+    
+    /** The label descripcion prod. */
     private javax.swing.JLabel label_descripcion_prod;
+    
+    /** The label descripcion prod 1. */
     private javax.swing.JLabel label_descripcion_prod1;
+    
+    /** The label tipo factura. */
     private javax.swing.JLabel label_tipo_factura;
+    
+    /** The mant icon. */
     private javax.swing.JLabel mant_icon;
+    
+    /** The modificar panel. */
     private javax.swing.JPanel modificarPanel;
+    
+    /** The modificar fact. */
     private javax.swing.JButton modificar_fact;
+    
+    /** The salir. */
     private javax.swing.JButton salir;
+    
+    /** The tabla resultado. */
     private javax.swing.JTable tabla_resultado;
+    
+    /** The text buscar agregar. */
     private javax.swing.JLabel text_buscar_agregar;
     // End of variables declaration//GEN-END:variables
 }

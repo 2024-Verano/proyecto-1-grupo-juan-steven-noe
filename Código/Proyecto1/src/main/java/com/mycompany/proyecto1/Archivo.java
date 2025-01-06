@@ -9,12 +9,20 @@ import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class Archivo.
  *
  * @author Steven Umaña
  */
 public class Archivo {
 
+    /**
+     * Guardar archivo.
+     *
+     * @param ruta the ruta
+     * @param data the data
+     */
     public void guardarArchivo(String ruta, Object data) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -24,6 +32,13 @@ public class Archivo {
         }
     }
 
+    /**
+     * Leer archivo.
+     *
+     * @param ruta the ruta
+     * @param clase the clase
+     * @return the object
+     */
     public Object leerArchivo(String ruta, Class<?> clase) {
         try {
             ObjectMapper mapper = new ObjectMapper();
@@ -34,6 +49,14 @@ public class Archivo {
         }
     }
     
+    /**
+     * Obtener siguiente codigo.
+     *
+     * @param <T> the generic type
+     * @param ruta the ruta
+     * @param clase the clase
+     * @return the int
+     */
     // Calcula el siguiente código de cualquier objeto
     public <T extends ConCodigo> int obtenerSiguienteCodigo(String ruta, Class<T[]> clase) {
         try {

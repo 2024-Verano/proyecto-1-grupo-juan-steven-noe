@@ -12,12 +12,25 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class GuardarFactura.
  *
  * @author noe
  */
 public class GuardarFactura {
 
+    /**
+     * Guardar factura producto.
+     *
+     * @param numeroFactura the numero factura
+     * @param codigoCliente the codigo cliente
+     * @param fechaRecibido the fecha recibido
+     * @param codigoProducto the codigo producto
+     * @param cantidad the cantidad
+     * @param precioUnitario the precio unitario
+     * @return true, if guardar factura producto
+     */
     public static boolean guardarFacturaProducto(int numeroFactura, int codigoCliente, String fechaRecibido, int codigoProducto, int cantidad, int precioUnitario) {
         Archivo archivo = new Archivo();
         String ruta = "facturas_productos.json";
@@ -54,6 +67,14 @@ public class GuardarFactura {
         }
     }
 
+    /**
+     * Guardar factura mantenimiento.
+     *
+     * @param numeroFactura the numero factura
+     * @param codigoCliente the codigo cliente
+     * @param codigoServicio the codigo servicio
+     * @param fecha the fecha
+     */
     // Método para guardar las facturas de mantenimiento
     public static void guardarFacturaMantenimiento(int numeroFactura, int codigoCliente, int codigoServicio, String fecha) {
         Archivo archivo = new Archivo();

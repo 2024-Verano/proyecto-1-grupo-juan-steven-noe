@@ -13,18 +13,38 @@ import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ButtonHoverEffect.
+ */
 // Clase para efectps hover varios
 public class ButtonHoverEffect {
 
+    /** The hover color. */
     private final Color hoverColor;
+    
+    /** The original color. */
     private final Color originalColor;
+    
+    /** The active button. */
     private static JButton activeButton = null; // Rastrea el botón activo
 
+    /**
+     * The Constructor.
+     *
+     * @param hoverColor the hover color
+     * @param originalColor the original color
+     */
     public ButtonHoverEffect(Color hoverColor, Color originalColor) {
         this.hoverColor = hoverColor;
         this.originalColor = originalColor;
     }
 
+    /**
+     * Apply to.
+     *
+     * @param button the button
+     */
     public void applyTo(JButton button) {
         button.setOpaque(false); // Quitar fondo
         button.setContentAreaFilled(false); // Evita que el fondo se pinte
@@ -47,6 +67,11 @@ public class ButtonHoverEffect {
         });
     }
       
+    /**
+     * Apply selectable hover effect.
+     *
+     * @param button the button
+     */
     // Método para aplicar el efecto hover y mantener seleccionado
     public static void applySelectableHoverEffect(JButton button) {
         // Establece un borde vacío inicial para mantener el espacio reservado

@@ -4,11 +4,19 @@
  */
 package com.mycompany.proyecto1;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Interface ConCodigo.
  *
  * @author noe
  */
 // Interfaz para los objetos con código
 public interface ConCodigo {
+    
+    /**
+     * Gets the codigo.
+     *
+     * @return the codigo
+     */
     int getCodigo();
 }

@@ -7,14 +7,16 @@ import java.awt.Color;
 import javax.swing.ImageIcon;
 
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class MenuOpciones.
  *
  * @author noe
  */
 public class MenuOpciones extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuOpciones
+     * Creates new form MenuOpciones.
      */
     public MenuOpciones() {
         initComponents();
@@ -184,6 +186,11 @@ public class MenuOpciones extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Registro producto action performed.
+     *
+     * @param evt the evt
+     */
     private void registro_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_productoActionPerformed
              // Cierra el frame actual
             this.dispose(); 
@@ -194,6 +201,11 @@ public class MenuOpciones extends javax.swing.JFrame {
             opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_registro_productoActionPerformed
 
+    /**
+     * Registro clientes action performed.
+     *
+     * @param evt the evt
+     */
     private void registro_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_clientesActionPerformed
             
             this.dispose();
@@ -203,6 +215,11 @@ public class MenuOpciones extends javax.swing.JFrame {
             opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_registro_clientesActionPerformed
 
+    /**
+     * Registro mant action performed.
+     *
+     * @param evt the evt
+     */
     private void registro_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_mantActionPerformed
         // Cierra el frame actual    
         this.dispose();
@@ -213,6 +230,11 @@ public class MenuOpciones extends javax.swing.JFrame {
         opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_registro_mantActionPerformed
 
+    /**
+     * Facturacion action performed.
+     *
+     * @param evt the evt
+     */
     private void facturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturacionActionPerformed
         // Cierra el frame actual    
         this.dispose();
@@ -223,6 +245,11 @@ public class MenuOpciones extends javax.swing.JFrame {
         opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_facturacionActionPerformed
 
+    /**
+     * Cerrar sesion action performed.
+     *
+     * @param evt the evt
+     */
     private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
         // Cierra el frame actual
         this.dispose(); 
@@ -233,12 +260,19 @@ public class MenuOpciones extends javax.swing.JFrame {
         opciones.setLocationRelativeTo(this);
     }//GEN-LAST:event_cerrar_sesionActionPerformed
 
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Menú de opciones de administrador");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -276,13 +310,26 @@ public class MenuOpciones extends javax.swing.JFrame {
         });
     }
 
+    /** The cerrar sesion. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrar_sesion;
+    
+    /** The ciclista icon. */
     private javax.swing.JLabel ciclista_icon;
+    
+    /** The encabezado. */
     private javax.swing.JLabel encabezado;
+    
+    /** The facturacion. */
     private javax.swing.JButton facturacion;
+    
+    /** The registro clientes. */
     private javax.swing.JButton registro_clientes;
+    
+    /** The registro mant. */
     private javax.swing.JButton registro_mant;
+    
+    /** The registro producto. */
     private javax.swing.JButton registro_producto;
     // End of variables declaration//GEN-END:variables
 }

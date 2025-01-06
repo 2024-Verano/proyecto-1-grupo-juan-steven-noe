@@ -23,23 +23,31 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
 /**
+ * The Class ModificarMant.
  *
  * @author noe
  */
 public class ModificarMant extends javax.swing.JFrame {
     
+    /** The estado. */
     // Variable global de estado
     private String estado;
     
+    /**
+     * The Constructor.
+     */
     // Constructor vacío para que ModificarMant pueda recibir parámetros sin conflictos en el main
     public ModificarMant(){
         initComponents();
     }
+    
     /**
-     * Creates new form VentanaModificar
-     * @param mantenimiento
-     * @param parent
+     * Creates new form VentanaModificar.
+     *
+     * @param mantenimiento the mantenimiento
+     * @param parent the parent
      */
     public ModificarMant(Mantenimiento mantenimiento, JFrame parent) {
         initComponents();       
@@ -384,6 +392,11 @@ public class ModificarMant extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    /**
+     * Guardar cambios action performed.
+     *
+     * @param evt the evt
+     */
     private void guardar_cambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_cambiosActionPerformed
         String ruta = "mantenimiento.json";
         Archivo archivo = new Archivo();
@@ -473,6 +486,11 @@ public class ModificarMant extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_guardar_cambiosActionPerformed
 
+    /**
+     * Eliminar mant action performed.
+     *
+     * @param evt the evt
+     */
     private void eliminar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_mantActionPerformed
         String ruta = "mantenimiento.json";
         Archivo archivo = new Archivo();
@@ -518,38 +536,83 @@ public class ModificarMant extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_eliminar_mantActionPerformed
 
+    /**
+     * Box codigo mant action performed.
+     *
+     * @param evt the evt
+     */
     private void box_codigo_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_codigo_mantActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_codigo_mantActionPerformed
 
+    /**
+     * Box marca bici action performed.
+     *
+     * @param evt the evt
+     */
     private void box_marca_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_marca_biciActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_marca_biciActionPerformed
 
+    /**
+     * Box precio bici action performed.
+     *
+     * @param evt the evt
+     */
     private void box_precio_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_precio_biciActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_precio_biciActionPerformed
 
+    /**
+     * Box descrip bici action performed.
+     *
+     * @param evt the evt
+     */
     private void box_descrip_biciActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_descrip_biciActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_descrip_biciActionPerformed
 
+    /**
+     * Formatt fecha recibido action performed.
+     *
+     * @param evt the evt
+     */
     private void formatt_fecha_recibidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_recibidoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_recibidoActionPerformed
 
+    /**
+     * Formatt fecha entrega action performed.
+     *
+     * @param evt the evt
+     */
     private void formatt_fecha_entregaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_formatt_fecha_entregaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_formatt_fecha_entregaActionPerformed
 
+    /**
+     * Box observaciones action performed.
+     *
+     * @param evt the evt
+     */
     private void box_observacionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_observacionesActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_observacionesActionPerformed
 
+    /**
+     * Combo codigo cliente action performed.
+     *
+     * @param evt the evt
+     */
     private void combo_codigo_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_clienteActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
 
+    /**
+     * Facturar mant action performed.
+     *
+     * @param evt the evt
+     */
     private void facturar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_mantActionPerformed
         // Validar si el mantenimiento está cerrado
         if ("Cerrado".equals(estado)) {
@@ -573,12 +636,23 @@ public class ModificarMant extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_facturar_mantActionPerformed
 
+    /**
+     * Form window opened.
+     *
+     * @param evt the evt
+     */
     // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Facturar/modificar/eliminar servicio");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
+    /**
+     * Obtener nombre cliente.
+     *
+     * @param codigoCliente the codigo cliente
+     * @return the string
+     */
     // Método para obtener nombre de cliente para mostrar en combo box de código cliente
     public static String obtenerNombreCliente(int codigoCliente) {
         Archivo archivo = new Archivo();
@@ -599,6 +673,8 @@ public class ModificarMant extends javax.swing.JFrame {
     
     
     /**
+     * The main method.
+     *
      * @param args the command line arguments
      */
     public static void main(String args[]) {
@@ -634,27 +710,68 @@ public class ModificarMant extends javax.swing.JFrame {
         });
     }
 
+    /** The box codigo mant. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField box_codigo_mant;
+    
+    /** The box descrip bici. */
     private javax.swing.JTextField box_descrip_bici;
+    
+    /** The box marca bici. */
     private javax.swing.JTextField box_marca_bici;
+    
+    /** The box observaciones. */
     private javax.swing.JTextField box_observaciones;
+    
+    /** The box precio bici. */
     private javax.swing.JTextField box_precio_bici;
+    
+    /** The codigo servicio. */
     private javax.swing.JLabel codigo_servicio;
+    
+    /** The combo codigo cliente. */
     private javax.swing.JComboBox<String> combo_codigo_cliente;
+    
+    /** The eliminar mant. */
     private javax.swing.JButton eliminar_mant;
+    
+    /** The facturar mant. */
     private javax.swing.JButton facturar_mant;
+    
+    /** The formatt fecha entrega. */
     private javax.swing.JFormattedTextField formatt_fecha_entrega;
+    
+    /** The formatt fecha recibido. */
     private javax.swing.JFormattedTextField formatt_fecha_recibido;
+    
+    /** The guardar cambios. */
     private javax.swing.JButton guardar_cambios;
+    
+    /** The j separator 4. */
     private javax.swing.JSeparator jSeparator4;
+    
+    /** The j separator 5. */
     private javax.swing.JSeparator jSeparator5;
+    
+    /** The label cliente. */
     private javax.swing.JLabel label_cliente;
+    
+    /** The label descrip bici. */
     private javax.swing.JLabel label_descrip_bici;
+    
+    /** The label entrega. */
     private javax.swing.JLabel label_entrega;
+    
+    /** The label marca bici. */
     private javax.swing.JLabel label_marca_bici;
+    
+    /** The label observaciones. */
     private javax.swing.JLabel label_observaciones;
+    
+    /** The label precio bici. */
     private javax.swing.JLabel label_precio_bici;
+    
+    /** The label recibido. */
     private javax.swing.JLabel label_recibido;
     // End of variables declaration//GEN-END:variables
 }
