@@ -1,80 +1,93 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change esta licencia
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java para editar esta plantilla
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing y manejo de fechas
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-// Importar las clases de lógica:
+// Importar clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Facturas.Factura;
 import com.mycompany.proyecto1.Facturas.GuardarFactura;
 import com.mycompany.proyecto1.Facturas.UtilidadesFacturas;
 import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
-import javax.swing.JOptionPane;
 
-// Importar las clases de objetos:
+// Importar clases de objetos
 import com.mycompany.proyecto1.Mantenimiento;
 
-// Importar liberías para fecha real
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.ImageIcon;
-
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class VentanaFacturacionMant.
+ * Clase que representa la interfaz para la facturación de mantenimientos.
+ *
+ * <p>Permite generar facturas de servicios de mantenimiento, asociando un cliente
+ * con un mantenimiento previamente registrado.</p>
+ *
+ * <p>Incluye funcionalidades para la asignación automática del número de factura,
+ * la carga de clientes y mantenimientos abiertos, y la configuración del campo de fecha.</p>
  *
  * @author noe
  */
 public class VentanaFacturacionMant extends javax.swing.JFrame {
     
     /**
-     * Creates new form VentanaModificar.
+     * Constructor que inicializa la ventana de facturación de mantenimientos.
+     *
+     * <p>Realiza las siguientes configuraciones iniciales:</p>
+     * <ul>
+     *   <li>Genera automáticamente el siguiente número de factura.</li>
+     *   <li>Carga los clientes disponibles en el comboBox.</li>
+     *   <li>Carga los mantenimientos abiertos en el comboBox.</li>
+     *   <li>Configura el campo de fecha para que tenga el formato correcto.</li>
+     *   <li>Aplica efectos visuales a los botones.</li>
+     *   <li>Evita que el cierre de esta ventana afecte el programa principal.</li>
+     * </ul>
      */
     public VentanaFacturacionMant() {
         initComponents();
         
-            // Cargar el siguiente número de factura automáticamente
-            Archivo archivo = new Archivo();
-            int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas_mantenimiento.json", Factura[].class);
-            box_num_fact.setText(String.valueOf(siguienteNumeroFactura));
+        // Generar automáticamente el siguiente número de factura
+        Archivo archivo = new Archivo();
+        int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas_mantenimiento.json", Factura[].class);
+        box_num_fact.setText(String.valueOf(siguienteNumeroFactura));
         
-            // Cargar los clientes en el comboBox de clientes al iniciar el formulario
-            Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
+        // Cargar los clientes en el comboBox de selección
+        Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
             
-            // Cargar los productos en el comboBox de clientes al iniciar el formulario
-            UtilidadesFacturas.cargarMantenimientosAbiertos("mantenimiento.json", combo_codigo_articulo);
+        // Cargar los mantenimientos abiertos en el comboBox
+        UtilidadesFacturas.cargarMantenimientosAbiertos("mantenimiento.json", combo_codigo_articulo);
         
-            // Evitar que la ventana emergente VentanaModificar cierre el programa
-            setDefaultCloseOperation(VentanaFacturacionMant.DISPOSE_ON_CLOSE);
+        // Evitar que esta ventana cierre toda la aplicación
+        setDefaultCloseOperation(VentanaFacturacionMant.DISPOSE_ON_CLOSE);
                 
-            // Define los colores
-            Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-            Color originalColor = Color.BLACK; // Negro (borde inicial)
+        // Definir los colores para los efectos hover en los botones
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro por defecto
 
-            // Crear la instancia de ButtonHoverEffect para el efecto
-            ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
-            hoverEffect.applyTo(crear_fact);
+        // Crear la instancia de ButtonHoverEffect para aplicar el efecto hover
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+        hoverEffect.applyTo(crear_fact);
         
-            // Configurar el campo de fecha
-            Validador.configurarCampoFecha(formatt_fecha_recibido);
+        // Configurar el campo de fecha con el formato correcto
+        Validador.configurarCampoFecha(formatt_fecha_recibido);
            
-            // Obtener la fecha de hoy en formato "dd/MM/yyyy"
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaHoy = formatoFecha.format(new Date());
+        // Obtener la fecha actual en formato "dd/MM/yyyy"
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaHoy = formatoFecha.format(new Date());
 
-            // Asignar la fecha actual al campo formateado
-            formatt_fecha_recibido.setText(fechaHoy);
+        // Asignar la fecha actual al campo formateado
+        formatt_fecha_recibido.setText(fechaHoy);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -457,9 +470,16 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
     }//GEN-LAST:event_box_total_pagarActionPerformed
 
     /**
-     * Crear fact action performed.
+     * Acción realizada al presionar el botón "Crear Factura".
      *
-     * @param evt the evt
+     * <p>Este método obtiene los datos ingresados en la interfaz, como el número de factura, 
+     * el código del cliente y el código del servicio, y los procesa para generar una nueva 
+     * factura de mantenimiento.</p>
+     *
+     * <p>Si ocurre un error en la conversión de los datos o en la creación de la factura, 
+     * se muestra un mensaje de error al usuario.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void crear_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_factActionPerformed
         try {
@@ -486,9 +506,13 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
 
     /**
-     * Combo codigo articulo action performed.
+     * Acción realizada al seleccionar un código de artículo en el comboBox.
      *
-     * @param evt the evt
+     * <p>Este método agrega un `ActionListener` al comboBox que contiene los códigos de los 
+     * servicios de mantenimiento disponibles. Cuando se selecciona un nuevo código, 
+     * se actualizan los datos del mantenimiento correspondiente.</p>
+     *
+     * @param evt el evento de acción generado al seleccionar un elemento en el comboBox
      */
     private void combo_codigo_articuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_articuloActionPerformed
         combo_codigo_articulo.addActionListener(new java.awt.event.ActionListener() {
@@ -499,20 +523,24 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_codigo_articuloActionPerformed
 
     /**
-     * Form window opened.
+     * Acción realizada al abrir la ventana.
      *
-     * @param evt the evt
+     * <p>Este método establece el título de la ventana y asigna el ícono del programa.</p>
+     * 
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Facturar un servicio");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
     
     /**
-     * Actualizar datos mantenimiento.
+     * Método para llenar los campos con los datos del mantenimiento seleccionado.
+     *
+     * <p>Este método obtiene el código del servicio seleccionado en el comboBox de mantenimientos,
+     * busca el mantenimiento correspondiente y luego actualiza los campos de la interfaz 
+     * con la información del mantenimiento, como el cliente y el precio.</p>
      */
-    // Método para llenar los campos con los datos del mantenimiento
     private void actualizarDatosMantenimiento() {
         String seleccion = (String) combo_codigo_articulo.getSelectedItem();
         if (seleccion != null && !seleccion.equals("No hay mantenimientos abiertos")) {
@@ -540,9 +568,11 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
     }
 
     /**
-     * Calcular totales.
+     * Método para calcular los montos automáticamente.
+     *
+     * <p>Este método calcula el subtotal, el IVA (13%) y el total de la factura 
+     * en base al precio proporcionado, y actualiza los campos correspondientes.</p>
      */
-    // Método para calcular los montos automáticamente
     private void calcularTotales() {
         try {
             int precio = Integer.parseInt(box_precio_und.getText().trim());
@@ -559,13 +589,16 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
         }
     }
 
-    /**
-     * Llenar datos factura.
+     /**
+     * Llena los datos de la factura en los campos correspondientes.
      *
-     * @param codigoMantenimiento the codigo mantenimiento
-     * @param codigoCliente the codigo cliente
-     * @param fechaRecibido the fecha recibido
-     * @param precio the precio
+     * <p>Este método asigna valores a los campos de la factura, como el número de factura, 
+     * el cliente, la fecha y el precio del servicio, y luego calcula los totales.</p>
+     *
+     * @param codigoMantenimiento el código del mantenimiento
+     * @param codigoCliente el código del cliente
+     * @param fechaRecibido la fecha en la que se recibe el servicio
+     * @param precio el precio del servicio
      */
     public void llenarDatosFactura(int codigoMantenimiento, int codigoCliente, String fechaRecibido, int precio) {
         box_num_fact.setText(String.valueOf(new Archivo().obtenerSiguienteCodigo("facturas_mantenimiento.json", Factura[].class)));
@@ -577,13 +610,10 @@ public class VentanaFacturacionMant extends javax.swing.JFrame {
         calcularTotales(); // Llama al método que calcula los valores
     }
 
-
-    
-    
     /**
-     * The main method.
+     * El método principal para ejecutar la aplicación.
      *
-     * @param args the command line arguments
+     * @param args los argumentos de la línea de comandos
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

@@ -4,84 +4,85 @@
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing y JSON
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.table.DefaultTableModel;
 import com.fasterxml.jackson.databind.JsonNode;
 
-
-// Importar las clases de lógica:
+// Importar las clases de lógica
 import com.mycompany.proyecto1.Archivo;
-import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
-import java.util.Date;
 
-
-// Importar las clases de objetos:
+// Importar las clases de objetos
 import com.mycompany.proyecto1.Cliente;
 import javax.swing.ImageIcon;
-import ventanas.RegistroClientes;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ModificarCliente.
+ * Clase que representa la ventana de modificación de clientes.
+ *
+ * <p>Permite modificar la información de un cliente existente, incluyendo su nombre,
+ * teléfono, correo, y ubicación (provincia, cantón y distrito).</p>
+ *
+ * <p>Cuenta con validaciones de entrada y configuración de límites en los campos de texto.</p>
  *
  * @author noe
  */
 public class ModificarCliente extends javax.swing.JFrame {
     
-    /** The provincias data. */
-    private JsonNode provinciasData; // Variable para almacenar los datos del JSON
+    /** Datos de provincias, cantones y distritos cargados desde un archivo JSON. */
+    private JsonNode provinciasData; 
     
     /**
-     * The Constructor.
+     * Constructor vacío necesario para la creación de la ventana sin parámetros.
+     *
+     * <p>Este constructor es requerido para evitar conflictos cuando la ventana
+     * se abre sin recibir un cliente como parámetro.</p>
      */
-    // Constructor vacío para que VentanaModificar pueda recibir parámetros sin conflictos en el main
-    public ModificarCliente(){
+    public ModificarCliente() {
         initComponents();
     }
     
     /**
-     * Creates new form VentanaModificar.
+     * Constructor que inicializa la ventana con los datos de un cliente existente.
      *
-     * @param cliente the cliente
+     * <p>Este constructor se utiliza cuando se necesita modificar los datos de un cliente ya registrado.</p>
+     *
+     * @param cliente el cliente cuyos datos serán cargados en la interfaz para su modificación
      */
     public ModificarCliente(Cliente cliente) {
         initComponents();
         
-        // Cargar datos de provincias, cantones y distritos
+        // Cargar datos de provincias, cantones y distritos desde el archivo JSON
         cargarProvinciasCantonesDistritos();
         
-        // Configurar los listeners de los ComboBox
+        // Configurar los listeners de los ComboBox para manejar la selección dinámica de ubicación
         configurarListeners();
         
-        // Evitar que la ventana emergente VentanaModificar cierre el programa
+        // Evitar que la ventana emergente cierre toda la aplicación al cerrarse
         setDefaultCloseOperation(ModificarCliente.DISPOSE_ON_CLOSE);
         
-        // Configurar el campo de fecha de nacimiento
+        // Configurar el campo de fecha de nacimiento con el formato correcto
         Validador.configurarCampoFechaNacimiento(formatt_fecha_nacimiento);
         
-        // Cargar los datos del cliente en los espacios correspondientes
+        // Cargar los datos del cliente en los campos correspondientes
         cargarDatosCliente(cliente);
        
-        // Establecer el máximo de carácteres en cada campo (formato: (campo, largo))
+        // Establecer el límite de caracteres en los campos de entrada de datos
         Validador.setLimiteCaracteres(box_nombre_cliente, 50);
         Validador.setLimiteCaracteres(box_telefono, 8);
         Validador.setLimiteCaracteres(box_correo_cliente, 50);
         
-            // Define los colores
-        Color hoverColor = new Color(150,150,150);
-        Color originalColor = Color.BLACK;
+        // Definir los colores del efecto hover en los botones
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro por defecto
 
-        // Crear la instancia de ButtonHoverEffect para el efecto
+        // Crear la instancia de ButtonHoverEffect para aplicar el efecto hover
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
         
+        // Aplicar efecto hover a los botones de acción
         hoverEffect.applyTo(guardar_cambios);
         hoverEffect.applyTo(eliminar_cliente);
-            
     }
 
     /**
@@ -412,11 +413,23 @@ public class ModificarCliente extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_box_nombre_clienteActionPerformed
 
-    /**
-     * Guardar cambios action performed.
+     /**
+     * Acción realizada al presionar el botón "Guardar Cambios".
      *
-     * @param evt the evt
+     * <p>Modifica la información de un cliente existente en el sistema y guarda los cambios en el archivo JSON.</p>
+     *
+     * <p>El método realiza las siguientes validaciones antes de actualizar los datos:</p>
+     * <ul>
+     *   <li>Verifica que existan clientes registrados.</li>
+     *   <li>Valida que la fecha de nacimiento no esté vacía o incompleta.</li>
+     * </ul>
+     *
+     * <p>Si la modificación es exitosa, se muestra un mensaje de confirmación, se actualiza la tabla de clientes
+     * en la interfaz de registro y se cierra la ventana de modificación.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
+
     private void guardar_cambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_cambiosActionPerformed
         String ruta = "registroClientes.json";
         Archivo archivo = new Archivo();
@@ -486,9 +499,20 @@ public class ModificarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_box_telefonoActionPerformed
 
     /**
-     * Eliminar cliente action performed.
+     * Acción realizada al presionar el botón "Eliminar Cliente".
      *
-     * @param evt the evt
+     * <p>Elimina un cliente del sistema y actualiza el archivo JSON de clientes.</p>
+     *
+     * <p>Antes de proceder con la eliminación, se realizan las siguientes validaciones:</p>
+     * <ul>
+     *   <li>Verifica que existan clientes registrados.</li>
+     *   <li>Solicita confirmación al usuario antes de eliminar el cliente.</li>
+     *   <li>Valida que el cliente a eliminar realmente exista en la base de datos.</li>
+     * </ul>
+     *
+     * <p>Si el cliente es eliminado con éxito, se muestra un mensaje de confirmación y se cierra la ventana.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void eliminar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_clienteActionPerformed
         String ruta = "registroClientes.json";
@@ -552,20 +576,24 @@ public class ModificarCliente extends javax.swing.JFrame {
     }//GEN-LAST:event_formatt_fecha_nacimientoActionPerformed
 
     /**
-     * Form window opened.
+     * Acción realizada cuando la ventana es abierta.
      *
-     * @param evt the evt
+     * <p>Configura el título y el ícono del programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Modificar/eliminar cliente");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Cargar datos cliente.
+     * Carga los datos de un cliente en la interfaz.
      *
-     * @param cliente the cliente
+     * <p>Llena los campos de texto con la información del cliente y ajusta las selecciones
+     * en los ComboBox de provincia, cantón y distrito.</p>
+     *
+     * @param cliente el cliente cuyos datos serán mostrados en la interfaz
      */
     private void cargarDatosCliente(Cliente cliente) {
         // Código del cliente
@@ -607,7 +635,10 @@ public class ModificarCliente extends javax.swing.JFrame {
     }
     
     /**
-     * Cargar provincias cantones distritos.
+     * Carga las provincias, cantones y distritos desde un archivo JSON.
+     *
+     * <p>Llena el ComboBox de provincias con los datos obtenidos y limpia los ComboBox
+     * de cantones y distritos hasta que se seleccione una provincia válida.</p>
      */
     private void cargarProvinciasCantonesDistritos() {
         try {
@@ -639,9 +670,12 @@ public class ModificarCliente extends javax.swing.JFrame {
     }
     
     /**
-     * Cargar cantones.
+     * Carga los cantones de una provincia seleccionada.
      *
-     * @param provincia the provincia
+     * <p>Llena el ComboBox de cantones basado en la provincia seleccionada
+     * y limpia el ComboBox de distritos, ya que estos dependen del cantón.</p>
+     *
+     * @param provincia la provincia seleccionada
      */
     private void cargarCantones(String provincia) {
         try {
@@ -661,10 +695,12 @@ public class ModificarCliente extends javax.swing.JFrame {
 
     
     /**
-     * Cargar distritos.
+     * Carga los distritos de un cantón seleccionado dentro de una provincia.
      *
-     * @param provincia the provincia
-     * @param canton the canton
+     * <p>Llena el ComboBox de distritos con los datos obtenidos del JSON.</p>
+     *
+     * @param provincia la provincia seleccionada
+     * @param canton el cantón seleccionado
      */
     private void cargarDistritos(String provincia, String canton) {
         try {
@@ -684,7 +720,10 @@ public class ModificarCliente extends javax.swing.JFrame {
     }
 
     /**
-     * Configurar listeners.
+     * Configura los listeners de los ComboBox de provincia y cantón.
+     *
+     * <p>Estos listeners permiten actualizar dinámicamente la lista de cantones
+     * y distritos en función de la selección del usuario.</p>
      */
     private void configurarListeners() {
         box_provincias.addActionListener(e -> {
@@ -708,9 +747,11 @@ public class ModificarCliente extends javax.swing.JFrame {
     
     
     /**
-     * The main method.
+     * Método principal que inicia la aplicación.
      *
-     * @param args the command line arguments
+     * <p>Configura la interfaz gráfica e inicia la ventana de modificación de clientes.</p>
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

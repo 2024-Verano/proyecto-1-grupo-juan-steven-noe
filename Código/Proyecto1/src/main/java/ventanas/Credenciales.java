@@ -4,22 +4,26 @@
  */
 package ventanas;
 
-import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Usuario;
 import java.awt.Color;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class Credenciales.
+ * Clase que representa la ventana de credenciales de acceso.
+ *
+ * <p>Esta ventana permite a los usuarios ingresar sus credenciales para autenticarse en el sistema.</p>
+ * 
+ * <p>Cuenta con efectos visuales en los botones y establece el botón de ingreso como el predeterminado.</p>
  *
  * @author Steven Umaña
  */
 public class Credenciales extends javax.swing.JFrame {
 
     /**
-     * Creates new form Interfaz.
+     * Crea una nueva ventana de credenciales.
+     *
+     * <p>Inicializa los componentes gráficos y configura efectos visuales en los botones.</p>
      */
     public Credenciales() {
         initComponents();
@@ -27,14 +31,14 @@ public class Credenciales extends javax.swing.JFrame {
         // Asigna el botón ENTER ingresar como el predeterminado
         this.getRootPane().setDefaultButton(button_ingresar);
         
-          // Define los colores
-        Color hoverColor = new Color(150,150,150); // Rojo oscuro (al pasar el cursor)
+        // Define los colores del efecto hover en los botones
+        Color hoverColor = new Color(150, 150, 150); // Gris oscuro al pasar el cursor
         Color originalColor = Color.BLACK; // Negro (borde inicial)
 
         // Crear la instancia de ButtonHoverEffect
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-        // Aplica el efecto hover a cada botón
+        // Aplica el efecto hover al botón de ingreso
         hoverEffect.applyTo(button_ingresar);
     }
 
@@ -183,9 +187,17 @@ public class Credenciales extends javax.swing.JFrame {
     }//GEN-LAST:event_box_usuarioActionPerformed
 
     /**
-     * Button ingresar action performed.
+     * Maneja el evento de clic en el botón "Ingresar".
      *
-     * @param evt the evt
+     * <p>Este método obtiene el usuario y la contraseña ingresados, 
+     * valida que no estén vacíos y luego verifica las credenciales.</p>
+     * 
+     * <p>Si las credenciales son correctas, muestra un mensaje de éxito, 
+     * cierra la ventana actual y abre el menú de opciones.</p>
+     * 
+     * <p>Si las credenciales son incorrectas, muestra un mensaje de error.</p>
+     *
+     * @param evt el evento de acción generado al presionar el botón "Ingresar"
      */
     private void button_ingresarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_ingresarActionPerformed
 
@@ -218,30 +230,29 @@ public class Credenciales extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_button_ingresarActionPerformed
 
-    /**
-     * Box contrasenia action performed.
-     *
-     * @param evt the evt
-     */
     private void box_contraseniaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_box_contraseniaActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_box_contraseniaActionPerformed
 
     /**
-     * Form window opened.
+     * Evento que se ejecuta al abrir la ventana.
      *
-     * @param evt the evt
+     * <p>Este método establece el título de la ventana y define el ícono del programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Iniciar Sesión");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * The main method.
+     * Método principal que inicia la aplicación.
      *
-     * @param args the command line arguments
+     * <p>Este método configura el aspecto visual de la interfaz utilizando el
+     * tema "Nimbus" si está disponible y lanza la ventana de credenciales.</p>
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

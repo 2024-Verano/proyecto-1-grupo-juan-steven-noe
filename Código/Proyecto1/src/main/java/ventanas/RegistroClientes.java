@@ -1,97 +1,94 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change esta licencia
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to editar esta plantilla
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
-import java.util.Date;
 
-// Importar las clases de lógica:
+// Importar clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Validador;
-import com.mycompany.proyecto1.Utilidades;
 import com.fasterxml.jackson.databind.JsonNode;
 
-
-
-// Importar las clases de objetos:
-import com.mycompany.proyecto1.TipoProducto;
-import com.mycompany.proyecto1.Producto;
+// Importar clases de objetos
 import com.mycompany.proyecto1.Cliente;
-import java.text.SimpleDateFormat;
 import javax.swing.ImageIcon;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class RegistroClientes.
+ * Clase que representa la ventana de registro de clientes.
+ *
+ * <p>Permite registrar, modificar y gestionar clientes en la base de datos.</p>
+ *
+ * <p>Incluye validaciones de entrada, configuración de límites en los campos de texto
+ * y efectos visuales en los botones.</p>
  *
  * @author noe
  */
 public class RegistroClientes extends javax.swing.JFrame {
 
-    /** Creates new form MenuOpciones. */
-    
-    private JsonNode provinciasData; // Variable para almacenar los datos del JSON
+    /** Datos de provincias, cantones y distritos cargados desde un archivo JSON. */
+    private JsonNode provinciasData; 
     
     /**
-     * The Constructor.
+     * Constructor que inicializa la interfaz del registro de clientes.
+     *
+     * <p>Configura los efectos visuales, la estructura de la interfaz y
+     * las validaciones en los campos de entrada.</p>
      */
     public RegistroClientes() {
         initComponents();
+        
+        // Cargar datos de provincias, cantones y distritos
         cargarProvinciasCantonesDistritos();
+        
+        // Configurar los listeners de los ComboBox
         configurarListeners();
         
-        // Establecer el máximo de carácteres en cada campo (formato: (campo, largo))
+        // Establecer el máximo de caracteres en cada campo de entrada
         Validador.setLimiteCaracteres(box_nombre_cliente, 50);
         Validador.setLimiteCaracteres(box_num_telefono, 8);
         Validador.setLimiteCaracteres(box_correo_cliente, 50);
         
-        
-        // Aplicar el efecto hover y selección a los botones (TOOLBAR)
+        // Aplicar efecto hover y selección a los botones del menú
         ButtonHoverEffect.applySelectableHoverEffect(agregar_cliente);
         ButtonHoverEffect.applySelectableHoverEffect(modificar_cliente);
         ButtonHoverEffect.applySelectableHoverEffect(salir);
 
+        // Definir los colores del efecto hover
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro por defecto
 
-        // Define los colores
-        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-        Color originalColor = Color.BLACK; // Negro (borde inicial)
-
-        // Crear la instancia de ButtonHoverEffect para el efecto
+        // Crear la instancia de ButtonHoverEffect para aplicar el efecto hover
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-        // Aplica el efecto hover a cada botón (Agregar Producto)
+        // Aplicar efecto hover a los botones de acción
         hoverEffect.applyTo(crear_usuario);
         hoverEffect.applyTo(guardar_cliente);
         
-        // Aplica el efecto hover a cada botón (Modificar Productoi)
+        // Aplicar efecto hover al botón de modificar cliente
         hoverEffect.applyTo(button_buscar_modificar);
-        
 
         // Registrar los paneles en el CardLayout
         SubFrameContainer.add(agregarPanel, "agregarPanel");
         SubFrameContainer.add(modificarPanel, "modificarPanel");
 
-        // Ocultar los paneles de opcion de "agregar productos"
+        // Ocultar los paneles de opciones de "agregar clientes"
         opcionesAgregarCliente.setVisible(false);
         
-        
-        // Mostrar la bienvenida al inicio
+        // Mostrar la pantalla de bienvenida al inicio
         SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "bienvenidaPanel");
         
-        // Configurar el campo de fecha de nacimiento
+        // Configurar el campo de fecha de nacimiento con el formato correcto
         Validador.configurarCampoFechaNacimiento(formatt_fecha_nacimiento);
-
     }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -652,9 +649,13 @@ public class RegistroClientes extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     /**
-     * Cargar provincias cantones distritos.
+     * Carga la información de provincias, cantones y distritos desde un archivo JSON.
+     *
+     * <p>Lee el archivo "Provincias_Cantones.json" y llena el `jComboBox_provincias`
+     * con los nombres de las provincias disponibles.</p>
+     *
+     * <p>Si ocurre un error al leer el archivo, muestra un mensaje de error.</p>
      */
-    // Método para cargar provincias, cantones y distritos desde el archivo JSON usando Archivo
     private void cargarProvinciasCantonesDistritos() {
         try {
             Archivo archivo = new Archivo();
@@ -670,13 +671,16 @@ public class RegistroClientes extends javax.swing.JFrame {
         }
     }
 
-    
     /**
-     * Cargar cantones.
+     * Carga los cantones correspondientes a la provincia seleccionada.
      *
-     * @param provincia the provincia
+     * <p>Este método actualiza el `jComboBox_cantones` con los cantones
+     * pertenecientes a la provincia dada.</p>
+     *
+     * <p>Si ocurre un error al cargar los cantones, se muestra un mensaje de error.</p>
+     *
+     * @param provincia el nombre de la provincia seleccionada
      */
-    // Método para cargar cantones según la provincia seleccionada
     private void cargarCantones(String provincia) {
         try {
             JsonNode cantonesNode = provinciasData.get(provincia).get("cantones");
@@ -694,12 +698,16 @@ public class RegistroClientes extends javax.swing.JFrame {
     }
     
     /**
-     * Cargar distritos.
+     * Carga los distritos correspondientes al cantón seleccionado dentro de una provincia.
      *
-     * @param provincia the provincia
-     * @param canton the canton
+     * <p>Este método actualiza el `jComboBox_distritos` con los distritos
+     * pertenecientes al cantón y la provincia dados.</p>
+     *
+     * <p>Si ocurre un error al cargar los distritos, se muestra un mensaje de error.</p>
+     *
+     * @param provincia el nombre de la provincia seleccionada
+     * @param canton el nombre del cantón seleccionado dentro de la provincia
      */
-    // Método para cargar distritos según el cantón seleccionado
     private void cargarDistritos(String provincia, String canton) {
         try {
             JsonNode cantonesNode = provinciasData.get(provincia).get("cantones");
@@ -718,9 +726,11 @@ public class RegistroClientes extends javax.swing.JFrame {
     }
     
     /**
-     * Configurar listeners.
+     * Configura los listeners para la selección de provincia y cantón en los `JComboBox`.
+     *
+     * <p>Al seleccionar una provincia, se cargan sus cantones correspondientes.
+     * Al seleccionar un cantón, se cargan sus distritos correspondientes.</p>
      */
-    // Configuración de listeners para los ComboBox
     private void configurarListeners() {
         jComboBox_provincias.addActionListener(e -> {
             String provinciaSeleccionada = (String) jComboBox_provincias.getSelectedItem();
@@ -739,9 +749,11 @@ public class RegistroClientes extends javax.swing.JFrame {
     }
 
     /**
-     * Agregar cliente action performed.
+     * Acción realizada al presionar el botón "Agregar Cliente".
      *
-     * @param evt the evt
+     * <p>Muestra el subpanel de "agregar cliente" dentro del contenedor `SubFrameContainer`.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void agregar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_clienteActionPerformed
         // Mostrar el SubFrame de "agregar cliente"
@@ -750,9 +762,11 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_clienteActionPerformed
 
     /**
-     * Modificar cliente action performed.
+     * Acción realizada al presionar el botón "Modificar Cliente".
      *
-     * @param evt the evt
+     * <p>Muestra el subpanel de "modificar cliente" dentro del contenedor `SubFrameContainer`.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void modificar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_clienteActionPerformed
         // Mostrar el SubFrame de "modificar cliente"
@@ -761,9 +775,11 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_modificar_clienteActionPerformed
 
     /**
-     * Salir action performed.
+     * Acción realizada al presionar el botón "Salir".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre el menú de opciones principal.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
@@ -777,9 +793,16 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     /**
-     * Crear usuario action performed.
+     * Acción realizada al presionar el botón "Crear Usuario".
      *
-     * @param evt the evt
+     * <p>Este método alterna la visibilidad del panel de opciones para agregar un cliente.</p>
+     *
+     * <p>Si el panel se vuelve visible, se obtiene el siguiente código de cliente
+     * desde el archivo `registroClientes.json` y se asigna automáticamente en el campo correspondiente.</p>
+     *
+     * <p>En caso de error al cargar el código, se muestra un mensaje y se asigna "AUTOMÁTICO" como código.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void crear_usuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_usuarioActionPerformed
 
@@ -802,8 +825,8 @@ public class RegistroClientes extends javax.swing.JFrame {
             }
     }
 
-    this.revalidate();
-    this.repaint();
+        this.revalidate();
+        this.repaint();
     }//GEN-LAST:event_crear_usuarioActionPerformed
 
     /**
@@ -825,7 +848,15 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_box_codigo_clienteActionPerformed
     
     /**
-     * Cargar clientes en tabla.
+     * Carga los clientes en la tabla de resultados con la opción de búsqueda y filtrado.
+     *
+     * <p>Este método lee los clientes almacenados en un archivo JSON y los muestra en la tabla.
+     * Si el usuario ingresa un texto en el buscador, se filtrarán los clientes por nombre o código,
+     * según el filtro seleccionado.</p>
+     *
+     * <p>Si no se encuentran coincidencias con el filtro, se muestra un mensaje informativo.</p>
+     *
+     * @throws Exception si ocurre un error al leer los datos del archivo
      */
     void cargarClientesEnTabla() {
         String ruta = "registroClientes.json";
@@ -879,18 +910,33 @@ public class RegistroClientes extends javax.swing.JFrame {
     }
 
     /**
-     * Button buscar modificar action performed.
+     * Acción realizada al presionar el botón "Buscar Cliente para Modificar".
      *
-     * @param evt the evt
+     * <p>Carga la lista de clientes en la tabla de resultados.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         cargarClientesEnTabla();
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     /**
-     * Guardar cliente action performed.
+     * Acción realizada al presionar el botón "Guardar Cliente".
      *
-     * @param evt the evt
+     * <p>Este método valida los datos ingresados, genera un código único para el cliente,
+     * y lo guarda en el archivo JSON.</p>
+     *
+     * <p>Se validan los siguientes datos antes de guardar:</p>
+     * <ul>
+     *   <li>Nombre completo (nombre y apellidos)</li>
+     *   <li>Teléfono (debe ser numérico y cumplir con los criterios de validación)</li>
+     *   <li>Correo electrónico (debe tener un formato válido)</li>
+     *   <li>Fecha de nacimiento (no debe estar vacía)</li>
+     * </ul>
+     *
+     * <p>Si la validación es exitosa, el cliente se almacena en el archivo y se actualiza la tabla.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void guardar_clienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_clienteActionPerformed
         String ruta = "registroClientes.json";
@@ -967,9 +1013,19 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_guardar_clienteActionPerformed
 
     /**
-     * Tabla resultado mouse clicked.
+     * Acción realizada al hacer doble clic en una fila de la tabla de resultados.
      *
-     * @param evt the evt
+     * <p>Si el usuario hace doble clic sobre una fila en la tabla de clientes,
+     * se abrirá la ventana de modificación con los datos del cliente seleccionado.</p>
+     *
+     * <p>El método realiza los siguientes pasos:</p>
+     * <ul>
+     *   <li>Obtiene el código del cliente de la fila seleccionada.</li>
+     *   <li>Busca al cliente en el archivo JSON.</li>
+     *   <li>Si el cliente es encontrado, se abre la ventana de modificación.</li>
+     * </ul>
+     *
+     * @param evt el evento del clic del ratón sobre la tabla
      */
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
@@ -1019,9 +1075,12 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_formatt_fecha_nacimientoActionPerformed
 
     /**
-     * J combo box provincias action performed.
+     * Acción realizada al seleccionar una provincia en el ComboBox.
      *
-     * @param evt the evt
+     * <p>Este método obtiene la provincia seleccionada y carga los cantones 
+     * correspondientes en el ComboBox de cantones.</p>
+     *
+     * @param evt el evento de selección en el ComboBox de provincias
      */
     private void jComboBox_provinciasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_provinciasActionPerformed
         String provinciaSeleccionada = (String) jComboBox_provincias.getSelectedItem();
@@ -1031,9 +1090,12 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_provinciasActionPerformed
 
     /**
-     * J combo box cantones action performed.
+     * Acción realizada al seleccionar un cantón en el ComboBox.
      *
-     * @param evt the evt
+     * <p>Este método obtiene la provincia y el cantón seleccionados y carga 
+     * los distritos correspondientes en el ComboBox de distritos.</p>
+     *
+     * @param evt el evento de selección en el ComboBox de cantones
      */
     private void jComboBox_cantonesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_cantonesActionPerformed
         String provinciaSeleccionada = (String) jComboBox_provincias.getSelectedItem();
@@ -1053,22 +1115,27 @@ public class RegistroClientes extends javax.swing.JFrame {
     }//GEN-LAST:event_jComboBox_distritosActionPerformed
 
     /**
-     * Form window opened.
+     * Acción realizada cuando la ventana es abierta.
      *
-     * @param evt the evt
+     * <p>Este método establece el título de la ventana y configura el ícono del programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Registro de clientes");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Restablecer panel.
+     * Restablece la vista de un panel dentro del contenedor principal.
      *
-     * @param nombrePanel the nombre panel
+     * <p>Este método permite refrescar un panel específico en la interfaz utilizando
+     * un `CardLayout`.</p>
+     *
+     * <p>Después de cambiar de panel, se fuerza una actualización visual para reflejar los cambios.</p>
+     *
+     * @param nombrePanel el nombre del panel a mostrar en el `SubFrameContainer`
      */
-    // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, nombrePanel);
@@ -1081,9 +1148,14 @@ public class RegistroClientes extends javax.swing.JFrame {
     
     
     /**
-     * The main method.
+     * Método principal que inicia la aplicación.
      *
-     * @param args the command line arguments
+     * <p>Configura el aspecto visual de la interfaz utilizando el tema "Nimbus" si está disponible
+     * y lanza la ventana de registro de clientes.</p>
+     *
+     * <p>Si "Nimbus" no está disponible, se mantiene el tema predeterminado del sistema.</p>
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

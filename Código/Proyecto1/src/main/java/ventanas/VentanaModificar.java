@@ -4,43 +4,48 @@
  */
 package ventanas;
 
-// importar librerías de swing
+// importar librerías de swing y clases necesarias
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
-// Importar las clases de lógica:
+// Importar las clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
 
-// Importar las clases de objetos:
+// Importar las clases de objetos
 import com.mycompany.proyecto1.Producto;
 import com.mycompany.proyecto1.TipoProducto;
 import javax.swing.ImageIcon;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class VentanaModificar.
+ * La clase VentanaModificar permite modificar los datos de un producto registrado.
+ * <p>Proporciona funcionalidades para modificar el nombre, marca, precio y cantidad del producto,
+ * además de configurar los efectos visuales en los botones y validar las entradas de usuario.</p>
  *
  * @author noe
  */
 public class VentanaModificar extends javax.swing.JFrame {
     
     /**
-     * The Constructor.
+     * Constructor vacío para crear una instancia de la ventana sin parámetros.
+     * <p>Este constructor es necesario para que la clase VentanaModificar pueda ser instanciada 
+     * sin conflictos cuando se abre desde el main o el menú.</p>
      */
-    // Constructor vacío para que VentanaModificar pueda recibir parámetros sin conflictos en el main
     public VentanaModificar(){
         initComponents();
     }
     
     /**
-     * Creates new form VentanaModificar.
+     * Constructor que inicializa la ventana con los datos de un producto.
      *
-     * @param producto the producto
+     * <p>Este constructor recibe un producto y carga sus datos en los campos correspondientes de la ventana.</p>
+     * <p>Además, se establecen los límites de caracteres en los campos de texto y se configuran los efectos hover en los botones.</p>
+     *
+     * @param producto el producto cuya información se cargará en la ventana
      */
     public VentanaModificar(Producto producto) {
         initComponents();
@@ -57,17 +62,17 @@ public class VentanaModificar extends javax.swing.JFrame {
         // Cargar los datos del producto en los espacios correspondientes
         cargarDatosProducto(producto);
         
-         // Define los colores
-         Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-         Color originalColor = Color.BLACK; // Negro (borde inicial)
+        // Define los colores para los botones al pasar el cursor
+        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
+        Color originalColor = Color.BLACK; // Negro (borde inicial)
 
-         // Crear la instancia de ButtonHoverEffect para el efecto
-         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+        // Crear la instancia de ButtonHoverEffect para aplicar los efectos
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
         
-         hoverEffect.applyTo(guardar_cambios);
-         hoverEffect.applyTo(eliminar_producto);
-         
+        hoverEffect.applyTo(guardar_cambios);
+        hoverEffect.applyTo(eliminar_producto);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -359,9 +364,13 @@ public class VentanaModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_box_codigo_artActionPerformed
 
     /**
-     * Combo tipo art action performed.
+     * Acción realizada al seleccionar un tipo de artículo en el comboBox.
      *
-     * @param evt the evt
+     * <p>Este método valida el tipo de artículo seleccionado en el comboBox. Si se selecciona "Bicicleta",
+     * el comboBox para seleccionar el tamaño de la bicicleta se activa, permitiendo la selección del tamaño. 
+     * En caso contrario, se desactiva el comboBox de tamaño de bicicleta y se limpia la selección.</p>
+     *
+     * @param evt el evento generado al seleccionar un tipo de artículo en el comboBox
      */
     private void combo_tipo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_artActionPerformed
 
@@ -404,9 +413,13 @@ public class VentanaModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_box_marca_artActionPerformed
 
     /**
-     * Guardar cambios action performed.
+     * Acción realizada al guardar los cambios de un producto.
      *
-     * @param evt the evt
+     * <p>Este método valida y actualiza los datos de un producto en el archivo de productos. Si los datos del formulario son correctos,
+     * se actualiza el producto correspondiente con los nuevos valores ingresados, como el nombre, marca, precio, cantidad, etc.
+     * El archivo de productos se guarda nuevamente con los cambios realizados. Si algún dato es inválido, se muestra un mensaje de error.</p>
+     *
+     * @param evt el evento generado al hacer clic en el botón para guardar los cambios
      */
     private void guardar_cambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_cambiosActionPerformed
         String ruta = "productos.json";
@@ -495,9 +508,13 @@ public class VentanaModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_box_cantidad_artActionPerformed
 
     /**
-     * Eliminar producto action performed.
+     * Acción realizada al eliminar un producto.
      *
-     * @param evt the evt
+     * <p>Este método valida si un producto puede eliminarse, considerando que no haya sido facturado previamente.
+     * Si el producto es facturado, se muestra un mensaje de error. Si no ha sido facturado, se solicita una confirmación
+     * del usuario antes de proceder a eliminarlo. Si se confirma, el producto es eliminado del archivo de productos.</p>
+     *
+     * @param evt el evento generado al hacer clic en el botón para eliminar el producto
      */
     private void eliminar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_productoActionPerformed
         String ruta = "productos.json";
@@ -549,20 +566,23 @@ public class VentanaModificar extends javax.swing.JFrame {
     }//GEN-LAST:event_eliminar_productoActionPerformed
 
     /**
-     * Form window opened.
+     * Método para establecer el ícono del programa y un título de ventana.
+     * 
+     * <p>Este método se ejecuta cuando la ventana se abre, configurando el título de la ventana y el ícono del programa.</p>
      *
-     * @param evt the evt
+     * @param evt el evento generado cuando la ventana se abre
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Modificar/eliminar un producto");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Cargar datos producto.
+     * Método para cargar los datos de un producto en los campos correspondientes.
+     * 
+     * <p>Este método asigna los valores del producto seleccionado a los campos de texto y comboBoxes en la interfaz de usuario.</p>
      *
-     * @param producto the producto
+     * @param producto el producto cuyas propiedades se cargarán
      */
     private void cargarDatosProducto(Producto producto) {
         box_codigo_art.setText(String.valueOf(producto.getCodigoArticulo()));
@@ -590,12 +610,14 @@ public class VentanaModificar extends javax.swing.JFrame {
     }
 
     /**
-     * Obtener nombre tipo producto.
+     * Clase para obtener los datos de un tipo de producto.
+     * 
+     * <p>Este método busca el nombre de un tipo de producto en el archivo de tipos de productos
+     * utilizando el código del tipo de producto.</p>
      *
-     * @param codigoProducto the codigo producto
-     * @return the string
+     * @param codigoProducto el código del tipo de producto
+     * @return el nombre del tipo de producto correspondiente o "Desconocido" si no se encuentra
      */
-    //Clase para obtener los datos de un tipo de producto
     public static String obtenerNombreTipoProducto(int codigoProducto) {
         String ruta = "tiposProductos.json";
         Archivo archivo = new Archivo();
@@ -624,10 +646,13 @@ public class VentanaModificar extends javax.swing.JFrame {
     
     
     /**
-     * The main method.
-     *
-     * @param args the command line arguments
-     */
+    * Método principal para ejecutar la aplicación.
+    *
+    * <p>Este método establece el look and feel de la interfaz gráfica utilizando Nimbus si está disponible. Luego, 
+    * inicializa y muestra la ventana principal de la aplicación (VentanaModificar).</p>
+    *
+    * @param args los argumentos de la línea de comandos
+    */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">

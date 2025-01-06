@@ -4,14 +4,18 @@
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing y manejo de fechas
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
-// Importar las clases de lógica:
+// Importar clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Facturas.DetalleFactura;
 import com.mycompany.proyecto1.Facturas.EncabezadoFactura;
@@ -21,64 +25,73 @@ import com.mycompany.proyecto1.Facturas.UtilidadesFacturas;
 import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
 
-// Importar las clases de objetos:
+// Importar clases de objetos
 import com.mycompany.proyecto1.Producto;
 
-// Importar liberías para fecha real
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class VentanaFacturacionProd.
+ * Clase que representa la interfaz para la facturación de productos.
+ *
+ * <p>Permite generar facturas de productos, asociando un cliente con un producto
+ * previamente registrado. La clase se encarga de manejar la creación automática
+ * de números de factura, la carga de clientes y productos en los comboBox, y la
+ * validación de los campos de fecha.</p>
  *
  * @author noe
  */
 public class VentanaFacturacionProd extends javax.swing.JFrame {
     
     /**
-     * Creates new form VentanaModificar.
+     * Constructor que inicializa la ventana de facturación de productos.
+     *
+     * <p>Este constructor realiza las siguientes acciones:</p>
+     * <ul>
+     *   <li>Genera automáticamente el siguiente número de factura.</li>
+     *   <li>Carga los clientes disponibles en el comboBox.</li>
+     *   <li>Carga los productos disponibles en el comboBox.</li>
+     *   <li>Configura el campo de fecha para que tenga el formato correcto.</li>
+     *   <li>Aplica efectos visuales a los botones.</li>
+     *   <li>Evita que el cierre de esta ventana afecte el programa principal.</li>
+     * </ul>
      */
     public VentanaFacturacionProd() {
         initComponents();
         
-            // Cargar el siguiente número de factura automáticamente
-            Archivo archivo = new Archivo();
-            int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas_productos.json", Factura[].class);
-            box_num_fact.setText(String.valueOf(siguienteNumeroFactura));
+        // Generar automáticamente el siguiente número de factura
+        Archivo archivo = new Archivo();
+        int siguienteNumeroFactura = archivo.obtenerSiguienteCodigo("facturas_productos.json", Factura[].class);
+        box_num_fact.setText(String.valueOf(siguienteNumeroFactura));
         
-            // Cargar los clientes en el comboBox de clientes al iniciar el formulario
-            Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
+        // Cargar los clientes en el comboBox de selección
+        Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
             
-            // Cargar los productos en el comboBox de clientes al iniciar el formulario
-            UtilidadesFacturas.cargarProductos("productos.json", combo_codigo_articulo);
+        // Cargar los productos en el comboBox
+        UtilidadesFacturas.cargarProductos("productos.json", combo_codigo_articulo);
         
-            // Evitar que la ventana emergente VentanaModificar cierre el programa
-            setDefaultCloseOperation(VentanaFacturacionProd.DISPOSE_ON_CLOSE);
+        // Evitar que esta ventana cierre toda la aplicación
+        setDefaultCloseOperation(VentanaFacturacionProd.DISPOSE_ON_CLOSE);
                 
-            // Define los colores
-            Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-            Color originalColor = Color.BLACK; // Negro (borde inicial)
+        // Definir los colores para los efectos hover en los botones
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro por defecto
 
-            // Crear la instancia de ButtonHoverEffect para el efecto
-            ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
-            hoverEffect.applyTo(crear_fact);
+        // Crear la instancia de ButtonHoverEffect para aplicar el efecto hover
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+        hoverEffect.applyTo(crear_fact);
         
-            // Configurar el campo de fecha
-            Validador.configurarCampoFecha(formatt_fecha_recibido);
+        // Configurar el campo de fecha con el formato correcto
+        Validador.configurarCampoFecha(formatt_fecha_recibido);
             
-            // Obtener la fecha de hoy en formato "dd/MM/yyyy"
-            SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
-            String fechaHoy = formatoFecha.format(new Date());
+        // Obtener la fecha actual en formato "dd/MM/yyyy"
+        SimpleDateFormat formatoFecha = new SimpleDateFormat("dd/MM/yyyy");
+        String fechaHoy = formatoFecha.format(new Date());
 
-            // Asignar la fecha actual al campo formateado
-            formatt_fecha_recibido.setText(fechaHoy);
+        // Asignar la fecha actual al campo formateado
+        formatt_fecha_recibido.setText(fechaHoy);
             
-            // Establecer límite de carácteres por espacio
-            Validador.setLimiteCaracteres(box_cantidad, 3);
+        // Establecer límite de carácteres para el campo cantidad
+        Validador.setLimiteCaracteres(box_cantidad, 3);
     }
+
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -458,10 +471,19 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
     }//GEN-LAST:event_box_total_pagarActionPerformed
 
     /**
-     * Crear fact action performed.
+     * Acción realizada al presionar el botón "Crear Factura" para productos.
      *
-     * @param evt the evt
+     * <p>Este método valida los datos ingresados en los campos del formulario, como el cliente seleccionado, 
+     * el producto seleccionado, la cantidad y el precio. Luego, guarda la factura de producto utilizando la clase 
+     * {@link GuardarFactura} y actualiza los campos correspondientes. Si ocurre algún error o falta de datos, 
+     * se muestra un mensaje de error.</p>
+     * 
+     * <p>Si la factura se guarda correctamente, los campos se limpian y se genera automáticamente 
+     * el siguiente número de factura.</p>
+     *
+     * @param evt el evento generado al hacer clic en el botón
      */
+
     private void crear_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_factActionPerformed
         try {
             int numeroFactura = Integer.parseInt(box_num_fact.getText().trim());
@@ -516,9 +538,13 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
     }//GEN-LAST:event_crear_factActionPerformed
 
     /**
-     * Combo codigo articulo action performed.
+     * Acción realizada al seleccionar un código de artículo en el comboBox.
      *
-     * @param evt the evt
+     * <p>Este método obtiene la selección del código del artículo, valida que el formato sea correcto 
+     * (es decir, que contenga un número seguido de un guion y texto), y luego llama al método 
+     * {@link #llenarDatosProducto(int)} para obtener y llenar los datos del producto seleccionado.</p>
+     *
+     * @param evt el evento generado al seleccionar un elemento en el comboBox
      */
     private void combo_codigo_articuloActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_codigo_articuloActionPerformed
         String seleccion = (String) combo_codigo_articulo.getSelectedItem();
@@ -529,32 +555,38 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_codigo_articuloActionPerformed
 
     /**
-     * Box cantidad key released.
+     * Acción realizada al liberar una tecla en el campo de cantidad.
      *
-     * @param evt the evt
+     * <p>Este método recalcula los totales (como el subtotal y el IVA) cada vez que el usuario cambia 
+     * la cantidad de productos en el formulario, de forma dinámica.</p>
+     *
+     * @param evt el evento generado al liberar una tecla en el campo de cantidad
      */
-    // Método para calcular dinámicamente los montos al cambiar la cantidad
     private void box_cantidadKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_box_cantidadKeyReleased
         calcularTotales();
     }//GEN-LAST:event_box_cantidadKeyReleased
 
     /**
-     * Form window opened.
+     * Acción realizada al abrir la ventana.
      *
-     * @param evt the evt
+     * <p>Este método establece el título de la ventana y asigna el ícono del programa.</p>
+     * 
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Facturar un producto");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Llenar datos producto.
+     * Llenar los datos del producto en los campos correspondientes.
      *
-     * @param codigoProducto the codigo producto
+     * <p>Este método obtiene la información de un producto basado en su código, y luego llena los campos 
+     * relacionados con el producto, como el precio y la cantidad inicial. Si no se encuentra el producto, 
+     * se muestra un mensaje de error.</p>
+     *
+     * @param codigoProducto el código del producto
      */
-    // Método para obtener el precio de un producto
     private void llenarDatosProducto(int codigoProducto) {
         Producto producto = UtilidadesFacturas.obtenerProductoPorCodigo(codigoProducto);
 
@@ -568,9 +600,11 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
     }
     
     /**
-     * Calcular totales.
+     * Método para calcular los montos e IVA de la factura.
+     *
+     * <p>Este método toma el precio unitario y la cantidad del producto, y luego calcula el subtotal, 
+     * el IVA (13%) y el total. Los resultados se muestran en los campos correspondientes.</p>
      */
-    // Método para calcular los montos e IVA
     private void calcularTotales() {
         try{
             int cantidad = Integer.parseInt(box_cantidad.getText().trim());
@@ -589,15 +623,11 @@ public class VentanaFacturacionProd extends javax.swing.JFrame {
             
         }
     }
-
-
-
-    
     
     /**
-     * The main method.
+     * El método principal para ejecutar la aplicación.
      *
-     * @param args the command line arguments
+     * @param args los argumentos de la línea de comandos
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */

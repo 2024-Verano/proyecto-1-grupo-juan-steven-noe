@@ -1,88 +1,81 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit este template
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing y utilidades
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
-import javax.swing.table.DefaultTableModel;
-import java.text.SimpleDateFormat;
-import javax.swing.text.DefaultFormatterFactory;
-import javax.swing.text.DateFormatter;
 
-// Importar las clases de lógica:
+// Importar clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
 
-// Importar las clases de objetos:
+// Importar clases de objetos
 import com.mycompany.proyecto1.Mantenimiento;
-import com.mycompany.proyecto1.Producto;
 import javax.swing.ImageIcon;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class RegistroMantenimiento.
+ * Clase que gestiona el registro y modificación de mantenimientos.
+ *
+ * <p>Permite agregar, modificar y listar servicios de mantenimiento, así como asignarlos
+ * a clientes específicos.</p>
+ *
+ * <p>Incluye validaciones en los campos de entrada y efectos visuales en la interfaz gráfica.</p>
  *
  * @author noe
  */
 public class RegistroMantenimiento extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuOpciones.
+     * Constructor que inicializa la interfaz de Registro de Mantenimientos.
+     *
+     * <p>Configura la interfaz gráfica, aplica efectos visuales en los botones, 
+     * carga la lista de clientes en el comboBox y establece las validaciones en los campos.</p>
      */
     public RegistroMantenimiento() {
         initComponents();
         
-        // Cargar los clientes en el comboBox de clientes al iniciar el formulario
+        // Cargar los clientes en el comboBox al iniciar el formulario
         Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
 
-        // Aplicar el efecto hover y selección a los botones (TOOLBAR)
+        // Aplicar el efecto hover y selección a los botones del toolbar
         ButtonHoverEffect.applySelectableHoverEffect(agregar_mant);
         ButtonHoverEffect.applySelectableHoverEffect(modificar_mant);
         ButtonHoverEffect.applySelectableHoverEffect(salir);
 
+        // Definir los colores para efectos visuales en los botones
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro por defecto
 
-        // Define los colores
-        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-        Color originalColor = Color.BLACK; // Negro (borde inicial)
-
-        // Crear la instancia de ButtonHoverEffect para el efecto
+        // Crear la instancia de ButtonHoverEffect para aplicar los efectos
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-        // Aplica el efecto hover a cada botón (Agregar Producto)
+        // Aplicar efecto hover a los botones de acción
         hoverEffect.applyTo(crear_mant);
-        //hoverEffect.applyTo(crear_prod);
         hoverEffect.applyTo(guardar_mant);
-        //hoverEffect.applyTo(guardar_art);
-        
-        // Aplica el efecto hover a cada botón (Modificar Productoi)
         hoverEffect.applyTo(button_buscar_modificar);
         
-
         // Registrar los paneles en el CardLayout
         SubFrameContainer.add(agregarPanel, "agregarPanel");
         SubFrameContainer.add(modificarPanel_mant, "modificarPanel");
 
-        // Ocultar los paneles de opcion de "agregar productos"
+        // Ocultar los paneles de opciones de "Agregar Mantenimiento"
         opcionesAgregarMant.setVisible(false);
-        //opcionesProducto.setVisible(false);
         
-        // Mostrar la bienvenida al inicio
+        // Mostrar la pantalla de bienvenida al inicio
         SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "bienvenidaPanel");
         
-        // Configurar los campos de fecha
+        // Configurar los campos de fecha con validación del formato dd/MM/yyyy
         Validador.configurarCampoFecha(formatt_fecha_recibido);
         Validador.configurarCampoFecha(formatt_fecha_entrega);
         
-        // Establecer máximo de carácteres por campo (formato: (campo, largo))
+        // Establecer el límite de caracteres en los campos de entrada de datos
         Validador.setLimiteCaracteres(box_marca_bici, 30);
         Validador.setLimiteCaracteres(box_precio_bici, 7);
         Validador.setLimiteCaracteres(box_descrip_bici, 100);
@@ -660,9 +653,14 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Agregar mant action performed.
+     * Acción realizada al presionar el botón "Agregar Mantenimiento".
      *
-     * @param evt the evt
+     * <p>Genera automáticamente el siguiente código de mantenimiento y lo muestra en el campo correspondiente.</p>
+     *
+     * <p>Si ocurre un error al obtener el código desde el archivo JSON, se muestra un mensaje de error
+     * y se coloca "AUTOMÁTICO" en el campo de código.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void agregar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_mantActionPerformed
         String ruta = "mantenimiento.json";
@@ -687,9 +685,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_mantActionPerformed
 
     /**
-     * Modificar mant action performed.
+     * Acción realizada al presionar el botón "Modificar Mantenimiento".
      *
-     * @param evt the evt
+     * <p>Cambia la vista actual al panel de modificación de mantenimiento dentro del contenedor de subventanas.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void modificar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_mantActionPerformed
         // Mostrar el SubFrame de "modificar mantenimiento"
@@ -698,9 +698,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_modificar_mantActionPerformed
 
     /**
-     * Salir action performed.
+     * Acción realizada al presionar el botón "Salir".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre el menú principal de opciones.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
@@ -714,9 +716,12 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     /**
-     * Crear mant action performed.
+     * Acción realizada al presionar el botón "Crear Mantenimiento".
      *
-     * @param evt the evt
+     * <p>Alterna la visibilidad del panel de opciones para agregar mantenimiento.
+     * Si el panel está visible, lo oculta; si está oculto, lo muestra.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void crear_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_mantActionPerformed
 
@@ -737,9 +742,15 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_box_codigo_mantActionPerformed
 
     /**
-     * Button buscar modificar action performed.
+     * Acción realizada al presionar el botón "Buscar Mantenimiento para Modificar".
      *
-     * @param evt the evt
+     * <p>Este método obtiene el criterio y el valor ingresado por el usuario,
+     * y realiza una búsqueda de mantenimientos en la tabla de resultados.</p>
+     *
+     * <p>Se filtran los mantenimientos según el criterio seleccionado en el combo box
+     * y el valor ingresado en el campo de búsqueda.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         String criterio = combo_filtro_agregar.getSelectedItem().toString();
@@ -749,9 +760,25 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     /**
-     * Guardar mant action performed.
+     * Acción realizada al presionar el botón "Guardar Mantenimiento".
      *
-     * @param evt the evt
+     * <p>Este método valida los datos ingresados, genera un código único para el mantenimiento,
+     * y lo guarda en el archivo JSON.</p>
+     *
+     * <p>Se validan los siguientes datos antes de guardar:</p>
+     * <ul>
+     *   <li>Cliente seleccionado (debe ser válido y existente).</li>
+     *   <li>Marca de la bicicleta (debe contener solo letras).</li>
+     *   <li>Precio (debe ser numérico y válido).</li>
+     *   <li>Descripción del mantenimiento (no debe estar vacía).</li>
+     *   <li>Fechas de recibido y entrega (no deben estar vacías y la fecha de recibido no puede ser mayor a la de entrega).</li>
+     *   <li>Observaciones (si están vacías, se asigna "Sin observaciones").</li>
+     * </ul>
+     *
+     * <p>Si la validación es exitosa, el mantenimiento se almacena en el archivo JSON
+     * y se actualizan los campos de la interfaz gráfica.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void guardar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_mantActionPerformed
 
@@ -867,9 +894,20 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_guardar_mantActionPerformed
 
     /**
-     * Tabla resultado mouse clicked.
+     * Acción realizada al hacer doble clic en una fila de la tabla de resultados.
      *
-     * @param evt the evt
+     * <p>Si el usuario hace doble clic sobre una fila en la tabla de mantenimientos,
+     * se abrirá la ventana de modificación con los datos del mantenimiento seleccionado.</p>
+     *
+     * <p>El método realiza los siguientes pasos:</p>
+     * <ul>
+     *   <li>Detecta si el clic es doble (`evt.getClickCount() == 2`).</li>
+     *   <li>Obtiene la fila seleccionada.</li>
+     *   <li>Si la fila es válida (`filaSeleccionada != -1`), llama al método de utilidad
+     *       para abrir la ventana de modificación con los datos de la fila seleccionada.</li>
+     * </ul>
+     *
+     * @param evt el evento del clic del ratón sobre la tabla
      */
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         if (evt.getClickCount() == 2) { // Detecta doble clic
@@ -953,22 +991,25 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
 
     /**
-     * Form window opened.
+     * Acción realizada al abrir la ventana.
      *
-     * @param evt the evt
+     * <p>Este método configura el título de la ventana y establece el icono del programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Registro de servicios de mantenimiento");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Restablecer panel.
+     * Restablece y actualiza visualmente un panel dentro del contenedor.
      *
-     * @param nombrePanel the nombre panel
+     * <p>Este método cambia dinámicamente el panel visible dentro de un `CardLayout`
+     * y fuerza la actualización visual para reflejar los cambios en la interfaz gráfica.</p>
+     *
+     * @param nombrePanel el nombre del panel que se debe mostrar
      */
-    // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, nombrePanel);
@@ -981,9 +1022,11 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     
     
     /**
-     * The main method.
+     * Método principal que inicia la aplicación.
      *
-     * @param args the command line arguments
+     * <p>Configura el entorno gráfico y lanza la ventana principal.</p>
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1027,128 +1070,46 @@ public class RegistroMantenimiento extends javax.swing.JFrame {
     /** The Sub frame container. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubFrameContainer;
-    
-    /** The agregar panel. */
     private javax.swing.JPanel agregarPanel;
-    
-    /** The agregar mant. */
     private javax.swing.JButton agregar_mant;
-    
-    /** The bienvenida label. */
     private javax.swing.JLabel bienvenidaLabel;
-    
-    /** The bienvenida label 1. */
     private javax.swing.JLabel bienvenidaLabel1;
-    
-    /** The bienvenida panel. */
     private javax.swing.JPanel bienvenidaPanel;
-    
-    /** The box codigo mant. */
     private javax.swing.JTextField box_codigo_mant;
-    
-    /** The box descrip bici. */
     private javax.swing.JTextField box_descrip_bici;
-    
-    /** The box marca bici. */
     private javax.swing.JTextField box_marca_bici;
-    
-    /** The box observaciones. */
     private javax.swing.JTextField box_observaciones;
-    
-    /** The box precio bici. */
     private javax.swing.JTextField box_precio_bici;
-    
-    /** The buscador agregar. */
     private javax.swing.JTextField buscador_agregar;
-    
-    /** The button buscar modificar. */
     private javax.swing.JButton button_buscar_modificar;
-    
-    /** The codigo servicio. */
     private javax.swing.JLabel codigo_servicio;
-    
-    /** The combo codigo cliente. */
     private javax.swing.JComboBox<String> combo_codigo_cliente;
-    
-    /** The combo filtro agregar. */
     private javax.swing.JComboBox<String> combo_filtro_agregar;
-    
-    /** The crear mant. */
     private javax.swing.JButton crear_mant;
-    
-    /** The filtro agregar. */
     private javax.swing.JLabel filtro_agregar;
-    
-    /** The formatt fecha entrega. */
     private javax.swing.JFormattedTextField formatt_fecha_entrega;
-    
-    /** The formatt fecha recibido. */
     private javax.swing.JFormattedTextField formatt_fecha_recibido;
-    
-    /** The funciones. */
     private javax.swing.JToolBar funciones;
-    
-    /** The guardar mant. */
     private javax.swing.JButton guardar_mant;
-    
-    /** The j scroll pane 1. */
     private javax.swing.JScrollPane jScrollPane1;
-    
-    /** The j separator 1. */
     private javax.swing.JToolBar.Separator jSeparator1;
-    
-    /** The j separator 2. */
     private javax.swing.JToolBar.Separator jSeparator2;
-    
-    /** The j separator 3. */
     private javax.swing.JToolBar.Separator jSeparator3;
-    
-    /** The j separator 4. */
     private javax.swing.JSeparator jSeparator4;
-    
-    /** The j separator 5. */
     private javax.swing.JSeparator jSeparator5;
-    
-    /** The label cliente. */
     private javax.swing.JLabel label_cliente;
-    
-    /** The label descrip bici. */
     private javax.swing.JLabel label_descrip_bici;
-    
-    /** The label entrega. */
     private javax.swing.JLabel label_entrega;
-    
-    /** The label marca bici. */
     private javax.swing.JLabel label_marca_bici;
-    
-    /** The label observaciones. */
     private javax.swing.JLabel label_observaciones;
-    
-    /** The label precio bici. */
     private javax.swing.JLabel label_precio_bici;
-    
-    /** The label recibido. */
     private javax.swing.JLabel label_recibido;
-    
-    /** The mant icon. */
     private javax.swing.JLabel mant_icon;
-    
-    /** The modificar panel mant. */
     private javax.swing.JPanel modificarPanel_mant;
-    
-    /** The modificar mant. */
     private javax.swing.JButton modificar_mant;
-    
-    /** The opciones agregar mant. */
     private javax.swing.JPanel opcionesAgregarMant;
-    
-    /** The salir. */
     private javax.swing.JButton salir;
-    
-    /** The tabla resultado. */
     private javax.swing.JTable tabla_resultado;
-    
-    /** The text buscar agregar. */
     private javax.swing.JLabel text_buscar_agregar;
     // End of variables declaration//GEN-END:variables
 }

@@ -3,41 +3,46 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
  */
 package ventanas;
+
 import java.awt.Color;
 import javax.swing.ImageIcon;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class MenuOpciones.
+ * Clase que representa el menú de opciones principal del sistema.
+ *
+ * <p>Desde este menú, los usuarios pueden acceder a diferentes módulos como 
+ * el registro de productos, clientes, mantenimientos y facturación.</p>
+ *
+ * <p>Además, se implementan efectos visuales en los botones para mejorar la 
+ * experiencia de usuario.</p>
  *
  * @author noe
  */
 public class MenuOpciones extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuOpciones.
+     * Constructor que inicializa la interfaz del menú de opciones.
+     *
+     * <p>Se configuran los efectos visuales en los botones del menú.</p>
      */
     public MenuOpciones() {
         initComponents();
         
-        // Define los colores
-        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
+        // Definir los colores para los efectos hover
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
         Color originalColor = Color.BLACK; // Negro (borde inicial)
 
         // Crear la instancia de ButtonHoverEffect
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-        // Aplica el efecto hover a cada botón
+        // Aplicar el efecto hover a cada botón del menú
         hoverEffect.applyTo(cerrar_sesion);
         hoverEffect.applyTo(registro_producto);
         hoverEffect.applyTo(registro_clientes);
         hoverEffect.applyTo(registro_mant);
         hoverEffect.applyTo(facturacion);
-        
-
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -187,9 +192,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Registro producto action performed.
+     * Acción realizada al presionar el botón "Registro de Productos".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre la interfaz de registro de productos.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void registro_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_productoActionPerformed
              // Cierra el frame actual
@@ -202,9 +209,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_registro_productoActionPerformed
 
     /**
-     * Registro clientes action performed.
+     * Acción realizada al presionar el botón "Registro de Clientes".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre la interfaz de registro de clientes.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void registro_clientesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_clientesActionPerformed
             
@@ -216,9 +225,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_registro_clientesActionPerformed
 
     /**
-     * Registro mant action performed.
+     * Acción realizada al presionar el botón "Registro de Mantenimiento".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre la interfaz de registro de mantenimiento.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void registro_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registro_mantActionPerformed
         // Cierra el frame actual    
@@ -231,9 +242,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_registro_mantActionPerformed
 
     /**
-     * Facturacion action performed.
+     * Acción realizada al presionar el botón "Facturación".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre la interfaz de facturación.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void facturacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturacionActionPerformed
         // Cierra el frame actual    
@@ -246,9 +259,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_facturacionActionPerformed
 
     /**
-     * Cerrar sesion action performed.
+     * Acción realizada al presionar el botón "Cerrar Sesión".
      *
-     * @param evt the evt
+     * <p>Cierra la sesión actual y redirige a la pantalla de credenciales.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void cerrar_sesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrar_sesionActionPerformed
         // Cierra el frame actual
@@ -261,9 +276,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_cerrar_sesionActionPerformed
 
     /**
-     * Form window opened.
+     * Acción realizada cuando la ventana es abierta.
      *
-     * @param evt the evt
+     * <p>Este método establece el título de la ventana y configura el ícono del programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Menú de opciones de administrador");
@@ -271,9 +288,14 @@ public class MenuOpciones extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * The main method.
+     * Método principal que inicia la aplicación.
      *
-     * @param args the command line arguments
+     * <p>Configura el aspecto visual de la interfaz utilizando el tema "Nimbus" si está disponible
+     * y lanza la ventana del menú de opciones.</p>
+     *
+     * <p>Si "Nimbus" no está disponible, se mantiene el tema predeterminado del sistema.</p>
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -313,23 +335,11 @@ public class MenuOpciones extends javax.swing.JFrame {
     /** The cerrar sesion. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cerrar_sesion;
-    
-    /** The ciclista icon. */
     private javax.swing.JLabel ciclista_icon;
-    
-    /** The encabezado. */
     private javax.swing.JLabel encabezado;
-    
-    /** The facturacion. */
     private javax.swing.JButton facturacion;
-    
-    /** The registro clientes. */
     private javax.swing.JButton registro_clientes;
-    
-    /** The registro mant. */
     private javax.swing.JButton registro_mant;
-    
-    /** The registro producto. */
     private javax.swing.JButton registro_producto;
     // End of variables declaration//GEN-END:variables
 }

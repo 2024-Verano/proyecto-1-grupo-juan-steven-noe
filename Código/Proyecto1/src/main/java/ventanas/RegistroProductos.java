@@ -1,44 +1,52 @@
 /*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change esta licencia
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to editar esta plantilla
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing y utilidades
 import java.awt.Color;
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
-// Importar las clases de lógica:
+// Importar clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Validador;
 import com.mycompany.proyecto1.Utilidades;
 
-// Importar las clases de objetos:
+// Importar clases de objetos
 import com.mycompany.proyecto1.TipoProducto;
 import com.mycompany.proyecto1.Producto;
 import javax.swing.ImageIcon;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class RegistroProductos.
+ * Clase que representa la interfaz de registro y modificación de productos.
+ *
+ * <p>Permite registrar nuevos productos y tipos de productos, así como modificarlos.</p>
+ *
+ * <p>Cuenta con validaciones de entrada, límites de caracteres y efectos visuales en los botones.</p>
  *
  * @author noe
  */
 public class RegistroProductos extends javax.swing.JFrame {
 
     /**
-     * Creates new form MenuOpciones.
+     * Constructor que inicializa la interfaz de registro de productos.
+     *
+     * <p>Realiza las siguientes configuraciones iniciales:</p>
+     * <ul>
+     *   <li>Establece los límites de caracteres en los campos de entrada.</li>
+     *   <li>Carga los tipos de productos desde un archivo JSON en el `comboBox`.</li>
+     *   <li>Configura los efectos `hover` en los botones para mejorar la experiencia de usuario.</li>
+     *   <li>Registra los paneles en el `CardLayout` para navegación entre secciones.</li>
+     * </ul>
      */
     public RegistroProductos() {
         initComponents();
         
-        // Establecer máximo de carácteres para campos (formato: (campo, largo))
+        // Establecer límites de caracteres en los campos de entrada
         Validador.setLimiteCaracteres(box_nombre_tipo_prod, 50);
-        
         Validador.setLimiteCaracteres(box_nombre_art, 50);
         Validador.setLimiteCaracteres(box_marca_art, 50);
         Validador.setLimiteCaracteres(box_precio_art, 7);
@@ -47,38 +55,36 @@ public class RegistroProductos extends javax.swing.JFrame {
         // Cargar los tipos de producto en el comboBox al iniciar el formulario
         Utilidades.cargarTiposDeProducto("tiposProductos.json", box_codigo_prod);
 
-        // Aplicar el efecto hover y selección a los botones (TOOLBAR)
+        // Aplicar el efecto hover y selección a los botones de la barra de herramientas (TOOLBAR)
         ButtonHoverEffect.applySelectableHoverEffect(agregar_prod);
         ButtonHoverEffect.applySelectableHoverEffect(modificar_prod);
         ButtonHoverEffect.applySelectableHoverEffect(salir);
 
+        // Definir los colores para los efectos hover en los botones
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro por defecto
 
-        // Define los colores
-        Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-        Color originalColor = Color.BLACK; // Negro (borde inicial)
-
-        // Crear la instancia de ButtonHoverEffect para el efecto
+        // Crear la instancia de ButtonHoverEffect para aplicar el efecto hover
         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-        // Aplica el efecto hover a cada botón (Agregar Producto)
+        // Aplicar efecto hover a los botones de agregar productos
         hoverEffect.applyTo(crear_tipo_prod);
         hoverEffect.applyTo(crear_prod);
         hoverEffect.applyTo(guardar_tipo_prod);
         hoverEffect.applyTo(guardar_art);
         
-        // Aplica el efecto hover a cada botón (Modificar Productoi)
+        // Aplicar efecto hover al botón de modificar productos
         hoverEffect.applyTo(button_buscar_modificar);
-        
 
         // Registrar los paneles en el CardLayout
         SubFrameContainer.add(agregarPanel, "agregarPanel");
         SubFrameContainer.add(modificarPanel, "modificarPanel");
 
-        // Ocultar los paneles de opcion de "agregar productos"
+        // Ocultar los paneles de opción de "agregar productos"
         opcionesTipoProducto.setVisible(false);
         opcionesProducto.setVisible(false);
         
-        // Mostrar la bienvenida al inicio
+        // Mostrar la pantalla de bienvenida al inicio
         SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, "bienvenidaPanel");
@@ -730,9 +736,11 @@ public class RegistroProductos extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Agregar prod action performed.
+     * Acción realizada al presionar el botón "Agregar Producto".
      *
-     * @param evt the evt
+     * <p>Muestra el subpanel correspondiente para agregar un nuevo producto.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void agregar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_prodActionPerformed
         // Mostrar el SubFrame de "agregar producto"
@@ -741,9 +749,11 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_prodActionPerformed
 
     /**
-     * Modificar prod action performed.
+     * Acción realizada al presionar el botón "Modificar Producto".
      *
-     * @param evt the evt
+     * <p>Muestra el subpanel correspondiente para modificar un producto existente.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void modificar_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_prodActionPerformed
         // Mostrar el SubFrame de "modificar producto"
@@ -752,9 +762,11 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_modificar_prodActionPerformed
 
     /**
-     * Salir action performed.
+     * Acción realizada al presionar el botón "Salir".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre el menú de opciones.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
@@ -768,9 +780,12 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     /**
-     * Crear tipo prod action performed.
+     * Acción realizada al presionar el botón "Crear Tipo de Producto".
      *
-     * @param evt the evt
+     * <p>Muestra u oculta el panel de opciones para la creación de un nuevo tipo de producto.</p>
+     * <p>Si se muestra el panel, se genera automáticamente el siguiente código disponible.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void crear_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_tipo_prodActionPerformed
 
@@ -800,9 +815,12 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_crear_tipo_prodActionPerformed
 
     /**
-     * Crear prod action performed.
+     * Acción realizada al presionar el botón "Crear Producto".
      *
-     * @param evt the evt
+     * <p>Muestra u oculta el panel de opciones para la creación de un nuevo producto.</p>
+     * <p>Si se muestra el panel, se genera automáticamente el siguiente código disponible.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void crear_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_crear_prodActionPerformed
         boolean isVisible = opcionesProducto.isVisible();
@@ -825,8 +843,8 @@ public class RegistroProductos extends javax.swing.JFrame {
             }
     }
 
-    this.revalidate();
-    this.repaint();
+        this.revalidate();
+        this.repaint();
     }//GEN-LAST:event_crear_prodActionPerformed
 
     /**
@@ -866,9 +884,21 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_box_nombre_artActionPerformed
 
     /**
-     * Guardar art action performed.
+     * Acción realizada al presionar el botón "Guardar Producto".
      *
-     * @param evt the evt
+     * <p>Este método guarda un nuevo producto en el archivo JSON de productos, validando
+     * las entradas y asegurando que los datos sean correctos.</p>
+     *
+     * <p>Pasos del proceso:</p>
+     * <ul>
+     *   <li>Actualiza el comboBox con los tipos de producto y mantiene la selección actual.</li>
+     *   <li>Valida que los campos obligatorios no estén vacíos.</li>
+     *   <li>Genera automáticamente el siguiente código disponible para el nuevo producto.</li>
+     *   <li>Guarda el producto en el archivo JSON.</li>
+     *   <li>Confirma la acción y limpia los campos del formulario.</li>
+     * </ul>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void guardar_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_artActionPerformed
         String rutaTipos = "tiposProductos.json";
@@ -973,9 +1003,12 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_box_cantidad_artActionPerformed
 
     /**
-     * Button buscar modificar action performed.
+     * Acción realizada al presionar el botón "Buscar Producto para Modificar".
      *
-     * @param evt the evt
+     * <p>Permite buscar productos en el archivo JSON según el criterio seleccionado 
+     * (Código o Nombre) y muestra los resultados en la tabla.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void button_buscar_modificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_modificarActionPerformed
         String ruta = "productos.json";
@@ -1022,9 +1055,17 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_button_buscar_modificarActionPerformed
 
     /**
-     * Guardar tipo prod action performed.
+     * Acción realizada al presionar el botón "Guardar Tipo de Producto".
      *
-     * @param evt the evt
+     * <p>Valida y guarda un nuevo tipo de producto en el archivo JSON. 
+     * Si el nombre está vacío, muestra un mensaje de error.</p>
+     *
+     * <p>El código del nuevo tipo se genera automáticamente.</p>
+     *
+     * <p>Una vez guardado, se actualiza el `ComboBox` de tipos de producto 
+     * y se limpian los campos.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void guardar_tipo_prodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_tipo_prodActionPerformed
         String ruta = "tiposProductos.json";
@@ -1080,9 +1121,12 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_tammanio_biciActionPerformed
 
     /**
-     * Combo tipo art action performed.
+     * Maneja la acción cuando se selecciona un tipo de artículo en el combo box.
      *
-     * @param evt the evt
+     * <p>Si el tipo seleccionado es "Bicicleta", habilita el combo box de tamaño de bicicleta.
+     * Si se selecciona otro tipo, lo deshabilita y limpia la selección.</p>
+     *
+     * @param evt el evento de acción generado al cambiar la selección del combo box
      */
     private void combo_tipo_artActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_combo_tipo_artActionPerformed
 
@@ -1098,9 +1142,12 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_tipo_artActionPerformed
 
     /**
-     * Tabla resultado mouse clicked.
+     * Maneja el evento de clic en la tabla de resultados.
      *
-     * @param evt the evt
+     * <p>Si se hace doble clic en una fila de la tabla, se obtiene el código del artículo
+     * seleccionado y se abre una ventana de modificación con los datos del producto.</p>
+     *
+     * @param evt el evento de clic del mouse
      */
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         if (evt.getClickCount() == 2 && tabla_resultado.getSelectedRow() != -1) {
@@ -1123,22 +1170,24 @@ public class RegistroProductos extends javax.swing.JFrame {
     }//GEN-LAST:event_tabla_resultadoMouseClicked
 
     /**
-     * Form window opened.
+     * Configura la ventana al abrirse.
      *
-     * @param evt the evt
+     * <p>Establece el título de la ventana y asigna un ícono al programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Registro de productos");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Restablecer panel.
+     * Restablece el panel activo en la interfaz.
      *
-     * @param nombrePanel the nombre panel
+     * <p>Cambia la vista al panel especificado y fuerza una actualización visual.</p>
+     *
+     * @param nombrePanel el nombre del panel a mostrar
      */
-    // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, nombrePanel);
@@ -1151,9 +1200,9 @@ public class RegistroProductos extends javax.swing.JFrame {
     
     
     /**
-     * The main method.
+     * Método principal que inicia la aplicación.
      *
-     * @param args the command line arguments
+     * @param args los argumentos de línea de comandos
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -1191,149 +1240,53 @@ public class RegistroProductos extends javax.swing.JFrame {
     /** The Sub frame container. */
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel SubFrameContainer;
-    
-    /** The agregar panel. */
     private javax.swing.JPanel agregarPanel;
-    
-    /** The agregar prod. */
     private javax.swing.JButton agregar_prod;
-    
-    /** The bienvenida label. */
     private javax.swing.JLabel bienvenidaLabel;
-    
-    /** The bienvenida label 1. */
     private javax.swing.JLabel bienvenidaLabel1;
-    
-    /** The bienvenida panel. */
     private javax.swing.JPanel bienvenidaPanel;
-    
-    /** The box cantidad art. */
     private javax.swing.JTextField box_cantidad_art;
-    
-    /** The box codigo art. */
     private javax.swing.JTextField box_codigo_art;
-    
-    /** The box codigo prod. */
     private javax.swing.JComboBox<String> box_codigo_prod;
-    
-    /** The box codigo tipo prod. */
     private javax.swing.JTextField box_codigo_tipo_prod;
-    
-    /** The box marca art. */
     private javax.swing.JTextField box_marca_art;
-    
-    /** The box nombre art. */
     private javax.swing.JTextField box_nombre_art;
-    
-    /** The box nombre tipo prod. */
     private javax.swing.JTextField box_nombre_tipo_prod;
-    
-    /** The box precio art. */
     private javax.swing.JTextField box_precio_art;
-    
-    /** The buscador agregar. */
     private javax.swing.JTextField buscador_agregar;
-    
-    /** The button buscar modificar. */
     private javax.swing.JButton button_buscar_modificar;
-    
-    /** The ciclista icon. */
     private javax.swing.JLabel ciclista_icon;
-    
-    /** The codigo art. */
     private javax.swing.JLabel codigo_art;
-    
-    /** The codigo defecto 1. */
     private javax.swing.JLabel codigo_defecto1;
-    
-    /** The codigo prod. */
     private javax.swing.JLabel codigo_prod;
-    
-    /** The combo filtro agregar. */
     private javax.swing.JComboBox<String> combo_filtro_agregar;
-    
-    /** The combo tammanio bici. */
     private javax.swing.JComboBox<String> combo_tammanio_bici;
-    
-    /** The combo tipo art. */
     private javax.swing.JComboBox<String> combo_tipo_art;
-    
-    /** The crear prod. */
     private javax.swing.JButton crear_prod;
-    
-    /** The crear tipo prod. */
     private javax.swing.JButton crear_tipo_prod;
-    
-    /** The filtro agregar. */
     private javax.swing.JLabel filtro_agregar;
-    
-    /** The funciones. */
     private javax.swing.JToolBar funciones;
-    
-    /** The guardar art. */
     private javax.swing.JButton guardar_art;
-    
-    /** The guardar tipo prod. */
     private javax.swing.JButton guardar_tipo_prod;
-    
-    /** The j scroll pane 1. */
     private javax.swing.JScrollPane jScrollPane1;
-    
-    /** The j separator 1. */
     private javax.swing.JToolBar.Separator jSeparator1;
-    
-    /** The j separator 2. */
     private javax.swing.JToolBar.Separator jSeparator2;
-    
-    /** The j separator 5. */
     private javax.swing.JToolBar.Separator jSeparator5;
-    
-    /** The j separator 6. */
     private javax.swing.JSeparator jSeparator6;
-    
-    /** The j separator 7. */
     private javax.swing.JSeparator jSeparator7;
-    
-    /** The marca art. */
     private javax.swing.JLabel marca_art;
-    
-    /** The marca art 1. */
     private javax.swing.JLabel marca_art1;
-    
-    /** The marca art 2. */
     private javax.swing.JLabel marca_art2;
-    
-    /** The modificar panel. */
     private javax.swing.JPanel modificarPanel;
-    
-    /** The modificar prod. */
     private javax.swing.JButton modificar_prod;
-    
-    /** The nombre art. */
     private javax.swing.JLabel nombre_art;
-    
-    /** The nombre prod. */
     private javax.swing.JLabel nombre_prod;
-    
-    /** The opciones producto. */
     private javax.swing.JPanel opcionesProducto;
-    
-    /** The opciones tipo producto. */
     private javax.swing.JPanel opcionesTipoProducto;
-    
-    /** The salir. */
     private javax.swing.JButton salir;
-    
-    /** The tabla resultado. */
     private javax.swing.JTable tabla_resultado;
-    
-    /** The tammanio bici 1. */
     private javax.swing.JLabel tammanio_bici1;
-    
-    /** The text buscar agregar. */
     private javax.swing.JLabel text_buscar_agregar;
-    
-    /** The tipo art. */
     private javax.swing.JLabel tipo_art;
     // End of variables declaration//GEN-END:variables
 }

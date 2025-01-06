@@ -4,14 +4,12 @@
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing
 import java.awt.Color;
 import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 import javax.swing.table.DefaultTableModel;
 
-// Importar las clases de lógica:
+// Importar clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Facturas.BuscarFactura;
 import com.mycompany.proyecto1.Facturas.DetalleFactura;
@@ -19,68 +17,69 @@ import com.mycompany.proyecto1.Facturas.EncabezadoFactura;
 import com.mycompany.proyecto1.Facturas.Factura;
 import com.mycompany.proyecto1.Facturas.UtilidadesFacturas;
 import com.mycompany.proyecto1.Mantenimiento;
-import com.mycompany.proyecto1.Validador;
-import com.mycompany.proyecto1.Utilidades;
 
-// Importar las clases de objetos:
-import com.mycompany.proyecto1.TipoProducto;
+// Importar clases de objetos
 import com.mycompany.proyecto1.Producto;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
-
-// TODO: Auto-generated Javadoc
 /**
- * The Class Facturacion.
+ * Clase que representa la ventana de facturación en el sistema.
+ *
+ * <p>Esta interfaz permite gestionar facturas, incluyendo la facturación de productos 
+ * y servicios, la búsqueda y anulación de facturas, y la visualización de detalles.</p>
+ * 
+ * <p>Se implementan efectos visuales en los botones y la navegación mediante un `CardLayout`.</p>
  *
  * @author noe
  */
 public class Facturacion extends javax.swing.JFrame {
     
-    /** The estado. */
-    // Variable global para validar el estado de la factura al anular
-    String estado;
+    /** Estado de la factura, utilizado para validar su estatus antes de anularla. */
+    private String estado;
 
     /**
-     * Creates new form MenuOpciones.
+     * Constructor que inicializa la ventana de facturación.
+     *
+     * <p>Se configuran los efectos visuales en los botones, la navegación entre paneles 
+     * y se muestra una pantalla de bienvenida al inicio.</p>
      */
     public Facturacion() {
         initComponents();
         
-            // Quitar la visibilidad del botón de anular factura
-            button_anular_factura.setVisible(false);
+        // Ocultar el botón de anular factura hasta que sea necesario
+        button_anular_factura.setVisible(false);
 
+        // Aplicar efecto hover y selección a los botones del menú de opciones (TOOLBAR)
+        ButtonHoverEffect.applySelectableHoverEffect(agregar_fact);
+        ButtonHoverEffect.applySelectableHoverEffect(modificar_fact);
+        ButtonHoverEffect.applySelectableHoverEffect(salir);
 
-            // Aplicar el efecto hover y selección a los botones (TOOLBAR)
-            ButtonHoverEffect.applySelectableHoverEffect(agregar_fact);
-            ButtonHoverEffect.applySelectableHoverEffect(modificar_fact);
-            ButtonHoverEffect.applySelectableHoverEffect(salir);
+        // Definir los colores para los efectos hover
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro (borde inicial)
 
+        // Crear la instancia de ButtonHoverEffect para los botones
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
 
-            // Define los colores
-            Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-            Color originalColor = Color.BLACK; // Negro (borde inicial)
-
-            // Crear la instancia de ButtonHoverEffect para el efecto
-            ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
-
-            // Aplica el efecto hover a cada botón
-            hoverEffect.applyTo(facturar_producto);
-            hoverEffect.applyTo(facturar_servicio);
+        // Aplicar el efecto hover a los botones de facturación
+        hoverEffect.applyTo(facturar_producto);
+        hoverEffect.applyTo(facturar_servicio);
         
-            // Aplica el efecto hover a cada botón (Buscar y anular factura)
-            hoverEffect.applyTo(button_buscar_factura);
-            hoverEffect.applyTo(button_anular_factura);
+        // Aplicar el efecto hover a los botones de búsqueda y anulación de facturas
+        hoverEffect.applyTo(button_buscar_factura);
+        hoverEffect.applyTo(button_anular_factura);
 
-            // Registrar los paneles en el CardLayout
-            SubFrameContainer.add(agregarPanel, "agregarPanel");
-            SubFrameContainer.add(modificarPanel, "modificarPanel");
+        // Registrar los paneles en el CardLayout
+        SubFrameContainer.add(agregarPanel, "agregarPanel");
+        SubFrameContainer.add(modificarPanel, "modificarPanel");
         
-            // Mostrar la bienvenida al inicio
-            SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
-            java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
-            layout.show(SubFrameContainer, "bienvenidaPanel");
+        // Mostrar la pantalla de bienvenida al inicio
+        SubFrameContainer.add(bienvenidaPanel, "bienvenidaPanel");
+        java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
+        layout.show(SubFrameContainer, "bienvenidaPanel");
     }
+
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -473,9 +472,12 @@ public class Facturacion extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Agregar fact action performed.
+     * Acción realizada al presionar el botón "Agregar Factura".
      *
-     * @param evt the evt
+     * <p>Cambia la vista del contenedor de subventanas (`SubFrameContainer`) para 
+     * mostrar el panel de agregar facturas.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void agregar_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregar_factActionPerformed
         // Mostrar el SubFrame de "agregar cliente"
@@ -484,9 +486,12 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_agregar_factActionPerformed
 
     /**
-     * Modificar fact action performed.
+     * Acción realizada al presionar el botón "Agregar Factura".
      *
-     * @param evt the evt
+     * <p>Cambia la vista del contenedor de subventanas (`SubFrameContainer`) para 
+     * mostrar el panel de buscar y anular facturas.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void modificar_factActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_modificar_factActionPerformed
         // Mostrar el SubFrame de "modificar cliente"
@@ -495,9 +500,11 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_modificar_factActionPerformed
 
     /**
-     * Salir action performed.
+     * Acción realizada al presionar el botón "Salir".
      *
-     * @param evt the evt
+     * <p>Cierra la ventana actual y abre el menú de opciones.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void salirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_salirActionPerformed
 
@@ -511,9 +518,13 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_salirActionPerformed
 
     /**
-     * Facturar producto action performed.
+     * Acción realizada al presionar el botón "Facturar Producto".
      *
-     * @param evt the evt
+     * <p>Valida que existan productos en el inventario antes de abrir la ventana de facturación.</p>
+     *
+     * <p>Si no hay productos disponibles, se muestra un mensaje de error y no se procede con la facturación.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void facturar_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_productoActionPerformed
         // Validar que existan productos para facturar
@@ -531,9 +542,14 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_facturar_productoActionPerformed
 
     /**
-     * Button buscar factura action performed.
+     * Acción realizada al presionar el botón "Buscar Factura".
      *
-     * @param evt the evt
+     * <p>Este método busca facturas según el tipo y criterio seleccionados, 
+     * y muestra los resultados en una tabla.</p>
+     *
+     * <p>Si no se encuentra ninguna factura, se muestra un mensaje de información.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void button_buscar_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_buscar_facturaActionPerformed
         String tipoFactura = (String) combo_tipo_factura.getSelectedItem();
@@ -586,9 +602,12 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_button_buscar_facturaActionPerformed
 
     /**
-     * Tabla resultado mouse clicked.
+     * Acción realizada al hacer clic en una fila de la tabla de resultados.
      *
-     * @param evt the evt
+     * <p>Si el usuario selecciona una fila en la tabla de facturas, 
+     * se habilita la opción de anular factura mostrando el botón correspondiente.</p>
+     *
+     * @param evt el evento de clic del ratón sobre la tabla
      */
     private void tabla_resultadoMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tabla_resultadoMouseClicked
         int filaSeleccionada = tabla_resultado.getSelectedRow();
@@ -609,9 +628,13 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_criterio_busquedaActionPerformed
 
     /**
-     * Facturar servicio action performed.
+     * Acción realizada al presionar el botón "Facturar Servicio".
      *
-     * @param evt the evt
+     * <p>Valida que existan servicios de mantenimiento disponibles antes de abrir la ventana de facturación.</p>
+     *
+     * <p>Si no hay servicios registrados, se muestra un mensaje de error y no se permite continuar.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void facturar_servicioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_servicioActionPerformed
         // Validar que existan servicios para facturar
@@ -638,9 +661,20 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_tipo_facturaActionPerformed
 
     /**
-     * Button anular factura action performed.
+     * Acción realizada al presionar el botón "Anular Factura".
      *
-     * @param evt the evt
+     * <p>Este método permite anular una factura seleccionada en la tabla de resultados.</p>
+     *
+     * <p>Realiza las siguientes validaciones antes de proceder con la anulación:</p>
+     * <ul>
+     *   <li>Verifica que se haya seleccionado una factura.</li>
+     *   <li>Verifica que la factura no haya sido anulada previamente.</li>
+     *   <li>Solicita confirmación antes de proceder con la anulación.</li>
+     * </ul>
+     *
+     * <p>Si la factura se anula correctamente, la tabla se actualiza automáticamente.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void button_anular_facturaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_anular_facturaActionPerformed
         int filaSeleccionada = tabla_resultado.getSelectedRow();
@@ -669,22 +703,27 @@ public class Facturacion extends javax.swing.JFrame {
     }//GEN-LAST:event_button_anular_facturaActionPerformed
     
     /**
-     * Form window opened.
+     * Acción realizada cuando la ventana es abierta.
      *
-     * @param evt the evt
+     * <p>Este método establece el título de la ventana y configura el ícono del programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Facturación de productos y servicios");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Restablecer panel.
+     * Restablece la vista de un panel dentro del contenedor principal.
      *
-     * @param nombrePanel the nombre panel
+     * <p>Este método permite refrescar un panel específico en la interfaz utilizando
+     * un `CardLayout`.</p>
+     *
+     * <p>Después de cambiar de panel, se fuerza una actualización visual para reflejar los cambios.</p>
+     *
+     * @param nombrePanel el nombre del panel a mostrar en el `SubFrameContainer`
      */
-    // Método para refrescar un panel
     public void restablecerPanel(String nombrePanel) {
         java.awt.CardLayout layout = (java.awt.CardLayout) SubFrameContainer.getLayout();
         layout.show(SubFrameContainer, nombrePanel);
@@ -697,9 +736,14 @@ public class Facturacion extends javax.swing.JFrame {
     
     
     /**
-     * The main method.
+     * Método principal que inicia la aplicación de facturación.
      *
-     * @param args the command line arguments
+     * <p>Este método configura el aspecto visual de la interfaz utilizando el
+     * tema "Nimbus" si está disponible y lanza la ventana de facturación.</p>
+     *
+     * <p>Si "Nimbus" no está disponible, se mantiene el tema predeterminado del sistema.</p>
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
@@ -724,21 +768,7 @@ public class Facturacion extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Facturacion.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
-        //</editor-fold>
+
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {

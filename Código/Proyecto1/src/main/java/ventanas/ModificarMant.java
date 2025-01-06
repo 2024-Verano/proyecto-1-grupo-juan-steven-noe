@@ -1,58 +1,66 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit este template
  */
 package ventanas;
 
-// importar librerías de swing
+// Importar librerías de Swing y utilidades
 import java.awt.Color;
-import java.util.List;
-import java.util.ArrayList;
 import java.util.Arrays;
-import javax.swing.table.DefaultTableModel;
 
-// Importar las clases de lógica:
+// Importar clases de lógica
 import com.mycompany.proyecto1.Archivo;
 import com.mycompany.proyecto1.Cliente;
 import com.mycompany.proyecto1.Utilidades;
 import com.mycompany.proyecto1.Validador;
 
-// Importar las clases de objetos:
+// Importar clases de objetos
 import com.mycompany.proyecto1.Mantenimiento;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
-// TODO: Auto-generated Javadoc
 /**
- * The Class ModificarMant.
+ * Clase que representa la ventana de modificación de un mantenimiento.
+ *
+ * <p>Permite modificar la información de un servicio de mantenimiento existente, incluyendo
+ * el código del cliente, marca de bicicleta, precio, descripción, fechas de recepción y entrega, 
+ * y observaciones.</p>
+ *
+ * <p>Se implementan validaciones de entrada y configuración de límites en los campos de texto.</p>
  *
  * @author noe
  */
 public class ModificarMant extends javax.swing.JFrame {
     
-    /** The estado. */
-    // Variable global de estado
+    /** Estado actual del mantenimiento. */
     private String estado;
     
     /**
-     * The Constructor.
+     * Constructor vacío necesario para la creación de la ventana sin parámetros.
+     *
+     * <p>Este constructor es requerido para evitar conflictos cuando la ventana se 
+     * abre sin recibir un mantenimiento como parámetro.</p>
      */
-    // Constructor vacío para que ModificarMant pueda recibir parámetros sin conflictos en el main
-    public ModificarMant(){
+    public ModificarMant() {
         initComponents();
     }
     
     /**
-     * Creates new form VentanaModificar.
+     * Constructor que inicializa la ventana con los datos de un mantenimiento existente.
      *
-     * @param mantenimiento the mantenimiento
-     * @param parent the parent
+     * <p>Este constructor se utiliza cuando se necesita modificar los datos de un servicio de mantenimiento
+     * ya registrado.</p>
+     *
+     * @param mantenimiento el mantenimiento cuyos datos serán cargados en la interfaz para su modificación
+     * @param parent la ventana padre desde la cual se abre esta ventana, utilizada para centrar la posición
      */
     public ModificarMant(Mantenimiento mantenimiento, JFrame parent) {
         initComponents();       
-        // Evitar que la ventana emergente VentanaModificar cierre el programa
+
+        // Evitar que la ventana emergente cierre toda la aplicación al cerrarse
         setDefaultCloseOperation(ModificarMant.DISPOSE_ON_CLOSE);
+        
         // Centrar con respecto a la ventana de RegistroMantenimiento
         setLocationRelativeTo(parent);
         
@@ -63,7 +71,7 @@ public class ModificarMant extends javax.swing.JFrame {
         // Cargar los clientes en el combo box antes de seleccionar uno
         Utilidades.cargarClientes("registroClientes.json", combo_codigo_cliente);
 
-        // Cargar los datos en los campos
+        // Cargar los datos del mantenimiento en los campos correspondientes
         box_codigo_mant.setText(String.valueOf(mantenimiento.getCodigoServicio()));
         combo_codigo_cliente.setSelectedItem(mantenimiento.getCodigoCliente() + " - " + obtenerNombreCliente(mantenimiento.getCodigoCliente()));
         box_marca_bici.setText(mantenimiento.getMarcaBicicleta());
@@ -73,26 +81,26 @@ public class ModificarMant extends javax.swing.JFrame {
         formatt_fecha_entrega.setText(mantenimiento.getFechaEntrega());
         box_observaciones.setText(mantenimiento.getObservaciones());
         
-        // Asignar valor a variable de estado
+        // Asignar valor a la variable de estado
         this.estado = mantenimiento.getEstado();
         
-        // Define los colores
-         Color hoverColor = new Color(150,150,150); // Gris claro (al pasar el cursor)
-         Color originalColor = Color.BLACK; // Negro (borde inicial)
+        // Definir los colores para los efectos hover en los botones
+        Color hoverColor = new Color(150, 150, 150); // Gris claro al pasar el cursor
+        Color originalColor = Color.BLACK; // Negro por defecto
 
-         // Crear la instancia de ButtonHoverEffect para el efecto
-         ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
+        // Crear la instancia de ButtonHoverEffect para aplicar el efecto hover
+        ButtonHoverEffect hoverEffect = new ButtonHoverEffect(hoverColor, originalColor);
         
-         hoverEffect.applyTo(guardar_cambios);
-         hoverEffect.applyTo(eliminar_mant);
-         hoverEffect.applyTo(facturar_mant);
+        // Aplicar efecto hover a los botones de acción
+        hoverEffect.applyTo(guardar_cambios);
+        hoverEffect.applyTo(eliminar_mant);
+        hoverEffect.applyTo(facturar_mant);
          
-         // Establecer máximo de carácteres por campo (formato: (campo, largo))
+        // Establecer el límite de caracteres en los campos de entrada de datos
         Validador.setLimiteCaracteres(box_marca_bici, 30);
         Validador.setLimiteCaracteres(box_precio_bici, 7);
         Validador.setLimiteCaracteres(box_descrip_bici, 100);
         Validador.setLimiteCaracteres(box_observaciones, 100);
-         
     }
 
     /**
@@ -393,9 +401,25 @@ public class ModificarMant extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     /**
-     * Guardar cambios action performed.
+     * Acción realizada al presionar el botón "Guardar Cambios".
      *
-     * @param evt the evt
+     * <p>Este método permite modificar los datos de un servicio de mantenimiento existente,
+     * validando la entrada del usuario y guardando los cambios en el archivo JSON.</p>
+     *
+     * <p>Realiza las siguientes validaciones antes de actualizar el mantenimiento:</p>
+     * <ul>
+     *   <li>Verifica que haya mantenimientos registrados en el sistema.</li>
+     *   <li>Valida que la marca de la bicicleta contenga solo letras.</li>
+     *   <li>Verifica que el precio sea un número válido y mayor a 0.</li>
+     *   <li>Valida que la descripción sea un texto alfanumérico no vacío.</li>
+     *   <li>Verifica que las fechas de recibido y entrega estén completas y tengan el formato adecuado.</li>
+     *   <li>Garantiza que la fecha de recibido no sea posterior a la de entrega.</li>
+     *   <li>Valida que las observaciones sean alfanuméricas o, en caso de estar vacías, asigna "Sin observaciones".</li>
+     * </ul>
+     *
+     * <p>Si todas las validaciones se cumplen, los cambios se guardan en el archivo JSON y se muestra un mensaje de éxito.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void guardar_cambiosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardar_cambiosActionPerformed
         String ruta = "mantenimiento.json";
@@ -487,9 +511,21 @@ public class ModificarMant extends javax.swing.JFrame {
     }//GEN-LAST:event_guardar_cambiosActionPerformed
 
     /**
-     * Eliminar mant action performed.
+     * Acción realizada al presionar el botón "Eliminar Mantenimiento".
      *
-     * @param evt the evt
+     * <p>Este método permite eliminar un servicio de mantenimiento del sistema,
+     * siempre que no haya sido facturado previamente.</p>
+     *
+     * <p>Realiza las siguientes validaciones antes de proceder con la eliminación:</p>
+     * <ul>
+     *   <li>Verifica si hay mantenimientos registrados.</li>
+     *   <li>Verifica que el servicio no haya sido facturado.</li>
+     *   <li>Solicita confirmación al usuario antes de eliminarlo.</li>
+     * </ul>
+     *
+     * <p>Si la eliminación es exitosa, se actualiza el archivo JSON y se cierra la ventana.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void eliminar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_eliminar_mantActionPerformed
         String ruta = "mantenimiento.json";
@@ -609,9 +645,14 @@ public class ModificarMant extends javax.swing.JFrame {
     }//GEN-LAST:event_combo_codigo_clienteActionPerformed
 
     /**
-     * Facturar mant action performed.
+     * Acción realizada al presionar el botón "Facturar Mantenimiento".
      *
-     * @param evt the evt
+     * <p>Verifica si el servicio de mantenimiento está cerrado antes de proceder con la facturación.</p>
+     *
+     * <p>Si el mantenimiento aún no ha sido facturado, obtiene sus datos y abre la ventana de facturación
+     * con la información precargada.</p>
+     *
+     * @param evt el evento de acción generado al hacer clic en el botón
      */
     private void facturar_mantActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_facturar_mantActionPerformed
         // Validar si el mantenimiento está cerrado
@@ -637,23 +678,26 @@ public class ModificarMant extends javax.swing.JFrame {
     }//GEN-LAST:event_facturar_mantActionPerformed
 
     /**
-     * Form window opened.
+     * Acción realizada cuando la ventana es abierta.
      *
-     * @param evt the evt
+     * <p>Este método establece el título de la ventana y configura el ícono del programa.</p>
+     *
+     * @param evt el evento de apertura de la ventana
      */
-    // Método para establecer el ícono del programa y un título de ventana
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         setTitle("Facturar/modificar/eliminar servicio");
         setIconImage(new ImageIcon(getClass().getResource("/imagenes/icono_programa.png")).getImage());
     }//GEN-LAST:event_formWindowOpened
 
     /**
-     * Obtener nombre cliente.
+     * Obtiene el nombre del cliente a partir de su código.
      *
-     * @param codigoCliente the codigo cliente
-     * @return the string
+     * <p>Este método busca en el archivo de clientes el nombre asociado al código dado y lo devuelve.
+     * Si el cliente no se encuentra, devuelve "Desconocido".</p>
+     *
+     * @param codigoCliente el código del cliente a buscar
+     * @return el nombre del cliente si existe, de lo contrario "Desconocido"
      */
-    // Método para obtener nombre de cliente para mostrar en combo box de código cliente
     public static String obtenerNombreCliente(int codigoCliente) {
         Archivo archivo = new Archivo();
         Cliente[] clientes = (Cliente[]) archivo.leerArchivo("registroClientes.json", Cliente[].class);
@@ -673,9 +717,11 @@ public class ModificarMant extends javax.swing.JFrame {
     
     
     /**
-     * The main method.
+     * Método principal que inicia la aplicación.
      *
-     * @param args the command line arguments
+     * <p>Configura la apariencia de la interfaz y lanza la ventana de facturación/modificación de mantenimiento.</p>
+     *
+     * @param args los argumentos de la línea de comandos (no utilizados)
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
